@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Buyer's agent for home buyers | Propertybuyer</title>
+<meta name="description" content="Propertybuyer acts for buyers only and never sells property. Tell us what you are looking for and we will put a buyer's agent in your market on it.">
+<link rel="stylesheet" href="assets/css/styles.css">
+<!--
+  Propertybuyer, home buyers landing page. Segment: home.
+  Register for this page, from the Tone page: reassuring and process forward.
+  Lead with the handover of risk and the fact that a person inspects
+  everything. Do not lead with data.
+
+  Traffic: Google Ads and Performance Max.
+  FLAG: PMAX runs with Final URL Expansion, which can override this
+  destination entirely. Confirm with Kynan before assuming this page receives
+  the traffic it was designed for.
+
+  FLAG: no canonical, no robots directive set yet. Confirm whether this page
+  should be indexable before it goes live, since it targets the same terms as
+  the homepage and the homepage H1 is untouchable for SEO reasons.
+-->
+</head>
+<body>
+
+<a class="skip-link" href="#capture">Skip to the form</a>
+
+<!-- ==========================================================================
+     site-header
+     Minimal by design. Paid traffic, so there is no navigation to leak the
+     click into the wider site.
+     FLAG: the logo asset lives on Brand > Assets in Figma and is not in this
+     repo. A text wordmark stands in. Swap it before handover.
+     FLAG: no phone number here. The CallRail tracking number was not supplied
+     and inventing one would render a false claim as visible text.
+     ========================================================================== -->
+<header class="site-header on-dark">
+  <div class="container">
+    <div class="site-header__inner">
+      <a class="wordmark" href="https://www.propertybuyer.com.au/">propertybuyer</a>
+      <span class="micro">Buyers only, since 2001</span>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ========================================================================
+       hero
+       One of the two sections allowed to break the section rhythm.
+       Sparse density. This is the page's one sparse section, and nothing
+       below it loosens back up.
+       Capture point one, inside the first screen.
+       ======================================================================== -->
+  <section class="hero on-dark" id="top">
+    <div class="container">
+      <div class="hero__grid">
+
+        <div>
+          <!-- H1 accent word is the only use of text/highlight on this page
+               besides the review stars. 31 characters. -->
+          <h1>Buy with an <span class="highlight">expert</span> on your side</h1>
+
+          <!-- Hero subhead, 42 characters, the hard maximum at 390. -->
+          <p class="hero__subhead">We act for buyers only, never for sellers.</p>
+
+          <p class="hero__body">
+            Going direct hands the selling agent your budget and your deadline.
+            They are paid to use both against you. We sit on your side of the
+            table, from the first brief to the keys.
+          </p>
+        </div>
+
+        <!-- The capture panel sits on a light surface inside the teal band so
+             that border/focus, which is teal/700, stays visible on every
+             field. A teal ring on a teal section is not feedback. -->
+        <div class="capture" id="capture">
+          <!--
+            FORM IS STUBBED. No action, no method, nothing posts.
+            The three inputs, their names and the data-segment attribute are
+            the deliverable here. Wire to HubSpot at integration.
+            Rule: three inputs maximum in the first screen. Segment, budget
+            band, location. Name, email and phone come after, never before.
+          -->
+          <form class="stack-sm" data-segment="home" novalidate>
+            <p class="capture__title">Tell us about your search</p>
+
+            <!-- Input 1 of 3. Segment is a tap chip row, not a dropdown.
+                 A dropdown records a value and teaches the user nothing.
+                 Native radios, so the row is keyboard operable with no script.
+                 Selected state: border and weight, no fill. Design lead
+                 direction, 13 August 2026. -->
+            <fieldset class="field fieldset-reset">
+              <legend class="micro">What are you buying</legend>
+              <div class="chips">
+                <span>
+                  <input class="chip__input" type="radio" name="segment" id="seg-home" value="home" checked>
+                  <label class="chip__label" for="seg-home">Home to live in</label>
+                </span>
+                <span>
+                  <input class="chip__input" type="radio" name="segment" id="seg-investor" value="investor">
+                  <label class="chip__label" for="seg-investor">Investment</label>
+                </span>
+                <span>
+                  <input class="chip__input" type="radio" name="segment" id="seg-commercial" value="commercial">
+                  <label class="chip__label" for="seg-commercial">Commercial</label>
+                </span>
+                <span>
+                  <input class="chip__input" type="radio" name="segment" id="seg-prestige" value="prestige">
+                  <label class="chip__label" for="seg-prestige">Prestige</label>
+                </span>
+                <span>
+                  <input class="chip__input" type="radio" name="segment" id="seg-expat" value="expat">
+                  <label class="chip__label" for="seg-expat">From overseas</label>
+                </span>
+                <span>
+                  <input class="chip__input" type="radio" name="segment" id="seg-developer" value="developer">
+                  <label class="chip__label" for="seg-developer">Development site</label>
+                </span>
+              </div>
+            </fieldset>
+
+            <!-- Input 2 of 3. -->
+            <div class="field">
+              <label class="micro" for="budget">Budget band</label>
+              <select class="field__control" id="budget" name="budget_band">
+                <option value="">Select a band</option>
+                <option value="under-800k">Under $800k</option>
+                <option value="800k-1.5m">$800k to $1.5m</option>
+                <option value="1.5m-2.5m">$1.5m to $2.5m</option>
+                <option value="2.5m-5m">$2.5m to $5m</option>
+                <option value="5m-10m">$5m to $10m</option>
+                <option value="over-10m">Over $10m</option>
+                <option value="unsure">Not sure yet</option>
+              </select>
+            </div>
+
+            <!-- Input 3 of 3. -->
+            <div class="field">
+              <label class="micro" for="location">Suburb or area</label>
+              <input class="field__control" type="text" id="location" name="location"
+                     autocomplete="address-level2" placeholder="For example, Lane Cove">
+            </div>
+
+            <!-- 32 characters, so it is a full width label only at 390.
+                 Short sibling for tight placements: "Start your search". -->
+            <button class="btn btn--primary btn--block" type="submit">Tell us what you are looking for</button>
+
+            <p class="field__hint">3 questions now. Contact details on the next step.</p>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       stats-band
+       Proof block, inside the first two screens.
+       Tier 2 treatment: one inline line, no badge, no icon, no card.
+       Review stars are the second and last permitted use of text/highlight.
+       ======================================================================== -->
+  <section class="section">
+    <div class="container">
+      <div class="proof">
+        <span class="proof__stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p class="proof__line">
+          315+ Google reviews. Buyers only since 2001, and more than 5,000
+          properties purchased.
+        </p>
+      </div>
+    </div>
+  </section>
+  <!--
+    GATED AND NOT RENDERED, per the claims register:
+
+    · "96% purchase rate". Ambiguous as written. Nobody has confirmed what the
+      denominator is. Unusable until the client says.
+    · The award count. Client material says both "50+" and "53". Two numbers
+      means neither is safe to publish. No badge grid either way: the rule is
+      one line naming the count plus the two most significant wins.
+    · Any specific off-market percentage. Generic off-market access is fine.
+      A percentage needs a source, because competitors quote 69 and 70.
+
+    CHECK AT PUBLISH:
+    · "315+ Google reviews" is true at time of writing and moving. The client
+      is targeting 500. Verify the number on the day this ships.
+
+    TIER 1 SLOTS, EMPTY ON PURPOSE:
+    The budget is three Tier 1 proof blocks per page, each one attributable
+    and dated: a named suburb, a purchase price, a saving against guide, or a
+    client first name plus segment, with the number set in type/stat. No such
+    data was supplied, and inventing a case study would put a fabricated claim
+    in front of the client's own customers. The .stat class and the markup
+    pattern are ready. Supply three and they drop in above the FAQ.
+  -->
+
+  <!-- ========================================================================
+       why-choose
+       Claim 1 in the hierarchy: buyers only, no conflict, no kickback.
+       Standard density. Four cards, not three: a triadic list is the most
+       recognisable machine tell in marketing copy.
+       ======================================================================== -->
+  <section class="section section--cream">
+    <div class="container">
+      <div class="stack">
+        <div>
+          <h2>We buy property. We have never sold one.</h2>
+          <p class="section__intro">
+            That one fact decides everything else. No seller pays us, so no
+            seller can influence what we put in front of you.
+          </p>
+        </div>
+
+        <div class="grid grid--2 grid--4">
+          <article class="card">
+            <h3>No kickbacks, ever</h3>
+            <p class="card__body">
+              We take no commission from sellers, developers or agents. You are
+              the only person paying us, so you are the only person we answer
+              to.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>One agent, in your market</h3>
+            <p class="card__body">
+              Your agent works the suburbs you are buying in, and inspects
+              every property in person before you see it.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>We tell you what it is worth</h3>
+            <p class="card__body">
+              You get an independent read on value against recent comparable
+              sales. Then we hold the line in the negotiation.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>Access before it is listed</h3>
+            <p class="card__body">
+              Agents bring us properties before they reach the portals, because
+              we buy often enough to be worth calling.
+            </p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       navigate-band
+       Claim 3 in the hierarchy: process. What happens next, and how long.
+       30 to 60 days is client supplied, specific, and answers the actual
+       anxiety for this segment.
+       ======================================================================== -->
+  <section class="section">
+    <div class="container">
+      <div class="stack">
+        <div>
+          <h2>What happens after you call us</h2>
+          <p class="section__intro">
+            Most clients go from engagement to purchase in 30 to 60 days. Here
+            is the order it happens in.
+          </p>
+        </div>
+
+        <div class="grid grid--2 grid--4">
+          <div class="step">
+            <p class="micro step__label">Step 1</p>
+            <h3>We set the brief</h3>
+            <p class="step__body">
+              A short call to agree what you are buying, what you will pay, and
+              the suburbs you are open to.
+            </p>
+          </div>
+
+          <div class="step">
+            <p class="micro step__label">Step 2</p>
+            <h3>We search and inspect</h3>
+            <p class="step__body">
+              We work the agent network, including stock that is not listed
+              yet, and go through everything that fits.
+            </p>
+          </div>
+
+          <div class="step">
+            <p class="micro step__label">Step 3</p>
+            <h3>We value it</h3>
+            <p class="step__body">
+              Before you make an offer you know what the property is worth, and
+              what the recent comparable sales actually say.
+            </p>
+          </div>
+
+          <div class="step">
+            <p class="micro step__label">Step 4</p>
+            <h3>We negotiate or bid</h3>
+            <p class="step__body">
+              We handle the agent and the auction. You are never the one
+              standing there revealing your position.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       who-we-help
+       The segment router. Required contents on every page.
+       FLAG: which segment cards get elevated treatment is a client decision
+       and has not been made. All six carry equal weight here, which the rules
+       say is itself wrong, because if everything ranks equally nothing ranks.
+       Deliberately not decided by the build. Surface it before handover.
+       ======================================================================== -->
+  <section class="section section--cream">
+    <div class="container">
+      <div class="stack">
+        <div>
+          <h2>Not buying a home to live in?</h2>
+          <p class="section__intro">
+            Tell us which one you are and we will put you with the team that
+            works on it every day.
+          </p>
+        </div>
+
+        <div class="grid grid--2 grid--3">
+          <a class="router__item" href="#capture" data-segment="home">
+            <h3>A home to live in</h3>
+            <p>Upgrading, downsizing or relocating.</p>
+          </a>
+          <a class="router__item" href="#capture" data-segment="investor">
+            <h3>An investment</h3>
+            <p>First property through to a portfolio.</p>
+          </a>
+          <a class="router__item" href="#capture" data-segment="commercial">
+            <h3>Commercial</h3>
+            <p>Lease expiry, or buying for yield.</p>
+          </a>
+          <a class="router__item" href="#capture" data-segment="prestige">
+            <h3>Prestige</h3>
+            <p>Buying without going public.</p>
+          </a>
+          <a class="router__item" href="#capture" data-segment="expat">
+            <h3>Buying from overseas</h3>
+            <p>You cannot inspect it yourself.</p>
+          </a>
+          <a class="router__item" href="#capture" data-segment="developer">
+            <h3>A development site</h3>
+            <p>Duplex, subdivision or larger.</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       faq
+       Dense. Something the user processes rather than reads.
+       ======================================================================== -->
+  <section class="section">
+    <div class="container">
+      <div class="stack-sm">
+        <h2>Questions we get from home buyers</h2>
+
+        <div class="stack-sm mt-gap">
+          <details class="faq__item">
+            <summary class="faq__q">What does a buyer's agent do?</summary>
+            <div class="faq__a measure">
+              <p>
+                We find the property, inspect it, tell you what it is worth,
+                and negotiate or bid for you. You keep the decision. We do the
+                work and carry the risk of getting it wrong.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq__item">
+            <summary class="faq__q">How long does it usually take?</summary>
+            <div class="faq__a measure">
+              <p>
+                Most clients go from engagement to purchase in 30 to 60 days.
+                A tight brief in a thin market takes longer, and we will say so
+                at the start rather than at the end.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq__item">
+            <summary class="faq__q">Does the seller pay you anything?</summary>
+            <div class="faq__a measure">
+              <p>
+                No. We act for buyers only and we have never sold a property,
+                so there is no commission coming to us from the other side of
+                the table and no reason to prefer one listing over another.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq__item">
+            <summary class="faq__q">Can you bid at auction for me?</summary>
+            <div class="faq__a measure">
+              <p>
+                Yes. We set the limit with you beforehand, then we bid. The
+                selling agent reads the room during an auction, and reading you
+                is part of that. It is easier when you are not in it.
+              </p>
+            </div>
+          </details>
+
+          <details class="faq__item">
+            <summary class="faq__q">I have already found a property.</summary>
+            <div class="faq__a measure">
+              <p>
+                We can value it and negotiate on it without running the search.
+                Tell us the address when you get in touch and we will say
+                whether it is worth what they are asking.
+              </p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       discover-banner
+       Closing capture point. Required contents on every page.
+       Dense, because density is monotonic below the first call to action.
+       ======================================================================== -->
+  <section class="section section--cream">
+    <div class="container">
+      <div class="stack">
+        <div>
+          <h2>Talk to a buyer's agent in your market</h2>
+          <p class="section__intro">
+            3 questions to start, and you will be speaking to the person who
+            would run your search.
+          </p>
+        </div>
+
+        <div class="capture">
+          <!-- FORM IS STUBBED. Same contract as the hero form.
+               Note the duplicate ids are avoided with a -2 suffix. -->
+          <form class="stack-sm" data-segment="home" novalidate>
+            <fieldset class="field fieldset-reset">
+              <legend class="micro">What are you buying</legend>
+              <div class="chips">
+                <span>
+                  <input class="chip__input" type="radio" name="segment" id="seg-home-2" value="home" checked>
+                  <label class="chip__label" for="seg-home-2">Home to live in</label>
+                </span>
+                <span>
+                  <input class="chip__input" type="radio" name="segment" id="seg-investor-2" value="investor">
+                  <label class="chip__label" for="seg-investor-2">Investment</label>
+                </span>
+                <span>
+                  <input class="chip__input" type="radio" name="segment" id="seg-commercial-2" value="commercial">
+                  <label class="chip__label" for="seg-commercial-2">Commercial</label>
+                </span>
+                <span>
+                  <input class="chip__input" type="radio" name="segment" id="seg-prestige-2" value="prestige">
+                  <label class="chip__label" for="seg-prestige-2">Prestige</label>
+                </span>
+                <span>
+                  <input class="chip__input" type="radio" name="segment" id="seg-expat-2" value="expat">
+                  <label class="chip__label" for="seg-expat-2">From overseas</label>
+                </span>
+                <span>
+                  <input class="chip__input" type="radio" name="segment" id="seg-developer-2" value="developer">
+                  <label class="chip__label" for="seg-developer-2">Development site</label>
+                </span>
+              </div>
+            </fieldset>
+
+            <div class="grid grid--2 grid--tight">
+              <div class="field">
+                <label class="micro" for="budget-2">Budget band</label>
+                <select class="field__control" id="budget-2" name="budget_band">
+                  <option value="">Select a band</option>
+                  <option value="under-800k">Under $800k</option>
+                  <option value="800k-1.5m">$800k to $1.5m</option>
+                  <option value="1.5m-2.5m">$1.5m to $2.5m</option>
+                  <option value="2.5m-5m">$2.5m to $5m</option>
+                  <option value="5m-10m">$5m to $10m</option>
+                  <option value="over-10m">Over $10m</option>
+                  <option value="unsure">Not sure yet</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label class="micro" for="location-2">Suburb or area</label>
+                <input class="field__control" type="text" id="location-2" name="location"
+                       autocomplete="address-level2" placeholder="For example, Lane Cove">
+              </div>
+            </div>
+
+            <!-- 32 characters, full width label only at 390. -->
+            <button class="btn btn--primary btn--block" type="submit">Book a call with a buyer's agent</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ==========================================================================
+     footer
+     Dense. bg/brand-deep.
+     FLAG: privacy policy, terms and the licence numbers were not supplied.
+     Nothing invented. Add the real URLs before this goes live.
+     ========================================================================== -->
+<footer class="site-footer on-dark">
+  <div class="container">
+    <div class="stack-sm">
+      <p class="footer__brand">propertybuyer</p>
+      <p>
+        Independent buyers agency, established 2001. Offices in Sydney,
+        Melbourne, Brisbane and Adelaide, with coverage across the major
+        regional markets.
+      </p>
+      <p><a href="https://www.propertybuyer.com.au/">propertybuyer.com.au</a></p>
+      <p class="footer__legal">&copy; 2026 Propertybuyer. We act for buyers only and never sell property.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* Progressive enhancement only. Without this the router items are plain
+     anchors that jump to the form, which is the correct no-script behaviour.
+     With it, choosing a segment in the router preselects the matching chip so
+     the lead still arrives labelled. */
+  (function () {
+    var form = document.getElementById('capture');
+    if (!form) return;
+
+    document.querySelectorAll('.router__item[data-segment]').forEach(function (item) {
+      item.addEventListener('click', function () {
+        var segment = item.getAttribute('data-segment');
+        var chip = form.querySelector('.chip__input[value="' + segment + '"]');
+        if (!chip) return;
+        chip.checked = true;
+        var owner = chip.closest('form');
+        if (owner) owner.setAttribute('data-segment', segment);
+      });
+    });
+
+    /* Keep the form's data-segment in step with the chip the user picks, so
+       whatever posts it can read one attribute rather than walk the inputs. */
+    document.querySelectorAll('form[data-segment]').forEach(function (owner) {
+      owner.addEventListener('change', function (event) {
+        if (!event.target.classList.contains('chip__input')) return;
+        owner.setAttribute('data-segment', event.target.value);
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>

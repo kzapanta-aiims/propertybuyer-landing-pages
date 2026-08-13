@@ -1,0 +1,731 @@
+/* ==========================================================================
+   Propertybuyer, home buyers landing page
+   --------------------------------------------------------------------------
+   Every value below is an alias of a token in Figma "2. Mapped".
+   Source: Property Buyer, Source, file 0cUUO8Qye1DBPPPGhmPWmr
+   Values pulled from Figma Variables 13 August 2026, not from the DESIGN.md
+   snapshot. Where the two disagreed, Figma won. See HANDOVER.md.
+   Nothing here is a raw value chosen by hand.
+   ========================================================================== */
+
+:root {
+  /* --- Backgrounds ------------------------------------------------------ */
+  --bg-page: #ffffff;            /* bg/page          base/white  */
+  --bg-surface: #fbfaf7;         /* bg/surface       sand/50     */
+  --bg-surface-alt: #f5f1e9;     /* bg/surface-alt   sand/100    */
+  --bg-brand: #00404b;           /* bg/brand         teal/700    */
+  --bg-brand-deep: #02313a;      /* bg/brand-deep    teal/800    */
+  --bg-info-subtle: #e8eef0;     /* bg/info-subtle   teal/100    */
+  --bg-success-subtle: #eff6f1;  /* bg/success-subtle success/50 */
+  --bg-warning-subtle: #fff8e8;  /* bg/warning-subtle warning/50 */
+  --bg-error-subtle: #fbf0ef;    /* bg/error-subtle  destructive/50 */
+
+  /* FLAG, do not use until resolved. The Figma variable bg/prestige resolves
+     to #001114 (teal/950), but its own description and the Colours page both
+     say night/950 #1B1C25, "not a teal", client direction 3 Aug 2026. There is
+     no night ramp in Base Values. The documented ratio text/prestige on
+     bg/prestige = 7.15 only computes against #1B1C25; against #001114 it is
+     8.13. Unused on this page. See HANDOVER.md. */
+  --bg-prestige: #001114;        /* bg/prestige      CONFLICTED  */
+
+  /* --- Text ------------------------------------------------------------- */
+  --text-heading: #00404b;       /* text/heading     teal/700    */
+  --text-body: #1c2b2f;          /* text/body        grey/900    */
+  --text-muted: #5c6b6f;         /* text/muted       grey/500    */
+  --text-on-brand: #ffffff;      /* text/on-brand    base/white  */
+  --text-on-brand-muted: #b6c8cb;/* text/on-brand-muted teal/300 */
+  --text-link: #00404b;          /* text/link        teal/700    */
+  --text-prestige: #c9a26b;      /* text/prestige    gold/400    */
+  --text-highlight: #ff7f22;     /* text/highlight   orange/500  */
+  --text-info: #00404b;          /* text/info        teal/700    */
+  --text-success: #2f5f42;       /* text/success     success/700 */
+  --text-warning: #a87c0e;       /* text/warning     warning/700 */
+  --text-error: #b0392e;         /* text/error       destructive/600 */
+
+  /* --- Borders ---------------------------------------------------------- */
+  --border-default: #e4e0d8;     /* border/default   sand/200    */
+  --border-muted: #d2d9da;       /* border/muted     grey/200    */
+  --border-brand: #00404b;       /* border/brand     teal/700    */
+  --border-focus: #00404b;       /* border/focus     teal/700    */
+  --border-info: #526f75;        /* border/info      teal/500    */
+  --border-success: #a3cdb1;     /* border/success   success/300 */
+  --border-warning: #e6c96a;     /* border/warning   warning/300 */
+  --border-error: #b0392e;       /* border/error     destructive/600 */
+
+  /* --- Actions ---------------------------------------------------------- */
+  --action-primary: #a26246;         /* action/primary       terracotta/500, white 4.80 */
+  --action-primary-hover: #89533b;   /* action/primary-hover terracotta/600, white 6.24 */
+  --action-prestige: #c9a26b;        /* action/prestige      gold/400   */
+  --action-prestige-hover: #b18a50;  /* action/prestige-hover gold/500  */
+
+  /* Derived in code, not a token. Interactive States rule: pressed moves
+     15 percent away from the background, hover moves 8. Mapped holds no
+     pressed value for either action, so the fallback lives here, which is
+     where DESIGN.md says a fallback belongs. */
+  --action-primary-pressed: color-mix(in oklab, var(--action-primary), black 15%);
+  --action-prestige-pressed: color-mix(in oklab, var(--action-prestige), black 15%);
+
+  /* --- Spacing, nine tokens --------------------------------------------- */
+  --space-section-y: 48px;       /* space/section-y  48 mobile, 80 from 768 */
+  --space-gutter: 20px;          /* space/gutter     */
+  --gap-lg: 40px;                /* space/gap-lg     sparse  */
+  --gap: 24px;                   /* space/gap        standard */
+  --gap-sm: 12px;                /* space/gap-sm     dense   */
+  --tap-min: 44px;               /* space/tap-min    constraint, every viewport */
+  --container: 1200px;           /* space/container  */
+  --content-max: 1160px;         /* space/content-max */
+  --measure-intro: 760px;        /* space/measure-intro */
+
+  /* --- Radius, two tokens ------------------------------------------------ */
+  --radius-card: 8px;            /* radius/card      */
+  --radius-pill: 999px;          /* radius/pill      */
+
+  /* --- Type sizes, mobile column ---------------------------------------- */
+  --type-stat: 40px;             /* type/stat     52 desktop, 40 at 390 */
+  --type-display: 34px;          /* type/display  44 desktop, 34 at 390 */
+  --type-h2: 28px;               /* type/h2       34 desktop, 28 at 390 */
+  --type-h3: 18px;               /* type/h3       20 desktop, 18 at 390 */
+  --type-body: 16px;             /* type/body     16 at every viewport  */
+  --type-small: 14px;            /* type/small    14 at every viewport  */
+  --type-micro: 13px;            /* type/micro    13 at every viewport  */
+  --type-button: 16px;           /* type/button   16 at every viewport  */
+
+  /* --- Font tokens ------------------------------------------------------- */
+  --family-display: "Proyale", Georgia, serif;
+  --family-text: "Geist", Helvetica, Arial, sans-serif;
+  --tracking-display: -0.02em;   /* font/tracking-display  H1 and H2 */
+  --tracking-heading: -0.015em;  /* font/tracking-heading  H3 down   */
+  --tracking-body: -0.01em;      /* font/tracking-body     */
+  --tracking-button: -0.005em;   /* font/tracking-button   */
+  --tracking-caps: 0.04em;       /* font/tracking-caps     uppercase micro only */
+}
+
+@media (min-width: 768px) {
+  :root {
+    --space-section-y: 80px;
+    --type-stat: 52px;
+    --type-display: 44px;
+    --type-h2: 34px;
+    --type-h3: 20px;
+  }
+}
+
+/* ==========================================================================
+   Fonts
+   Geist is open licensed and self hosted. Proyale is served from
+   propertybuyer.com.au/hubfs/fonts and is supplied by the design lead.
+   Neither file is in this repo yet, so both stacks fall back until they land.
+   Drop the files into assets/fonts/ and the rules below pick them up.
+   Proyale ships one weight, 400. Never ask a browser for Proyale Bold.
+   ========================================================================== */
+
+@font-face {
+  font-family: "Proyale";
+  src: url("../fonts/proyale-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist";
+  src: url("../fonts/geist-light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist";
+  src: url("../fonts/geist-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist";
+  src: url("../fonts/geist-semibold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist";
+  src: url("../fonts/geist-bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg-page);
+  color: var(--text-body);
+  font-family: var(--family-text);
+  font-size: var(--type-body);
+  font-weight: 300;
+  line-height: 1.6;
+  letter-spacing: var(--tracking-body);
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; }
+
+h1, h2, h3, p, ul, ol, figure { margin: 0; }
+ul { padding: 0; list-style: none; }
+
+/* Proyale, H1 and H2 only, one weight, never bolded. */
+h1, h2 {
+  font-family: var(--family-display);
+  font-weight: 400;
+  letter-spacing: var(--tracking-display);
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--type-display);
+  line-height: 1.1;
+}
+
+h2 {
+  font-size: var(--type-h2);
+  line-height: 1.25;
+  color: var(--text-heading);
+}
+
+/* Geist SemiBold 600 from H3 down. Against a Light 300 body a functional
+   heading needs 600 to separate. Never set a heading in Light. */
+h3 {
+  font-family: var(--family-text);
+  font-size: var(--type-h3);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: var(--tracking-heading);
+  color: var(--text-heading);
+  text-wrap: balance;
+}
+
+a { color: var(--text-link); }
+
+/* Focus ring is always rendered and is never removed. */
+:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* border/focus is teal/700, which is invisible on a teal section. Mapped holds
+   no focus token for dark surfaces, so dark bands carry the on-brand value.
+   Derived here rather than invented as a token. Flagged in HANDOVER.md. */
+.on-dark :focus-visible {
+  outline-color: var(--text-on-brand);
+}
+
+/* ==========================================================================
+   Layout
+   Container 1200, gutter 20, content column tops out at 1160.
+   One section rhythm, space/section-y. The hero is one of the two allowed
+   exceptions and carries its own padding.
+   ========================================================================== */
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--space-gutter);
+}
+
+.container > * { max-width: var(--content-max); margin-inline: auto; }
+
+.section { padding-block: var(--space-section-y); }
+.section--cream { background: var(--bg-surface-alt); }
+.section--brand { background: var(--bg-brand); color: var(--text-on-brand); }
+
+.section__intro {
+  max-width: var(--measure-intro);
+  color: var(--text-muted);
+  margin-top: var(--gap-sm);
+}
+
+/* Long form body sits inside 68 characters. A full 1160 line is about 150
+   characters and it does not get read. */
+.measure { max-width: 68ch; }
+
+/* Three densities. Chosen before the content is laid out.
+   Density is monotonic below the first call to action: nothing under the hero
+   is ever sparser than the section above it. */
+.stack-lg { display: grid; gap: var(--gap-lg); }
+.stack    { display: grid; gap: var(--gap); }
+.stack-sm { display: grid; gap: var(--gap-sm); }
+
+.grid {
+  display: grid;
+  gap: var(--gap);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .grid--2 { grid-template-columns: repeat(2, 1fr); }
+  .grid--3 { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 1100px) {
+  .grid--4 { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ==========================================================================
+   Type helpers
+   ========================================================================== */
+
+/* Field labels and captions. 13px Geist Bold, uppercase, +4 percent, the one
+   positive tracking in the system. Always visible. A placeholder is not a
+   label. Colour text/heading. */
+.micro {
+  font-size: var(--type-micro);
+  font-weight: 700;
+  line-height: 1.6;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--text-heading);
+}
+
+.on-dark .micro { color: var(--text-on-brand-muted); }
+
+/* The capture panel is a light surface sitting inside a dark band, so it wins
+   the colour back. Field labels are always text/heading. */
+.capture .micro { color: var(--text-heading); }
+
+.small { font-size: var(--type-small); }
+
+/* type/stat is Tier 1 proof numbers only. Nothing decorative takes this size. */
+.stat {
+  font-family: var(--family-text);
+  font-size: var(--type-stat);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: var(--tracking-display);
+  color: var(--text-heading);
+}
+
+/* text/highlight has exactly two jobs: the H1 accent word, and review stars. */
+.highlight { color: var(--text-highlight); }
+
+/* ==========================================================================
+   Buttons
+   16px Geist SemiBold 600, sentence case, tracking -0.5 percent, line height
+   1.25 stated explicitly because a button inherits neither family nor leading.
+   Height is space/tap-min. Never shrink a button to fit a layout.
+   Accent appears on actions only. Never lighten an action on a light surface:
+   white on action/primary rests at 4.80, and lightening it fails AA.
+   ========================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--tap-min);
+  padding: 10px 24px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-card);
+  font-family: var(--family-text);
+  font-size: var(--type-button);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: var(--tracking-button);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 120ms ease;
+}
+
+.btn--primary {
+  background: var(--action-primary);
+  color: var(--text-on-brand);
+}
+
+.btn--primary:hover { background: var(--action-primary-hover); }
+.btn--primary:active { background: var(--action-primary-pressed); }
+
+/* "Tell us what you are looking for" is 32 characters and survives 390 only
+   as a full width button. Short sibling: "Start your search". */
+.btn--block { width: 100%; }
+
+@media (min-width: 768px) {
+  .btn--block { width: auto; }
+}
+
+/* ==========================================================================
+   Hero
+   One of the two sections allowed to break the section rhythm.
+   Sparse density, gap-lg. This is the page's one sparse section.
+   ========================================================================== */
+
+.hero {
+  background: var(--bg-brand);
+  color: var(--text-on-brand);
+  padding-block: 56px;
+}
+
+@media (min-width: 768px) {
+  .hero { padding-block: 88px; }
+}
+
+.hero__grid {
+  display: grid;
+  gap: var(--gap-lg);
+  align-items: start;
+}
+
+@media (min-width: 1100px) {
+  .hero__grid {
+    grid-template-columns: 1fr 460px;
+    gap: var(--gap-lg);
+    /* Centred rather than top aligned. Left top aligned leaves a void of teal
+       under the copy, and a section that reads heavily teal has left the
+       brand even when every value came from a token. */
+    align-items: center;
+  }
+}
+
+.hero__subhead {
+  font-family: var(--family-text);
+  font-size: var(--type-h3);
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: var(--tracking-heading);
+  color: var(--text-on-brand);
+  margin-top: var(--gap-sm);
+}
+
+.hero__body {
+  color: var(--text-on-brand-muted);
+  margin-top: var(--gap);
+  max-width: 52ch;
+}
+
+/* The capture panel sits on a light surface inside the teal band so that
+   border/focus, which is teal/700, stays visible on every field. */
+.capture {
+  background: var(--bg-page);
+  border: 1px solid var(--border-muted);
+  border-radius: var(--radius-card);
+  padding: 24px;
+  color: var(--text-body);
+}
+
+@media (min-width: 768px) {
+  .capture { padding: 32px; }
+}
+
+.capture__title {
+  font-family: var(--family-text);
+  font-size: var(--type-h3);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: var(--tracking-heading);
+  color: var(--text-heading);
+}
+
+/* Forms are dense. Things the user processes rather than reads. */
+.field { display: grid; gap: var(--gap-sm); }
+
+/* A fieldset is the correct grouping element for the chip row, and it needs
+   its browser chrome removed before it will sit in the grid. */
+.fieldset-reset { border: 0; padding: 0; margin: 0; min-width: 0; }
+.fieldset-reset > legend { padding: 0; }
+
+.mt-gap { margin-top: var(--gap); }
+.grid--tight { gap: var(--gap-sm); }
+
+.field__control {
+  min-height: var(--tap-min);
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border-muted);
+  border-radius: var(--radius-card);
+  background: var(--bg-page);
+  color: var(--text-body);
+  font-family: var(--family-text);
+  font-size: var(--type-body);
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: var(--tracking-body);
+}
+
+.field__control::placeholder { color: var(--text-muted); }
+
+.field__hint {
+  font-size: var(--type-small);
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   Segment chips
+   Segment is a tap chip row, not a dropdown. A dropdown records a value and
+   teaches the user nothing.
+   Selected state, direction from the design lead 13 August 2026: border and
+   weight change, no fill. The accent stays free, so six chips in one viewport
+   do not break "one primary action per viewport height", and a selection
+   control does not wear an action colour.
+   Native radio inputs, so the row is keyboard operable with no script.
+   ========================================================================== */
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-sm);
+}
+
+.chip__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.chip__label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--tap-min);
+  padding: 10px 18px;
+  border: 1px solid var(--border-muted);
+  border-radius: var(--radius-pill);
+  background: var(--bg-page);
+  color: var(--text-body);
+  font-family: var(--family-text);
+  font-size: var(--type-button);
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: var(--tracking-button);
+  cursor: pointer;
+  transition: border-color 120ms ease, background-color 120ms ease;
+}
+
+.chip__label:hover { background: var(--bg-surface); }
+
+.chip__input:checked + .chip__label {
+  border-color: var(--border-brand);
+  border-width: 2px;
+  padding: 9px 17px;
+  font-weight: 600;
+  color: var(--text-heading);
+}
+
+.chip__input:focus-visible + .chip__label {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   Cards and panels
+   One radius, 8. No shadow system and no elevation scale. Hierarchy comes
+   from background bands, hairline borders and density.
+   border/default on warm surfaces, border/muted on cool or white.
+   ========================================================================== */
+
+.card {
+  background: var(--bg-page);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-card);
+  padding: 24px;
+}
+
+.section--cream .card { border-color: var(--border-default); }
+.card--plain { background: transparent; border: 0; padding: 0; }
+
+.card__body { margin-top: var(--gap-sm); color: var(--text-muted); }
+
+/* ==========================================================================
+   Proof
+   Tier 2 gets one inline line. No badge, no icon, no card.
+   ========================================================================== */
+
+.proof {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--gap-sm);
+  border-block: 1px solid var(--border-muted);
+  padding-block: var(--gap);
+}
+
+.proof__stars {
+  color: var(--text-highlight);
+  letter-spacing: 0.1em;
+  font-size: var(--type-h3);
+  line-height: 1;
+}
+
+.proof__line { color: var(--text-body); }
+
+/* ==========================================================================
+   Steps
+   ========================================================================== */
+
+.step { border-top: 1px solid var(--border-default); padding-top: var(--gap); }
+.step__label { margin-bottom: var(--gap-sm); }
+.step__body { color: var(--text-muted); margin-top: var(--gap-sm); }
+
+/* ==========================================================================
+   Segment router
+   All six carry equal weight. Which cards get elevated treatment is a client
+   decision and has not been made, so nothing here ranks. Flagged, not decided.
+   ========================================================================== */
+
+.router__item {
+  display: block;
+  min-height: var(--tap-min);
+  background: var(--bg-page);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-card);
+  padding: 20px;
+  text-decoration: none;
+  color: var(--text-body);
+  transition: border-color 120ms ease, background-color 120ms ease;
+}
+
+.router__item:hover {
+  border-color: var(--border-brand);
+  background: var(--bg-surface);
+}
+
+.router__item h3 { margin-bottom: 4px; }
+.router__item p { color: var(--text-muted); font-size: var(--type-small); }
+
+/* ==========================================================================
+   FAQ
+   Dense. Something the user processes rather than reads.
+   ========================================================================== */
+
+.faq__item { border-bottom: 1px solid var(--border-muted); }
+
+.faq__q {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap-sm);
+  min-height: var(--tap-min);
+  padding-block: 16px;
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--family-text);
+  font-size: var(--type-h3);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: var(--tracking-heading);
+  color: var(--text-heading);
+}
+
+.faq__q::-webkit-details-marker { display: none; }
+
+.faq__q::after {
+  content: "+";
+  font-weight: 400;
+  color: var(--text-muted);
+  flex: none;
+  transition: transform 120ms ease;
+}
+
+/* Rotated rather than swapped for a dash glyph. The house rule bans em dashes
+   and reserves the en dash for genuine ranges, so no dash appears anywhere. */
+.faq__item[open] .faq__q::after { transform: rotate(45deg); }
+
+.faq__a { padding-bottom: 20px; color: var(--text-muted); }
+
+/* ==========================================================================
+   Footer
+   Dense. bg/brand-deep.
+   ========================================================================== */
+
+.site-footer {
+  background: var(--bg-brand-deep);
+  color: var(--text-on-brand-muted);
+  padding-block: var(--space-section-y);
+  font-size: var(--type-small);
+}
+
+.site-footer a {
+  color: var(--text-on-brand-muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap-min);
+}
+
+.site-footer a:hover { color: var(--text-on-brand); }
+
+.footer__brand {
+  color: var(--text-on-brand);
+  font-family: var(--family-display);
+  font-size: var(--type-h3);
+  letter-spacing: var(--tracking-display);
+}
+
+.footer__legal { border-top: 1px solid rgba(255, 255, 255, 0.14); padding-top: var(--gap); }
+
+/* ==========================================================================
+   Header
+   Minimal. Paid traffic, no navigation to leak the click.
+   ========================================================================== */
+
+.site-header {
+  background: var(--bg-brand);
+  color: var(--text-on-brand);
+  padding-block: 16px;
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap);
+}
+
+/* Interactive, so it carries the 44 constraint like every other tap target. */
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap-min);
+  font-family: var(--family-display);
+  font-size: var(--type-h3);
+  font-weight: 400;
+  letter-spacing: var(--tracking-display);
+  color: var(--text-on-brand);
+  text-decoration: none;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap-min);
+  padding: 0 16px;
+}
+
+.skip-link:focus {
+  left: var(--space-gutter);
+  top: 8px;
+  z-index: 10;
+  background: var(--bg-page);
+  color: var(--text-heading);
+  border-radius: var(--radius-card);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: 0.01ms !important; }
+}
