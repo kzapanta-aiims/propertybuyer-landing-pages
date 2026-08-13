@@ -3,28 +3,28 @@
 Segment `home`. Built for Google Ads and Performance Max traffic.
 Static HTML and CSS, no build step, no framework, no CDN dependency.
 
-Sources read, in the order Design Rules requires: Figma Context, this
-repository's `DESIGN.md` rules layer, Figma Variables, then Colours, Type &
-Tone. Values were pulled from Figma Variables on 13 August 2026 rather than
-from the DESIGN.md snapshot, and where the two disagreed, Figma won.
+Sources read, in the order Design Rules requires: Figma Context, the rules
+layer, Figma Variables, then Colours, Type & Tone, then Assets.
 
 ```
 index.html               the page
 assets/css/styles.css    tokens, then components
-assets/fonts/            empty, see Fonts below
+assets/fonts/            Proyale is in, Geist is not, see the README there
 tools/check.mjs          the acceptance checklist, automated
+DESIGN.md                the rules layer, corrected against Figma
 ```
 
 Run it: open `index.html`, or `npm run serve`.
 Check it: `npm install && npm run check`.
 
-## Where DESIGN.md is wrong
+## What was corrected in DESIGN.md
 
-`DESIGN.md` says Figma Variables are canonical and that a disagreement means
-the file has a bug. Six disagreements turned up. The build follows Figma in
-every case. `DESIGN.md` needs correcting.
+`DESIGN.md` is now in this repository and every value in its frontmatter was
+read directly out of the Figma Mapped collection on 13 August 2026 rather than
+carried over from the earlier snapshot. Six values disagreed and Figma won each
+time. The build follows the corrected file.
 
-| Token | DESIGN.md says | Figma holds | Built with |
+| Token | Old snapshot | Figma holds | Now shipping |
 |---|---|---|---|
 | `action/primary-hover` | `#955A40`, white 5.51 | `#89533B`, white 6.24 | `#89533B` |
 | `action/prestige-hover` | `#B99562` | `#B18A50` (gold/500) | `#B18A50` |
@@ -33,39 +33,69 @@ every case. `DESIGN.md` needs correcting.
 | `type/h3` mobile | not listed | 18 | 20 / 18 |
 | `bg/prestige` | `#1B1C25` | `#001114` | not used, see below |
 
-The four `-hover` and `-pressed` values in the DESIGN.md frontmatter are
-described there as derived proposals pending the design lead. Two of them
-have since been settled in Figma and the frontmatter did not follow. The
-proposal to demote Figma's hover to `pressed` was never applied either.
+The tokens the old file said could not be verified and must not be
+interpolated are now filled in from Figma: `text/link`, `border/brand`,
+`border/focus`, `border/error`, and the info, success and warning text
+colours. The four `-hover` and `-pressed` values that were derived proposals
+are retired; two of them existed in Figma all along.
+
+Also added to `DESIGN.md`: both columns of the type scale, the full computed
+contrast table, the Assets page lockups and colourway rule, the selected chip
+decision, and the dark-surface focus problem.
 
 ## Stop and flag
 
-**`bg/prestige` is broken in Figma and I did not guess at it.** The variable
-resolves to `#001114`, which is teal/950. Its own description in Mapped, and
-the Colours page, both say night/950 `#1B1C25`, "not a teal", client direction
-3 August 2026. There is no `night` ramp in `1. Base Values` at all. The
-documented ratio `text/prestige on bg/prestige = 7.15` only computes against
-`#1B1C25`; against `#001114` it is 8.13. So the documentation is internally
-consistent and the alias is wrong, most likely because night/950 was never
-created. Either the ramp needs adding or the direction needs reversing. The
-token is carried in the CSS with a FLAG comment and is unused on this page.
+**Proyale is a capitals-only face, and the case rule says sentence case with
+no exceptions.** Verified against the supplied font file: the lowercase glyphs
+have outlines and bounds identical to their uppercase counterparts, no
+x-height, no descenders. Every H1 and H2 renders in capitals whatever case is
+typed, while the Tone page says the only uppercase on a page is micro labels.
+No `text-transform` is applied anywhere in the CSS; this is the face itself.
 
-**Two tokens DESIGN.md depends on do not exist in Mapped.**
+It has gone unnoticed because the Figma Type page states plainly that Proyale
+is not installed and that the H1 and H2 specimens are Geist standing in for
+it. The direction "Proyale 400 for H1 and H2" was therefore settled against a
+stand-in. The page ships as it renders, in capitals, which sits well beside the
+logo wordmark, but the rule and the face cannot both stand and that is a design
+lead call, not an agent's.
+
+One consequence to watch: the mobile character budgets were set against a
+sentence-case H1 and capitals are wider. The H1 on this page moves from two
+lines to three at 390 with Proyale loaded. It still fits with no orphan.
+
+A second consequence: the fallback, Georgia, is mixed case. A heading renders
+in sentence case until Proyale loads and in capitals afterwards.
+
+**The `-2 percent` display tracking is now checked.** This was a flagged open
+item. At 44 with Proyale actually installed it holds, so the token stays. Note
+it was judged on a capitals setting, which is not what the rule assumed. If
+the case question resolves toward a mixed-case face, check it again.
+
+**`bg/prestige` is inconsistent with itself in Figma.** The variable resolves
+to `#001114`, which is teal/950. Its own description in Mapped, and the Colours
+page, both say night/950 `#1B1C25`, "not a teal", client direction 3 August
+2026. There is no `night` ramp in Base Values at all. The published ratio
+`text/prestige on bg/prestige = 7.15` only computes against `#1B1C25`; against
+`#001114` it is 8.13. The documentation is self-consistent, so the alias is
+most likely the bug. The token is carried in the CSS with a FLAG comment and
+is unused on this page.
+
+**Three tokens the system depends on do not exist in Mapped.**
 
 - `text/on-prestige-action`, the teal/950 ink that reaches 8.13 on gold. This
   matters: teal/700 on `action/prestige-hover` computes to **3.61 and fails
   AA**, while teal/950 holds 6.07. If a gold action ever ships, the token has
   to exist first.
 - `action/primary-pressed` and `action/prestige-pressed`. Only `-hover`
-  exists. Pressed is derived in CSS with the `color-mix` fallback DESIGN.md
-  specifies, which is where DESIGN.md says a fallback belongs. No new token
+  exists. Pressed is derived in CSS with the `color-mix` fallback `DESIGN.md`
+  specifies, which is where that file says a fallback belongs. No new token
   was invented.
 
 **Mapped has no focus token for dark surfaces.** `border/focus` is teal/700,
-which is invisible on `bg/brand` and `bg/brand-deep`. Two consequences in the
-build: the hero capture panel sits on a light surface inside the teal band so
-every field keeps a visible ring, and dark bands carry an on-brand outline
-via a `.on-dark` rule. Derived, not invented as a token, and worth a decision.
+invisible on `bg/brand` and `bg/brand-deep`. Two consequences in the build: the
+hero capture panel sits on a light surface inside the teal band so every field
+keeps a visible ring, and dark bands carry an on-brand outline via a `.on-dark`
+rule. Derived, not invented as a token, and worth a decision.
 
 **Segment card ranking is not decided, so the router does not rank.** All six
 items in `who-we-help` carry equal weight. The rules say equal treatment is
@@ -76,11 +106,6 @@ markup at the section.
 **Performance Max with Final URL Expansion** can override this destination
 entirely. Confirm with Kynan before assuming the page receives the traffic it
 was designed for.
-
-**Indexing is not set.** No canonical and no robots directive. This page
-targets terms the homepage holds position one on, and the homepage H1 is
-untouchable, so someone should decide whether this is indexable before it goes
-live.
 
 ## Claims
 
@@ -120,30 +145,48 @@ process intro and the section still works.
   This keeps the accent free, so six chips in one viewport do not break "one
   primary action per viewport height", and a selection control does not wear
   an action colour. Native radio inputs, so the row is keyboard operable and
-  works with no script. This resolves the item DESIGN.md calls the single most
-  important undefined interactive element in the system, and it should go into
-  Figma Variables and the rules layer rather than living only here.
+  works with no script. This resolves the item the old `DESIGN.md` called the
+  single most important undefined interactive element in the system. It is
+  written into the corrected `DESIGN.md` and should go into Figma Variables
+  too rather than living only here.
 - **Forms are stubbed.** Nothing posts. The three inputs, their names, and
-  `data-segment` on both capture points are the deliverable. Wire to HubSpot
-  at integration.
-- **Fonts are supplied later.** See below.
+  `data-segment` on both capture points are the deliverable.
+- **The website logo is the Standard lockup**, `PropBuy_Logo_Stacked_Standard`.
 
 ## Fonts
 
-Neither font file is in the repository, so both stacks currently fall back.
+**Proyale is in**, converted from the supplied TTF to WOFF2, 139 KB down to
+39 KB, no other change. It covers every character used on this page.
+
+**Geist is not.** It is open licensed and self hosted with no CDN, but the
+files were not supplied, so body and UI fall back to Helvetica, Arial. The
 `@font-face` rules are in place and pick the files up as soon as they land in
-`assets/fonts/`:
+`assets/fonts/` under the names in the README there.
 
-- `proyale-regular.woff2`, one weight, 400. Served on the live site from
-  `propertybuyer.com.au/hubfs/fonts`. H1 and H2 render in Georgia until it
-  arrives. Never ask a browser for Proyale Bold.
-- `geist-light.woff2`, `geist-regular.woff2`, `geist-semibold.woff2`,
-  `geist-bold.woff2`. Open licensed and self hosted, no CDN.
+## The logo is not in the build, and I could not fetch it
 
-Two build notes follow the fonts, not the code. The `-2 percent` display
-tracking was measured on a Gotham set H1 and has never been checked optically
-on Proyale at 44. Look at it once Proyale is installed and move the token if
-it reads loose or tight.
+The Assets page holds two colourways and three lockups. For a landing page the
+right one is `PropBuy_Logo_Stacked_Standard`, and because the header sits on
+`bg/brand`, the correct colourway there is **White**, not Standard: the
+Standard colourway is a teal wordmark with a teal and terracotta brandmark and
+it is invisible on teal.
+
+I could not download either file. Figma serves its assets from
+`www.figma.com`, and this environment's egress policy denies that host, so the
+asset URLs the Figma tools return cannot be retrieved here. Redrawing a logo
+by hand is not an option, so the header currently carries a text wordmark set
+in Proyale as a stand-in. Because Proyale is capitals-only it reads as
+PROPERTYBUYER, which is close to the real wordmark but has no brandmark.
+
+To finish it, attach the two SVGs the same way the font was attached:
+
+- `PropBuy_Logo_Stacked_Standard`, White colourway, node `6068:17`, for the
+  header on teal.
+- `PropBuy_Logo_Stacked_Standard`, Standard colourway, node `6047:126`, for
+  any light surface.
+
+Drop them at `assets/img/propertybuyer-logo-white.svg` and
+`assets/img/propertybuyer-logo.svg` and the header swap is one edit.
 
 ## Deliberate divergences from the live site
 
@@ -155,14 +198,22 @@ Do not let the client discover them:
 - the body face is Geist rather than Gotham Pro,
 - the H1 is Proyale 400 capped at 44, with no 52 step.
 
-## Still missing before this can go live
+## For the developer
 
-- The logo asset. A text wordmark stands in. It is on Brand > Assets in Figma.
-- A phone number. The CallRail tracking number was not supplied and inventing
-  one would render a false claim as visible text, so the header carries none.
-- Privacy policy and terms URLs, and the licence numbers for the footer.
-- The HubSpot form endpoint.
-- Three Tier 1 proof points.
+Backend and integration, none of it stubbed in a way that hides work:
+
+- Both capture points are plain `<form>` elements with no `action` and no
+  `method`. Field names are `segment`, `budget_band` and `location`, and each
+  form carries `data-segment`, kept in step with the chip the user picks by
+  the small script at the bottom of `index.html`. Wire to HubSpot and keep the
+  six segment strings exactly as they are, because routing depends on them.
+- Name, email and phone belong on the next step, never in the first screen.
+- The CallRail number. The header deliberately carries none rather than a
+  placeholder, since a fake number would render a false claim as visible text.
+- Privacy policy and terms URLs, and the licence numbers, for the footer.
+- No canonical and no robots directive are set. This page targets terms the
+  homepage holds position one on and the homepage H1 is untouchable, so
+  someone should decide whether it is indexable before it goes live.
 
 ## Acceptance checklist
 

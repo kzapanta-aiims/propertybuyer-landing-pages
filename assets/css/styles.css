@@ -112,11 +112,19 @@
 
 /* ==========================================================================
    Fonts
-   Geist is open licensed and self hosted. Proyale is served from
-   propertybuyer.com.au/hubfs/fonts and is supplied by the design lead.
-   Neither file is in this repo yet, so both stacks fall back until they land.
-   Drop the files into assets/fonts/ and the rules below pick them up.
-   Proyale ships one weight, 400. Never ask a browser for Proyale Bold.
+   Proyale is supplied by the design lead and is in this repo, converted from
+   the source TTF to WOFF2. It ships one weight, 400. Never ask a browser for
+   Proyale Bold: it will synthesise one, badly.
+
+   Proyale is a CAPITALS-ONLY face. Its lowercase glyphs have outlines and
+   bounds identical to the uppercase, with no x-height and no descenders, so
+   H1 and H2 render as capitals whatever case is typed. No text-transform is
+   applied anywhere; the face does it. This conflicts with the sentence case
+   rule and is flagged in DESIGN.md and HANDOVER.md rather than worked around.
+
+   Geist is open licensed and self hosted, no CDN. Those files have not been
+   supplied yet, so body and UI fall back to Helvetica, Arial until they land
+   in assets/fonts/ under the names below.
    ========================================================================== */
 
 @font-face {

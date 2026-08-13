@@ -8,8 +8,9 @@ Static HTML and CSS. No build step, no framework, no CDN dependency.
 ```
 index.html               the page
 assets/css/styles.css    tokens first, then components
-assets/fonts/            drop Proyale and Geist here, see the README there
+assets/fonts/            Proyale is in, Geist is not, see the README there
 tools/check.mjs          the acceptance checklist, automated
+DESIGN.md                the rules layer, corrected against Figma Variables
 HANDOVER.md              read this before touching anything
 ```
 
@@ -32,9 +33,15 @@ the five items that still need a human pass.
 
 ## Before you change anything
 
-Read `HANDOVER.md`. It records where `DESIGN.md` disagrees with Figma
-Variables, which tokens are missing or broken upstream, which claims are gated
-and why, and what is still needed before this page can go live.
+Read `DESIGN.md` for the rules and `HANDOVER.md` for the state of this build.
+Between them they record which tokens are missing or broken upstream, which
+claims are gated and why, the decisions the design lead has made, and what is
+still needed before this page can go live.
+
+`DESIGN.md` was corrected against Figma Variables on 13 August 2026. Every
+value in its frontmatter was read out of the Mapped collection rather than
+interpolated, so it can be trusted as a snapshot, but Figma still wins on any
+future disagreement.
 
 Two standing rules from the design system apply to every edit here:
 
