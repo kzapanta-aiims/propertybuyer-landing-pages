@@ -30,15 +30,19 @@
      site-header
      Minimal by design. Paid traffic, so there is no navigation to leak the
      click into the wider site.
-     FLAG: the logo asset lives on Brand > Assets in Figma and is not in this
-     repo. A text wordmark stands in. Swap it before handover.
+     Logo: PropBuy_Logo_Stacked_Standard, White colourway, from Figma Assets.
+     This band sits on bg/brand, and the Standard colourway is a teal wordmark
+     with a teal and terracotta brandmark, so it is invisible on teal. White
+     is the correct colourway for any dark band.
      FLAG: no phone number here. The CallRail tracking number was not supplied
      and inventing one would render a false claim as visible text.
      ========================================================================== -->
 <header class="site-header on-dark">
   <div class="container">
     <div class="site-header__inner">
-      <a class="wordmark" href="https://www.propertybuyer.com.au/">propertybuyer</a>
+      <a class="wordmark" href="https://www.propertybuyer.com.au/">
+        <img class="wordmark__logo" src="assets/img/propertybuyer-logo-white.svg" alt="Propertybuyer" width="560" height="154">
+      </a>
       <span class="micro">Buyers only, since 2001</span>
     </div>
   </div>
@@ -511,14 +515,15 @@
 
 <!-- ==========================================================================
      footer
-     Dense. bg/brand-deep.
+     Dense. bg/brand-deep. Same White logo as the header, for the same reason:
+     the Standard colourway is invisible on a dark band.
      FLAG: privacy policy, terms and the licence numbers were not supplied.
      Nothing invented. Add the real URLs before this goes live.
      ========================================================================== -->
 <footer class="site-footer on-dark">
   <div class="container">
     <div class="stack-sm">
-      <p class="footer__brand">propertybuyer</p>
+      <img class="footer__brand" src="assets/img/propertybuyer-logo-white.svg" alt="Propertybuyer" width="560" height="154">
       <p>
         Independent buyers agency, established 2001. Offices in Sydney,
         Melbourne, Brisbane and Adelaide, with coverage across the major

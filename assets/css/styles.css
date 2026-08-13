@@ -676,11 +676,13 @@ a { color: var(--text-link); }
 
 .site-footer a:hover { color: var(--text-on-brand); }
 
+/* Supplied asset, White colourway. Height is an editorial choice, not a
+   token: the system has no logo-size token, and none is warranted for a
+   single fixed lockup. Width is intrinsic from the SVG's own aspect ratio. */
 .footer__brand {
-  color: var(--text-on-brand);
-  font-family: var(--family-display);
-  font-size: var(--type-h3);
-  letter-spacing: var(--tracking-display);
+  display: block;
+  height: 40px;
+  width: auto;
 }
 
 .footer__legal { border-top: 1px solid rgba(255, 255, 255, 0.14); padding-top: var(--gap); }
@@ -703,17 +705,19 @@ a { color: var(--text-link); }
   gap: var(--gap);
 }
 
-/* Interactive, so it carries the 44 constraint like every other tap target. */
+/* Interactive, so the link itself carries the 44 tap constraint even though
+   the mark rendered inside it is shorter. Supplied asset, White colourway;
+   see the footer rule above for why height is a plain value here. */
 .wordmark {
   display: inline-flex;
   align-items: center;
   min-height: var(--tap-min);
-  font-family: var(--family-display);
-  font-size: var(--type-h3);
-  font-weight: 400;
-  letter-spacing: var(--tracking-display);
-  color: var(--text-on-brand);
-  text-decoration: none;
+}
+
+.wordmark__logo {
+  display: block;
+  height: 36px;
+  width: auto;
 }
 
 .skip-link {

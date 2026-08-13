@@ -163,30 +163,38 @@ files were not supplied, so body and UI fall back to Helvetica, Arial. The
 `@font-face` rules are in place and pick the files up as soon as they land in
 `assets/fonts/` under the names in the README there.
 
-## The logo is not in the build, and I could not fetch it
+## Logo
 
-The Assets page holds two colourways and three lockups. For a landing page the
-right one is `PropBuy_Logo_Stacked_Standard`, and because the header sits on
-`bg/brand`, the correct colourway there is **White**, not Standard: the
-Standard colourway is a teal wordmark with a teal and terracotta brandmark and
-it is invisible on teal.
+Both SVGs are in the build, at `assets/img/propertybuyer-logo.svg` (Standard
+colourway) and `assets/img/propertybuyer-logo-white.svg` (White colourway).
+The Figma CDN that would have served them is on the environment's egress
+denylist, so they could not be fetched from Figma directly; the client
+supplied the exported files instead.
 
-I could not download either file. Figma serves its assets from
-`www.figma.com`, and this environment's egress policy denies that host, so the
-asset URLs the Figma tools return cannot be retrieved here. Redrawing a logo
-by hand is not an option, so the header currently carries a text wordmark set
-in Proyale as a stand-in. Because Proyale is capitals-only it reads as
-PROPERTYBUYER, which is close to the real wordmark but has no brandmark.
+The header and the footer both sit on a dark band (`bg/brand`,
+`bg/brand-deep`), so both use the **White** colourway. The text wordmark
+stand-in is gone. There is no logo-height token in the system, since none is
+warranted for a single fixed lockup, so the rendered height (36px header,
+40px footer) is a plain editorial value, commented as such in `styles.css`.
 
-To finish it, attach the two SVGs the same way the font was attached:
+**Two things in the supplied files worth naming, neither of them a build bug
+and neither changed here, because a brand asset is not a design decision.**
 
-- `PropBuy_Logo_Stacked_Standard`, White colourway, node `6068:17`, for the
-  header on teal.
-- `PropBuy_Logo_Stacked_Standard`, Standard colourway, node `6047:126`, for
-  any light surface.
+- The brandmark accent in both colourways is `#B9795D`. That is the exact
+  pre-accessibility-fix terracotta: `DESIGN.md` documents `action/primary` as
+  "darkened 13 Aug 2026 from the live site's `#B9795D` so white button text
+  clears AA at 4.80". The logo file still carries the retired value. Buttons
+  on this page correctly use the darker `#A26246`, so the accent now differs
+  visibly between a button and the brandmark a few hundred pixels above it.
+- The Standard wordmark fill is `#00313A`, not `#00404B` (teal/700, the
+  system's ink for headings) and not quite `#02313A` either (teal/800,
+  `bg/brand-deep`). It sits a shade off both. Likely predates the token set.
 
-Drop them at `assets/img/propertybuyer-logo-white.svg` and
-`assets/img/propertybuyer-logo.svg` and the header swap is one edit.
+Neither is a reason to hold up this page: colour rules govern layout
+decisions, not the pixels inside a supplied asset. But if the client is ever
+told the accent moved for accessibility, the same conversation should cover
+the logo file, or the two will visibly disagree the next time both are on
+screen together.
 
 ## Deliberate divergences from the live site
 
