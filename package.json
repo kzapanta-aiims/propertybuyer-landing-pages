@@ -1,8 +1,8 @@
 {
-  "name": "propertybuyer-landing-home-buyers",
+  "name": "propertybuyer-landing-pages",
   "version": "1.0.0",
   "private": true,
-  "description": "Propertybuyer landing page for the home buyers segment, Google Ads and Performance Max traffic.",
+  "description": "Propertybuyer segment landing pages for Google Ads and Performance Max traffic. Home buyers first, as the template.",
   "scripts": {
     "check": "node tools/check.mjs",
     "serve": "npx --yes serve ."
