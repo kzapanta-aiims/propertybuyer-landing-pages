@@ -109,6 +109,16 @@ for (const { key, file } of pages) {
   const advocate = [...headings, ...buttons].filter((t) => t.toLowerCase().includes('advocate'));
   advocate.length === 0 ? pass('no "advocate" in a heading or CTA') : fail(`"advocate" in: ${advocate.join(', ')}`);
 
+  /* Bracketed placeholder copy. Approved for design presentation, never for
+     publication, so this is a hard failure rather than a note. A page that
+     cannot pass its own checklist cannot be signed off as ready to ship, and
+     that is the point: it makes shipping a fabricated claim impossible by
+     accident rather than merely discouraged. */
+  const placeholders = [...visible.matchAll(/\[[^\]]{1,60}\]/g)].map((m) => m[0]);
+  placeholders.length === 0
+    ? pass('no placeholder copy remaining')
+    : fail(`${placeholders.length} placeholder(s) still in visible copy, NOT SHIPPABLE: ${placeholders.slice(0, 6).join(' ')}${placeholders.length > 6 ? ' ...' : ''}`);
+
   /* ------------------------------------------------- character budgets --- */
   head('Mobile character budgets, checked at 390');
 

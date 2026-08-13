@@ -73,6 +73,13 @@
       "consequence": "The router is a measurement instrument before it is a conversion device. Revisit once there is real volume, and rank on observed demand rather than assumption.",
       "supersedes": "The DESIGN.md rule that equal treatment is itself wrong. That rule assumes you know the order. Here, not knowing is the finding."
     },
+    "tier1Proof": {
+      "problem": "The rules budget three Tier 1 proof blocks per page, attributable and dated. No real examples were supplied, and the slots shipped empty.",
+      "status": "PLACEHOLDERS 13 Aug 2026, design presentation only",
+      "decision": "Fill the three slots with bracketed placeholders so the design can be presented and approved. The client holds real examples and supplies them after sign-off.",
+      "safeguard": "Every placeholder value is wrapped in square brackets, and tools/check.mjs fails hard on any bracket in visible copy. The page therefore cannot pass its own acceptance checklist until the numbers are real. Shipping a fabricated claim is made impossible by accident rather than merely discouraged.",
+      "outstanding": "Twelve real proof points needed in total, three per page. Each one needs a number, a named suburb, a month and year, and a client first name."
+    },
     "proyaleCase": {
       "problem": "Proyale is capitals-only, so H1 and H2 render in caps whatever case is typed, against a sentence case rule with no exceptions.",
       "status": "RESOLVED 13 Aug 2026, ships as is",

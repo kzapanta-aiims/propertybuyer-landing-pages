@@ -191,13 +191,9 @@
     · "315+ Google reviews" is true at time of writing and moving. The client
       is targeting 500. Verify the number on the day this ships.
 
-    TIER 1 SLOTS, EMPTY ON PURPOSE:
-    The budget is three Tier 1 proof blocks per page, each one attributable
-    and dated: a named suburb, a purchase price, a saving against guide, or a
-    client first name plus segment, with the number set in type/stat. No such
-    data was supplied, and inventing a case study would put a fabricated claim
-    in front of the client's own customers. The .stat class and the markup
-    pattern are ready. Supply three and they drop in above the FAQ.
+    TIER 1 SLOTS: now filled with bracketed placeholders, see the
+    tier-1-proof section above the FAQ. Design presentation only. The client
+    holds real examples and supplies them once the design is approved.
   -->
 
   <!-- ========================================================================
@@ -357,6 +353,65 @@
             <h3>A development site</h3>
             <p>Duplex, subdivision or larger.</p>
           </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       tier-1-proof
+       The three Tier 1 slots. Attributable and dated, number in type/stat.
+
+       PLACEHOLDER CONTENT, 13 August 2026. Approved for design presentation
+       only, on the basis that the client holds real examples and supplies
+       them once the design is signed off.
+
+       Every value below is wrapped in square brackets on purpose. Nothing
+       here reads as a real claim, nothing here can ship by accident, and
+       tools/check.mjs FAILS while any bracket remains, so this page cannot
+       pass its own acceptance checklist until the numbers are real.
+
+       Replacing them: keep the structure, drop the brackets. Each block needs
+       a number, a named suburb, a month and year, and a client first name.
+       ======================================================================== -->
+  <section class="section">
+    <div class="container">
+      <div class="stack">
+        <div>
+          <h2>What that looks like in practice</h2>
+          <p class="section__intro">
+            Three recent purchases, with the numbers the client agreed we
+            could publish.
+          </p>
+        </div>
+
+        <div class="grid grid--3 grid--tight">
+          <article class="card">
+            <p class="stat">[$00,000]</p>
+            <h3>Under guide in [Suburb]</h3>
+            <p class="card__body">
+              [First name] was bidding against [n] other buyers on a
+              [n]-bedroom [property type]. [Month Year].
+            </p>
+          </article>
+
+          <article class="card">
+            <p class="stat">[00 days]</p>
+            <h3>From brief to keys in [Suburb]</h3>
+            <p class="card__body">
+              [First name] had [constraint, e.g. a settlement date to match].
+              [Month Year].
+            </p>
+          </article>
+
+          <article class="card">
+            <p class="stat">[00]</p>
+            <h3>Properties inspected in [Suburb]</h3>
+            <p class="card__body">
+              [First name] saw [n] of them. We rejected the rest before they
+              reached the shortlist. [Month Year].
+            </p>
+          </article>
         </div>
       </div>
     </div>
