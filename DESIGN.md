@@ -5,9 +5,13 @@ description: >
   Design system for Propertybuyer landing pages and section-level conversion
   work on an existing HubSpot site. Independent Australian buyers agency,
   established 2001. Audience 40 to 65, professional, risk-handover buyers.
+  Four segment landing pages: home, investor, commercial, developer.
   This file is a rules layer for agents. Values below were read directly from
   the Figma Mapped collection on 13 August 2026, not interpolated. On any
   conflict, Figma Variables win.
+  Scope: design and creative only. Backend, HubSpot field mapping and ad
+  account configuration sit with other people. See the Backend Handover
+  section for what a developer needs from the markup, and nothing beyond it.
 colors:
   # Backgrounds
   bg/page: "#FFFFFF"           # base/white
@@ -192,6 +196,16 @@ existing HubSpot site. It is not a brand refresh, not a full design system and
 not a component library for its own sake. The primary job of every page is to
 make each lead arrive labelled with segment, budget band and location.
 Conversion is the secondary job.
+
+**Four landing pages**, one per segment: `home`, `investor`, `commercial`,
+`developer`. `home` is built first and is the template the other three copy.
+
+**What this engagement covers.** Design and creative. The markup, the copy,
+the tokens, the capture structure and the documentation a backend developer
+needs to wire it up. It does not cover HubSpot configuration, ad account
+settings or anything else on the client's side of the line. Where an upstream
+problem constrains a design decision it is recorded here as a constraint to
+design around, not as a task for someone else. We work with what we have.
 
 ## Colors
 
@@ -406,10 +420,48 @@ capture point. A page missing any of these is not finished.
 
 **Forms and capture.**
 
-- Every capture point carries `data-segment` with one of exactly six lowercase values: `home` · `investor` · `commercial` · `prestige` · `expat` · `developer`. Downstream HubSpot routing depends on these strings; the list changes only by decision of the design lead.
+- Every capture point carries `data-segment` with one of exactly **four** lowercase values: `home` · `investor` · `commercial` · `developer`. Downstream HubSpot routing depends on these strings; the list changes only by decision of the design lead. **Changed 13 August 2026 from six.** See Segments below.
 - Three inputs maximum in the first screen: segment, budget band, location. Name, email and phone come after, never before.
 - Segment is a tap chip row, not a dropdown. A visible chip row shows a commercial buyer that commercial is a category here before they commit anything.
-- **The selected chip is a border and weight change with no fill.** `border/brand` at 2px plus Geist SemiBold 600; unselected is `border/muted` at 1px, Regular 400. Settled by the design lead 13 August 2026. The accent stays free, so six chips in one viewport do not break one primary action per viewport height, and a selection control does not wear an action colour. Build it on native radio inputs so the row works with no script.
+- **The selected chip is a border and weight change with no fill.** `border/brand` at 2px plus Geist SemiBold 600; unselected is `border/muted` at 1px, Regular 400. Settled by the design lead 13 August 2026. The accent stays free, so a chip row in one viewport does not break one primary action per viewport height, and a selection control does not wear an action colour. Build it on native radio inputs so the row works with no script.
+
+## Segments
+
+**Four. Changed from six on 13 August 2026 by the design lead.** Four chips,
+four pages, four `data-segment` values.
+
+| Segment | Who | Budget | Lead with |
+|---|---|---|---|
+| `home` | Upgraders, downsizers, relocators, time-poor professionals | $800k to $6m | Handover of risk, and that a person inspects everything. Do not lead with data. |
+| `investor` | First timers through to portfolio builders and SMSF buyers, heavily interstate | $650k to $2m | Independence and no developer commissions. An honest on-the-ground assessment, not more data. |
+| `commercial` | Owner-occupiers facing lease expiry, and investors chasing yield | $600k to $20m | Due diligence and buy-versus-lease certainty. |
+| `developer` | Duplex and small subdivision through to institutional | $2.5m upward | Site access and resale numbers. Shortest copy of any segment. |
+
+**Why four and not six.**
+
+- **`prestige` is not a chip.** It is a treatment and, downstream, a derived
+  flag. A prestige buyer selects `home` and a budget band at the top of the
+  scale; the flag is derived from the band, not self-declared. Behaviour is a
+  more reliable signal than self-labelling here, and it keeps the hero clean
+  for the volume segments. Gold, discretion language and the sparse density
+  still belong to prestige components wherever they appear. Note the standing
+  constraint: `prestigepropertybuyer.com.au` is a non-functional shell, so
+  there is no separate destination to route a prestige lead to. It is served
+  by one restrained band low on the `home` page.
+- **`expat` is retired from the capture list.** It described a circumstance,
+  not a buying motive: an expat is a home buyer or an investor who cannot
+  attend an inspection. Remote process and foreign buyer rules are content
+  that belongs inside the `home` and `investor` pages, not a segment of their
+  own.
+
+**`commercial` carries two psychographics.** Owner-occupiers and investors
+want opposite things, and one blended message serves neither. Fork the page
+near the top rather than averaging the copy. This is the page most likely to
+underperform and it should be designed with that named rather than discovered.
+
+**Do not re-expand the list to six.** If a fifth page is ever proposed, it
+changes the `data-segment` contract, which is why the list moves only by the
+design lead's decision.
 - Tap targets 44 minimum at every viewport. Visible label on every field. Focus ring (`border/focus`) always rendered, never removed.
 - `border/focus` is teal/700 and is invisible on `bg/brand` and `bg/brand-deep`. Either put the control on a light surface inside the dark band, or render the ring in `text/on-brand`. Mapped has no dark-surface focus token, so this is derived. Flagged.
 
@@ -434,15 +486,21 @@ allowed everywhere. Do not confuse it with discretion: discretion, anonymity
 and NDA language is a prestige-only vocabulary.
 
 **Register by segment.** The voice does not change; the fear you answer first
-does. `home`: reassuring, process-forward, lead with handover of risk and the
-fact that a person inspects everything. Do not lead with data.
-`investor`: evidence-forward, lead with independence and no developer
-commissions. `commercial`: competent, transactional, lead with due diligence
-and buy-versus-lease certainty. `prestige`: restrained, fewer words, more
-space, lead with access to stock that never reaches the market. `expat`:
-practical, lead with the remote process and current foreign buyer rules.
-`developer`: numerical, lead with site access and resale numbers, shortest
-copy of any segment.
+does.
+
+- `home`: reassuring, process-forward. Lead with handover of risk and the fact that a person inspects everything. Do not lead with data.
+- `investor`: evidence-forward and unsentimental. They arrive semi-informed via a broker or accountant and want validation, not education from scratch. Lead with independence and no developer commissions.
+- `commercial`: competent, transactional. Lead with due diligence and buy-versus-lease certainty. Fork owner-occupier from investor rather than blending them.
+- `developer`: numerical. Lead with site access and resale numbers. Shortest copy of any segment.
+
+**The prestige register still exists, as a component treatment rather than a
+page.** Restrained, fewer words, more space, no exclamation of any kind. It is
+the only place discretion, anonymity and off-market privacy language is
+permitted, and it leads with access to stock that never reaches the market.
+Applied to the prestige band on `home`, not to a page of its own.
+
+What never changes, in any segment: buyer-side only, specificity over
+adjectives, Australian English, no em dashes.
 
 **Banned language, testable:**
 
@@ -485,14 +543,87 @@ Never mix tiers in one block: a Tier 1 case study beside a Tier 2 badge drags
 the case study down to badge level, and the badge does not come up. No award
 badge grid, ever: one line naming the count plus the two most significant wins.
 
-**Claims register.** Gated: the 96 percent purchase rate (denominator
-unconfirmed) and the exact award count (client material says both 50+ and 53).
-Banned: "lowest possible price". Clear: buyers only, never sell · 5,000+
-properties purchased · since 2001 · 30 to 60 days from engagement to purchase ·
-database of 10,000+ agents. Check at publish: the review count (315+ and
-moving, client targeting 500) and any specific off-market percentage, which
-needs a source because competitors quote 69 and 70 percent. Add a row to the
-register in Figma rather than making a judgement call.
+**Claims register.**
+
+**Clear, use freely:** buyers only, never sell · 5,000+ properties purchased ·
+since 2001 · 30 to 60 days from engagement to purchase · database of 10,000+
+agents · Rich Harvey's credentials (Masters in Economics, REBAA President four
+years, Chairman REINSW Buyers Agent Chapter) · the fee schedule, 1.5 to 2
+percent full search and 1 percent appraise and negotiate.
+
+**53 awards.** Resolved. The landing page build brief of 6 August 2026 clears
+53 and states it replaces "50+" everywhere, sourced to the client's own
+onboarding USP document. Use 53. Note that the Figma Stop and Flag list still
+carries this as gated and is behind; Figma should be corrected rather than this
+file reverted. Treatment is unchanged: one aggregate line naming the count plus
+the two most significant wins, never a badge grid. Which two are the marquee
+wins is not recorded anywhere, so name the count alone until they are.
+
+**Gated, does not render:** the 96 percent purchase rate, because the
+denominator is ambiguous as written and a claim nobody can define is a claim
+nobody can defend. Any specific off-market percentage, because competitors
+quote 69 and 70 and ours needs a source. Frame off-market as access, not as a
+bargain: REBAA itself warns off-market can carry a premium.
+
+**Banned:** "lowest possible price", substitute "right price".
+
+**Check at publish:** the review count. 315+ was true at time of writing and it
+moves. Verify on the day it ships.
+
+Where a claim is not in this register, add a row rather than making a judgement
+call in the markup.
+
+## Backend Handover
+
+For the developer wiring HubSpot. This section is documentation, not a task
+list for us. Nothing here is built on the design side; the markup is the
+contract and this describes it.
+
+**What the markup guarantees.** Every capture point is a plain `<form>` with
+no `action` and no `method`, carrying `data-segment` with one of the four
+values. Field names are stable and are the integration surface:
+
+| Name | Type | Notes |
+|---|---|---|
+| `segment` | radio group | One of `home` `investor` `commercial` `developer`. Lowercase, exact. Routing depends on the string. |
+| `budget_band` | select | Bands differ per segment, see below. |
+| `location` | text | Free text. Suburb or postcode. |
+
+`data-segment` on the form element is kept in step with the chip the user picks
+by a small script. It is the value to trust, because a visitor can arrive on
+one page and select another segment before submitting.
+
+**Two steps, and the split matters.** Step one is segment, budget band and
+location. Step two is name, email and phone. Never more than three inputs on
+one screen. **A lead must be creatable from step one alone** so a visitor who
+abandons at step two still arrives labelled. That is the entire point of the
+page; a form that captures a name and no segment has done the easy half of the
+job and skipped the valuable half.
+
+**Budget bands differ by segment.** A commercial owner-occupier and a first
+home buyer do not share a scale. The bands follow the ranges in Segments above.
+If the HubSpot property is a fixed dropdown it needs to hold the union of every
+band across all four pages, or four separate properties. That is a decision for
+whoever owns the HubSpot schema, and it needs making before the first page
+posts anything.
+
+**Derived, not captured:** `prestige_flag`, set true where `budget_band` is at
+the top of the scale regardless of segment. This is how a prestige lead is
+identified without a prestige chip in the hero.
+
+**Discrete properties, not a notes blob.** The segment field is what the
+nurture flows have been missing. It has to arrive as its own property or the
+exercise fails quietly and nobody notices for a quarter.
+
+**Not specified here, and deliberately so:** which HubSpot properties exist,
+what the analytics event names are, how CallRail numbers are provisioned, and
+anything about the ad account. Those sit with the people who own them. The
+design side commits to stable field names and a segment on every submission.
+
+**Still needed from someone, to finish the markup:** the privacy policy and
+terms URLs, the licence numbers for the footer, and the CallRail number. The
+header deliberately carries no phone number rather than a placeholder, because
+a fake number renders a false claim as visible text.
 
 ## Do's and Don'ts
 
@@ -504,7 +635,8 @@ looking.
 - [ ] One primary action visible per viewport height.
 - [ ] Gold appears only inside prestige components.
 - [ ] No Tier 3 claim renders as visible text.
-- [ ] Every capture point carries `data-segment` with one of the six values.
+- [ ] Every capture point carries `data-segment` with one of the four values.
+- [ ] A lead is creatable from step one alone, with segment, budget band and location.
 - [ ] No em dash anywhere in the copy.
 - [ ] Hero subhead under 42 characters; other headings under 60.
 - [ ] 390 check: no horizontal scroll, no clipped text, no orphaned single word on a heading.
@@ -520,19 +652,14 @@ Hit one of these and surface it rather than choosing a plausible answer. A
 guess here becomes a client-facing error, and the person who catches it will
 be the client.
 
-- **Proyale is capitals-only, and the case rule says sentence case with no exceptions.** Verified against the supplied font file on 13 August 2026: the lowercase glyphs have outlines and bounds identical to the uppercase, with no x-height and no descenders. So every H1 and H2 renders in capitals no matter what is typed, while the rule says the only uppercase on a page is micro labels. The two cannot both stand. This was never caught because the Figma Type page states that Proyale is not installed and that the H1 and H2 specimens are Geist standing in for it, so no one has seen the face rendered. Resolve by either accepting capitals for the display face and rewriting the case rule, or moving H1 and H2 to a mixed-case face. Design lead, not an agent.
 - **`bg/prestige` is inconsistent with itself.** The variable resolves to `#001114` (teal/950). Its own description in Mapped, and the Colours page, both say night/950 `#1B1C25`, "not a teal", client direction 3 August 2026. There is no `night` ramp in Base Values at all. The published ratio `text/prestige on bg/prestige = 7.15` only computes against `#1B1C25`; against `#001114` it is 8.13. The documentation is self-consistent, so the alias is most likely the bug, probably because night/950 was never created. Do not pick one.
 - **Three tokens the system depends on are missing from Mapped:** `text/on-prestige-action` (teal/950, the only ink that holds AA on gold through hover), `action/primary-pressed` and `action/prestige-pressed`. Author them rather than continuing to derive them.
 - **No focus token for dark surfaces.** `border/focus` is teal/700 and disappears on `bg/brand` and `bg/brand-deep`.
-- **Segment card ranking.** Not all six can get equal treatment or nothing ranks. Client decision, not made.
-- **The `-2 percent` display tracking has now been checked optically on Proyale at 44** and it holds, but it was checked on a capitals setting, which is not what the rule assumed. If the case question above is resolved toward a mixed-case face, check it again.
-- **Award count.** 50+ vs 53. Neither is safe to publish.
-- **The 96 percent purchase rate.** Gated pending the client confirming what it measures.
-- **Homepage H1.** Untouchable. It holds position one for the core commercial terms; SEO risk outweighs any conversion gain.
+- **Homepage H1.** Untouchable. It holds position one for the core commercial terms; SEO risk outweighs any conversion gain. This constrains what a landing page H1 may compete with, which is why it is here rather than on someone else's list.
 - **Deliberate divergences from the live site** that the client has not yet been told about: the accent darkened to `#A26246` for accessibility, body face moved to Geist, H1 in Proyale capped at 44. Defensible, but flag them in handovers; do not let the client discover them.
 - **The success colour ramp is invented.** The build has no success state, so it has no source. The first form that ships with it makes it brand by accident; get it looked at first.
-- **Prestige sub-brand:** `prestigepropertybuyer.com.au` is a non-functional shell. Prestige buyers land on the core site; there is no separate destination to route to.
-- **Google Ads runs Performance Max with Final URL Expansion**, which can override a landing page destination entirely. Confirm with Kynan before assuming a page receives the traffic it was designed for.
+- **Prestige sub-brand:** `prestigepropertybuyer.com.au` is a non-functional shell. Prestige buyers land on the core site; there is no separate destination to route to. Design the prestige band on `home` as a terminus, not as a signpost to somewhere else.
+- **Which two awards are the marquee wins.** The count is cleared at 53 but the two named wins the treatment calls for are not recorded in any document we hold. Name the count alone until they are.
 
 **Resolved, kept for the record.**
 
@@ -541,6 +668,26 @@ be the client.
 - 13 Aug 2026: the selected segment chip. Border and weight, no fill.
 - 13 Aug 2026: the mobile H1. The token says 34 and the first landing page ships 34. The older CRO build shipped 36 and is behind.
 - 13 Aug 2026: the state values. Read out of Figma rather than derived, and this file corrected.
+- 13 Aug 2026: **the segment list. Six to four.** `home`, `investor`, `commercial`, `developer`. Prestige becomes a treatment and a derived flag; expat is retired as a circumstance rather than a motive. See Segments.
+- 13 Aug 2026: **Proyale renders in capitals, and that is accepted.** A capitals-only face is a property of the face. The sentence case rule governs how copy is written, not how a chosen display face renders it. Keep writing H1 and H2 in sentence case: the fallback, Georgia, is mixed case and renders them that way until Proyale loads. The `-2 percent` display tracking was checked optically on Proyale at 44 on a capitals setting and holds.
+- 13 Aug 2026: **segment ranking. Deliberately equal, do not rank.** There is no lead qualification data to rank against, so a ranking would encode a guess as a design decision. The router measures demand before it converts it. Rank later, on observed distribution.
+- 13 Aug 2026: **the award count. 53**, per the build brief. Figma's Stop and Flag list is behind on this.
+
+**Where Figma is now behind this file.** These are not conflicts to reason
+about, they are edits queued against the Figma source. Until they land, Figma
+and this file disagree and this file is the newer of the two:
+
+| Figma location | Says | Should say |
+|---|---|---|
+| Context § 6 | "The six segments", all six listed with ranges | Four. `prestige` becomes a treatment plus derived flag, `expat` retired |
+| Design Rules § 5 | "The six values" | The four values |
+| Design Rules § 10 | "data-segment with one of the six values" | four |
+| Context § 8 | Segment ranking open, award count open | Both resolved 13 Aug 2026 |
+| Design Rules § 11 | Award count gated, PMax and Final URL Expansion | 53 cleared; the PMax item is not a design constraint and belongs elsewhere |
+
+The standing precedence rule still holds for **values**: Figma Variables win on
+any token. It does not extend to segment scope or claims status, which are
+decisions rather than values, and those are recorded here first.
 
 **Documentation inconsistencies worth a tidy, none of them blocking.** The
 Colours page says Mapped holds seven type-size tokens; there are eight, since
@@ -550,6 +697,6 @@ header cites a different prototype URL from the Context page.
 
 Owner: Kenn Zapanta, Head of Design, AIIMS Group. Every token value in the
 frontmatter read directly from Figma Variables 13 August 2026. Proyale
-verified against the supplied font file the same day. Update this file when a
-variable changes, a new section ships, or the client resolves any item in Stop
-and Flag.
+verified against the supplied font file the same day. Segment scope reduced to
+four the same day. Update this file when a variable changes, a new section
+ships, or an item in Stop and Flag is resolved.
