@@ -9,7 +9,7 @@ layer, Figma Variables, then Colours, Type & Tone, then Assets.
 ```
 New Builds/buyer/index.html   the page
 assets/css/styles.css         tokens, then components
-assets/fonts/                 Proyale is in, Geist is not, see the README there
+assets/fonts/                 both faces are in, see the README there
 tools/check.mjs               the acceptance checklist, automated
 DESIGN.md                     the rules layer, corrected against Figma
 ```
@@ -49,19 +49,23 @@ decision, and the dark-surface focus problem.
 
 ## Stop and flag
 
-**Proyale is a capitals-only face, and the case rule says sentence case with
-no exceptions.** Verified against the supplied font file: the lowercase glyphs
-have outlines and bounds identical to their uppercase counterparts, no
-x-height, no descenders. Every H1 and H2 renders in capitals whatever case is
-typed, while the Tone page says the only uppercase on a page is micro labels.
-No `text-transform` is applied anywhere in the CSS; this is the face itself.
+**Proyale is a capitals-only face. RESOLVED 13 August 2026, ships as is.**
+Verified against the supplied font file: the lowercase glyphs have outlines
+and bounds identical to their uppercase counterparts, no x-height, no
+descenders. Every H1 and H2 renders in capitals whatever case is typed, while
+the Tone page says the only uppercase on a page is micro labels. No
+`text-transform` is applied anywhere in the CSS; this is the face itself.
 
-It has gone unnoticed because the Figma Type page states plainly that Proyale
-is not installed and that the H1 and H2 specimens are Geist standing in for
-it. The direction "Proyale 400 for H1 and H2" was therefore settled against a
-stand-in. The page ships as it renders, in capitals, which sits well beside the
-logo wordmark, but the rule and the face cannot both stand and that is a design
-lead call, not an agent's.
+It went unnoticed because the Figma Type page states plainly that Proyale is
+not installed and that the H1 and H2 specimens are Geist standing in for it.
+The direction "Proyale 400 for H1 and H2" was therefore settled against a
+stand-in.
+
+The decision: this is a property of the face, not a contradiction. The
+sentence case rule governs how copy is **written**, not how a chosen display
+face renders it. So the page ships as it renders, in capitals, which sits well
+beside the logo wordmark. Headings stay written in sentence case, which
+matters for the reason in the next paragraph.
 
 One consequence to watch: the mobile character budgets were set against a
 sentence-case H1 and capitals are wider. The H1 on this page moves from two
@@ -71,9 +75,10 @@ A second consequence: the fallback, Georgia, is mixed case. A heading renders
 in sentence case until Proyale loads and in capitals afterwards.
 
 **The `-2 percent` display tracking is now checked.** This was a flagged open
-item. At 44 with Proyale actually installed it holds, so the token stays. Note
-it was judged on a capitals setting, which is not what the rule assumed. If
-the case question resolves toward a mixed-case face, check it again.
+item. At 44 with Proyale actually installed it holds, so the token stays. It
+was judged on a capitals setting, which is what now ships, so the check
+stands. It would only need repeating if the display face were ever changed to
+a mixed-case one.
 
 **`bg/prestige` is inconsistent with itself in Figma.** The variable resolves
 to `#001114`, which is teal/950. Its own description in Mapped, and the Colours
@@ -101,11 +106,19 @@ hero capture panel sits on a light surface inside the teal band so every field
 keeps a visible ring, and dark bands carry an on-brand outline via a `.on-dark`
 rule. Derived, not invented as a token, and worth a decision.
 
-**Segment card ranking is not decided, so the router does not rank.** All six
-items in `who-we-help` carry equal weight. The rules say equal treatment is
-itself wrong, because if everything ranks equally nothing ranks, but the
-ranking is a client decision and an agent must not make it. Flagged in the
-markup at the section.
+**Segment card ranking. RESOLVED 13 August 2026: do not rank.** All six items
+in `who-we-help` carry equal weight, deliberately. The rules say equal
+treatment is itself wrong, because if everything ranks equally nothing ranks,
+but that rule assumes you know the order. Here not knowing is the finding: the
+client database was never set up to qualify leads or segment the market, so
+there is no evidence base to rank against, and ranking now would encode a
+guess as a design decision.
+
+These pages exist partly to generate that evidence. Every capture point labels
+a lead by segment, budget band and location, and the distribution that comes
+back is the ranking input. The router is a measurement instrument before it is
+a conversion device. Revisit once there is real volume, and rank on observed
+demand rather than assumption.
 
 **Performance Max with Final URL Expansion** can override this destination
 entirely. Confirm with Kynan before assuming the page receives the traffic it
@@ -162,10 +175,13 @@ process intro and the section still works.
 **Proyale is in**, converted from the supplied TTF to WOFF2, 139 KB down to
 39 KB, no other change. It covers every character used on this page.
 
-**Geist is not.** It is open licensed and self hosted with no CDN, but the
-files were not supplied, so body and UI fall back to Helvetica, Arial. The
-`@font-face` rules are in place and pick the files up as soon as they land in
-`assets/fonts/` under the names in the README there.
+**Geist is in**, supplied 13 August 2026. Open licensed and self hosted with
+no CDN. The bundle carried both a variable font and eighteen static cuts, and
+the variable file was chosen on measured size: 67.2 KB in one request against
+131.5 KB in four for the cuts this page actually asks for (300, 400, 600,
+700). Half the bytes on a page whose load time feeds Ads Quality Score. Body
+and UI no longer fall back to Helvetica. Licence in `GEIST-OFL.txt`, italics
+not shipped. See `assets/fonts/README.md`.
 
 ## Logo
 

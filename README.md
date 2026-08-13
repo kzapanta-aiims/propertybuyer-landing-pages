@@ -37,7 +37,7 @@ New Builds/developer/BRIEF.md
 
 shared/segments.json     the segment list, single source of truth
 assets/css/styles.css    one stylesheet, every page
-assets/fonts/            Proyale is in, Geist is not, see the README there
+assets/fonts/            both faces are in, see the README there
 assets/img/              both logo colourways
 
 DESIGN.md                the rules layer, corrected against Figma Variables
@@ -122,13 +122,39 @@ value, and `npm run check` fails if one appears.
 
 ## Open, and blocking more than one page
 
-- **Proyale is capitals-only**, which contradicts the sentence case rule. It
-  was specced against Geist standing in for it in Figma. Design lead call, and
-  it affects all four pages.
-- **Segment ranking is undecided.** All six rank equally, which the rules
-  themselves call wrong. Client decision. Resolve before page two, not after.
-- **No Tier 1 proof supplied.** Three slots sit empty and commented on `home`.
-  Each page needs its own three.
-- **Geist has not been supplied**, so body and UI fall back to Helvetica.
+- **No Tier 1 proof supplied.** This is the blocker. Twelve proof points are
+  needed, three per page, each with a number, a named suburb, a month and year
+  and a client first name. The buyer page ships bracketed placeholders and
+  `npm run check` fails hard on any bracket in visible copy, so no page can
+  pass its own checklist until the numbers are real. That is deliberate: it
+  makes shipping a fabricated claim impossible by accident rather than merely
+  discouraged.
+- **Deferred chip behaviour is assumed, not confirmed.** `prestige` and
+  `expat` keep their chips in every router and post to the same capture form,
+  so the lead still arrives labelled in HubSpot. The alternative is linking
+  those two chips out to the equivalent propertybuyer.com.au pages, which
+  costs the labelled lead. Raised 13 August 2026, still unconfirmed.
 - See `HANDOVER.md` for the token-level problems: `bg/prestige`,
   `border/focus` on dark surfaces, and three tokens missing from Mapped.
+
+## Settled, do not reopen
+
+Recorded in full, with reasoning, under `openDecisions` in
+`shared/segments.json`. Summarised here so they are not raised again.
+
+- **Proyale renders H1 and H2 in capitals.** Resolved 13 August 2026, ships as
+  is. A property of the face, not a breach of the sentence case rule: that
+  rule governs how copy is written, not how a chosen display face renders it.
+  No `text-transform` anywhere, and headings stay written in sentence case so
+  the Georgia fallback renders correctly before Proyale loads. See
+  `assets/fonts/README.md`.
+- **All six segments rank equally, deliberately.** Resolved 13 August 2026.
+  The client database was never set up to qualify leads, so there is no
+  evidence base to rank against and ranking now would encode a guess as a
+  design decision. These pages generate that evidence: every capture point
+  labels a lead by segment, budget band and location, and the distribution
+  that comes back is the ranking input. The router is a measurement instrument
+  before it is a conversion device. Revisit on observed demand.
+- **Both faces are supplied.** Proyale and Geist are self hosted, no CDN.
+  Geist arrived 13 August 2026 as one variable file covering the whole 100 to
+  900 axis, chosen over four static cuts on measured size.

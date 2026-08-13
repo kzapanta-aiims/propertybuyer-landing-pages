@@ -44,7 +44,10 @@ A page missing any of these is not finished.
   fill.
 - Asset paths are two levels up: `../../assets/css/styles.css`.
 
-## Open, blocks nothing but affects this page
+## Settled, affects this page
 
-Segment ranking is undecided, so the router here will give all six equal
-weight exactly as home does. See `../../shared/segments.json`.
+Segment ranking was resolved on 13 August 2026: do not rank. The router here
+gives all six equal weight exactly as the buyer page does, and that is
+deliberate rather than a gap. There is no evidence base to rank against yet,
+and these pages are what generates it. See `../../shared/segments.json` for
+the full reasoning.
