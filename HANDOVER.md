@@ -7,14 +7,18 @@ Sources read, in the order Design Rules requires: Figma Context, the rules
 layer, Figma Variables, then Colours, Type & Tone, then Assets.
 
 ```
-index.html               the page
-assets/css/styles.css    tokens, then components
-assets/fonts/            Proyale is in, Geist is not, see the README there
-tools/check.mjs          the acceptance checklist, automated
-DESIGN.md                the rules layer, corrected against Figma
+New Builds/buyer/index.html   the page
+assets/css/styles.css         tokens, then components
+assets/fonts/                 Proyale is in, Geist is not, see the README there
+tools/check.mjs               the acceptance checklist, automated
+DESIGN.md                     the rules layer, corrected against Figma
 ```
 
-Run it: open `index.html`, or `npm run serve`.
+The `home` segment builds into the `buyer` folder. The key is the routing
+label and does not change; the folder is only a path. See `README.md` for the
+full layout.
+
+Run it: open `New Builds/buyer/index.html`, or `npm run serve`.
 Check it: `npm install && npm run check`.
 
 ## What was corrected in DESIGN.md

@@ -2,9 +2,10 @@
 
 Segment `investor`. Not built. This file is the input the build needs.
 
-Template: `home/index.html`. Copy it, then change only what this file names.
-Structure, tokens, component classes and the acceptance rules do not change
-between segments. Read `../DESIGN.md` and `../HANDOVER.md` first.
+Template: `../buyer/index.html`, the built `home` page. Copy it, then change
+only what this file names. Structure, tokens, component classes and the
+acceptance rules do not change between segments. Read `../../DESIGN.md` and
+`../../HANDOVER.md` first.
 
 ## Register, from DESIGN.md
 
@@ -24,7 +25,7 @@ A page missing any of these is not finished.
 ## Supply before build
 
 - [ ] **H1.** Under 60 characters. Renders in capitals, see the Proyale note in
-      `../HANDOVER.md`.
+      `../../HANDOVER.md`.
 - [ ] **Hero subhead.** Hard limit 42 characters at 390. This is the tightest
       constraint on the page and the checker enforces it.
 - [ ] **Three Tier 1 proof points.** Attributable and dated: a named suburb, a
@@ -41,9 +42,9 @@ A page missing any of these is not finished.
   first screen. Name, email and phone come after, never before.
 - Chip row is native radio inputs, selected state is border and weight with no
   fill.
-- Asset paths are one level up: `../assets/css/styles.css`.
+- Asset paths are two levels up: `../../assets/css/styles.css`.
 
 ## Open, blocks nothing but affects this page
 
 Segment ranking is undecided, so the router here will give all six equal
-weight exactly as home does. See `../shared/segments.json`.
+weight exactly as home does. See `../../shared/segments.json`.

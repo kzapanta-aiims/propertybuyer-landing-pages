@@ -12,11 +12,12 @@
  *
  * Exits non zero if any hard rule fails.
  *
- * Run from the repository root. Paths below are root relative.
+ * Run from the repository root, which is the client folder. Paths below are
+ * root relative. The pages themselves live under "New Builds/".
  */
 
 import { readFileSync, existsSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
 import { chromium } from 'playwright';
 
 /* ------------------------------------------------------------- segments --- */
@@ -174,16 +175,21 @@ for (const { key, file } of pages) {
   const inline = (stripped.match(/style="/g) || []).length;
   inline === 0 ? pass('no inline style attributes') : fail(`${inline} inline style attribute(s)`);
 
-  /* Pages live one level down, so every asset reference is ../ relative. */
-  const badRefs = [...html.matchAll(/(?:href|src)="(assets\/[^"]*)"/g)].map((m) => m[1]);
+  /* Pages live two levels down, under "New Builds/", so every asset reference
+     is ../../ relative. Anything shallower resolves to nothing and the page
+     loads unstyled, which is easy to miss on a machine that caches. */
+  const badRefs = [...html.matchAll(/(?:href|src)="((?:\.\.\/)?assets\/[^"]*)"/g)].map((m) => m[1]);
   badRefs.length === 0
     ? pass('asset paths are relative to the page folder')
-    : fail(`asset paths missing ../ : ${badRefs.join(', ')}`);
+    : fail(`asset paths need ../../ : ${badRefs.join(', ')}`);
 
   /* ---------------------------------------------------------- rendered --- */
   head('Rendered checks');
 
-  const url = 'file://' + resolve(file);
+  /* pathToFileURL, not string concatenation: the page path now contains a
+     space, and on Windows a backslash drive path, both of which need encoding
+     before Chromium will open them. */
+  const url = pathToFileURL(file).href;
 
   for (const [w, h] of [[390, 844], [768, 1024], [1100, 900], [1440, 900]]) {
     const page = await browser.newPage({ viewport: { width: w, height: h } });

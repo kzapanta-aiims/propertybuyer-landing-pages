@@ -11,7 +11,13 @@
     "have no page of their own yet.",
     "",
     "SCOPE SET 13 Aug 2026: four pages, home first as the template.",
-    "prestige and expat deferred."
+    "prestige and expat deferred.",
+    "",
+    "FOLDERS 13 Aug 2026: pages live under 'New Builds/', two levels below the",
+    "repository root. The 'home' segment builds into the 'buyer' folder, so its",
+    "key and its folder name differ on purpose. The key is the routing label",
+    "and never changes; the folder is only a path. Every other segment builds",
+    "into a folder named after its key."
   ],
 
   "segments": [
@@ -19,21 +25,21 @@
       "key": "home",
       "label": "Home buyer",
       "status": "built",
-      "page": "home/index.html",
+      "page": "New Builds/buyer/index.html",
       "register": "Reassuring, process-forward. Lead with handover of risk and the fact that a person inspects everything. Do not lead with data."
     },
     {
       "key": "investor",
       "label": "Investor",
       "status": "planned",
-      "page": "investor/index.html",
+      "page": "New Builds/investor/index.html",
       "register": "Evidence-forward. Lead with independence and no developer commissions."
     },
     {
       "key": "commercial",
       "label": "Commercial",
       "status": "planned",
-      "page": "commercial/index.html",
+      "page": "New Builds/commercial/index.html",
       "register": "Competent, transactional. Lead with due diligence and buy-versus-lease certainty."
     },
     {
@@ -54,7 +60,7 @@
       "key": "developer",
       "label": "Developer",
       "status": "planned",
-      "page": "developer/index.html",
+      "page": "New Builds/developer/index.html",
       "register": "Numerical. Lead with site access and resale numbers, shortest copy of any segment."
     }
   ],

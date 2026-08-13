@@ -1,3 +1,9 @@
 node_modules/
 package-lock.json
 .DS_Store
+
+# The repository root is the client folder, so these two sit inside it without
+# being part of the build. They are client working files, not source, and the
+# remote is not where they belong.
+Brand Assets/
+CRO/

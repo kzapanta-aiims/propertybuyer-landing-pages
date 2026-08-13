@@ -8,13 +8,15 @@ Static HTML and CSS. No build step, no framework, no CDN dependency.
 ## Scope
 
 Four pages. `home` was built first and is the template the other three copy.
+It builds into the `buyer` folder, so that one segment's key and folder name
+differ; every other segment's folder is named after its key.
 
 | Segment | Status | Page |
 |---|---|---|
-| `home` | **built** | `home/index.html` |
-| `investor` | planned | `investor/BRIEF.md` |
-| `commercial` | planned | `commercial/BRIEF.md` |
-| `developer` | planned | `developer/BRIEF.md` |
+| `home` | **built** | `New Builds/buyer/index.html` |
+| `investor` | planned | `New Builds/investor/BRIEF.md` |
+| `commercial` | planned | `New Builds/commercial/BRIEF.md` |
+| `developer` | planned | `New Builds/developer/BRIEF.md` |
 | `prestige` | deferred | chip only, no page |
 | `expat` | deferred | chip only, no page |
 
@@ -24,11 +26,14 @@ own. See `shared/segments.json`.
 
 ## Layout
 
+The repository root is the client folder. Everything shared sits at the root,
+and each page gets a folder of its own under `New Builds/`.
+
 ```
-home/index.html          the built page, and the template
-investor/BRIEF.md        what the build needs before it starts
-commercial/BRIEF.md
-developer/BRIEF.md
+New Builds/buyer/index.html        the built page, and the template
+New Builds/investor/BRIEF.md       what the build needs before it starts
+New Builds/commercial/BRIEF.md
+New Builds/developer/BRIEF.md
 
 shared/segments.json     the segment list, single source of truth
 assets/css/styles.css    one stylesheet, every page
@@ -40,7 +45,11 @@ HANDOVER.md              read this before touching anything
 tools/check.mjs          the acceptance checklist, automated
 ```
 
-Pages sit one level down, so every asset reference inside a page is `../`
+`Brand Assets/` and `CRO/` also sit in this folder. They are client working
+files rather than build source, and `.gitignore` keeps them out of the
+repository.
+
+Pages sit two levels down, so every asset reference inside a page is `../../`
 relative. The checker fails a page that gets this wrong.
 
 ## Run it
@@ -49,7 +58,8 @@ relative. The checker fails a page that gets this wrong.
 npm run serve
 ```
 
-Then open `/home/`. Or open `home/index.html` directly.
+Then open `/New%20Builds/buyer/`. Or open `New Builds/buyer/index.html`
+directly.
 
 ## Check it
 
@@ -72,11 +82,12 @@ npm run check home
 ## Adding a segment page
 
 1. Read that segment's `BRIEF.md`, and supply everything it lists as missing.
-2. Copy `home/index.html` into the segment folder.
+2. Copy `New Builds/buyer/index.html` into the segment folder.
 3. Change the copy, and the `data-segment` on both `<form>` elements.
 4. Leave the router, the chip rows, the classes and the tokens alone.
 5. Flip `status` to `built` in `shared/segments.json`.
-6. `npm run check <segment>`.
+6. `npm run check <segment>`, using the segment key, so `npm run check home`
+   checks the buyer page.
 
 ## Before you change anything
 
