@@ -67,9 +67,16 @@
       "raised": "13 Aug 2026"
     },
     "segmentRanking": {
-      "problem": "DESIGN.md says not all six can get equal treatment or nothing ranks. The home page currently gives all six equal weight, which the rules call wrong.",
-      "status": "CLIENT DECISION, NOT MADE",
-      "note": "Affects every page, not just home. Resolve before page two."
+      "problem": "DESIGN.md says not all six can get equal treatment or nothing ranks. Every page gives all six equal weight, which the rules call wrong.",
+      "status": "RESOLVED 13 Aug 2026, equal weight is deliberate",
+      "decision": "Do not rank. The client database was never set up to qualify leads or segment the market, so there is no evidence base to rank against. Ranking now would encode a guess as a design decision. These pages exist partly to generate that evidence: every capture point labels a lead by segment, budget band and location, and the distribution that comes back is the ranking input.",
+      "consequence": "The router is a measurement instrument before it is a conversion device. Revisit once there is real volume, and rank on observed demand rather than assumption.",
+      "supersedes": "The DESIGN.md rule that equal treatment is itself wrong. That rule assumes you know the order. Here, not knowing is the finding."
+    },
+    "proyaleCase": {
+      "problem": "Proyale is capitals-only, so H1 and H2 render in caps whatever case is typed, against a sentence case rule with no exceptions.",
+      "status": "RESOLVED 13 Aug 2026, ships as is",
+      "decision": "A font limitation, not a contradiction. The sentence case rule governs how copy is written, not how a chosen display face renders it. No text-transform anywhere, and headings stay written in sentence case so the Georgia fallback renders correctly before Proyale loads."
     }
   }
 }

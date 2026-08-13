@@ -119,12 +119,14 @@
    Proyale is a CAPITALS-ONLY face. Its lowercase glyphs have outlines and
    bounds identical to the uppercase, with no x-height and no descenders, so
    H1 and H2 render as capitals whatever case is typed. No text-transform is
-   applied anywhere; the face does it. This conflicts with the sentence case
-   rule and is flagged in DESIGN.md and HANDOVER.md rather than worked around.
+   applied anywhere; the face does it. ACCEPTED 13 Aug 2026 as a property of
+   the face rather than a breach of the sentence case rule, which governs how
+   copy is written, not how a chosen face renders it. Write H1 and H2 in
+   sentence case regardless: the fallback, Georgia, is mixed case and renders
+   them that way until Proyale loads.
 
-   Geist is open licensed and self hosted, no CDN. Those files have not been
-   supplied yet, so body and UI fall back to Helvetica, Arial until they land
-   in assets/fonts/ under the names below.
+   Geist is in, one variable file, open licensed and self hosted with no CDN.
+   Supplied 13 Aug 2026.
    ========================================================================== */
 
 @font-face {
@@ -135,34 +137,14 @@
   font-display: swap;
 }
 
+/* Geist is a single variable file covering the whole 100 to 900 axis, which is
+   67 KB against 131 KB for the four static cuts this previously declared, and
+   one request rather than four. The page asks for 300, 400, 600 and 700; the
+   axis serves all four. Supplied 13 Aug 2026. */
 @font-face {
   font-family: "Geist";
-  src: url("../fonts/geist-light.woff2") format("woff2");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Geist";
-  src: url("../fonts/geist-regular.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Geist";
-  src: url("../fonts/geist-semibold.woff2") format("woff2");
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Geist";
-  src: url("../fonts/geist-bold.woff2") format("woff2");
-  font-weight: 700;
+  src: url("../fonts/geist-variable.woff2") format("woff2-variations");
+  font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
