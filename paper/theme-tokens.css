@@ -1,0 +1,136 @@
+/*
+  Propertybuyer theme tokens, for transfer into Paper.Design.
+
+  Source of truth: Figma Variables, collection "2. Mapped", file
+  0cUUO8Qye1DBPPPGhmPWmr. Every value below was read out of that collection on
+  13 August 2026 (recorded in DESIGN.md). Nothing here is derived or invented.
+  On any conflict, Figma wins and this file has a bug.
+
+  Naming: the Figma token "bg/brand" becomes the CSS variable "--bg-brand".
+  Slashes become hyphens, nothing else changes. The Figma name sits in the
+  comment on every line so the pair can be audited.
+
+  Modes: Paper supports theme modes. This file carries two:
+    - :root                     desktop values, the default mode
+    - the "mobile-390" block    the 390 values, which are part of the token,
+                                not a suggestion. Only tokens that change at
+                                390 appear in the second block.
+
+  THREE FLAGS, do not resolve them here:
+    1. --bg-prestige is CONFLICTED in Figma. The variable resolves to #001114
+       (teal/950) but its own description and the Colours page say night/950
+       #1B1C25. This file mirrors what the variable resolves to today. Carry
+       the flag into Paper as a comment or description, do not pick a side.
+    2. Three tokens the system depends on are MISSING from Mapped:
+       text/on-prestige-action, action/primary-pressed,
+       action/prestige-pressed. They are listed commented-out at the bottom.
+       Do not author them in Paper; they do not exist in Figma yet.
+    3. The success ramp is flagged as invented in DESIGN.md. Transferred
+       because it is in Mapped, but do not build a success state on it
+       without sign-off.
+*/
+
+:root {
+  /* ---- Colour: backgrounds ---- */
+  --bg-page: #FFFFFF;            /* bg/page (base/white) */
+  --bg-surface: #FBFAF7;         /* bg/surface (sand/50), cards and panels on white */
+  --bg-surface-alt: #F5F1E9;     /* bg/surface-alt (sand/100), the cream band */
+  --bg-brand: #00404B;           /* bg/brand (teal/700), hero and CEO band */
+  --bg-brand-deep: #02313A;      /* bg/brand-deep (teal/800), footer */
+  --bg-prestige: #001114;        /* bg/prestige, CONFLICTED, see header flag 1 */
+  --bg-info-subtle: #E8EEF0;     /* bg/info-subtle (teal/100) */
+  --bg-success-subtle: #EFF6F1;  /* bg/success-subtle (success/50) */
+  --bg-warning-subtle: #FFF8E8;  /* bg/warning-subtle (warning/50) */
+  --bg-error-subtle: #FBF0EF;    /* bg/error-subtle (destructive/50) */
+
+  /* ---- Colour: text ---- */
+  --text-heading: #00404B;       /* text/heading (teal/700), headings on light */
+  --text-body: #1C2B2F;          /* text/body (grey/900), the ink, never black */
+  --text-muted: #5C6B6F;         /* text/muted (grey/500), intros and captions */
+  --text-on-brand: #FFFFFF;      /* text/on-brand (base/white) */
+  --text-on-brand-muted: #B6C8CB;/* text/on-brand-muted (teal/300), footer links */
+  --text-link: #00404B;          /* text/link (teal/700) */
+  --text-prestige: #C9A26B;      /* text/prestige (gold/400), prestige only */
+  --text-highlight: #FF7F22;     /* text/highlight (orange/500), H1 accent word and review stars only */
+  --text-info: #00404B;          /* text/info (teal/700) */
+  --text-success: #2F5F42;       /* text/success (success/700), ramp flagged as invented */
+  --text-warning: #A87C0E;       /* text/warning (warning/700) */
+  --text-error: #B0392E;         /* text/error (destructive/600) */
+
+  /* ---- Colour: actions. Terracotta on actions only, gold on prestige only ---- */
+  --action-primary: #A26246;        /* action/primary (terracotta/500) */
+  --action-primary-hover: #89533B;  /* action/primary-hover (terracotta/600), white text 6.24 */
+  --action-prestige: #C9A26B;       /* action/prestige (gold/400) */
+  --action-prestige-hover: #B18A50; /* action/prestige-hover (gold/500) */
+
+  /* ---- Colour: borders ---- */
+  --border-default: #E4E0D8;     /* border/default (sand/200), hairline on warm surfaces */
+  --border-muted: #D2D9DA;       /* border/muted (grey/200), hairline on cool or white */
+  --border-brand: #00404B;       /* border/brand (teal/700), emphasised border */
+  --border-focus: #00404B;       /* border/focus (teal/700), invisible on dark bands, flagged in DESIGN.md */
+  --border-info: #526F75;        /* border/info (teal/500) */
+  --border-success: #A3CDB1;     /* border/success (success/300) */
+  --border-warning: #E6C96A;     /* border/warning (warning/300) */
+  --border-error: #B0392E;       /* border/error (destructive/600) */
+
+  /* ---- Typography: families ---- */
+  --font-display: Proyale, Georgia, serif;               /* H1 and H2 only, one weight, 400. Capitals-only face, flagged */
+  --font-ui: Geist, Helvetica, Arial, sans-serif;        /* everything else */
+
+  /* ---- Typography: sizes, desktop. Mobile values in the mobile-390 mode ---- */
+  --type-stat-size: 52px;        /* type/stat, Tier 1 proof numbers only, Geist 700, tracking -2% */
+  --type-display-size: 44px;     /* type/display, hero H1 ceiling, Proyale 400, lh 1.1, tracking -2% */
+  --type-h2-size: 34px;          /* type/h2, Proyale 400, lh 1.25, tracking -2% */
+  --type-h3-size: 20px;          /* type/h3, Geist 600, lh 1.25, tracking -1.5% */
+  --type-body-size: 16px;        /* type/body, Geist 300, lh 1.6, tracking -1% */
+  --type-small-size: 14px;       /* type/small, Geist 300, lh 1.6 */
+  --type-micro-size: 13px;       /* type/micro, Geist 700, uppercase, tracking +4% */
+  --type-button-size: 16px;      /* type/button, Geist 600, lh 1.25, tracking -0.5%, sentence case */
+
+  /* ---- Typography: weights. The four sanctioned Geist weights, plus Proyale's one ---- */
+  --weight-display: 400;         /* Proyale ships one weight, never synthesise bold */
+  --weight-body: 300;            /* Geist Light, body. Never below 16px */
+  --weight-regular: 400;         /* Geist Regular, UI where 300 is too thin */
+  --weight-semibold: 600;        /* Geist SemiBold, buttons and H3 to H6 */
+  --weight-bold: 700;            /* Geist Bold, labels, strong text, stats */
+
+  /* ---- Radius. One radius ---- */
+  --radius-card: 8px;            /* radius/card. Every card, panel, media, chip, input */
+  --radius-pill: 999px;          /* shapes round by definition only */
+
+  /* ---- Spacing ---- */
+  --space-section-y: 80px;       /* space/section-y. One rhythm, no second */
+  --space-gutter: 20px;          /* space/gutter */
+  --space-gap-lg: 40px;          /* sparse density, one sparse section per page */
+  --space-gap: 24px;             /* standard density, the default */
+  --space-gap-sm: 12px;          /* dense density, forms, lists, footer */
+  --space-tap-min: 44px;         /* space/tap-min, a constraint at every viewport */
+  --space-container: 1200px;
+  --space-content-max: 1160px;
+  --space-measure-intro: 760px;  /* section intro copy cap */
+}
+
+/*
+  Mode: mobile-390. In Paper, author these as a second theme mode named
+  "mobile-390" on the same tokens. Only the tokens below change; everything
+  not listed keeps its desktop value. The 390 value is part of the token.
+*/
+/*
+  --type-stat-size: 40px;
+  --type-display-size: 34px;
+  --type-h2-size: 28px;
+  --type-h3-size: 18px;
+  --space-section-y: 48px;
+*/
+
+/*
+  MISSING FROM MAPPED, do not author in Paper, listed so nobody re-derives
+  them silently. Figma needs to author these; DESIGN.md's Interactive States
+  section holds the code-side fallback until then.
+
+  --text-on-prestige-action: #001114;  (teal/950, the only ink holding AA on
+                                        gold through hover; teal/700 fails at
+                                        3.61 on action/prestige-hover)
+  --action-primary-pressed:  (does not exist, derive: 15% toward black in oklab)
+  --action-prestige-pressed: (does not exist, derive: 15% toward black in oklab)
+*/

@@ -43,7 +43,14 @@ assets/img/              both logo colourways
 DESIGN.md                the rules layer, corrected against Figma Variables
 HANDOVER.md              read this before touching anything
 tools/check.mjs          the acceptance checklist, automated
+paper/TRANSFER.md        token transfer into Paper.Design, runs locally only
+paper/theme-tokens.css   the Mapped collection as CSS, for that transfer
 ```
+
+`paper/` is prepared work, not part of the build. Paper's MCP server listens
+on localhost and only while Paper Desktop has the file open, so the transfer
+cannot run from a remote session. `paper/TRANSFER.md` carries the setup and
+the task prompt so that run is mechanical when someone does it locally.
 
 `Brand Assets/` and `CRO/` also sit in this folder. They are client working
 files rather than build source, and `.gitignore` keeps them out of the
