@@ -120,6 +120,20 @@ for (const { key, file } of pages) {
     ? pass('no placeholder copy remaining')
     : fail(`${placeholders.length} placeholder(s) still in visible copy, NOT SHIPPABLE: ${placeholders.slice(0, 6).join(' ')}${placeholders.length > 6 ? ' ...' : ''}`);
 
+  /* Demo scaffolding, same reasoning as the placeholders above. The expert
+     count and its toggle assert live availability, which is a stronger claim
+     than any bracket on this page: a visitor can read "6 experts available
+     right now" as fact, and the toggle lets anyone rewrite it from the URL.
+     A README note is not a gate, so this is one. Added 18 Aug 2026 after the
+     count shipped as a proof of concept. Remove the attributes to pass. */
+  const poc = [];
+  if (/<body[^>]*\sdata-poc=/.test(html)) poc.push('data-poc on <body>, renders the demo availability toggle');
+  if (/<body[^>]*\sdata-experts-count=/.test(html)) poc.push('data-experts-count on <body>, seeds an unverified availability claim');
+  if (/class="[^"]*\bpoc-toggle\b/.test(html)) poc.push('.poc-toggle markup is still present');
+  poc.length === 0
+    ? pass('no proof-of-concept scaffolding left in the page')
+    : fail(`${poc.length} demo item(s) present, NOT SHIPPABLE: ${poc.join('; ')}`);
+
   /* ------------------------------------------------- character budgets --- */
   head('Mobile character budgets, checked at 390');
 

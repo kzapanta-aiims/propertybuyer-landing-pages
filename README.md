@@ -142,6 +142,19 @@ The toggle is the urgent one. It lets any visitor rewrite an availability
 claim, and `?experts=N` in the URL does the same, so neither should survive
 into a page that carries ad spend. See `HANDOVER.md`.
 
+`npm run check` now fails while any of this is present, listing each item by
+name, so the reminder is a gate rather than a note. It fails today, which is
+correct: this build is a proof of concept, not a shippable page.
+
+## This build is a proof of concept
+
+Confirmed 18 August 2026. Both capture forms are deliberately unwired: the
+submit handler calls `preventDefault()` and there is no endpoint, so a lead
+entered on this page goes nowhere and the visitor sees no acknowledgement.
+That is accepted for now. Before this takes real traffic it needs an endpoint
+and a confirmation state, or the buttons need disabling, because a form that
+silently discards a lead is worse than no form. Tracked in `HANDOVER.md`.
+
 ## Open, and blocking more than one page
 
 - **No Tier 1 proof supplied.** Twelve proof points are needed, three per

@@ -18,20 +18,23 @@
     var next = form.querySelector('[data-step-next]');
     var back = form.querySelector('[data-step-back]');
 
+    var onStepOne = function () { return step2 && step2.hidden; };
+
+    var advance = function () {
+      var budget = form.querySelector('#budget');
+      if (budget && !budget.value) {
+        budget.reportValidity();
+        return;
+      }
+      step1.hidden = true;
+      step2.hidden = false;
+      var name = form.querySelector('#lead-name');
+      if (name) name.focus();
+    };
+
     if (step1 && step2 && next) {
       step2.hidden = true;
-
-      next.addEventListener('click', function () {
-        var budget = form.querySelector('#budget');
-        if (budget && !budget.value) {
-          budget.reportValidity();
-          return;
-        }
-        step1.hidden = true;
-        step2.hidden = false;
-        var name = form.querySelector('#lead-name');
-        if (name) name.focus();
-      });
+      next.addEventListener('click', advance);
 
       if (back) {
         back.addEventListener('click', function () {
@@ -42,9 +45,16 @@
       }
     }
 
-    /* FORM IS STUBBED: no endpoint exists yet. */
+    /* Enter inside a step-one field triggers implicit submission, because the
+       form's only submit button is the one in step two. Left alone that hands
+       the event straight to the preventDefault below, so the visitor gets
+       neither the next step nor a message. Treat it as pressing Next. */
     form.addEventListener('submit', function (e) {
       e.preventDefault();
+      if (step1 && step2 && next && onStepOne()) advance();
+      /* FORM IS STUBBED: no endpoint exists yet, so a step-two submit
+         deliberately does nothing. This whole build is a proof of concept;
+         see HANDOVER.md before wiring it up. */
     });
   }
 

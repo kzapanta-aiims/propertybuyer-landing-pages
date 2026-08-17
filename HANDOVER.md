@@ -81,6 +81,20 @@ Substitutions and judgment calls:
   routes to the form for now. The mobile header call icon (18 Aug) has the
   same problem and the same answer: it routes to the form until a number
   exists, then its href becomes tel:.
+- **Both forms silently discard leads, and that is accepted for now.**
+  Confirmed 18 Aug 2026: this whole build is a proof of concept and needs no
+  endpoint yet. Verified behaviour is zero network requests, no navigation
+  and no acknowledgement, so a visitor who fills the form believes they have
+  made contact and has not. Before real traffic: wire an endpoint and add a
+  confirmation state, or disable the buttons. `npm run check` does not and
+  cannot detect this, so it is the one launch risk with no automated gate.
+- **The award list in the hero is transcribed, not supplied.** The eight
+  entries in the visually hidden `ul.sr-only` were read off the badge
+  artwork in `assets/img/badge-*.png` on 18 Aug 2026, because the badge
+  images carried no text alternative at all and were invisible to both
+  screen readers and search. Worth one confirmation pass against the
+  client's own award records, since the wording came from my reading of the
+  images rather than from a list.
 - **The mobile CTA carries a POC-only demo toggle. REMOVE BEFORE LAUNCH.**
   Added 18 Aug 2026 for the client presentation: a small switch on the
   right of the bar that flips it between available and nobody available,
