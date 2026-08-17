@@ -146,6 +146,56 @@
     /* ------------------------- end POC ONLY ---------------------------- */
   }
 
+  /* ---- Award marquees -----------------------------------------------------
+     Each track ships one set of badges. A seamless loop needs the content
+     left after the shift to still cover the strip, so the number of copies
+     depends on how wide the strip is, which CSS cannot know. Measure the set,
+     clone it until it covers, and shift by exactly one set.
+
+     Speed is held at the original 15px per second by deriving the duration
+     from the set width, so a wider strip scrolls at the same pace rather
+     than faster. */
+  if (!reduced) {
+    var PIXELS_PER_SECOND = 15;
+
+    var fillMarquee = function (marquee, track, set, setWidth) {
+      /* After shifting one set, the rest must still fill the strip, so the
+         track needs one set for the shift plus enough to cover the width. */
+      var copiesNeeded = Math.ceil(marquee.clientWidth / setWidth) + 1;
+      var copiesPresent = Math.round(track.scrollWidth / setWidth);
+      for (var i = copiesPresent; i < copiesNeeded; i++) {
+        set.forEach(function (node) { track.appendChild(node.cloneNode(true)); });
+      }
+      return copiesNeeded > copiesPresent;
+    };
+
+    document.querySelectorAll('.marquee').forEach(function (marquee) {
+      var track = marquee.querySelector('.marquee__track');
+      if (!track || !track.children.length) return;
+
+      var set = [].slice.call(track.children);
+      var setWidth = track.scrollWidth;
+      /* Badges are lazy images, so the set can measure at zero before they
+         have laid out. Bail rather than divide by it. */
+      if (!setWidth) return;
+
+      fillMarquee(marquee, track, set, setWidth);
+      track.style.setProperty('--marquee-shift', setWidth + 'px');
+      track.style.setProperty('--marquee-duration', (setWidth / PIXELS_PER_SECOND) + 's');
+      marquee.classList.add('is-looping');
+
+      /* Widening the window can outrun the copies already in place. Only ever
+         adds, so the running animation is never restarted needlessly. */
+      var resizeTimer;
+      window.addEventListener('resize', function () {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function () {
+          fillMarquee(marquee, track, set, setWidth);
+        }, 200);
+      });
+    });
+  }
+
   /* ---- Scroll reveals ----------------------------------------------------
      The auction photos get the glass entry: in from the right, blur to
      sharp, staggered. Everything else gets a quiet fade-up. Classes are
