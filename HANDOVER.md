@@ -78,7 +78,15 @@ Substitutions and judgment calls:
   The final button says "Send my details" because DESIGN.md bans "Submit"
   as a button label; change there first if it should read differently.
 - **The prestige tel number is not supplied**, so "Call the prestige team"
-  routes to the form for now.
+  routes to the form for now. The mobile header call icon (18 Aug) has the
+  same problem and the same answer: it routes to the form until a number
+  exists, then its href becomes tel:.
+- **The mobile CTA hint carries no head-count.** The brief asked for "N
+  experts available right now". An availability number is a claim this
+  page cannot prove, same class as the Tier 1 gaps, so the bar ships
+  saying "Our experts are ready to talk". When a real count or a live
+  source exists, set data-experts-count on body and the script renders
+  the counted line. Do not hardcode a number.
 - **Stats are visible unproven claims**: 5,000+ purchases, 53 awards, 4.9
   stars, 300 reviews, "most awarded", "Best Buyers Agency of the Year
   2025". They came from the design, not from the proof register. Verify

@@ -1294,3 +1294,178 @@ fieldset.field legend { margin-bottom: var(--gap-sm); padding: 0; }
 }
 
 .shader-host--band { position: absolute; inset: 0; z-index: 0; }
+
+/* ==========================================================================
+   Round 5, 18 Aug 2026: mobile refinements and the closer band.
+   ========================================================================== */
+
+/* --- Header call action, mobile only -------------------------------------- */
+
+.header-call {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--tap-min);
+  height: var(--tap-min);
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--action-primary);
+  color: var(--text-on-brand);
+  flex-shrink: 0;
+  transition: background-color 280ms ease-out, border-color 280ms ease-out;
+}
+.header-call:hover { background: var(--action-primary); }
+
+/* --- Closer band, desktop and mobile --------------------------------------- */
+
+.closer { position: relative; background: var(--grad-band-teal); overflow: clip; }
+.closer__shader { position: absolute; inset: 0; }
+.closer__shader canvas { width: 100%; height: 100%; display: block; }
+.closer__wrap {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--gap);
+}
+.closer h2 { color: var(--text-on-brand); max-width: 560px; }
+.closer__body { color: var(--text-on-brand-muted); max-width: 56ch; }
+.closer__btn { min-width: 280px; }
+.closer__note { font-size: var(--type-micro); color: var(--text-on-brand-muted); }
+
+/* --- Fixed mobile CTA -------------------------------------------------------
+   Liquid glass: translucent brand ink over a strong backdrop blur. Slides
+   up only when neither capture form is on screen (script toggles .is-up).
+   Colours are token-derived mixes, same pattern as the pressed states. */
+
+.mobile-cta { display: none; }
+
+@media (max-width: 767px) {
+  .js .mobile-cta {
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    z-index: 60;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 10px var(--space-gutter) calc(12px + env(safe-area-inset-bottom, 0px));
+    background: color-mix(in oklab, var(--bg-brand-deep), transparent 42%);
+    -webkit-backdrop-filter: blur(22px) saturate(1.35);
+    backdrop-filter: blur(22px) saturate(1.35);
+    border-top: 1px solid color-mix(in oklab, var(--text-on-brand), transparent 82%);
+    translate: 0 120%;
+    transition: translate 460ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .js .mobile-cta.is-up { translate: 0 0; }
+}
+
+.mobile-cta__hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--type-micro);
+  line-height: 16px;
+  color: var(--text-on-brand);
+}
+.mobile-cta__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: var(--radius-pill);
+  background: var(--border-success);
+  animation: cta-dot 2.4s ease-in-out infinite;
+}
+@keyframes cta-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+/* The shine: a conic highlight orbiting the button border. The masked
+   pseudo element is the ring; only its gradient angle animates. Browsers
+   without @property keep a static highlight, which reads as a lit edge. */
+@property --shine {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+.mobile-cta__btn { position: relative; width: 100%; }
+.mobile-cta__btn::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: calc(var(--radius-card) + 2px);
+  padding: 2px;
+  background: conic-gradient(
+    from var(--shine),
+    transparent 0turn,
+    color-mix(in oklab, var(--text-on-brand), transparent 25%) 0.10turn,
+    transparent 0.22turn,
+    transparent 0.5turn,
+    color-mix(in oklab, var(--action-prestige), transparent 35%) 0.60turn,
+    transparent 0.72turn
+  );
+  -webkit-mask: linear-gradient(rgb(0,0,0) 0 0) content-box, linear-gradient(rgb(0,0,0) 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(rgb(0,0,0) 0 0) content-box, linear-gradient(rgb(0,0,0) 0 0);
+  mask-composite: exclude;
+  animation: cta-shine 6s linear infinite;
+  pointer-events: none;
+}
+@keyframes cta-shine {
+  to { --shine: 360deg; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-cta__btn::after, .mobile-cta__dot { animation: none; }
+}
+
+/* --- Mobile alignment pass --------------------------------------------------
+   Requested 18 Aug 2026: centre the hero stack, the stats copy, the
+   auction CTA card and the prestige band on small screens only. */
+
+@media (max-width: 767px) {
+  /* Header: smaller logo left, call icon right, tagline gone. */
+  .site-header .wrap { flex-wrap: nowrap; justify-content: space-between; gap: var(--gap-sm); }
+  .logo { min-width: 0; }
+  .logo svg { width: min(62vw, 232px); height: auto; }
+  .header-right { flex-wrap: nowrap; }
+  .header-tag { display: none; }
+  .header-right .btn--outline { display: none; }
+  .header-call { display: inline-flex; }
+
+  /* Hero: everything centres. */
+  .hero-copy { text-align: center; }
+  .hero-copy-top { align-items: center; }
+  .hero-title-block { align-items: center; }
+  .hero-vs { justify-content: center; }
+  .hero-sub { display: flex; flex-direction: column; align-items: center; }
+  .hero-awards { align-items: center; }
+  .hero-awards__label { text-align: center; width: auto; }
+
+  /* Truth cards pin higher so each stays readable longer before the next
+     slides over it. */
+  .truth-card:nth-child(1) { top: 24px; }
+  .truth-card:nth-child(2) { top: 36px; }
+  .truth-card:nth-child(3) { top: 48px; }
+  .truth-card:nth-child(4) { top: 60px; }
+
+  /* Stats band copy and action centre. */
+  .stats-copy { align-items: center; text-align: center; }
+  .stats-copy__head { align-items: center; }
+  .stats-points { align-items: center; }
+  .stats-point { justify-content: center; }
+  .stats-cta { align-items: center; }
+
+  /* Auction CTA card centres. */
+  .auction-cta { align-items: center; text-align: center; }
+  .auction-cta__action { align-items: center; }
+
+  /* Prestige: centred copy, stacked full-width actions. */
+  .prestige-copy { align-items: center; text-align: center; }
+  .prestige-actions { flex-direction: column; align-items: stretch; width: 100%; }
+  .prestige-actions .btn { width: 100%; }
+
+  /* Closer button stretches like the prestige actions. */
+  .closer__btn { width: 100%; min-width: 0; }
+}

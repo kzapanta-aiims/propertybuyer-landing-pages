@@ -56,6 +56,31 @@
     });
   }
 
+  /* ---- Fixed mobile CTA ---------------------------------------------------
+     Slides up when neither capture form is on screen. The hint stays
+     unquantified until a real availability number exists: set
+     data-experts-count on <body> and it becomes "N experts available
+     right now". Never hardcode that count here; it is a claim. */
+  var bar = document.getElementById('mobile-cta');
+  if (bar && 'IntersectionObserver' in window) {
+    var expertsCount = document.body.getAttribute('data-experts-count');
+    if (expertsCount) {
+      var hint = bar.querySelector('[data-experts-hint]');
+      if (hint) hint.textContent = expertsCount + ' experts available right now';
+    }
+    var formsInView = new Map();
+    var watched = [form, auctionCta].filter(Boolean);
+    if (watched.length) {
+      var barIo = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { formsInView.set(e.target, e.isIntersecting); });
+        var anyVisible = false;
+        formsInView.forEach(function (v) { if (v) anyVisible = true; });
+        bar.classList.toggle('is-up', !anyVisible);
+      }, { threshold: 0 });
+      watched.forEach(function (f) { formsInView.set(f, true); barIo.observe(f); });
+    }
+  }
+
   /* ---- Scroll reveals ----------------------------------------------------
      The auction photos get the glass entry: in from the right, blur to
      sharp, staggered. Everything else gets a quiet fade-up. Classes are
@@ -69,7 +94,8 @@
     '.steps-head', '.step-card',
     '.auction-head', '.move', '.auction-cta',
     '.prestige-visual', '.prestige-copy',
-    '.faq h2', '.faq-item'
+    '.faq h2', '.faq-item',
+    '.closer__wrap'
   ];
   var GLASS = ['.auction-photo'];
 
