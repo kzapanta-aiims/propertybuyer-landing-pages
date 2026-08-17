@@ -53,35 +53,47 @@ addendum `:root` block of `styles.css`, and Figma should be updated to match:
   (44/34). `check.mjs` expectations were updated accordingly, with a dated
   comment at the edit.
 
-Substitutions and judgment calls, all flagged for sign-off:
+Substitutions and judgment calls:
 
-- **Gotham appears in the Paper design** on the award and section pills.
-  Gotham is commercial and not in this repo, so pills render in Geist 400.
-  Either supply a Gotham licence and file, or accept Geist.
-- **Paper's shaders cannot run in static HTML.** The prestige grain
-  gradient and liquid metal mark are exported stills
-  (`prestige-grain-bg.png`, `prestige-liquid-mark.png`). The fluted glass
-  caption strips on the truth cards and auction photos are exported renders
-  (`*-glass-*.png`). Re-export from Paper if those layers change.
+- **Geist replaces Gotham everywhere.** Confirmed by the client 17 Aug;
+  no Gotham licence is needed.
+- **Paper's shaders run live, with the stills as fallback.** Round two
+  (client brief, 17 Aug) vendored `@paper-design/shaders` v0.0.80 (MIT)
+  into `assets/vendor/paper-shaders/`, self hosted, no CDN. The grain
+  gradient, liquid metal mark and all seven fluted glass strips mount as
+  WebGL canvases over their exported stills; each still fades only after
+  its canvas is up, and remains if WebGL, modules (file:// pages), or any
+  asset fails. Parameters are verbatim from the Paper file. The fluted
+  glass source crops live as `assets/img/glass-src-*.webp`.
 - **The design shows four segment chips; the router contract needs six.**
   Prestige and Expat chips were added to the hero form in the unselected
   style. The six `data-segment` keys are intact.
 - **The design has one form; the contract needs two capture points.** The
   auction CTA panel is the second `<form data-segment="home">` and routes
-  into the hero form. Both forms are stubbed: step two of the lead form
-  (contact details) is not designed and no endpoint exists.
+  into the hero form.
+- **The lead form now has two steps.** Step two (name, phone, email) was
+  not designed in Paper; it follows the step-one field pattern and is
+  revealed by the Next button, with a back control. Without script the
+  whole form renders in one pass. Still no endpoint: submits are stubbed.
+  The final button says "Send my details" because DESIGN.md bans "Submit"
+  as a button label; change there first if it should read differently.
 - **The prestige tel number is not supplied**, so "Call the prestige team"
   routes to the form for now.
 - **Stats are visible unproven claims**: 5,000+ purchases, 53 awards, 4.9
   stars, 300 reviews, "most awarded", "Best Buyers Agency of the Year
   2025". They came from the design, not from the proof register. Verify
   before launch and record sources in `paper/proof-register.md`.
-- **assets/img is 34 MB.** Photography and textures are unoptimised
-  exports. Compress before this goes near an ad budget.
+- **Images are compressed**: 33.5 MB of exports became 2.3 MB of WebP via
+  `npm run compress` (tools/compress-images.mjs, caps at 2x rendered
+  size). Re-run it after replacing any export.
 
-Motion added per the client brief of 17 Aug: award badges run a continuous
-edge-faded marquee, truth cards stack sticky on scroll, and hovers are
-subtle throughout. All motion sits behind `prefers-reduced-motion`.
+Motion, per the client briefs of 17 Aug: award badges run a continuous
+edge-faded marquee that fades out of both edges with shadows unclipped;
+truth cards stack sticky on scroll; the auction photos enter from the
+right, blur settling to sharp like panes of glass, staggered; other
+sections get a quiet fade-up on first view; hovers are subtle throughout.
+All motion sits behind `prefers-reduced-motion`, and reveal states only
+exist once script has run, so the page is fully visible without it.
 
 ## What was corrected in DESIGN.md
 

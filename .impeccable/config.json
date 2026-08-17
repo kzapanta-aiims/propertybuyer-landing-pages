@@ -1,0 +1,35 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "geist",
+        "createdAt": "2026-08-17T13:00:24.055Z",
+        "reason": "client brand face: Figma token font/ui and self-hosted licence in assets/fonts, mandated by the design system, not a styling choice"
+      },
+      {
+        "rule": "aphoristic-cadence",
+        "value": "*",
+        "files": [
+          "New Builds/buyer/index.html"
+        ],
+        "createdAt": "2026-08-17T13:00:24.177Z",
+        "reason": "copy is verbatim from the design lead's Paper artboard BUYER 1440 and the approved buyer copy deck; voice is the client's, flagged claims tracked in HANDOVER.md"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "rgb(0,0,0)",
+        "createdAt": "2026-08-17T13:17:27.792Z",
+        "reason": "mask-image gradient stop, alpha channel only - masks require opaque black, not a palette colour"
+      },
+      {
+        "rule": "design-system-radius",
+        "value": "2px",
+        "createdAt": "2026-08-17T13:17:27.914Z",
+        "reason": "focus-ring border-radius carried verbatim from the pre-rebuild template base styles (git d5251d3)"
+      }
+    ]
+  }
+}
