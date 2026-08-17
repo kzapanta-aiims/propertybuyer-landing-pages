@@ -81,6 +81,17 @@ Substitutions and judgment calls:
   routes to the form for now. The mobile header call icon (18 Aug) has the
   same problem and the same answer: it routes to the form until a number
   exists, then its href becomes tel:.
+- **The mobile CTA carries a POC-only demo toggle. REMOVE BEFORE LAUNCH.**
+  Added 18 Aug 2026 for the client presentation: a small switch on the
+  right of the bar that flips it between available and nobody available,
+  so both states can be shown without editing the URL. It renders only
+  under `body[data-poc="true"]`, and the click handler is only bound when
+  that attribute is present, so deleting the attribute disables it
+  everywhere. The markup, the CSS and the JS are each fenced in comment
+  banners reading `POC ONLY`; delete all three before launch. This is not
+  a product control. It rewrites an availability claim, which no visitor
+  may be able to do, and the same objection applies to `?experts=N`.
+  Also listed in README.md under "Remove before launch".
 - **The mobile CTA expert count is a PROOF OF CONCEPT, not a claim.**
   Raised 18 Aug as unprovable, then requested anyway for a client demo, so
   it ships as demo data and is labelled as such in three places: the

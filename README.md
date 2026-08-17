@@ -127,6 +127,21 @@ Figma `2. Mapped`, declared once in the `:root` block at the top of the file
 with its Figma token name in a comment. Nothing below that block holds a raw
 value, and `npm run check` fails if one appears.
 
+## Remove before launch
+
+Two things on the buyer page exist for the 18 August 2026 client demo and
+must not reach live traffic. Both hang off attributes on `<body>` in
+`New Builds/buyer/index.html`, so removing them is a one line change.
+
+| Attribute | What it does | Before launch |
+|---|---|---|
+| `data-poc="true"` | Renders the demo toggle in the fixed mobile CTA, which flips the bar between available and nobody available | **Delete the attribute**, then delete the two blocks marked `POC ONLY` in `index.html`, `styles.css` and `page.js` |
+| `data-experts-count="6"` | Seeds the expert count in that bar. Demo data, not a measured number | Replace with a real presence feed via `readAvailability()` in `page.js`, or delete the attribute so the bar shows the unquantified line |
+
+The toggle is the urgent one. It lets any visitor rewrite an availability
+claim, and `?experts=N` in the URL does the same, so neither should survive
+into a page that carries ad spend. See `HANDOVER.md`.
+
 ## Open, and blocking more than one page
 
 - **No Tier 1 proof supplied.** Twelve proof points are needed, three per

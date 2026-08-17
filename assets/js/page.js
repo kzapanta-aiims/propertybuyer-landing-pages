@@ -95,18 +95,45 @@
     var hint = bar.querySelector('[data-experts-hint]');
     var cta = bar.querySelector('[data-cta-label]');
 
-    readAvailability().then(function (count) {
+    var applyAvailability = function (count) {
       if (count === null || !hint || !cta) return;
       if (count === 0) {
         bar.classList.add('is-offline');
         hint.textContent = 'Our team is offline right now';
         cta.textContent = 'Request a call back';
       } else {
+        bar.classList.remove('is-offline');
         hint.innerHTML = '<strong>' + count + ' ' + (count === 1 ? 'expert' : 'experts') +
           '</strong> available right now';
         cta.textContent = 'Speak to a team member';
       }
-    });
+    };
+
+    readAvailability().then(applyAvailability);
+
+    /* ---- POC ONLY. DELETE BEFORE LAUNCH, WITH data-poc ON <body>. --------
+       Demo switch so the nobody-available state can be shown in a client
+       meeting. It is gated on data-poc and wired only when that attribute
+       is present, so live never binds this handler. Not a product control:
+       it rewrites an availability claim, which no visitor may do.
+       Tracked in HANDOVER.md and README.md. */
+    if (document.body.getAttribute('data-poc') === 'true') {
+      var pocToggle = bar.querySelector('.poc-toggle');
+      if (pocToggle) {
+        pocToggle.addEventListener('click', function () {
+          var wasAvailable = pocToggle.getAttribute('aria-checked') === 'true';
+          pocToggle.setAttribute('aria-checked', wasAvailable ? 'false' : 'true');
+          if (wasAvailable) {
+            applyAvailability(0);
+          } else {
+            readAvailability().then(function (count) {
+              applyAvailability(count === null || count === 0 ? 1 : count);
+            });
+          }
+        });
+      }
+    }
+    /* ------------------------- end POC ONLY ---------------------------- */
   }
 
   /* ---- Scroll reveals ----------------------------------------------------

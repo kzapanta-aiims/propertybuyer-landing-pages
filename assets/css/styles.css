@@ -483,6 +483,9 @@ h3 {
 .avatar-card--l { rotate: -4.8deg; }
 .avatar-card--r { rotate: 7.7deg; }
 .avatar-card--vs { rotate: 3.4deg; }
+/* The two buyer cards frame in the brand terracotta, the selling agent
+   card keeps the neutral frost. Requested 18 Aug 2026. */
+.avatar-card--l, .avatar-card--r { background: var(--action-primary); }
 .avatar-card:hover { rotate: 0deg; }
 .avatar-card__img {
   width: 90px;
@@ -1319,11 +1322,16 @@ fieldset.field legend { margin-bottom: var(--gap-sm); padding: 0; }
   height: var(--tap-min);
   border-radius: var(--radius-pill);
   border: 2px solid var(--action-primary);
+  background: var(--action-primary);
   color: var(--text-on-brand);
   flex-shrink: 0;
   transition: background-color 280ms ease-out, border-color 280ms ease-out;
 }
-.header-call:hover { background: var(--action-primary); }
+.header-call:hover {
+  background: var(--action-primary-hover);
+  border-color: var(--action-primary-hover);
+}
+.header-call:active { background: var(--action-primary-pressed); border-color: var(--action-primary-pressed); }
 
 /* --- Closer band, desktop and mobile --------------------------------------- */
 
@@ -1382,6 +1390,15 @@ fieldset.field legend { margin-bottom: var(--gap-sm); padding: 0; }
   .js .mobile-cta.is-up { translate: 0 0; }
 }
 
+/* The hint centres in the bar; the POC toggle is taken out of flow so
+   deleting it leaves the live layout byte-identical. */
+.mobile-cta__top {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
 .mobile-cta__hint {
   display: inline-flex;
   align-items: center;
@@ -1497,3 +1514,58 @@ fieldset.field legend { margin-bottom: var(--gap-sm); padding: 0; }
   /* Closer button stretches like the prestige actions. */
   .closer__btn { width: 100%; min-width: 0; }
 }
+
+/* ==========================================================================
+   POC ONLY, 18 Aug 2026. DELETE THIS BLOCK BEFORE LAUNCH.
+   Demo switch for the fixed mobile CTA, so the nobody-available state can be
+   shown in a client meeting. Renders only under body[data-poc="true"], so
+   dropping that attribute hides it without touching this file. It is not a
+   product control: it rewrites an availability claim, which no visitor may
+   do. Tracked in HANDOVER.md and README.md.
+   ========================================================================== */
+
+.poc-toggle { display: none; }
+
+body[data-poc="true"] .poc-toggle {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  translate: 0 -50%;
+  /* 44 high for the tap-target rule, with a smaller visual track inside. */
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-height: var(--tap-min);
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.poc-toggle__track {
+  position: relative;
+  display: block;
+  width: 34px;
+  height: 20px;
+  border-radius: var(--radius-pill);
+  background: var(--border-success);
+  transition: background-color 260ms ease-out;
+}
+.poc-toggle__knob {
+  position: absolute;
+  left: 16px;
+  top: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: var(--radius-pill);
+  background: var(--text-on-brand);
+  transition: left 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.poc-toggle[aria-checked="false"] .poc-toggle__track { background: var(--text-on-brand-muted); }
+.poc-toggle[aria-checked="false"] .poc-toggle__knob { left: 2px; }
+.poc-toggle:focus-visible { outline: 2px solid var(--text-on-brand); outline-offset: 2px; border-radius: var(--radius-pill); }
+
+@media (prefers-reduced-motion: reduce) {
+  .poc-toggle__track, .poc-toggle__knob { transition: none; }
+}
+
+/* ============================= end POC ONLY ============================== */
