@@ -32,6 +32,43 @@ function sizing(overrides) {
   }, overrides || {});
 }
 
+/* ---- Mount scheduling ---------------------------------------------------
+   Constructing a ShaderMount is synchronous and not cheap: a WebGL context,
+   a shader compile and link, a texture upload and a first draw. There are
+   nine on this page, and the four glass strips in the truth cards all come
+   within the observer's margin at nearly the same scroll position, so left
+   alone they land together, in one task, while the visitor is scrolling.
+
+   So gate every mount: one at a time, and only in idle time. The exported
+   still stays in place until its own shader is up, so a mount deferred until
+   scrolling settles shows the still meanwhile rather than a gap.
+
+   This is a precaution rather than a measured win. The card stack's jank was
+   the drop-shadow filter on .truth-card, fixed in the stylesheet; the mount
+   burst could not be isolated as a second cause here, because this container
+   has no GPU and software WebGL distorts exactly these numbers. Spreading
+   nine context creations is still the right shape on weak hardware, and it
+   costs nothing when the machine is fast. */
+let mountQueue = Promise.resolve();
+
+function whenIdle() {
+  return new Promise((resolve) => {
+    if (typeof requestIdleCallback === 'function') requestIdleCallback(() => resolve(), { timeout: 2000 });
+    else setTimeout(resolve, 0);
+  });
+}
+
+/* Run `mount` once the queue reaches it and the main thread is idle. The
+   queue waits for the work itself, not just for the idle slot, so two mounts
+   can never share a task. Failures are swallowed on the queue's copy of the
+   promise so one bad mount cannot stall the rest; the caller still sees the
+   rejection. */
+function queueMount(mount) {
+  const done = mountQueue.then(whenIdle).then(mount);
+  mountQueue = done.catch(() => {});
+  return done;
+}
+
 function loadImage(src) {
   return new Promise((resolve, reject) => {
     const img = new Image();
@@ -41,15 +78,17 @@ function loadImage(src) {
   });
 }
 
-/* Mount a shader into a host div layered over `stillEl`, then fade the
-   still. Returns the mount so callers can adjust it. */
+/* Mount a shader into a host div layered over `stillEl`, then fade the still.
+   Resolves with the mount, once the queue has had its idle slot. */
 function mountOver(stillEl, fragment, uniforms, speed, frame) {
-  const host = document.createElement('div');
-  host.className = 'shader-host';
-  stillEl.insertAdjacentElement('afterend', host);
-  const mount = new ShaderMount(host, fragment, uniforms, undefined, reduced ? 0 : speed, frame);
-  requestAnimationFrame(() => stillEl.classList.add('still-behind-shader'));
-  return mount;
+  return queueMount(function () {
+    const host = document.createElement('div');
+    host.className = 'shader-host';
+    stillEl.insertAdjacentElement('afterend', host);
+    const mount = new ShaderMount(host, fragment, uniforms, undefined, reduced ? 0 : speed, frame);
+    requestAnimationFrame(() => stillEl.classList.add('still-behind-shader'));
+    return mount;
+  });
 }
 
 const noiseTexture = getShaderNoiseTexture ? getShaderNoiseTexture() : undefined;
@@ -74,18 +113,20 @@ async function prestigeGrain() {
   const noise = await readyNoiseTexture();
   const host = document.createElement('div');
   host.className = 'shader-host shader-host--band';
-  band.prepend(host);
-  new ShaderMount(host, grainGradientFragmentShader, sizing({
-    u_scale: 1.93,
-    u_colorBack: getShaderColorFromString('#00000000'),
-    u_colors: ['#001114', '#202020', '#464646', '#00404B'].map(getShaderColorFromString),
-    u_colorsCount: 4,
-    u_softness: 1,
-    u_intensity: 0.26,
-    u_noise: 0.19,
-    u_shape: GrainGradientShapes.corners,
-    u_noiseTexture: noise,
-  }), undefined, reduced ? 0 : 1, 147046.53);
+  await queueMount(function () {
+    band.prepend(host);
+    return new ShaderMount(host, grainGradientFragmentShader, sizing({
+      u_scale: 1.93,
+      u_colorBack: getShaderColorFromString('#00000000'),
+      u_colors: ['#001114', '#202020', '#464646', '#00404B'].map(getShaderColorFromString),
+      u_colorsCount: 4,
+      u_softness: 1,
+      u_intensity: 0.26,
+      u_noise: 0.19,
+      u_shape: GrainGradientShapes.corners,
+      u_noiseTexture: noise,
+    }), undefined, reduced ? 0 : 1, 147046.53);
+  });
 }
 
 /* ---- Prestige: liquid metal mark ----------------------------------------

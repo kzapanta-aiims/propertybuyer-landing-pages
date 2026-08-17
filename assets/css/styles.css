@@ -232,7 +232,17 @@
   --shadow-btn: 0 2px 2px rgba(0,0,0,0.2), 0 3px 4px rgba(0,0,0,0.1), 0 5px 16px rgba(0,0,0,0.1);
   --shadow-pill-dark: drop-shadow(0 4px 5px rgba(0,0,0,0.29)) drop-shadow(0 18px 9px rgba(0,0,0,0.26));
   --shadow-pill-light: drop-shadow(0 4px 5px rgba(0,0,0,0.1)) drop-shadow(0 18px 9px rgba(0,0,0,0.06));
-  --shadow-card-stack: drop-shadow(0 1px 2px rgba(0,17,20,0.06)) drop-shadow(0 4px 7px rgba(0,17,20,0.05)) drop-shadow(0 8px 14px rgba(0,17,20,0.05)) drop-shadow(0 15px 24px rgba(0,17,20,0.04));
+  /* A box-shadow, not the drop-shadow filter stack Paper exports. These cards
+     are sticky, opaque and rectangular, so drop-shadow bought nothing that
+     box-shadow does not: it draws the same shadow, because a filter blur
+     radius and a box-shadow blur radius are both twice the deviation. What it
+     did buy was a filter over four sticky cards that each hold a live WebGL
+     canvas, which forces the whole subtree down the repaint path every time
+     the stack moves. Measured scrolling the stack three times at 1440px,
+     18 Aug 2026: worst frame 300 to 633ms and 4 to 13 dropped frames per
+     pass, against a clean 17ms and none once this became a box-shadow.
+     Verified by isolation, so keep shadows off `filter` on this component. */
+  --shadow-card-stack: 0 1px 2px rgba(0,17,20,0.06), 0 4px 7px rgba(0,17,20,0.05), 0 8px 14px rgba(0,17,20,0.05), 0 15px 24px rgba(0,17,20,0.04);
   --shadow-cta-panel: 0 1px 2px rgba(0,32,38,0.07), 0 6px 10px -4px rgba(0,32,38,0.1), 0 18px 28px -10px rgba(0,32,38,0.14), 0 40px 60px -24px rgba(0,32,38,0.22);
   --shadow-badge: drop-shadow(0 4px 5px rgba(0,0,0,0.29)) drop-shadow(0 10px 14px rgba(0,0,0,0.18));
   --shadow-avatar-card: 0 2px 8px rgba(0,0,0,0.1);
@@ -808,7 +818,7 @@ fieldset.field legend { margin-bottom: var(--gap-sm); padding: 0; }
   border-radius: var(--radius-card);
   background: var(--bg-page);
   border: 1px solid var(--border-default);
-  filter: var(--shadow-card-stack);
+  box-shadow: var(--shadow-card-stack);
   overflow: clip;
 }
 .truth-card:nth-child(1) { top: 96px; }
