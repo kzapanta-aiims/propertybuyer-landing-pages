@@ -90,7 +90,7 @@
       if (sib.classList.contains('reveal') || sib.classList.contains('reveal-glass')) i++;
     }
     var step = el.classList.contains('reveal-glass') ? 380 : 110;
-    el.style.transitionDelay = (i * step) + 'ms';
+    el.style.animationDelay = (i * step) + 'ms';
   });
 
   var io = new IntersectionObserver(function (entries) {
