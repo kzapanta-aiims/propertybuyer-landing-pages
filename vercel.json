@@ -1,51 +1,20 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-
-  "_comment": [
-    "Deployment config for the client preview, added 18 Aug 2026.",
-    "",
-    "No build step. This is hand-written static HTML and CSS, and the only",
-    "dependencies in package.json are the checker and the two asset tools,",
-    "none of which run on the server. installCommand and buildCommand are",
-    "empty so Vercel serves the repository as-is instead of downloading",
-    "Playwright and sharp on every deploy.",
-    "",
-    "The rewrite exists because the page lives two levels down at",
-    "'New Builds/buyer/', which makes an awkward URL to send a client.",
-    "Serving it at the root works because the page's asset paths are all",
-    "'../../assets/...', and browsers clamp '..' at the root, so they still",
-    "resolve to '/assets/...'.",
-    "",
-    "REMOVE THE X-Robots-Tag BEFORE LAUNCH. While this is a proof of",
-    "concept the page carries bracketed placeholders such as [Suburb], an",
-    "unverified availability count, and award and review figures nobody has",
-    "checked yet. None of that should be indexed against the client's brand.",
-    "Vercel noindexes preview URLs on its own, but this header also covers",
-    "the production URL, which is the one that would otherwise get crawled.",
-    "See README.md, 'Remove before launch'."
-  ],
-
   "installCommand": "",
   "buildCommand": "",
   "outputDirectory": ".",
-
   "rewrites": [
     { "source": "/", "destination": "/New Builds/buyer/index.html" },
     { "source": "/buyer", "destination": "/New Builds/buyer/index.html" }
   ],
-
   "headers": [
     {
       "source": "/(.*)",
-      "headers": [
-        { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
-      ]
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
     },
     {
       "source": "/assets/fonts/(.*)",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
-      ]
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
     }
   ]
 }

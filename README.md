@@ -127,6 +127,30 @@ Figma `2. Mapped`, declared once in the `:root` block at the top of the file
 with its Figma token name in a comment. Nothing below that block holds a raw
 value, and `npm run check` fails if one appears.
 
+## Deploying the preview
+
+Hosted on Vercel, linked to this repository, so every push to `main`
+redeploys. Config lives in `vercel.json`; it has no comments because Vercel
+validates the file against a strict schema and rejects unknown keys, so the
+reasoning is here instead.
+
+- **No build step.** `installCommand` and `buildCommand` are empty and
+  `outputDirectory` is `.`, so Vercel serves the repository as it stands. The
+  dependencies in `package.json` are the checker and the two asset tools, and
+  none of them run on a server; without this, every deploy would download
+  Playwright and sharp for nothing.
+- **The page is served at the root.** `New Builds/buyer/` is an awkward URL
+  to send a client, so a rewrite maps `/` and `/buyer` to it. This works
+  because every asset path in the page is `../../assets/...` and browsers
+  clamp `..` at the root, so they still resolve to `/assets/...`.
+- **`X-Robots-Tag: noindex, nofollow` on everything, and it must come off
+  before launch.** While this is a proof of concept the page carries
+  bracketed placeholders such as `[Suburb]`, an unverified availability
+  count, and award and review figures nobody has checked. None of that
+  should be indexed against the client's brand. Vercel noindexes its preview
+  URLs on its own, but this header also covers the production URL, which is
+  the one that would otherwise get crawled.
+
 ## Remove before launch
 
 Two things on the buyer page exist for the 18 August 2026 client demo and
