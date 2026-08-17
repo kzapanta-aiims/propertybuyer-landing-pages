@@ -17,7 +17,13 @@
     "repository root. The 'home' segment builds into the 'buyer' folder, so its",
     "key and its folder name differ on purpose. The key is the routing label",
     "and never changes; the folder is only a path. Every other segment builds",
-    "into a folder named after its key."
+    "into a folder named after its key.",
+    "",
+    "REBUILD 17 Aug 2026: the first home buyers page was rejected by the",
+    "client, deleted (recoverable at d5251d3) and rebuilt the same day from",
+    "the Paper.Design artboard 'BUYER 1440'. For this design Paper is the",
+    "visual source of truth; the token deltas against Figma are recorded in",
+    "HANDOVER.md. The rebuilt page is the template for the other three."
   ],
 
   "segments": [

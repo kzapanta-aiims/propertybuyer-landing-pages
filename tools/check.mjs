@@ -228,7 +228,11 @@ for (const { key, file } of pages) {
     r.clipped.length === 0 ? pass(`${at} no clipped text`) : fail(`${at} clipped: ${r.clipped}`);
     r.small.length === 0 ? pass(`${at} every tap target 44 or larger`) : fail(`${at} under 44: ${r.small.join(' | ')}`);
 
-    const expect = w >= 768 ? { h1: '44px', h2: '34px', y: '80px' } : { h1: '34px', h2: '28px', y: '48px' };
+    /* UPDATED 17 Aug 2026 for the Paper rebuild. The design promotes the
+       hero H1 to type/stat (52/40) and section H2 to type/display (44/34),
+       and moves section rhythm to 120 desktop. Figma Variables still hold
+       the old values; HANDOVER.md records the delta until Figma is updated. */
+    const expect = w >= 768 ? { h1: '52px', h2: '44px', y: '120px' } : { h1: '40px', h2: '34px', y: '48px' };
     r.h1 === expect.h1 && r.h2 === expect.h2
       ? pass(`${at} H1 ${r.h1} and H2 ${r.h2} match the type tokens`)
       : fail(`${at} H1 ${r.h1} H2 ${r.h2}, expected ${expect.h1} and ${expect.h2}`);

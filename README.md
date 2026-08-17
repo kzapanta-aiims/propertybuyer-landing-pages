@@ -7,7 +7,7 @@ Static HTML and CSS. No build step, no framework, no CDN dependency.
 
 ## Scope
 
-Four pages. `home` was built first and is the template the other three copy.
+Four pages. `home` is built first and is the template the other three copy.
 It builds into the `buyer` folder, so that one segment's key and folder name
 differ; every other segment's folder is named after its key.
 
@@ -20,6 +20,12 @@ differ; every other segment's folder is named after its key.
 | `prestige` | deferred | chip only, no page |
 | `expat` | deferred | chip only, no page |
 
+The first home buyers page was rejected by the client on 17 August 2026 and
+rebuilt the same day from the Paper.Design artboard "BUYER 1440" (file
+`01KZW0Y27PGW3NV0QJRPXAJ9DZ`). The old build is recoverable from git at
+`d5251d3`. The Paper file, not Figma, is the visual source for this design;
+the token deltas that implies are recorded in `HANDOVER.md`.
+
 All six segments stay in every chip row and router. The two deferred segments
 capture a labelled lead into the same form; they just have no page of their
 own. See `shared/segments.json`.
@@ -30,13 +36,14 @@ The repository root is the client folder. Everything shared sits at the root,
 and each page gets a folder of its own under `New Builds/`.
 
 ```
-New Builds/buyer/index.html        the built page, and the template
+New Builds/buyer/index.html        the page being rebuilt, and the template
 New Builds/investor/BRIEF.md       what the build needs before it starts
 New Builds/commercial/BRIEF.md
 New Builds/developer/BRIEF.md
 
 shared/segments.json     the segment list, single source of truth
-assets/css/styles.css    one stylesheet, every page
+assets/css/styles.css    one stylesheet, every page. Tokens and font faces
+                         only; the design layer goes in below the marker
 assets/fonts/            both faces are in, see the README there
 assets/img/              both logo colourways
 
@@ -122,13 +129,13 @@ value, and `npm run check` fails if one appears.
 
 ## Open, and blocking more than one page
 
-- **No Tier 1 proof supplied.** This is the blocker. Twelve proof points are
-  needed, three per page, each with a number, a named suburb, a month and year
-  and a client first name. The buyer page ships bracketed placeholders and
-  `npm run check` fails hard on any bracket in visible copy, so no page can
-  pass its own checklist until the numbers are real. That is deliberate: it
-  makes shipping a fabricated claim impossible by accident rather than merely
-  discouraged.
+- **No Tier 1 proof supplied.** Twelve proof points are needed, three per
+  page, each with a number, a named suburb, a month and year and a client
+  first name. `npm run check` fails hard on any bracket in visible copy, so
+  no page can pass its own checklist until the numbers are real. That is
+  deliberate: it makes shipping a fabricated claim impossible by accident
+  rather than merely discouraged. The rebuild must carry the same bracketed
+  placeholders until real numbers arrive.
 - **Deferred chip behaviour is assumed, not confirmed.** `prestige` and
   `expat` keep their chips in every router and post to the same capture form,
   so the lead still arrives labelled in HubSpot. The alternative is linking

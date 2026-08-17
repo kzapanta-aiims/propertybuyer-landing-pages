@@ -6,12 +6,21 @@ Static HTML and CSS, no build step, no framework, no CDN dependency.
 Sources read, in the order Design Rules requires: Figma Context, the rules
 layer, Figma Variables, then Colours, Type & Tone, then Assets.
 
+> **State, 17 August 2026.** The first home buyers page was rejected by the
+> client and deleted (recoverable at git `d5251d3`), then rebuilt the same
+> day from the Paper.Design artboard "BUYER 1440", file
+> `01KZW0Y27PGW3NV0QJRPXAJ9DZ`, at the client's direction. **For this page
+> the Paper file is the visual source of truth**; Figma Variables remain the
+> token registry but are now behind Paper. See "The Paper rebuild" below for
+> every delta, substitution and known failure that implies.
+
 ```
-New Builds/buyer/index.html   the page
-assets/css/styles.css         tokens, then components
+New Builds/buyer/index.html   the page, rebuilt 17 Aug 2026 from Paper
+assets/css/styles.css         Figma token block, Paper token addendum, design layer
+assets/img/                   photography, badges and shader stills from Paper
 assets/fonts/                 both faces are in, see the README there
-tools/check.mjs               the acceptance checklist, automated
-DESIGN.md                     the rules layer, corrected against Figma
+tools/check.mjs               the acceptance checklist, updated for the rebuild
+DESIGN.md                     the rules layer, corrected against Figma 13 Aug
 ```
 
 The `home` segment builds into the `buyer` folder. The key is the routing
@@ -19,7 +28,60 @@ label and does not change; the folder is only a path. See `README.md` for the
 full layout.
 
 Run it: open `New Builds/buyer/index.html`, or `npm run serve`.
-Check it: `npm install && npm run check`.
+Check it: `npm install && npm run check home`.
+
+## The Paper rebuild, 17 August 2026
+
+Checker state: **passes everything except two named failures.**
+
+1. Seven bracketed placeholders in visible copy: `[Suburb]`, three
+   `[Month Year]`, `[Privacy policy]`, `[Terms]`, `[Licence numbers]`.
+   Deliberate, the Tier 1 proof gate. Unchanged from the old contract.
+2. One card heading a character over budget: "Off market purchase in
+   Paddington" is 33 against the 32 limit. Copy is verbatim from the Paper
+   design; shorten it or lift the budget, a design lead call.
+
+Token deltas, Paper versus the 13 Aug Figma snapshot. Declared in the
+addendum `:root` block of `styles.css`, and Figma should be updated to match:
+
+- `space/section-y` is now 120 desktop (was 80). 48 at 390 unchanged.
+- `type/h3` on cards is 24 desktop (was 20). Mobile derived at 20, no
+  authored mobile value exists yet.
+- New spacing tokens: gap-xsm 4, gap-xl 64. New radii: avatar 4, avatar
+  inner 2. Weight 500 appears on step titles and pills.
+- The hero H1 uses `type/stat` (52/40) and section H2s use `type/display`
+  (44/34). `check.mjs` expectations were updated accordingly, with a dated
+  comment at the edit.
+
+Substitutions and judgment calls, all flagged for sign-off:
+
+- **Gotham appears in the Paper design** on the award and section pills.
+  Gotham is commercial and not in this repo, so pills render in Geist 400.
+  Either supply a Gotham licence and file, or accept Geist.
+- **Paper's shaders cannot run in static HTML.** The prestige grain
+  gradient and liquid metal mark are exported stills
+  (`prestige-grain-bg.png`, `prestige-liquid-mark.png`). The fluted glass
+  caption strips on the truth cards and auction photos are exported renders
+  (`*-glass-*.png`). Re-export from Paper if those layers change.
+- **The design shows four segment chips; the router contract needs six.**
+  Prestige and Expat chips were added to the hero form in the unselected
+  style. The six `data-segment` keys are intact.
+- **The design has one form; the contract needs two capture points.** The
+  auction CTA panel is the second `<form data-segment="home">` and routes
+  into the hero form. Both forms are stubbed: step two of the lead form
+  (contact details) is not designed and no endpoint exists.
+- **The prestige tel number is not supplied**, so "Call the prestige team"
+  routes to the form for now.
+- **Stats are visible unproven claims**: 5,000+ purchases, 53 awards, 4.9
+  stars, 300 reviews, "most awarded", "Best Buyers Agency of the Year
+  2025". They came from the design, not from the proof register. Verify
+  before launch and record sources in `paper/proof-register.md`.
+- **assets/img is 34 MB.** Photography and textures are unoptimised
+  exports. Compress before this goes near an ad budget.
+
+Motion added per the client brief of 17 Aug: award badges run a continuous
+edge-faded marquee, truth cards stack sticky on scroll, and hovers are
+subtle throughout. All motion sits behind `prefers-reduced-motion`.
 
 ## What was corrected in DESIGN.md
 
