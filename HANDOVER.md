@@ -32,14 +32,21 @@ Check it: `npm install && npm run check home`.
 
 ## The Paper rebuild, 17 August 2026
 
-Checker state: **passes everything except two named failures.**
+Checker state as of 18 August 2026: **one named failure, the demo
+scaffolding.** Two earlier failures are resolved rather than outstanding.
 
-1. Seven bracketed placeholders in visible copy: `[Suburb]`, three
-   `[Month Year]`, `[Privacy policy]`, `[Terms]`, `[Licence numbers]`.
-   Deliberate, the Tier 1 proof gate. Unchanged from the old contract.
-2. One card heading a character over budget: "Off market purchase in
-   Paddington" is 33 against the 32 limit. Copy is verbatim from the Paper
-   design; shorten it or lift the budget, a design lead call.
+1. **Demo scaffolding present**, and the only remaining gate: `data-poc`,
+   `data-experts-count` and the `.poc-toggle` markup. Remove all three
+   before launch; details further down this file.
+2. ~~Seven bracketed placeholders in visible copy~~. Still present, no
+   longer a failure. The rule was retired 18 Aug 2026 at the client's
+   direction: the Tier 1 values arrive after the proof of concept, and a
+   permanent failure on every run was hiding the checks that still matter.
+   The seven are `[Suburb]`, three `[Month Year]`, `[Privacy policy]`,
+   `[Terms]` and `[Licence numbers]`. They render as brackets, so an
+   unfilled slot still looks unfilled; the automated stop is what is gone.
+3. ~~Card heading over budget~~. Fixed 18 Aug: "Bought off market in
+   Paddington", 31 characters against the 32 limit.
 
 Token deltas, Paper versus the 13 Aug Figma snapshot. Declared in the
 addendum `:root` block of `styles.css`, and Figma should be updated to match:

@@ -159,11 +159,16 @@ silently discards a lead is worse than no form. Tracked in `HANDOVER.md`.
 
 - **No Tier 1 proof supplied.** Twelve proof points are needed, three per
   page, each with a number, a named suburb, a month and year and a client
-  first name. `npm run check` fails hard on any bracket in visible copy, so
-  no page can pass its own checklist until the numbers are real. That is
-  deliberate: it makes shipping a fabricated claim impossible by accident
-  rather than merely discouraged. The rebuild must carry the same bracketed
-  placeholders until real numbers arrive.
+  first name. The buyer page carries them as bracketed placeholders such as
+  `[Suburb]` and `[Month Year]`, and the client supplies the real values
+  after the proof of concept.
+
+  `npm run check` used to fail on any bracket in visible copy. That rule was
+  retired 18 August 2026 at the client's direction, because the timing is
+  understood and a permanent failure on every run drowns out the checks that
+  are still meaningful. The brackets stay visible in the rendered page, so an
+  unfilled slot still reads as unfilled to anyone looking at it; what is gone
+  is the automated stop. Fill them before the page takes paid traffic.
 - **Deferred chip behaviour is assumed, not confirmed.** `prestige` and
   `expat` keep their chips in every router and post to the same capture form,
   so the lead still arrives labelled in HubSpot. The alternative is linking

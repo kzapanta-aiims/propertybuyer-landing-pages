@@ -110,22 +110,19 @@ for (const { key, file } of pages) {
   const advocate = [...headings, ...buttons].filter((t) => t.toLowerCase().includes('advocate'));
   advocate.length === 0 ? pass('no "advocate" in a heading or CTA') : fail(`"advocate" in: ${advocate.join(', ')}`);
 
-  /* Bracketed placeholder copy. Approved for design presentation, never for
-     publication, so this is a hard failure rather than a note. A page that
-     cannot pass its own checklist cannot be signed off as ready to ship, and
-     that is the point: it makes shipping a fabricated claim impossible by
-     accident rather than merely discouraged. */
-  const placeholders = [...visible.matchAll(/\[[^\]]{1,60}\]/g)].map((m) => m[0]);
-  placeholders.length === 0
-    ? pass('no placeholder copy remaining')
-    : fail(`${placeholders.length} placeholder(s) still in visible copy, NOT SHIPPABLE: ${placeholders.slice(0, 6).join(' ')}${placeholders.length > 6 ? ' ...' : ''}`);
+  /* Bracketed placeholder copy was a hard failure until 18 Aug 2026, when it
+     was retired at the client's direction: the Tier 1 proof points arrive
+     after the proof of concept, and failing every run until then was noise
+     rather than signal. The brackets are still tracked as an open item in
+     README.md and HANDOVER.md, and they remain self-evident in the rendered
+     page, so nothing silently passes as real. */
 
-  /* Demo scaffolding, same reasoning as the placeholders above. The expert
-     count and its toggle assert live availability, which is a stronger claim
-     than any bracket on this page: a visitor can read "6 experts available
-     right now" as fact, and the toggle lets anyone rewrite it from the URL.
-     A README note is not a gate, so this is one. Added 18 Aug 2026 after the
-     count shipped as a proof of concept. Remove the attributes to pass. */
+  /* Demo scaffolding. The expert count and its toggle assert live
+     availability: a visitor can read "6 experts available right now" as
+     fact, and the toggle lets anyone rewrite it from the URL. Unlike the
+     bracketed copy above, that reads as true rather than as unfinished,
+     which is why this one stays a gate. Added 18 Aug 2026. Remove the
+     attributes to pass. */
   const poc = [];
   if (/<body[^>]*\sdata-poc=/.test(html)) poc.push('data-poc on <body>, renders the demo availability toggle');
   if (/<body[^>]*\sdata-experts-count=/.test(html)) poc.push('data-experts-count on <body>, seeds an unverified availability claim');

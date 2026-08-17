@@ -89,7 +89,7 @@
       "problem": "The rules budget three Tier 1 proof blocks per page, attributable and dated. No real examples were supplied, and the slots shipped empty.",
       "status": "PLACEHOLDERS 13 Aug 2026, design presentation only",
       "decision": "Fill the three slots with bracketed placeholders so the design can be presented and approved. The client holds real examples and supplies them after sign-off.",
-      "safeguard": "Every placeholder value is wrapped in square brackets, and tools/check.mjs fails hard on any bracket in visible copy. The page therefore cannot pass its own acceptance checklist until the numbers are real. Shipping a fabricated claim is made impossible by accident rather than merely discouraged.",
+      "safeguard": "Every placeholder value is wrapped in square brackets, so an unfilled slot renders as visibly unfilled rather than as a plausible claim. tools/check.mjs used to fail hard on any bracket in visible copy; that rule was retired 18 Aug 2026 at the client's direction, because the values arrive after the proof of concept and a permanent failure on every run was drowning out the checks that still matter. The brackets remain the safeguard, the automated stop does not.",
       "outstanding": "Twelve real proof points needed in total, three per page. Each one needs a number, a named suburb, a month and year, and a client first name."
     },
     "proyaleCase": {
