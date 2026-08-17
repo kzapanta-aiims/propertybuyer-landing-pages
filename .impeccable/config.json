@@ -29,6 +29,12 @@
         "value": "2px",
         "createdAt": "2026-08-17T13:17:27.914Z",
         "reason": "focus-ring border-radius carried verbatim from the pre-rebuild template base styles (git d5251d3)"
+      },
+      {
+        "rule": "design-system-radius",
+        "value": "2px)",
+        "createdAt": "2026-08-17T14:56:37.464Z",
+        "reason": "calc(var(--radius-card) + 2px) on the CTA shine ring: the ring sits inset -2px outside the button, so +2px keeps it concentric with the token radius - derived geometry, not a new radius"
       }
     ]
   }
