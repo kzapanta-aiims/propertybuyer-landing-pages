@@ -6,7 +6,9 @@
   "scripts": {
     "check": "node tools/check.mjs",
     "serve": "npx --yes serve .",
-    "compress": "node tools/compress-images.mjs"
+    "compress": "node tools/compress-images.mjs",
+    "bake": "node tools/bake-liquid-metal.mjs",
+    "hints": "node tools/add-image-hints.mjs"
   },
   "devDependencies": {
     "@paper-design/shaders": "^0.0.80",

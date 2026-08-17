@@ -12,7 +12,7 @@ import { getShaderColorFromString } from '../vendor/paper-shaders/get-shader-col
 import { getShaderNoiseTexture } from '../vendor/paper-shaders/get-shader-noise-texture.js';
 import { ShaderFitOptions } from '../vendor/paper-shaders/shader-sizing.js';
 import { grainGradientFragmentShader, GrainGradientShapes } from '../vendor/paper-shaders/shaders/grain-gradient.js';
-import { liquidMetalFragmentShader, toProcessedLiquidMetal, LiquidMetalShapes } from '../vendor/paper-shaders/shaders/liquid-metal.js';
+import { liquidMetalFragmentShader, LiquidMetalShapes } from '../vendor/paper-shaders/shaders/liquid-metal.js';
 import { flutedGlassFragmentShader, GlassGridShapes, GlassDistortionShapes } from '../vendor/paper-shaders/shaders/fluted-glass.js';
 
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -88,13 +88,17 @@ async function prestigeGrain() {
   }), undefined, reduced ? 0 : 1, 147046.53);
 }
 
-/* ---- Prestige: liquid metal mark ---------------------------------------- */
+/* ---- Prestige: liquid metal mark ----------------------------------------
+   The mask is baked by tools/bake-liquid-metal.mjs rather than computed
+   here. Calling toProcessedLiquidMetal() at runtime rasterised the source
+   SVG at the library's hardcoded 4096px and solved a Poisson equation over
+   it: about 3s of main-thread time and a 1.3MB blob per visit, measured
+   18 Aug 2026. The mask is identical for every visitor, so it is now a
+   121KB cached image. Re-run npm run bake if prestige-mark.svg changes. */
 async function prestigeLiquid() {
   const still = document.querySelector('.prestige-visual img');
   if (!still) return;
-  const processed = await toProcessedLiquidMetal(IMG + 'prestige-mark.svg');
-  const url = URL.createObjectURL(processed.pngBlob);
-  const img = await loadImage(url);
+  const img = await loadImage(IMG + 'prestige-mark-mask.webp');
   mountOver(still, liquidMetalFragmentShader, sizing({
     u_scale: 0.6,
     u_image: img,
@@ -123,14 +127,15 @@ const GLASS_SOURCES = {
   'auction-glass-3': 'glass-src-auction-3.webp',
 };
 
-async function flutedStrips() {
-  const stills = document.querySelectorAll('.truth-card__glass, .auction-photo__glass');
-  for (const still of stills) {
-    const key = Object.keys(GLASS_SOURCES).find((k) => still.src.includes(k));
-    if (!key) continue;
-    try {
-      const img = await loadImage(IMG + GLASS_SOURCES[key]);
-      mountOver(still, flutedGlassFragmentShader, sizing({
+/* One strip at a time, each mounted only when it is close to the viewport.
+   Mounting all seven on load meant seven WebGL contexts, seven shader
+   compilations and seven extra image downloads before the visitor had seen
+   any of them, and the seven source crops loaded sequentially. */
+async function flutedStrip(still) {
+  const key = Object.keys(GLASS_SOURCES).find((k) => still.src.includes(k));
+  if (!key) return;
+  const img = await loadImage(IMG + GLASS_SOURCES[key]);
+  mountOver(still, flutedGlassFragmentShader, sizing({
         u_image: img,
         u_colorBack: getShaderColorFromString('#00000000'),
         u_colorHighlight: getShaderColorFromString('#FFFFFF'),
@@ -150,14 +155,9 @@ async function flutedStrips() {
         u_marginRight: 0,
         u_marginTop: 0,
         u_marginBottom: 0,
-        u_grainMixer: 0,
-        u_grainOverlay: 0,
-      }), 0, 0);
-    } catch (e) {
-      /* Still stays visible; nothing to undo. */
-      console.warn('fluted glass mount failed:', e);
-    }
-  }
+    u_grainMixer: 0,
+    u_grainOverlay: 0,
+  }), 0, 0);
 }
 
 /* WebGL sanity check before doing any work. */
@@ -170,8 +170,31 @@ function webglAvailable() {
   }
 }
 
+/* Mount when the target is within one viewport of the fold, so a visitor who
+   never scrolls that far never pays for the shader. Every mount is a WebGL
+   context plus a shader compilation, and there are nine of them on this
+   page; doing them all at load cost seconds of blocking time. The stills
+   stay in place until their own shader is up, so nothing pops. */
+function whenNear(target, run, label) {
+  if (!target) return;
+  const io = new IntersectionObserver((entries) => {
+    if (!entries[0].isIntersecting) return;
+    io.disconnect();
+    Promise.resolve()
+      .then(run)
+      .catch((e) => console.warn(label + ' failed:', e));
+  }, { rootMargin: '100% 0px' });
+  io.observe(target);
+}
+
 if (webglAvailable()) {
-  prestigeGrain().catch((e) => console.warn('grain mount failed:', e));
-  prestigeLiquid().catch((e) => console.warn('liquid mount failed:', e));
-  flutedStrips().catch((e) => console.warn('fluted strips failed:', e));
+  const prestige = document.querySelector('.prestige');
+  whenNear(prestige, prestigeGrain, 'grain mount');
+  whenNear(prestige, prestigeLiquid, 'liquid mount');
+  document.querySelectorAll('.truth-card__glass, .auction-photo__glass').forEach((still) => {
+    /* Observe the card, not the strip: the strip is the thing being replaced
+       and sits at the bottom of an image that may itself be revealing. */
+    whenNear(still.closest('.truth-card, .auction-photo') || still,
+      () => flutedStrip(still), 'fluted glass mount');
+  });
 }
