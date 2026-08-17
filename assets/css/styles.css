@@ -349,7 +349,7 @@ h3 {
   letter-spacing: var(--tracking-button);
   cursor: pointer;
   text-decoration: none;
-  transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+  transition: background-color 280ms ease-out, border-color 280ms ease-out, color 280ms ease-out, transform 280ms ease-out, box-shadow 280ms ease-out;
 }
 .btn--primary { background: var(--action-primary); color: var(--text-on-brand); box-shadow: var(--shadow-btn); }
 .btn--primary:hover { background: var(--action-primary-hover); transform: translateY(-1px); }
@@ -468,7 +468,7 @@ h3 {
   backdrop-filter: blur(10px);
   box-shadow: var(--shadow-avatar-card);
   background: var(--bg-frost);
-  transition: rotate 200ms ease, box-shadow 200ms ease;
+  transition: rotate 380ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 380ms ease-out;
 }
 .avatar-card--l { rotate: -4.8deg; }
 .avatar-card--r { rotate: 7.7deg; }
@@ -561,7 +561,7 @@ fieldset.field legend { margin-bottom: var(--gap-sm); padding: 0; }
   line-height: 18px;
   color: var(--text-body);
   cursor: pointer;
-  transition: border-color 140ms ease, background-color 140ms ease;
+  transition: border-color 260ms ease-out, background-color 260ms ease-out;
 }
 .chip:hover span { border-color: var(--border-brand); }
 .chip input:checked + span {
@@ -586,7 +586,7 @@ fieldset.field legend { margin-bottom: var(--gap-sm); padding: 0; }
   font-weight: var(--weight-regular);
   line-height: 20px;
   color: var(--text-body);
-  transition: border-color 140ms ease;
+  transition: border-color 260ms ease-out;
 }
 .input::placeholder { color: var(--text-muted); opacity: 1; }
 .input:hover, .select-wrap:hover select { border-color: var(--border-brand); }
@@ -677,7 +677,7 @@ fieldset.field legend { margin-bottom: var(--gap-sm); padding: 0; }
   flex-direction: column;
   border-radius: var(--radius-card);
   overflow: clip;
-  transition: transform 200ms ease, box-shadow 200ms ease;
+  transition: transform 320ms ease-out, box-shadow 320ms ease-out;
 }
 .story-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-cta-panel); }
 .story-card__media {
@@ -685,7 +685,8 @@ fieldset.field legend { margin-bottom: var(--gap-sm); padding: 0; }
   height: 342px;
   background: var(--bg-brand);
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+  justify-content: center;
   padding: 24px;
   overflow: clip;
 }
@@ -752,7 +753,7 @@ fieldset.field legend { margin-bottom: var(--gap-sm); padding: 0; }
   width: 100px;
   height: 100px;
   rotate: -15deg;
-  transition: rotate 300ms ease;
+  transition: rotate 420ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 .truth-visual:hover .truth-visual__medal { rotate: -5deg; }
 
@@ -837,6 +838,7 @@ fieldset.field legend { margin-bottom: var(--gap-sm); padding: 0; }
   font-weight: var(--weight-display);
   font-size: 20px;
   line-height: 1.25;
+  text-align: center;
   color: var(--text-on-brand);
 }
 .stat__label {
@@ -907,7 +909,7 @@ fieldset.field legend { margin-bottom: var(--gap-sm); padding: 0; }
   padding: var(--gap);
   border-radius: var(--radius-card);
   color: var(--text-on-brand);
-  transition: transform 200ms ease;
+  transition: transform 320ms ease-out;
 }
 .step-card:hover { transform: translateY(-4px); }
 .step-card--1 { background: var(--bg-brand); }
@@ -924,7 +926,7 @@ fieldset.field legend { margin-bottom: var(--gap-sm); padding: 0; }
 /* Scoped to the text block so the "Step N" pill keeps its text-body ink. */
 .step-card--1 .step-card__text p, .step-card--2 .step-card__text p { color: var(--text-on-brand-muted); }
 .step-card__img { height: 212px; overflow: clip; background: var(--bg-page); }
-.step-card__img img { width: 100%; height: 100%; object-fit: cover; transition: scale 400ms ease; }
+.step-card__img img { width: 100%; height: 100%; object-fit: cover; transition: scale 600ms cubic-bezier(0.22, 1, 0.36, 1); }
 .step-card:hover .step-card__img img { scale: 1.04; }
 .step-card__swoosh { position: absolute; right: 14px; top: 30px; }
 
@@ -1057,6 +1059,9 @@ fieldset.field legend { margin-bottom: var(--gap-sm); padding: 0; }
 .faq h2 { width: 40%; flex-shrink: 0; padding-bottom: 12px; }
 .faq-list { display: flex; flex-direction: column; gap: var(--gap-sm); flex: 1; min-width: 0; }
 .faq-item {
+  transition: border-color 260ms ease-out;
+  /* Lets block-size transition from 0 to auto for the open animation. */
+  interpolate-size: allow-keywords;
   border-radius: var(--radius-card);
   background: var(--bg-page);
   border: 1px solid var(--border-muted);
@@ -1079,8 +1084,22 @@ fieldset.field legend { margin-bottom: var(--gap-sm); padding: 0; }
   color: var(--text-heading);
 }
 .faq-item summary::-webkit-details-marker { display: none; }
-.faq-item summary svg { flex-shrink: 0; transition: transform 200ms ease; }
+.faq-item summary svg { flex-shrink: 0; transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1); }
 .faq-item[open] summary svg { transform: rotate(45deg); }
+
+/* Smooth open and close. ::details-content with interpolate-size is the
+   native way to animate a details element; browsers without it simply
+   toggle instantly, which is the same behaviour as before. */
+.faq-item::details-content {
+  block-size: auto;
+  opacity: 1;
+  overflow: clip;
+  transition: block-size 360ms cubic-bezier(0.22, 1, 0.36, 1), opacity 280ms ease-out, content-visibility 360ms allow-discrete;
+}
+.faq-item:not([open])::details-content {
+  block-size: 0;
+  opacity: 0;
+}
 .faq-item__a { padding: 0 20px 18px; max-width: 68ch; }
 
 /* ==========================================================================
@@ -1198,6 +1217,9 @@ fieldset.field legend { margin-bottom: var(--gap-sm); padding: 0; }
 /* --- Lead form steps ------------------------------------------------------ */
 
 .lead-step { display: flex; flex-direction: column; gap: var(--gap-sm); }
+/* display:flex on the step beats the UA [hidden] rule, which is display:
+   none at lower precedence, so step two showed on load. Restate it. */
+.lead-step[hidden] { display: none; }
 .btn-back {
   display: inline-flex;
   align-items: center;
@@ -1229,9 +1251,9 @@ fieldset.field legend { margin-bottom: var(--gap-sm); padding: 0; }
   }
   .js .reveal-glass {
     opacity: 0;
-    translate: 64px 0;
+    translate: 96px 0;
     filter: blur(14px) saturate(1.15);
-    transition: opacity 800ms ease-out, translate 800ms cubic-bezier(0.22, 1, 0.36, 1), filter 800ms ease-out;
+    transition: opacity 1400ms ease-out, translate 1400ms cubic-bezier(0.22, 1, 0.36, 1), filter 1400ms ease-out;
   }
   .js .reveal.revealed,
   .js .reveal-glass.revealed {

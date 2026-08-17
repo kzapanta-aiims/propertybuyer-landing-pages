@@ -82,13 +82,15 @@
   });
 
   /* Stagger siblings that reveal together: each element's delay counts its
-     position among its revealing siblings. */
+     position among its revealing siblings. The glass photos cascade with a
+     much longer step so they clearly enter one after another. */
   targets.forEach(function (el) {
     var i = 0, sib = el;
     while ((sib = sib.previousElementSibling)) {
       if (sib.classList.contains('reveal') || sib.classList.contains('reveal-glass')) i++;
     }
-    el.style.transitionDelay = (i * 110) + 'ms';
+    var step = el.classList.contains('reveal-glass') ? 380 : 110;
+    el.style.transitionDelay = (i * step) + 'ms';
   });
 
   var io = new IntersectionObserver(function (entries) {
