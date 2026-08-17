@@ -81,12 +81,32 @@ Substitutions and judgment calls:
   routes to the form for now. The mobile header call icon (18 Aug) has the
   same problem and the same answer: it routes to the form until a number
   exists, then its href becomes tel:.
-- **The mobile CTA hint carries no head-count.** The brief asked for "N
-  experts available right now". An availability number is a claim this
-  page cannot prove, same class as the Tier 1 gaps, so the bar ships
-  saying "Our experts are ready to talk". When a real count or a live
-  source exists, set data-experts-count on body and the script renders
-  the counted line. Do not hardcode a number.
+- **The mobile CTA expert count is a PROOF OF CONCEPT, not a claim.**
+  Raised 18 Aug as unprovable, then requested anyway for a client demo, so
+  it ships as demo data and is labelled as such in three places: the
+  comment above `<body>`, the comment in `page.js`, and here.
+  `data-experts-count="6"` on `<body>` is the seed; `?experts=N` in the
+  URL overrides it so both states can be shown live in a meeting.
+  `readAvailability()` in `page.js` is the integration seam: point it at
+  the CRM or HR presence endpoint, resolve to a non-negative integer or
+  null, and nothing else changes. Zero available switches the button to
+  "Request a call back" and stills the status dot. **This must not go to
+  paid traffic while the number is invented**: it is a live-availability
+  promise, so a wrong count is worse than the Tier 1 placeholders, which
+  at least fail the checker loudly.
+- **The mobile CTA radius is 16px, client-directed 18 Aug 2026.** The
+  radius scale holds two tokens, card 8 and pill 999. 16 is neither, so
+  it needs a `radius/sheet` token in Figma before this ships.
+- **`--bg-brand-hover` is derived, not a token.** The closer band was
+  asked for "the brand hover colour". Mapped holds no `bg/brand-hover`:
+  its only hover values are `action/primary-hover` and
+  `action/prestige-hover`, both accent colours. The band therefore uses
+  `color-mix(in oklab, var(--bg-brand), black 8%)`, which is the
+  Interactive States rule from DESIGN.md section 6 applied to the brand
+  surface, and the same pattern as the pressed fallbacks already in
+  `:root`. It resolves a step darker than `bg/brand` and lighter than the
+  footer's `bg/brand-deep`, so the two bands separate. Author a real token
+  if this band is keeping that colour.
 - **Stats are visible unproven claims**: 5,000+ purchases, 53 awards, 4.9
   stars, 300 reviews, "most awarded", "Best Buyers Agency of the Year
   2025". They came from the design, not from the proof register. Verify

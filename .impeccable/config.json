@@ -35,6 +35,12 @@
         "value": "2px)",
         "createdAt": "2026-08-17T14:56:37.464Z",
         "reason": "calc(var(--radius-card) + 2px) on the CTA shine ring: the ring sits inset -2px outside the button, so +2px keeps it concentric with the token radius - derived geometry, not a new radius"
+      },
+      {
+        "rule": "design-system-radius",
+        "value": "16px",
+        "createdAt": "2026-08-17T15:12:10.069Z",
+        "reason": "client-directed 18 Aug 2026 for the fixed mobile CTA sheet corners; outside the two-token radius scale and tracked in HANDOVER.md pending a radius/sheet token in Figma"
       }
     ]
   }

@@ -1,4 +1,4 @@
-/* Live Paper shaders, progressive enhancement.
+﻿/* Live Paper shaders, progressive enhancement.
    The exported stills stay in the markup as the rendered fallback; each
    shader mounts a canvas over its still and fades the still out only once
    the first frame is up. If WebGL, this module, or an asset fails, the
@@ -160,83 +160,6 @@ async function flutedStrips() {
   }
 }
 
-/* ---- Closer band: animated fluted glass ---------------------------------
-   Full-bleed flutes over a brand gradient. The gradient is painted onto a
-   canvas from the token values at runtime, so no colour is invented here
-   and no extra image ships. The flutes animate by slowly drifting the
-   shader's shift uniform; the drive loop only runs while the band is on
-   screen, and not at all under reduced motion. */
-async function closerFlutes() {
-  const host = document.querySelector('.closer__shader');
-  if (!host) return;
-
-  const css = getComputedStyle(document.documentElement);
-  const teal = css.getPropertyValue('--bg-brand').trim();
-  const deep = css.getPropertyValue('--bg-brand-deep').trim();
-  const terra = css.getPropertyValue('--action-primary').trim();
-
-  const c = document.createElement('canvas');
-  c.width = 1440;
-  c.height = 640;
-  const g = c.getContext('2d');
-  const lg = g.createLinearGradient(0, 0, 1440, 640);
-  lg.addColorStop(0, deep);
-  lg.addColorStop(0.55, teal);
-  lg.addColorStop(1, deep);
-  g.fillStyle = lg;
-  g.fillRect(0, 0, 1440, 640);
-  /* One warm terracotta glow, low in the frame, echoing the action colour. */
-  const rg = g.createRadialGradient(1120, 600, 40, 1120, 600, 640);
-  rg.addColorStop(0, terra);
-  rg.addColorStop(1, 'rgba(0,0,0,0)');
-  g.globalAlpha = 0.5;
-  g.fillStyle = rg;
-  g.fillRect(0, 0, 1440, 640);
-
-  const img = await loadImage(c.toDataURL('image/png'));
-  const mount = new ShaderMount(host, flutedGlassFragmentShader, sizing({
-    u_fit: ShaderFitOptions.cover,
-    u_image: img,
-    u_colorBack: getShaderColorFromString('#00000000'),
-    u_colorHighlight: getShaderColorFromString('#FFFFFF'),
-    u_colorShadow: getShaderColorFromString('#000000'),
-    u_highlights: 0.1,
-    u_shadows: 0.22,
-    u_size: 0.5,
-    u_shape: GlassGridShapes.lines,
-    u_angle: 0, /* vertical flutes */
-    u_distortionShape: GlassDistortionShapes.prism,
-    u_distortion: 0.55,
-    u_shift: 0,
-    u_stretch: 0.5,
-    u_blur: 0.3,
-    u_edges: 0,
-    u_marginLeft: 0,
-    u_marginRight: 0,
-    u_marginTop: 0,
-    u_marginBottom: 0,
-    u_grainMixer: 0,
-    u_grainOverlay: 0,
-  }), 0, 0);
-
-  if (!reduced) {
-    let raf = 0;
-    const tick = (t) => {
-      mount.setUniforms({ u_shift: Math.sin(t * 0.00016) * 0.4 });
-      raf = requestAnimationFrame(tick);
-    };
-    const io = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        if (!raf) raf = requestAnimationFrame(tick);
-      } else {
-        cancelAnimationFrame(raf);
-        raf = 0;
-      }
-    });
-    io.observe(host);
-  }
-}
-
 /* WebGL sanity check before doing any work. */
 function webglAvailable() {
   try {
@@ -251,5 +174,4 @@ if (webglAvailable()) {
   prestigeGrain().catch((e) => console.warn('grain mount failed:', e));
   prestigeLiquid().catch((e) => console.warn('liquid mount failed:', e));
   flutedStrips().catch((e) => console.warn('fluted strips failed:', e));
-  closerFlutes().catch((e) => console.warn('closer flutes failed:', e));
 }

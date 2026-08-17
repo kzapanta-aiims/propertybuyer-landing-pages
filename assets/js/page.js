@@ -57,28 +57,56 @@
   }
 
   /* ---- Fixed mobile CTA ---------------------------------------------------
-     Slides up when neither capture form is on screen. The hint stays
-     unquantified until a real availability number exists: set
-     data-experts-count on <body> and it becomes "N experts available
-     right now". Never hardcode that count here; it is a claim. */
+     Visible the whole way down the page, hidden only while the hero
+     capture form is on screen, since the bar points at that form. The
+     auction CTA card is deliberately NOT watched: it routes to the form
+     rather than being one, so the bar stays up over it. */
   var bar = document.getElementById('mobile-cta');
-  if (bar && 'IntersectionObserver' in window) {
-    var expertsCount = document.body.getAttribute('data-experts-count');
-    if (expertsCount) {
-      var hint = bar.querySelector('[data-experts-hint]');
-      if (hint) hint.textContent = expertsCount + ' experts available right now';
-    }
-    var formsInView = new Map();
-    var watched = [form, auctionCta].filter(Boolean);
-    if (watched.length) {
-      var barIo = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) { formsInView.set(e.target, e.isIntersecting); });
-        var anyVisible = false;
-        formsInView.forEach(function (v) { if (v) anyVisible = true; });
-        bar.classList.toggle('is-up', !anyVisible);
-      }, { threshold: 0 });
-      watched.forEach(function (f) { formsInView.set(f, true); barIo.observe(f); });
-    }
+  if (bar && form && 'IntersectionObserver' in window) {
+    var barIo = new IntersectionObserver(function (entries) {
+      bar.classList.toggle('is-up', !entries[0].isIntersecting);
+    }, { threshold: 0 });
+    barIo.observe(form);
+
+    /* ---- Expert availability, PROOF OF CONCEPT ---------------------------
+       Demo for client review, 18 Aug 2026. The count is NOT a verified
+       claim; it comes from data-experts-count on <body>, which stands in
+       for a live presence feed.
+
+       To make it real, replace readAvailability below with a call to the
+       CRM or HR presence endpoint ("who is signed in right now"). Nothing
+       else here needs to change. Contract: resolve to a non-negative
+       integer, or null when availability is unknown.
+
+         0        nobody signed in, the button asks for a callback
+         1 or more  the count is shown and the button opens a conversation
+         null     neither is asserted, the unquantified line stays
+
+       ?experts=N in the URL overrides, so both states can be shown in a
+       meeting without a code change. */
+    var readAvailability = function () {
+      var q = new URLSearchParams(location.search).get('experts');
+      var raw = q !== null ? q : document.body.getAttribute('data-experts-count');
+      if (raw === null || raw === '') return Promise.resolve(null);
+      var n = parseInt(raw, 10);
+      return Promise.resolve(isNaN(n) || n < 0 ? null : n);
+    };
+
+    var hint = bar.querySelector('[data-experts-hint]');
+    var cta = bar.querySelector('[data-cta-label]');
+
+    readAvailability().then(function (count) {
+      if (count === null || !hint || !cta) return;
+      if (count === 0) {
+        bar.classList.add('is-offline');
+        hint.textContent = 'Our team is offline right now';
+        cta.textContent = 'Request a call back';
+      } else {
+        hint.innerHTML = '<strong>' + count + ' ' + (count === 1 ? 'expert' : 'experts') +
+          '</strong> available right now';
+        cta.textContent = 'Speak to a team member';
+      }
+    });
   }
 
   /* ---- Scroll reveals ----------------------------------------------------

@@ -65,6 +65,16 @@
   --action-primary-pressed: color-mix(in oklab, var(--action-primary), black 15%);
   --action-prestige-pressed: color-mix(in oklab, var(--action-prestige), black 15%);
 
+  /* Also derived, not a token. Mapped holds no bg/brand-hover: its only
+     hover values are action/primary-hover and action/prestige-hover. The
+     closer band was asked for "the brand hover colour", dark and distinct
+     from the footer, so this follows the Interactive States rule in
+     DESIGN.md section 6, 8 percent away from the surface for hover. It
+     lands between bg/brand and bg/brand-deep, so the closer reads a step
+     darker than the brand band and still separates from the footer.
+     Requested 18 Aug 2026, pending a real token. See HANDOVER.md. */
+  --bg-brand-hover: color-mix(in oklab, var(--bg-brand), black 8%);
+
   /* --- Spacing, nine tokens --------------------------------------------- */
   --space-section-y: 48px;       /* space/section-y  48 mobile, 80 from 768 */
   --space-gutter: 20px;          /* space/gutter     */
@@ -1317,9 +1327,7 @@ fieldset.field legend { margin-bottom: var(--gap-sm); padding: 0; }
 
 /* --- Closer band, desktop and mobile --------------------------------------- */
 
-.closer { position: relative; background: var(--grad-band-teal); overflow: clip; }
-.closer__shader { position: absolute; inset: 0; }
-.closer__shader canvas { width: 100%; height: 100%; display: block; }
+.closer { position: relative; background: var(--bg-brand-hover); overflow: clip; }
 .closer__wrap {
   position: relative;
   z-index: 1;
@@ -1333,6 +1341,15 @@ fieldset.field legend { margin-bottom: var(--gap-sm); padding: 0; }
 .closer__body { color: var(--text-on-brand-muted); max-width: 56ch; }
 .closer__btn { min-width: 280px; }
 .closer__note { font-size: var(--type-micro); color: var(--text-on-brand-muted); }
+/* The ticker closes the band. Full width of the wrap, same mask and loop
+   as the hero strip, with a hairline above it so it reads as a footnote
+   of proof rather than another content row. */
+.closer__ticker {
+  width: 100%;
+  margin-top: var(--gap-sm);
+  padding-top: var(--space-gutter);
+  border-top: 1px solid var(--border-on-brand);
+}
 
 /* --- Fixed mobile CTA -------------------------------------------------------
    Liquid glass: translucent brand ink over a strong backdrop blur. Slides
@@ -1355,6 +1372,10 @@ fieldset.field legend { margin-bottom: var(--gap-sm); padding: 0; }
     -webkit-backdrop-filter: blur(22px) saturate(1.35);
     backdrop-filter: blur(22px) saturate(1.35);
     border-top: 1px solid color-mix(in oklab, var(--text-on-brand), transparent 82%);
+    /* 16px, client-directed 18 Aug 2026. Outside the two-token radius
+       scale (card 8, pill 999), so it needs a radius token in Figma before
+       this ships. Recorded in HANDOVER.md. */
+    border-radius: 16px 16px 0 0;
     translate: 0 120%;
     transition: translate 460ms cubic-bezier(0.22, 1, 0.36, 1);
   }
@@ -1369,12 +1390,19 @@ fieldset.field legend { margin-bottom: var(--gap-sm); padding: 0; }
   line-height: 16px;
   color: var(--text-on-brand);
 }
+.mobile-cta__hint strong { font-weight: var(--weight-semibold); }
 .mobile-cta__dot {
   width: 7px;
   height: 7px;
   border-radius: var(--radius-pill);
   background: var(--border-success);
   animation: cta-dot 2.4s ease-in-out infinite;
+}
+/* Nobody signed in: the dot stops pulsing and goes muted, and the button
+   asks for a callback instead of a conversation. */
+.mobile-cta.is-offline .mobile-cta__dot {
+  background: var(--text-on-brand-muted);
+  animation: none;
 }
 @keyframes cta-dot {
   0%, 100% { opacity: 1; }

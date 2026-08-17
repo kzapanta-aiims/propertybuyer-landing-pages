@@ -7,7 +7,12 @@
 <meta name="description" content="Independent buyers agency, established 2001. We act for buyers only, never for sellers, from the first brief to the keys.">
 <link rel="stylesheet" href="../../assets/css/styles.css">
 </head>
-<body>
+<!-- data-experts-count is DEMO DATA for the 18 Aug 2026 proof of concept,
+     not a verified claim. It stands in for a live presence count from the
+     client's CRM or HR app. See assets/js/page.js for the integration seam
+     and HANDOVER.md for what has to be true before this ships. Append
+     ?experts=0 to the URL to demonstrate the nobody-available state. -->
+<body data-experts-count="6">
 <a class="skip" href="#main">Skip to content</a>
 
 <!-- ==========================================================================
@@ -668,31 +673,55 @@
 </section>
 
 <!-- ==========================================================================
-     Closer. Final CTA band after the FAQ, desktop and mobile. The animated
-     fluted glass runs over a brand gradient painted from the token values;
-     the CSS gradient beneath is the no-WebGL fallback. Claims here are
-     reused from earlier in the page, nothing new is asserted.
+     Closer. Final CTA band after the FAQ, desktop and mobile. Flat dark
+     brand surface, one step off bg/brand so it separates from the footer
+     band below it. The award ticker repeats here as the closing proof.
+     Claims are reused from earlier in the page, nothing new is asserted.
      ========================================================================== -->
 <section class="section closer on-dark" id="closer">
-  <div class="closer__shader" aria-hidden="true"></div>
   <div class="wrap closer__wrap">
     <h2>Your side of the table is waiting</h2>
     <p class="closer__body">One conversation tells you what your budget really buys, and how we would run the search. No pressure, and nothing to sign.</p>
     <a class="btn btn--primary closer__btn" href="#lead-form">Speak to an expert</a>
     <p class="closer__note">Buyers only, since 2001. Your details stay private.</p>
+    <!-- Same badge set and marquee mechanics as the hero strip. The laurel
+         caps are a hero device and are left out here, which also avoids a
+         second copy of their gradient ids. -->
+    <div class="marquee closer__ticker" role="presentation">
+      <div class="marquee__track">
+        <div class="badge"><img src="../../assets/img/badge-1.webp" alt=""></div>
+        <div class="badge"><img src="../../assets/img/badge-2.webp" alt=""></div>
+        <div class="badge"><img src="../../assets/img/badge-3.webp" alt=""></div>
+        <div class="badge"><img src="../../assets/img/badge-4.webp" alt=""></div>
+        <div class="badge"><img src="../../assets/img/badge-5.webp" alt=""></div>
+        <div class="badge"><img src="../../assets/img/badge-6.webp" alt=""></div>
+        <div class="badge badge--reb"><img src="../../assets/img/badge-reb.svg" alt=""></div>
+        <div class="badge"><img src="../../assets/img/badge-7.webp" alt=""></div>
+        <div class="badge"><img src="../../assets/img/badge-8.webp" alt=""></div>
+        <div class="badge"><img src="../../assets/img/badge-1.webp" alt=""></div>
+        <div class="badge"><img src="../../assets/img/badge-2.webp" alt=""></div>
+        <div class="badge"><img src="../../assets/img/badge-3.webp" alt=""></div>
+        <div class="badge"><img src="../../assets/img/badge-4.webp" alt=""></div>
+        <div class="badge"><img src="../../assets/img/badge-5.webp" alt=""></div>
+        <div class="badge"><img src="../../assets/img/badge-6.webp" alt=""></div>
+        <div class="badge badge--reb"><img src="../../assets/img/badge-reb.svg" alt=""></div>
+        <div class="badge"><img src="../../assets/img/badge-7.webp" alt=""></div>
+        <div class="badge"><img src="../../assets/img/badge-8.webp" alt=""></div>
+      </div>
+    </div>
   </div>
 </section>
 
 </main>
 
-<!-- Mobile-only fixed CTA. Slides up once neither capture form is in the
-     viewport. The hint deliberately carries no head-count: an availability
-     number is a claim this page cannot prove yet. When a real count or a
-     live source exists, set data-experts-count on <body> and the script
-     renders "N experts available right now". -->
+<!-- Mobile-only fixed CTA. Visible the whole way down the page and hidden
+     only while the hero capture form is on screen, where it would compete
+     with the form it points at. The hint and the button label are both
+     rewritten by the availability check in page.js; the markup below is
+     the unknown-availability state, which is what renders without script. -->
 <div class="mobile-cta" id="mobile-cta">
   <p class="mobile-cta__hint"><span class="mobile-cta__dot" aria-hidden="true"></span><span data-experts-hint>Our experts are ready to talk</span></p>
-  <a class="btn btn--primary mobile-cta__btn" href="#lead-form">Speak to a team member</a>
+  <a class="btn btn--primary mobile-cta__btn" href="#lead-form" data-cta-label>Speak to a team member</a>
 </div>
 
 <!-- ==========================================================================
