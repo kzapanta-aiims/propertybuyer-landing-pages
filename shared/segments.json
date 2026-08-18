@@ -87,10 +87,11 @@
     },
     "tier1Proof": {
       "problem": "The rules budget three Tier 1 proof blocks per page, attributable and dated. No real examples were supplied, and the slots shipped empty.",
-      "status": "PLACEHOLDERS 13 Aug 2026, design presentation only",
-      "decision": "Fill the three slots with bracketed placeholders so the design can be presented and approved. The client holds real examples and supplies them after sign-off.",
-      "safeguard": "Every placeholder value is wrapped in square brackets, so an unfilled slot renders as visibly unfilled rather than as a plausible claim. tools/check.mjs used to fail hard on any bracket in visible copy; that rule was retired 18 Aug 2026 at the client's direction, because the values arrive after the proof of concept and a permanent failure on every run was drowning out the checks that still matter. The brackets remain the safeguard, the automated stop does not.",
-      "outstanding": "Twelve real proof points needed in total, three per page. Each one needs a number, a named suburb, a month and year, and a client first name."
+      "status": "RESOLVED for home 18 Aug 2026, nine still outstanding",
+      "decision": "The home page slots were filled 18 Aug 2026 from the client-supplied deck \"Latest Recent Purchases - Commercial.pdf\". Every figure is copied from that deck rather than derived, and each of the three traces to a row in paper/proof-register.md. The page now carries no proof brackets; the three that remain are footer legal links.",
+      "openQuestion": "The deck is commercial and this is the home buyers page, so the three slots put commercial purchases in front of a residential audience. Done at the client's direction. The figures are sound, the audience is not settled, and these three are the natural content for the commercial page when it is built. The displaced residential rows are kept under Reserves in the register so the page can be reverted without re-research.",
+      "safeguard": "Unfilled values stay wrapped in square brackets, so an unfilled slot renders as visibly unfilled rather than as a plausible claim. tools/check.mjs used to fail hard on any bracket in visible copy; that rule was retired 18 Aug 2026 at the client's direction, because the values arrive after the proof of concept and a permanent failure on every run was drowning out the checks that still matter. The brackets remain the safeguard, the automated stop does not.",
+      "outstanding": "Nine real proof points still needed, three each for investor, commercial and developer. Each one needs a number, a location, a month and year, and a client name."
     },
     "proyaleCase": {
       "problem": "Proyale is capitals-only, so H1 and H2 render in caps whatever case is typed, against a sentence case rule with no exceptions.",
