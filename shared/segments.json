@@ -25,7 +25,6 @@
     "visual source of truth; the token deltas against Figma are recorded in",
     "HANDOVER.md. The rebuilt page is the template for the other three."
   ],
-
   "segments": [
     {
       "key": "home",
@@ -70,7 +69,6 @@
       "register": "Numerical. Lead with site access and resale numbers, shortest copy of any segment."
     }
   ],
-
   "openDecisions": {
     "deferredChipBehaviour": {
       "assumed": "Keep prestige and expat chips in every router and chip row. They select normally and post to the same capture form, so the lead still arrives labelled in HubSpot. No page, no outbound link, no dead click.",
@@ -88,15 +86,23 @@
     "tier1Proof": {
       "problem": "The rules budget three Tier 1 proof blocks per page, attributable and dated. No real examples were supplied, and the slots shipped empty.",
       "status": "RESOLVED for home 18 Aug 2026, nine still outstanding",
-      "decision": "The home page slots were filled 18 Aug 2026 from the client-supplied deck \"Latest Recent Purchases - Commercial.pdf\". Every figure is copied from that deck rather than derived, and each of the three traces to a row in paper/proof-register.md. The page now carries no proof brackets; the three that remain are footer legal links.",
-      "openQuestion": "The deck is commercial and this is the home buyers page, so the three slots put commercial purchases in front of a residential audience. Done at the client's direction. The figures are sound, the audience is not settled, and these three are the natural content for the commercial page when it is built. The displaced residential rows are kept under Reserves in the register so the page can be reverted without re-research.",
+      "decision": "The home page slots were filled 18 Aug 2026 from the client-supplied deck \"Legacy All Homebuyer (1).pdf\", 80 residential purchases each carrying a purchase year and price, a 2026 valuation, client savings, equity created and a time to purchase. Every figure is copied from that deck rather than derived, and abbreviated figures on the cards are exact rather than rounded. Each of the three traces to a row in paper/proof-register.md. The page carries no proof brackets; the three that remain are footer legal links.",
+      "openQuestion": "Melbourne is the largest single group in the deck at 23 of 80 records and is not represented in the three, because the ladder was chosen over geographic spread. The register names the two Melbourne records that could take a slot if the client would rather show three states than three life stages.",
       "safeguard": "Unfilled values stay wrapped in square brackets, so an unfilled slot renders as visibly unfilled rather than as a plausible claim. tools/check.mjs used to fail hard on any bracket in visible copy; that rule was retired 18 Aug 2026 at the client's direction, because the values arrive after the proof of concept and a permanent failure on every run was drowning out the checks that still matter. The brackets remain the safeguard, the automated stop does not.",
-      "outstanding": "Nine real proof points still needed, three each for investor, commercial and developer. Each one needs a number, a location, a month and year, and a client name."
+      "outstanding": "Nine real proof points still needed, three each for investor, commercial and developer. The three commercial records used briefly on the home page are held in paper/proof-register.md under Reserves as the starting content for the commercial page.",
+      "selection": "The three chosen ladder by life stage and by price so a visitor finds themselves in one of them: first home (Shane, Brisbane, 2008), family home after three auction losses (Stephen and Veronica, Sydney, 2012), downsize (Roderick and Denise, Sydney, 2014). The middle one is the closest match in all 80 records to this segment register, which asks the page to lead with handover of risk."
     },
     "proyaleCase": {
       "problem": "Proyale is capitals-only, so H1 and H2 render in caps whatever case is typed, against a sentence case rule with no exceptions.",
       "status": "RESOLVED 13 Aug 2026, ships as is",
       "decision": "A font limitation, not a contradiction. The sentence case rule governs how copy is written, not how a chosen display face renders it. No text-transform anywhere, and headings stay written in sentence case so the Georgia fallback renders correctly before Proyale loads."
+    },
+    "storyPrivacyBadge": {
+      "problem": "The story cards carried a \"Privacy protection\" badge over each photograph, from the Paper design.",
+      "status": "HIDDEN 18 Aug 2026 at the client's request",
+      "decision": "Hidden in CSS, not deleted. The markup and the base rule stay intact, so removing one declaration in assets/css/styles.css brings the badge back.",
+      "note": "The story photographs are the actual properties purchased, taken from the client's own published success-story decks. A street number is legible on two of the three. Hiding the badge publishes nothing the client has not already published themselves, but it is worth a look before the page takes paid traffic.",
+      "raised": "18 Aug 2026"
     }
   }
 }
