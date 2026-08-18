@@ -754,6 +754,13 @@ fieldset.field legend { margin-bottom: var(--gap-sm); padding: 0; }
   line-height: 16px;
   color: var(--text-on-brand);
 }
+/* Hidden at the client's request, 18 Aug 2026. Hidden, not deleted: the
+   markup and the rule above stay intact, so removing this one line brings
+   the badge back. It sits after the base rule rather than before it because
+   the two selectors have equal specificity and source order decides.
+   The story photographs come from the client's own published success-story
+   decks, so hiding the label conceals nothing. */
+.story-card__privacy { display: none; }
 .story-card__body {
   flex: 1;
   display: flex;

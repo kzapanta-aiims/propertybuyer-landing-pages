@@ -145,12 +145,20 @@ Substitutions and judgment calls:
   before launch and record sources in `paper/proof-register.md`. This does
   **not** cover the three story cards: those were sourced 18 Aug 2026 and
   every figure on them traces to a row in the register.
-- **The story cards are commercial purchases on the home buyers page.** Filled
-  18 Aug 2026 from "Latest Recent Purchases - Commercial.pdf" at the client's
-  direction. The figures are real, dated and attributed, so they hold as
-  Tier 1; the mismatch is audience, not accuracy. The residential rows they
-  replaced are kept under Reserves in the register. Decide which segment owns
-  them before the commercial page is built.
+- **The story cards carry real home buyer records**, filled 18 Aug 2026 from
+  "Legacy All Homebuyer (1).pdf": Shane in Brisbane, Stephen and Veronica in
+  Sydney, Roderick and Denise in Sydney. Named, dated, and every figure copied
+  from the deck rather than derived. The abbreviated figures on the cards are
+  exact, not rounded. See `paper/proof-register.md` for the full records and
+  what each was chosen against.
+- ~~The story cards are commercial purchases on the home buyers page~~.
+  Resolved the same day. The slots briefly carried commercial records; they
+  now carry home buyer records, and the commercial three moved to Reserves in
+  the register as the starting content for the commercial page.
+- **The privacy badge on the story photos is hidden, not deleted**, at the
+  client's request of 18 Aug 2026. One declaration in `styles.css` restores
+  it. Note a street number is legible on two of the three photographs, though
+  the deck is the client's own published material.
 - **Images are compressed**: 33.5 MB of exports became 2.3 MB of WebP via
   `npm run compress` (tools/compress-images.mjs, caps at 2x rendered
   size). Re-run it after replacing any export.

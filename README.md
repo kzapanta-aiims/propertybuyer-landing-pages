@@ -189,11 +189,13 @@ silently discards a lead is worse than no form. Tracked in `HANDOVER.md`.
   remaining nine, for the investor, commercial and developer pages, are still
   outstanding.
 
-  One thing to settle: the buyer page's three are **commercial** purchases on
-  a **residential** page, done at the client's direction. The figures are
-  sound; the audience is the open question, and these three are the natural
-  content for the commercial page when it is built. The displaced residential
-  rows are kept under Reserves in the register.
+  The three are home buyer records, from the client's legacy home buyer deck:
+  a first home in Brisbane, a family home in Sydney bought after three auction
+  losses, and an eastern suburbs downsize. They ladder by life stage and by
+  price, so a visitor finds themselves in one of them. Melbourne is the
+  largest group in the deck and is not among the three; the register names the
+  two Melbourne records that could take a slot if the client would rather show
+  three states than three life stages.
 
   `npm run check` used to fail on any bracket in visible copy. That rule was
   retired 18 August 2026 at the client's direction. The three brackets left on
