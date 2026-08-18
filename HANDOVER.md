@@ -38,13 +38,13 @@ scaffolding.** Two earlier failures are resolved rather than outstanding.
 1. **Demo scaffolding present**, and the only remaining gate: `data-poc`,
    `data-experts-count` and the `.poc-toggle` markup. Remove all three
    before launch; details further down this file.
-2. ~~Seven bracketed placeholders in visible copy~~. Still present, no
-   longer a failure. The rule was retired 18 Aug 2026 at the client's
-   direction: the Tier 1 values arrive after the proof of concept, and a
-   permanent failure on every run was hiding the checks that still matter.
-   The seven are `[Suburb]`, three `[Month Year]`, `[Privacy policy]`,
-   `[Terms]` and `[Licence numbers]`. They render as brackets, so an
-   unfilled slot still looks unfilled; the automated stop is what is gone.
+2. ~~Seven bracketed placeholders in visible copy~~. Down to three, none of
+   them proof. The four Tier 1 brackets (`[Suburb]` and three
+   `[Month Year]`) were filled on 18 Aug 2026 from the client's commercial
+   purchase deck; see `paper/proof-register.md`. The three that remain are
+   legal links in the footer, `[Privacy policy]`, `[Terms]` and
+   `[Licence numbers]`, and still need real URLs before launch. The retired
+   check rule stays retired.
 3. ~~Card heading over budget~~. Fixed 18 Aug: "Bought off market in
    Paddington", 31 characters against the 32 limit.
 
@@ -142,7 +142,15 @@ Substitutions and judgment calls:
 - **Stats are visible unproven claims**: 5,000+ purchases, 53 awards, 4.9
   stars, 300 reviews, "most awarded", "Best Buyers Agency of the Year
   2025". They came from the design, not from the proof register. Verify
-  before launch and record sources in `paper/proof-register.md`.
+  before launch and record sources in `paper/proof-register.md`. This does
+  **not** cover the three story cards: those were sourced 18 Aug 2026 and
+  every figure on them traces to a row in the register.
+- **The story cards are commercial purchases on the home buyers page.** Filled
+  18 Aug 2026 from "Latest Recent Purchases - Commercial.pdf" at the client's
+  direction. The figures are real, dated and attributed, so they hold as
+  Tier 1; the mismatch is audience, not accuracy. The residential rows they
+  replaced are kept under Reserves in the register. Decide which segment owns
+  them before the commercial page is built.
 - **Images are compressed**: 33.5 MB of exports became 2.3 MB of WebP via
   `npm run compress` (tools/compress-images.mjs, caps at 2x rendered
   size). Re-run it after replacing any export.

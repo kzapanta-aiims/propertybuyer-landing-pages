@@ -766,6 +766,35 @@ fieldset.field legend { margin-bottom: var(--gap-sm); padding: 0; }
 .story-card__text { display: flex; flex-direction: column; gap: var(--gap-xs); }
 .story-card__text h3 { line-height: 1.25; }
 
+/* The purchase record under the summary, two or three figures per card.
+   The numbers stay at type/body and semibold rather than type/stat: the
+   card already spends its weight on the photograph and the heading, and a
+   third loud element would flatten the order. Value reads above its label,
+   with the markup left in term then definition order. */
+.story-stats {
+  display: flex;
+  gap: var(--gap-sm);
+  margin: var(--gap-xs) 0 0;
+  padding-top: var(--gap-sm);
+  border-top: 1px solid var(--border-default);
+}
+.story-stat { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.story-stat dd {
+  order: 1;
+  margin: 0;
+  font-size: var(--type-body);
+  font-weight: var(--weight-semibold);
+  line-height: 1.2;
+  color: var(--text-heading);
+}
+.story-stat dt {
+  order: 2;
+  font-size: var(--type-micro);
+  font-weight: var(--weight-body);
+  line-height: 1.3;
+  color: var(--text-muted);
+}
+
 /* ==========================================================================
    The Truth
    ========================================================================== */
@@ -1230,6 +1259,16 @@ fieldset.field legend { margin-bottom: var(--gap-sm); padding: 0; }
   .faq h2 { width: 100%; }
   .steps-row { flex-wrap: wrap; }
   .step-card { flex: 1 1 40%; }
+}
+
+/* Tablet only. The three story cards stay side by side until 768, so each
+   card column is at its narrowest here and three stats across would clip.
+   Below 768 the cards go full width and the row fits again. */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .story-stats { flex-direction: column; gap: 6px; }
+  .story-stat { flex-direction: row; align-items: baseline; gap: 6px; }
+  .story-stat dd { order: 0; }
+  .story-stat dt { order: 1; }
 }
 
 @media (max-width: 767px) {
