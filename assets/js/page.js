@@ -196,6 +196,61 @@
     });
   }
 
+  /* ---- Steps rail ---------------------------------------------------------
+     The five step cards sit on a native horizontal scroller. Touch and
+     trackpads scroll it already; this adds mouse drag and the two arrow
+     buttons, which page by one card at a time. The buttons are disabled at
+     the ends rather than hidden, so the control never jumps around. */
+  var rail = document.querySelector('[data-steps-row]');
+  if (rail) {
+    var prevBtn = document.querySelector('[data-steps-prev]');
+    var nextBtn = document.querySelector('[data-steps-next]');
+
+    var railStep = function () {
+      var card = rail.querySelector('.step-card');
+      var gap = parseFloat(getComputedStyle(rail).columnGap) || 20;
+      return card ? card.getBoundingClientRect().width + gap : 295;
+    };
+
+    var syncRailNav = function () {
+      if (!prevBtn || !nextBtn) return;
+      /* Subpixel scroll widths leave a remainder, so allow 1px of slack. */
+      var max = rail.scrollWidth - rail.clientWidth - 1;
+      prevBtn.disabled = rail.scrollLeft <= 0;
+      nextBtn.disabled = rail.scrollLeft >= max;
+    };
+
+    if (prevBtn && nextBtn) {
+      var page = function (dir) {
+        rail.scrollBy({ left: dir * railStep(), behavior: reduced ? 'auto' : 'smooth' });
+      };
+      prevBtn.addEventListener('click', function () { page(-1); });
+      nextBtn.addEventListener('click', function () { page(1); });
+      rail.addEventListener('scroll', syncRailNav, { passive: true });
+      window.addEventListener('resize', syncRailNav);
+      syncRailNav();
+    }
+
+    /* Mouse drag. Touch pointers are left alone: the scroller already pans
+       natively and fighting it breaks vertical page scrolling. */
+    var dragOriginX = 0;
+    var dragOriginScroll = 0;
+    rail.addEventListener('pointerdown', function (e) {
+      if (e.pointerType !== 'mouse' || e.button !== 0) return;
+      dragOriginX = e.clientX;
+      dragOriginScroll = rail.scrollLeft;
+      rail.classList.add('is-dragging');
+      rail.setPointerCapture(e.pointerId);
+    });
+    rail.addEventListener('pointermove', function (e) {
+      if (!rail.classList.contains('is-dragging')) return;
+      rail.scrollLeft = dragOriginScroll - (e.clientX - dragOriginX);
+    });
+    var endDrag = function () { rail.classList.remove('is-dragging'); };
+    rail.addEventListener('pointerup', endDrag);
+    rail.addEventListener('pointercancel', endDrag);
+  }
+
   /* ---- Scroll reveals ----------------------------------------------------
      The auction photos get the glass entry: in from the right, blur to
      sharp, staggered. Everything else gets a quiet fade-up. Classes are
@@ -207,6 +262,7 @@
     '.truth-head__copy', '.truth-visual',
     '.stats-visual', '.stats-copy',
     '.steps-head', '.step-card',
+    '.services-head', '.service-card',
     '.auction-head', '.move', '.auction-cta',
     '.prestige-visual', '.prestige-copy',
     '.faq h2', '.faq-item',
