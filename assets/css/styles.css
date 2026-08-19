@@ -1062,11 +1062,18 @@ fieldset.field legend { margin-bottom: var(--gap-sm); padding: 0; }
    ========================================================================== */
 
 .services { background: var(--bg-brand); color: var(--text-on-brand); position: relative; overflow: clip; }
+/* The texture is a 1440x960 still, so it is centred and stretched to the
+   full height of the band. A top-anchored fixed height cut off partway
+   down once the cards made the section taller than the export. */
 .services::before {
   content: "";
   position: absolute;
-  inset: 0 0 auto;
-  height: 900px;
+  left: 50%; top: 50%;
+  translate: -50% -50%;
+  width: 100%;
+  min-width: 1440px;
+  height: 100%;
+  min-height: 960px;
   background: url("../img/texture-wall-2.webp") center / cover;
   mix-blend-mode: multiply;
   opacity: 0.8;

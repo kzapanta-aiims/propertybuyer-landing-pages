@@ -80,23 +80,30 @@ Step 1 to 4 labels (6/20 each) · We set the brief (16/32) · We search and
 inspect (21/32) · We value it (11/32) · We negotiate or bid (19/32), bodies
 as built.
 
-## auction-explainer (net-new)
+## real-access, was auction-explainer (rewritten 20 Aug 2026)
+
+The band now carries off market access first and auction second, per Paper
+"Value & Features 7" on BUYER 1440 v2. Eyebrow, moves and close line all
+change; the photo strip, the four icons and the capture point are unchanged.
 
 | String | Count / budget |
 |---|---|
-| H2: What actually happens at auction | 32/60 |
-| Intro: The auction is built to read you. Here is how we take you out of it. | intro |
-| Move 1 H3: We set the limit together | 25/32 |
-| Move 1 body: You agree the walk-away number with your agent before the day. It is written down and it does not move. | two sentences |
-| Move 2 H3: We read the room | 16/32 |
-| Move 2 body: Selling agents watch buyers for signs of pressure. Your agent has stood in hundreds of auctions and reads it back. | two sentences |
-| Move 3 H3: We bid without tells | 20/32 |
-| Move 3 body: Bids land at the moments that suit your strategy, not the auctioneer's rhythm. No hesitation to read, no nerves to price. | two sentences |
-| Move 4 H3: We walk away when it is wrong | 29/32 |
-| Move 4 body: If bidding passes your limit, we stop. The next candidate is usually already on the shortlist. | two sentences |
-| Close line: Auction day feels different when it is not your job. | standalone body sentence, the emotional close |
+| Eyebrow: Real Access | 11/20 micro |
+| H2: Off-market & auction ready | 26/60 |
+| Intro: Much of what we buy never reaches a listing. Here is how we get there first. | intro, two lines, first line semibold |
+| Move 1 H3: We ask before it is listed | 26/32 |
+| Move 1 body: Your brief goes out to a database of 10,000+ agents. We hear about a property while the vendor is still deciding whether to list it at all. | two sentences |
+| Move 2 H3: Fewer buyers in the room | 24/32 |
+| Move 2 body: An off-market sale has no campaign and no competing bidders. It is a negotiation between two parties rather than a contest you have to win. | two sentences |
+| Move 3 H3: Your position stays yours | 25/32 |
+| Move 3 body: Going direct tells the selling agent what you can pay and how much you want it. We sit between you and the person who is paid to act against you. | two sentences |
+| Move 4 H3: Auction ready when it counts | 28/32 |
+| Move 4 body: Some properties only come up under the hammer. You agree the walk-away number before the day, your agent bids to it, and we stop when it is passed. | two sentences |
+| Close line 1: Most buyers only ever see the advertised market. | 47, semibold, the emotional close |
+| Close line 2: Tell us what you are looking for and we will put it to our agent network. | 73, body weight, runs into the capture button |
 
-No CTA, no numbers, no calculator chrome. Lightest section on the page.
+The 10,000+ agent database is the only number in the band. It is already
+cleared on the proof register and stated in the client USP table.
 
 ## who-we-help — router rescoped to the four-segment project
 
@@ -150,8 +157,8 @@ Offices paragraph, propertybuyer.com.au link, legal line, plus
 ## Capitals width watchlist (headings within ~5 of budget, re-check on canvas)
 
 - Subhead 42/42 (Geist, not Proyale, but at the hard cap)
-- H2 "What actually happens at auction" 32/60 fine, but renders in capitals
-  across roughly 26ch at 390: verify two clean lines, no orphan
+- H2 "Off-market & auction ready" 26/60 fine, but renders in capitals at
+  390: verify the ampersand line does not orphan "ready"
 - H3 "We walk away when it is wrong" 29/32
 - H3 "Home secured in North Sydney" 28/32
 - Submit buttons 32/34 full width at 390
