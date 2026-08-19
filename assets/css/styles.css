@@ -984,9 +984,28 @@ fieldset.field legend { margin-bottom: var(--gap-sm); padding: 0; }
 .steps-head h2 { max-width: 580px; }
 .steps-head .order { text-decoration: underline 1px; text-underline-offset: 4px; color: var(--text-body); }
 
-.steps-row { display: flex; gap: var(--space-gutter); }
+/* The five cards ride a horizontal rail. Four fill the container exactly
+   (4 x 275 + 3 x 20 = 1160) and the fifth overflows the right edge, so
+   there is visibly more to pull into view. The rail is a native scroller;
+   page.js adds mouse drag and the arrow buttons below it. */
+.steps-row {
+  display: flex;
+  gap: var(--space-gutter);
+  overflow-x: auto;
+  scrollbar-width: none;
+  cursor: grab;
+  /* Room for the hover lift, which the scroll container would otherwise
+     clip at its padding box. */
+  padding-top: 8px;
+  margin-top: -8px;
+}
+.steps-row::-webkit-scrollbar { display: none; }
+.steps-row.is-dragging { cursor: grabbing; }
+/* While the pointer is dragging the rail, the cards must not eat the move
+   events or fire their hover lift mid-drag. */
+.steps-row.is-dragging .step-card { pointer-events: none; }
 .step-card {
-  flex: 1;
+  flex: 0 0 275px;
   min-width: 0;
   position: relative;
   display: flex;
@@ -1002,6 +1021,9 @@ fieldset.field legend { margin-bottom: var(--gap-sm); padding: 0; }
 .step-card--2 { background: var(--bg-brand-deep); }
 .step-card--3 { background: var(--action-primary-hover); }
 .step-card--4 { background: var(--action-primary); }
+/* Paper paints card five with the gold ramp value #C9A26B, which Mapped
+   holds as action/prestige (and text/prestige, same hex). */
+.step-card--5 { background: var(--action-prestige); }
 .step-card__text { display: flex; flex-direction: column; gap: 8px; }
 .step-card h3 {
   font-size: var(--type-h3-card);
@@ -1015,6 +1037,63 @@ fieldset.field legend { margin-bottom: var(--gap-sm); padding: 0; }
 .step-card__img img { width: 100%; height: 100%; object-fit: cover; transition: scale 600ms cubic-bezier(0.22, 1, 0.36, 1); }
 .step-card:hover .step-card__img img { scale: 1.04; }
 .step-card__swoosh { position: absolute; right: 14px; top: 30px; }
+
+.steps-nav { display: flex; justify-content: center; gap: var(--gap-sm); }
+.steps-nav__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--tap-min);
+  height: var(--tap-min);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-brand);
+  background: none;
+  color: var(--text-heading);
+  cursor: pointer;
+  transition: background-color 160ms ease-out, opacity 160ms ease-out;
+}
+.steps-nav__btn:hover:not(:disabled) { background: var(--bg-info-subtle); }
+.steps-nav__btn:disabled { opacity: 0.35; cursor: default; }
+
+/* ==========================================================================
+   Services band
+   Teal band with the same wall texture treatment as the stats band, from
+   Paper "BUYER 1440 v2", 19 Aug 2026.
+   ========================================================================== */
+
+.services { background: var(--bg-brand); color: var(--text-on-brand); position: relative; overflow: clip; }
+.services::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 900px;
+  background: url("../img/texture-wall-2.webp") center / cover;
+  mix-blend-mode: multiply;
+  opacity: 0.8;
+  pointer-events: none;
+}
+.services .wrap { display: flex; flex-direction: column; gap: var(--gap-xl); position: relative; }
+.services-head { display: flex; align-items: center; justify-content: space-between; gap: var(--gap-lg); flex-wrap: wrap; }
+.services-head__intro { display: flex; flex-direction: column; align-items: flex-start; gap: var(--gap-lg); }
+/* Paper sets this H2 at type/stat, a step above the section scale. */
+.services h2 { font-size: var(--type-stat); color: var(--text-on-brand); }
+.services-cta { display: flex; flex-direction: column; align-items: center; gap: var(--gap-sm); }
+.services-cta .btn-note { color: var(--text-on-brand-muted); }
+
+.service-cards { display: flex; gap: var(--space-gutter); }
+.service-card { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--gap); }
+.service-card__img { height: 400px; overflow: clip; background: var(--bg-page); }
+.service-card__img img { width: 100%; height: 100%; object-fit: cover; transition: scale 600ms cubic-bezier(0.22, 1, 0.36, 1); }
+.service-card:hover .service-card__img img { scale: 1.04; }
+.service-card__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xs);
+  border-top: 2px solid var(--border-muted);
+  padding-top: var(--gap-sm);
+}
+.service-card__text h3 { font-size: var(--type-h3-card); font-weight: var(--weight-semibold); color: var(--text-on-brand); }
+.service-card__text p { color: var(--text-on-brand-muted); }
 
 /* ==========================================================================
    Auction
@@ -1264,8 +1343,7 @@ fieldset.field legend { margin-bottom: var(--gap-sm); padding: 0; }
   .prestige-visual { width: 100%; max-width: 546px; height: auto; aspect-ratio: 546 / 401; }
   .faq .wrap { flex-direction: column; }
   .faq h2 { width: 100%; }
-  .steps-row { flex-wrap: wrap; }
-  .step-card { flex: 1 1 40%; }
+  .service-card__img { height: 300px; }
 }
 
 /* Tablet only. The three story cards stay side by side until 768, so each
@@ -1290,8 +1368,8 @@ fieldset.field legend { margin-bottom: var(--gap-sm); padding: 0; }
   .truth-card:nth-child(3) { top: 96px; }
   .truth-card:nth-child(4) { top: 108px; }
   .rating-rows { width: 100%; }
-  .steps-row { flex-direction: column; }
-  .step-card { flex: 1 1 auto; }
+  .services-head { flex-direction: column; align-items: flex-start; }
+  .service-cards { flex-direction: column; }
   .auction { padding-block: var(--band-y); }
   .auction-strip { margin-block: var(--gap-lg) 0; overflow-x: auto; -webkit-overflow-scrolling: touch; }
   .auction-strip__row { width: max-content; margin: 0; padding-inline: var(--space-gutter); }
