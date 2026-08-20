@@ -197,10 +197,12 @@
   }
 
   /* ---- Steps rail ---------------------------------------------------------
-     The five step cards sit on a native horizontal scroller. Touch and
+     The four step cards sit on a native horizontal scroller. Touch and
      trackpads scroll it already; this adds mouse drag and the two arrow
-     buttons, which page by one card at a time. The buttons are disabled at
-     the ends rather than hidden, so the control never jumps around. */
+     buttons, which page by one card at a time. Within a run the buttons are
+     disabled at the ends rather than hidden, so the control never jumps
+     around; the whole nav is hidden only when the rail cannot scroll at all,
+     which since v3 merged two cards is the case at desktop. */
   var rail = document.querySelector('[data-steps-row]');
   if (rail) {
     var prevBtn = document.querySelector('[data-steps-prev]');
@@ -216,6 +218,10 @@
       if (!prevBtn || !nextBtn) return;
       /* Subpixel scroll widths leave a remainder, so allow 1px of slack. */
       var max = rail.scrollWidth - rail.clientWidth - 1;
+      /* Nothing to page through: hide the nav rather than leave two dead
+         arrows sitting under the rail. Paper v3 shows no arrows at 1440. */
+      var nav = prevBtn.closest('.steps-nav');
+      if (nav) nav.hidden = max <= 0;
       prevBtn.disabled = rail.scrollLeft <= 0;
       nextBtn.disabled = rail.scrollLeft >= max;
     };
