@@ -13,7 +13,6 @@ import { getShaderNoiseTexture } from '../vendor/paper-shaders/get-shader-noise-
 import { ShaderFitOptions } from '../vendor/paper-shaders/shader-sizing.js';
 import { grainGradientFragmentShader, GrainGradientShapes } from '../vendor/paper-shaders/shaders/grain-gradient.js';
 import { liquidMetalFragmentShader, LiquidMetalShapes } from '../vendor/paper-shaders/shaders/liquid-metal.js';
-import { flutedGlassFragmentShader, GlassGridShapes, GlassDistortionShapes } from '../vendor/paper-shaders/shaders/fluted-glass.js';
 
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const IMG = '../../assets/img/';
@@ -34,10 +33,10 @@ function sizing(overrides) {
 
 /* ---- Mount scheduling ---------------------------------------------------
    Constructing a ShaderMount is synchronous and not cheap: a WebGL context,
-   a shader compile and link, a texture upload and a first draw. There are
-   nine on this page, and the four glass strips in the truth cards all come
-   within the observer's margin at nearly the same scroll position, so left
-   alone they land together, in one task, while the visitor is scrolling.
+   a shader compile and link, a texture upload and a first draw. Two remain
+   on this page, both in the prestige band, and they enter the observer's
+   margin together, so left alone they land in one task while the visitor is
+   scrolling.
 
    So gate every mount: one at a time, and only in idle time. The exported
    still stays in place until its own shader is up, so a mount deferred until
@@ -46,9 +45,9 @@ function sizing(overrides) {
    This is a precaution rather than a measured win. The card stack's jank was
    the drop-shadow filter on .truth-card, fixed in the stylesheet; the mount
    burst could not be isolated as a second cause here, because this container
-   has no GPU and software WebGL distorts exactly these numbers. Spreading
-   nine context creations is still the right shape on weak hardware, and it
-   costs nothing when the machine is fast. */
+   has no GPU and software WebGL distorts exactly these numbers. Serialising
+   the two is still the right shape on weak hardware, and it costs nothing
+   when the machine is fast. */
 let mountQueue = Promise.resolve();
 
 function whenIdle() {
@@ -157,50 +156,6 @@ async function prestigeLiquid() {
   }), 1, 349839.6);
 }
 
-/* ---- Fluted glass caption strips ---------------------------------------- */
-const GLASS_SOURCES = {
-  'truth-glass-1': 'glass-src-truth-1.webp',
-  'truth-glass-2': 'glass-src-truth-2.webp',
-  'truth-glass-3': 'glass-src-truth-3.webp',
-  'truth-glass-4': 'glass-src-truth-4.webp',
-  'auction-glass-1': 'glass-src-auction-1.webp',
-  'auction-glass-2': 'glass-src-auction-2.webp',
-  'auction-glass-3': 'glass-src-auction-3.webp',
-};
-
-/* One strip at a time, each mounted only when it is close to the viewport.
-   Mounting all seven on load meant seven WebGL contexts, seven shader
-   compilations and seven extra image downloads before the visitor had seen
-   any of them, and the seven source crops loaded sequentially. */
-async function flutedStrip(still) {
-  const key = Object.keys(GLASS_SOURCES).find((k) => still.src.includes(k));
-  if (!key) return;
-  const img = await loadImage(IMG + GLASS_SOURCES[key]);
-  mountOver(still, flutedGlassFragmentShader, sizing({
-        u_image: img,
-        u_colorBack: getShaderColorFromString('#00000000'),
-        u_colorHighlight: getShaderColorFromString('#FFFFFF'),
-        u_colorShadow: getShaderColorFromString('#000000'),
-        u_highlights: 0.15,
-        u_shadows: 0.29,
-        u_size: 0.73,
-        u_shape: GlassGridShapes.lines,
-        u_angle: 92, /* -88 in Paper; the uniform takes 0 to 180 */
-        u_distortionShape: GlassDistortionShapes.prism,
-        u_distortion: 1,
-        u_shift: 0,
-        u_stretch: 1,
-        u_blur: 1,
-        u_edges: 0.25,
-        u_marginLeft: 0,
-        u_marginRight: 0,
-        u_marginTop: 0,
-        u_marginBottom: 0,
-    u_grainMixer: 0,
-    u_grainOverlay: 0,
-  }), 0, 0);
-}
-
 /* WebGL sanity check before doing any work. */
 function webglAvailable() {
   try {
@@ -213,9 +168,9 @@ function webglAvailable() {
 
 /* Mount when the target is within one viewport of the fold, so a visitor who
    never scrolls that far never pays for the shader. Every mount is a WebGL
-   context plus a shader compilation, and there are nine of them on this
-   page; doing them all at load cost seconds of blocking time. The stills
-   stay in place until their own shader is up, so nothing pops. */
+   context plus a shader compilation, and both of them sit in the prestige
+   band below the fold. The still stays in place until its shader is up, so
+   nothing pops. */
 function whenNear(target, run, label) {
   if (!target) return;
   const io = new IntersectionObserver((entries) => {
@@ -232,10 +187,4 @@ if (webglAvailable()) {
   const prestige = document.querySelector('.prestige');
   whenNear(prestige, prestigeGrain, 'grain mount');
   whenNear(prestige, prestigeLiquid, 'liquid mount');
-  document.querySelectorAll('.truth-card__glass, .auction-photo__glass').forEach((still) => {
-    /* Observe the card, not the strip: the strip is the thing being replaced
-       and sits at the bottom of an image that may itself be revealing. */
-    whenNear(still.closest('.truth-card, .auction-photo') || still,
-      () => flutedStrip(still), 'fluted glass mount');
-  });
 }

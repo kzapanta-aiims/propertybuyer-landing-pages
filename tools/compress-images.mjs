@@ -17,10 +17,6 @@ const DIR = 'assets/img';
 /* Max width in device pixels: 2x the largest CSS rendering. */
 const CAPS = [
   [/^auction-\d/, 1146],
-  [/^auction-glass/, 1246],
-  [/^glass-src-auction/, 1246],
-  [/^glass-src-truth/, 722],
-  [/^truth-glass/, 722],
   [/^truth-card/, 722],
   [/^truth-docs/, 1300],
   [/^step-\d/, 600],

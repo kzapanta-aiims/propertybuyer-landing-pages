@@ -67,11 +67,12 @@ Substitutions and judgment calls:
 - **Paper's shaders run live, with the stills as fallback.** Round two
   (client brief, 17 Aug) vendored `@paper-design/shaders` v0.0.80 (MIT)
   into `assets/vendor/paper-shaders/`, self hosted, no CDN. The grain
-  gradient, liquid metal mark and all seven fluted glass strips mount as
-  WebGL canvases over their exported stills; each still fades only after
-  its canvas is up, and remains if WebGL, modules (file:// pages), or any
-  asset fails. Parameters are verbatim from the Paper file. The fluted
-  glass source crops live as `assets/img/glass-src-*.webp`.
+  gradient and the liquid metal mark mount as WebGL canvases over their
+  exported stills; each still fades only after its canvas is up, and
+  remains if WebGL, modules (file:// pages), or any asset fails.
+  Parameters are verbatim from the Paper file. The seven fluted glass
+  strips were removed on 21 Aug, when the client deleted that layer from
+  the Paper image frames.
 - **The design shows four segment chips; the router contract needs six.**
   Prestige and Expat chips were added to the hero form in the unselected
   style. The six `data-segment` keys are intact.
