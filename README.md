@@ -11,11 +11,17 @@ Four pages. `home` is built first and is the template the other three copy.
 It builds into the `buyer` folder, so that one segment's key and folder name
 differ; every other segment's folder is named after its key.
 
+`commercial` was built from that template on 20 August 2026. Build the
+remaining two one at a time rather than in parallel: one stylesheet serves
+every page, so parallel branches collide in the file where a bad merge costs
+most, and each page teaches you what is genuinely template before the next
+one starts.
+
 | Segment | Status | Page |
 |---|---|---|
 | `home` | **built** | `New Builds/buyer/index.html` |
 | `investor` | planned | `New Builds/investor/BRIEF.md` |
-| `commercial` | planned | `New Builds/commercial/BRIEF.md` |
+| `commercial` | **built** | `New Builds/commercial/index.html` |
 | `developer` | planned | `New Builds/developer/BRIEF.md` |
 | `prestige` | deferred | chip only, no page |
 | `expat` | deferred | chip only, no page |
@@ -37,8 +43,8 @@ and each page gets a folder of its own under `New Builds/`.
 
 ```
 New Builds/buyer/index.html        the page being rebuilt, and the template
+New Builds/commercial/index.html   built 20 Aug 2026 from that template
 New Builds/investor/BRIEF.md       what the build needs before it starts
-New Builds/commercial/BRIEF.md
 New Builds/developer/BRIEF.md
 
 shared/segments.json     the segment list, single source of truth
@@ -47,9 +53,13 @@ assets/css/styles.css    one stylesheet, every page. Tokens and font faces
 assets/fonts/            both faces are in, see the README there
 assets/img/              both logo colourways
 
+CLAUDE.md                read order, current state and next step, for agents
 DESIGN.md                the rules layer, corrected against Figma Variables
 HANDOVER.md              read this before touching anything
 tools/check.mjs          the acceptance checklist, automated
+paper/buyer-copy.md      copy deck, home
+paper/commercial-copy.md copy deck, commercial
+paper/proof-register.md  every Tier 1 proof point, with its source
 paper/TRANSFER.md        token transfer into Paper.Design, runs locally only
 paper/theme-tokens.css   the Mapped collection as CSS, for that transfer
 ```

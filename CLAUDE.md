@@ -1,0 +1,106 @@
+# CLAUDE.md
+
+Segment landing pages for Propertybuyer, for Google Ads and Performance Max
+traffic. Static HTML and CSS. No build step, no framework, no CDN.
+
+**Read these before changing anything, in this order.** They are not optional
+context; they record decisions that look arbitrary from the code alone.
+
+1. `DESIGN.md` — the rules layer. Tokens, voice, banned language, claim tiers.
+2. `HANDOVER.md` — the state of the buyer build, and what is flagged.
+3. `shared/segments.json` — the segment list, and `openDecisions`, which is
+   the running decision log. **Anything decided in a build gets recorded
+   here**, with a status, a consequence and the date.
+4. The page's own `New Builds/<segment>/BRIEF.md`.
+
+## Where things are
+
+```
+New Builds/buyer/index.html        the home segment, and the template
+New Builds/commercial/index.html   built 20 Aug 2026 from that template
+New Builds/investor/BRIEF.md       not built, content blocked
+New Builds/developer/BRIEF.md      not built, content blocked
+
+assets/css/styles.css    ONE stylesheet, every page
+assets/js/page.js        ONE script, every page
+shared/segments.json     segment list plus the decision log
+paper/proof-register.md  every Tier 1 proof point, with its source
+paper/buyer-copy.md      copy deck, home
+paper/commercial-copy.md copy deck, commercial
+tools/check.mjs          the acceptance checklist, automated
+```
+
+Pages sit two levels down, so every asset reference is `../../` relative.
+
+## Current state, 20 August 2026
+
+| Segment | Status | Blocked on |
+|---|---|---|
+| `home` | built, client-reviewed | nothing |
+| `commercial` | **built, not yet reviewed** | budget bands unconfirmed |
+| `investor` | not started | three Tier 1 proof points |
+| `developer` | not started | three Tier 1 proof points, and a call on cutting a mid-page section |
+| `prestige`, `expat` | no page, deliberately | chip only, see segments.json |
+
+**Next step: get the client to supply proof records for investor and
+developer**, in the same shape as the homebuyer and commercial decks already
+supplied. Those two pages cannot be honestly built without them, because empty
+proof slots are the one thing this build refuses to fill with plausible copy.
+
+**Build the pages one at a time, not in parallel.** One stylesheet serves every
+page, so parallel branches collide in the file where a bad merge costs most.
+Each page also teaches you what is genuinely template and what was quietly
+buyer-specific; fold that back before starting the next.
+
+## The rules that get broken most
+
+1. **Never invent a value.** Not a token, not a claim, not a statistic, not a
+   proof point. If it is not in Figma Variables or the claims register in
+   `DESIGN.md`, stop and ask. A guess here reaches the client.
+2. **Unfilled values ship in `[square brackets]`**, visibly unfilled, rather
+   than as plausible copy. The checker used to fail on any bracket in visible
+   copy; that stop was retired 18 Aug 2026, the safeguard was not.
+3. **Do not touch the six segment strings.** `home`, `investor`, `commercial`,
+   `developer`, `prestige`, `expat`. HubSpot routing depends on them. Same for
+   `budget` option values once a page is live.
+4. **All six chips stay in every router**, on every page, including the two
+   with no page of their own. `tools/check.mjs` fails a page that drops one.
+5. **No em dashes and no exclamation marks**, anywhere, including comments and
+   data tables. Australian English. Sentence case. See `DESIGN.md` for the
+   full banned list.
+6. **Figures on cards are exact, never rounded.** If a price does not
+   abbreviate exactly, put it in the body text and keep it out of the stat row.
+7. `DESIGN.md` says four segments, `shared/segments.json` says six.
+   **segments.json wins**, and the checker enforces it. DESIGN.md is behind.
+
+## Adding a segment page
+
+1. Read that segment's `BRIEF.md` and supply what it lists as missing.
+2. Write the copy deck first, at `paper/<segment>-copy.md`, with character
+   counts against the budgets. Review it before it becomes HTML.
+3. Derive the page from `New Builds/buyer/index.html`. Change copy and the
+   `data-segment` on both forms. Leave router, chips, classes and tokens alone.
+4. Flip `status` to `built` in `shared/segments.json`, and record any decision
+   you took in `openDecisions` there.
+5. Add a rewrite in `vercel.json` so the client preview can reach it.
+6. Record it in `README.md` and in the state table above.
+
+## Running it
+
+```sh
+npm run serve
+npm run check <segment>
+```
+
+`npm run check` with no argument checks every built page, at 390, 768, 1100
+and 1440. It needs `npx playwright install chromium` once.
+
+**Known failure, on every page, deliberate:** three POC demo items
+(`data-poc`, `data-experts-count`, `.poc-toggle`) fail the shippability check.
+They are the client-demo availability switch and must be deleted before
+launch. A page that fails only these is otherwise passing.
+
+## Git
+
+Branch per page or per change, merge to `main` by PR. Commit messages here are
+sentences describing intent, not conventional-commit prefixes. Match them.
