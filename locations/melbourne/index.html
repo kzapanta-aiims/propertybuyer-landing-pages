@@ -267,8 +267,12 @@
     <div class="loc-records">
 
       <article class="loc-record">
-        <div class="loc-record__media">
-          <img src="../../assets/img/story-melbourne-office.webp" alt="The 952 square metre Melbourne office bought for Geoff in May 2025" loading="lazy" decoding="async">
+        <!-- The property itself, from the commercial deck. Shared with
+             New Builds/commercial/index.html, so read only: per CLAUDE.md,
+             writing over an unprefixed name changes the other page too. A
+             melbourne- prefixed copy is the tidy fix when anyone re-exports. -->
+        <div class="loc-record__media loc-figure loc-figure--record">
+          <img src="../../assets/img/story-melbourne-office.webp" alt="The 952 square metre Melbourne office bought for Geoff in May 2025" width="685" height="419" loading="lazy" decoding="async">
         </div>
         <div class="loc-record__copy">
           <h3>Bought $263,800 under appraisal</h3>
@@ -282,7 +286,14 @@
         </dl>
       </article>
 
-      <article class="loc-record loc-record--nophoto">
+      <article class="loc-record">
+        <!-- Wendy's own property, investor deck p37, the same page her
+             figures come from. Extracted by tools/extract-deck-images.mjs,
+             which records the deck page per slot, so this is the right
+             photograph for this record rather than a stand in. -->
+        <div class="loc-record__media loc-figure loc-figure--record">
+          <img src="../../assets/img/investor-story-2.webp" alt="The single level Melbourne home secured for Wendy in 2024" width="685" height="419" loading="lazy" decoding="async">
+        </div>
         <div class="loc-record__copy">
           <h3>Portfolio added in Melbourne</h3>
           <p>Wendy, Melbourne. Bought in 2024 on a 5.0% initial yield, renting at $1,200 a week in 2026.</p>
@@ -309,6 +320,11 @@
            neither can go here. See the "Both Melbourne home buyer candidates
            are contested" section in paper/proof-register.md. -->
       <div class="loc-record--unfilled">
+        <div class="loc-figure loc-figure--record loc-figure--empty">
+          <span class="loc-figure__label">Property photograph</span>
+          <span class="loc-figure__brief">The home this record is about, from the deck page the record comes from</span>
+          <span class="loc-figure__dims">685 x 419</span>
+        </div>
         <h3>[Melbourne home buyer record]</h3>
         <p class="loc-unfilled">[Unfilled, and blocked on the client rather than on us. Both Melbourne candidates in the proof register are re-narrated in the investor deck as investments, one of them with identical figures, so publishing either would publish a contested claim. Needs the client to confirm which framing is true, or one of the other 21 Melbourne records from the home buyer deck.]</p>
       </div>
@@ -327,9 +343,27 @@
       <h2>Your Melbourne buyers' agents</h2>
     </div>
     <div class="loc-team__grid">
-      <div class="loc-team__tile loc-tile--unfilled"><p><strong>[Agent name]</strong></p><p>[Role and patch]</p></div>
-      <div class="loc-team__tile loc-tile--unfilled"><p><strong>[Agent name]</strong></p><p>[Role and patch]</p></div>
-      <div class="loc-team__tile loc-tile--unfilled"><p><strong>[Agent name]</strong></p><p>[Role and patch]</p></div>
+      <div class="loc-team__tile">
+        <div class="loc-figure loc-figure--portrait loc-figure--empty">
+          <span class="loc-figure__label">Agent portrait</span>
+          <span class="loc-figure__dims">800 x 800</span>
+        </div>
+        <p><strong>[Agent name]</strong></p><p>[Role and patch]</p>
+      </div>
+      <div class="loc-team__tile">
+        <div class="loc-figure loc-figure--portrait loc-figure--empty">
+          <span class="loc-figure__label">Agent portrait</span>
+          <span class="loc-figure__dims">800 x 800</span>
+        </div>
+        <p><strong>[Agent name]</strong></p><p>[Role and patch]</p>
+      </div>
+      <div class="loc-team__tile">
+        <div class="loc-figure loc-figure--portrait loc-figure--empty">
+          <span class="loc-figure__label">Agent portrait</span>
+          <span class="loc-figure__dims">800 x 800</span>
+        </div>
+        <p><strong>[Agent name]</strong></p><p>[Role and patch]</p>
+      </div>
     </div>
     <p class="loc-team__note">[Named Melbourne agents with photographs, from the client. The Brisbane page carries fourteen. Clients repeatedly describe the first call with a named agent as the moment trust formed, which is why this band sits inside the first two screens.]</p>
   </div>
@@ -361,8 +395,15 @@
       <p class="micro">The market</p>
       <h2>The Melbourne market, as it actually behaves</h2>
     </div>
-    <div class="loc-prose">
-      <p class="loc-unfilled">[The heaviest SEO section, and deliberately empty of numbers until they arrive with sources. Market characteristics, suburb dynamics and lifestyle material fold in here, written once rather than three times. Nothing in this repository can supply a market statistic honestly, so the tiles below ship bracketed rather than plausible.]</p>
+    <div class="loc-market">
+      <div class="loc-prose">
+        <p class="loc-unfilled">[The heaviest SEO section, and deliberately empty of numbers until they arrive with sources. Market characteristics, suburb dynamics and lifestyle material fold in here, written once rather than three times. Nothing in this repository can supply a market statistic honestly, so the tiles below ship bracketed rather than plausible.]</p>
+      </div>
+      <div class="loc-figure loc-figure--wide loc-figure--empty">
+        <span class="loc-figure__label">Melbourne establishing shot</span>
+        <span class="loc-figure__brief">The city or a recognisable inner suburb streetscape. Not a stock skyline: this is the one image that has to say Melbourne rather than Australia</span>
+        <span class="loc-figure__dims">1370 x 838, for 685 x 419 at 2x</span>
+      </div>
     </div>
     <div class="loc-data">
       <div class="loc-data__tile loc-tile--unfilled"><span class="loc-data__num">[Median house price]</span><p>[source, month year]</p></div>
@@ -438,13 +479,35 @@
       <p class="micro">Coverage</p>
       <h2>Areas we cover around Melbourne</h2>
     </div>
+    <!-- Six region cards, image over label, the way the Brisbane page runs
+         them. The images and the region names arrive together: an image
+         labelled with the wrong region is worse than an empty slot, because
+         these become internal links. -->
     <div class="loc-regions">
-      <div class="loc-tile--unfilled"><p>[Region 1]</p></div>
-      <div class="loc-tile--unfilled"><p>[Region 2]</p></div>
-      <div class="loc-tile--unfilled"><p>[Region 3]</p></div>
-      <div class="loc-tile--unfilled"><p>[Region 4]</p></div>
-      <div class="loc-tile--unfilled"><p>[Region 5]</p></div>
-      <div class="loc-tile--unfilled"><p>[Region 6]</p></div>
+      <div class="loc-region">
+        <div class="loc-figure loc-figure--region loc-figure--empty"><span class="loc-figure__label">Region</span><span class="loc-figure__dims">800 x 600</span></div>
+        <p>[Region 1]</p>
+      </div>
+      <div class="loc-region">
+        <div class="loc-figure loc-figure--region loc-figure--empty"><span class="loc-figure__label">Region</span><span class="loc-figure__dims">800 x 600</span></div>
+        <p>[Region 2]</p>
+      </div>
+      <div class="loc-region">
+        <div class="loc-figure loc-figure--region loc-figure--empty"><span class="loc-figure__label">Region</span><span class="loc-figure__dims">800 x 600</span></div>
+        <p>[Region 3]</p>
+      </div>
+      <div class="loc-region">
+        <div class="loc-figure loc-figure--region loc-figure--empty"><span class="loc-figure__label">Region</span><span class="loc-figure__dims">800 x 600</span></div>
+        <p>[Region 4]</p>
+      </div>
+      <div class="loc-region">
+        <div class="loc-figure loc-figure--region loc-figure--empty"><span class="loc-figure__label">Region</span><span class="loc-figure__dims">800 x 600</span></div>
+        <p>[Region 5]</p>
+      </div>
+      <div class="loc-region">
+        <div class="loc-figure loc-figure--region loc-figure--empty"><span class="loc-figure__label">Region</span><span class="loc-figure__dims">800 x 600</span></div>
+        <p>[Region 6]</p>
+      </div>
     </div>
     <p class="loc-regions__note">[Six surrounding regions, from the client, the way the Brisbane page carries Redlands, Ipswich, Logan, Moreton Bay and Toowoomba. These become internal links, so guessing them would put invented service areas into anchor text, which is the worst place a guess can live.]</p>
   </div>
@@ -456,8 +519,15 @@
       <p class="micro">In their words</p>
       <h2>Melbourne clients, in their words</h2>
     </div>
-    <div class="loc-prose">
-      <p class="loc-unfilled">[Melbourne testimonials, from the client. The proof register holds none marked Melbourne, and a testimonial is a quote from a real person, so nothing is drafted in its place.]</p>
+    <div class="loc-voices">
+      <div class="loc-figure loc-figure--record loc-figure--empty">
+        <span class="loc-figure__label">Client or property</span>
+        <span class="loc-figure__brief">The person quoted, or the home they bought. A face outperforms a house here, with permission</span>
+        <span class="loc-figure__dims">685 x 419</span>
+      </div>
+      <div class="loc-prose">
+        <p class="loc-unfilled">[Melbourne testimonials, from the client. The proof register holds none marked Melbourne, and a testimonial is a quote from a real person, so nothing is drafted in its place.]</p>
+      </div>
     </div>
   </div>
 </section>

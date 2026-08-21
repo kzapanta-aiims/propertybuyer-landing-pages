@@ -182,6 +182,48 @@ page already carries. All additive, none touching layout.
 | `FAQPage` | section 12 | mirrors the rendered questions exactly, no extra questions in the markup |
 | `BreadcrumbList` | page level | Home, then Locations, then Melbourne |
 
+## Photography
+
+Added 21 August 2026, because the first build shipped with one photograph and
+read as a text document. Fourteen image slots now exist, ratio locked so
+filling one cannot reflow the page. Two of them hold real images.
+
+**Filled, from the client's own decks.** Both 685 x 419, which is what
+`tools/extract-deck-images.mjs` writes and what every other story image in
+this repository already ships at.
+
+| Slot | File | Source |
+|---|---|---|
+| Proof 1, Geoff's office | `story-melbourne-office.webp` | commercial deck p.7. Shared with the commercial page, so read only: writing over an unprefixed name changes that page too |
+| Proof 2, Wendy's home | `investor-story-2.webp` | investor deck p.37, the same page her figures come from |
+
+**Needed, and worth asking for in one request rather than six.** Twelve slots.
+The ratio matters more than the exact pixel count: anything larger at the same
+ratio downscales cleanly, anything smaller upscales and looks soft. At 1440 the
+record photographs render 340 wide and the establishing shot 548, so the sizes
+below all leave headroom.
+
+| Count | Slot | Ratio | Deliver at | Brief |
+|---|---|---|---|---|
+| 1 | Proof 3, the property | 685:419 | 1370 x 838 | The home the third record is about, once that record is unblocked |
+| 3 | Agent portraits | 1:1 | 800 x 800 | Three named Melbourne agents. Square crop, consistent framing across the three, because they sit in a row |
+| 1 | Melbourne establishing shot | 685:419 | 1370 x 838 | The city or a recognisable inner suburb streetscape. **Not a stock skyline**: this is the one image that has to say Melbourne rather than Australia |
+| 6 | Region cards | 4:3 | 800 x 600 | One per surrounding region, and they arrive with the region names. An image under the wrong region label is worse than an empty slot, because these become internal links |
+| 1 | Testimonial | 685:419 | 1370 x 838 | The person quoted, or the home they bought. A face outperforms a house here, with permission |
+
+Until they arrive the slots render as dashed containers carrying their own
+brief and dimensions. That is deliberate: a client reviewing this page should
+see where photography goes and how much is needed, and a placeholder that
+looks like a design slot reads better than one that looks like a broken image.
+
+**The hero stays flat teal, deliberately.** It is the treatment the paid pages
+use, so it needs no photograph and no slot was added there. An image behind
+the H1 would compete with the one thing on the page that has to be read first.
+
+**Naming.** Everything new takes a `melbourne-` prefix, per `CLAUDE.md`.
+Unprefixed names in `assets/img/` belong to the buyer page, and writing over
+them changes it as a side effect.
+
 ## Flags
 
 - **The third proof slot is empty, and blocked on the client.** Both Melbourne
@@ -196,4 +238,6 @@ page already carries. All additive, none touching layout.
   `assets/img/` belong to the buyer page, and `CLAUDE.md` records that writing
   over them changes the other page as a side effect. Follow the pattern
   `tools/import-paper-images.mjs` set for the commercial page.
+- **Twelve image slots are empty**, listed with ratios under Photography
+  above. Two are filled from the client's own decks.
 - **Not character counted below Zone A.** Zone B is heading level draft only.
