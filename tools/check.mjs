@@ -28,14 +28,26 @@ import { chromium } from 'playwright';
 const registry = JSON.parse(readFileSync('shared/segments.json', 'utf8'));
 const ALLOWED = registry.segments.map((s) => s.key);
 
+/* The location pages are a second family with their own registry. Same
+   tokens, same voice rules, same chips; different capture contract, checked
+   below under its own branch. */
+const locations = existsSync('shared/locations.json')
+  ? JSON.parse(readFileSync('shared/locations.json', 'utf8')).locations
+  : [];
+
 const only = process.argv[2];
-const pages = registry.segments
-  .filter((s) => s.page && existsSync(s.page))
-  .filter((s) => !only || s.key === only)
-  .map((s) => ({ key: s.key, file: s.page }));
+const pages = [
+  ...registry.segments
+    .filter((s) => s.page && existsSync(s.page))
+    .map((s) => ({ key: s.key, file: s.page, family: 'segment' })),
+  ...locations
+    .filter((l) => l.page && existsSync(l.page))
+    .map((l) => ({ key: l.slug, file: l.page, family: 'location' })),
+].filter((p) => !only || p.key === only);
 
 if (only && pages.length === 0) {
-  console.log(`No built page for "${only}". Known segments: ${ALLOWED.join(', ')}`);
+  const known = [...ALLOWED, ...locations.map((l) => l.slug)];
+  console.log(`No built page for "${only}". Known pages: ${known.join(', ')}`);
   process.exit(1);
 }
 if (pages.length === 0) {
@@ -70,7 +82,7 @@ const browser = await chromium.launch(executablePath ? { executablePath } : {});
 
 /* ============================================================ per page === */
 
-for (const { key, file } of pages) {
+for (const { key, file, family } of pages) {
   banner(`${key}  ${file}`);
 
   const html = readFileSync(file, 'utf8');
@@ -174,17 +186,43 @@ for (const { key, file } of pages) {
     : fail(`segments missing from this page: ${missing.join(', ')}`);
 
   const forms = html.match(/<form[^>]*>/g) || [];
-  const tagged = forms.filter((f) => f.includes('data-segment'));
-  tagged.length === forms.length && forms.length >= 2
-    ? pass(`${forms.length} capture points, all carry data-segment`)
-    : fail(`${tagged.length} of ${forms.length} capture points carry data-segment, and a page needs at least 2`);
 
-  /* Both capture points must default to the page's own segment, otherwise a
-     lead that never touches the chip row arrives labelled as another page. */
-  const defaults = [...html.matchAll(/<form[^>]*data-segment="([^"]+)"/g)].map((m) => m[1]);
-  defaults.every((d) => d === key)
-    ? pass(`both capture points default to "${key}"`)
-    : fail(`capture points default to ${defaults.join(', ')}, expected "${key}"`);
+  if (family === 'segment') {
+    const tagged = forms.filter((f) => f.includes('data-segment'));
+    tagged.length === forms.length && forms.length >= 2
+      ? pass(`${forms.length} capture points, all carry data-segment`)
+      : fail(`${tagged.length} of ${forms.length} capture points carry data-segment, and a page needs at least 2`);
+
+    /* Both capture points must default to the page's own segment, otherwise a
+       lead that never touches the chip row arrives labelled as another page. */
+    const defaults = [...html.matchAll(/<form[^>]*data-segment="([^"]+)"/g)].map((m) => m[1]);
+    defaults.every((d) => d === key)
+      ? pass(`both capture points default to "${key}"`)
+      : fail(`capture points default to ${defaults.join(', ')}, expected "${key}"`);
+  } else {
+    /* A location page inverts the capture: the location is fixed by the page
+       and the segment is the question. So every form carries data-location
+       for HubSpot, no form fixes a segment, no chip is pre-selected (a
+       default would mislabel every lead that never touched the row), and the
+       radio group is required so the choice cannot be skipped. */
+    const locTagged = forms.filter((f) => f.includes(`data-location="${key}"`));
+    locTagged.length === forms.length && forms.length >= 2
+      ? pass(`${forms.length} capture points, all carry data-location="${key}"`)
+      : fail(`${locTagged.length} of ${forms.length} capture points carry data-location="${key}", and a page needs at least 2`);
+
+    const segForms = forms.filter((f) => f.includes('data-segment'));
+    segForms.length === 0
+      ? pass('no capture point fixes a segment')
+      : fail(`${segForms.length} capture point(s) carry data-segment; a location page must not fix a segment`);
+
+    /<input[^>]*name="segment"[^>]*\schecked/.test(html)
+      ? fail('a segment chip is pre-selected; a location page asks, never assumes')
+      : pass('no segment chip pre-selected');
+
+    /<input[^>]*name="segment"[^>]*\srequired/.test(html)
+      ? pass('segment choice is required')
+      : fail('segment radio group is not required, so the qualification step can be skipped');
+  }
 
   /* ------------------------------------------------------------ markup --- */
   head('Token discipline, markup');
@@ -214,9 +252,10 @@ for (const { key, file } of pages) {
   wanted.every((f, i) => sheetRefs[i] === f)
     ? pass('tokens.css then base.css, first and second')
     : fail(`stylesheet order is ${sheetRefs.join(', ') || 'none'}, wanted ${wanted.join(', ')} first`);
-  layers.length === 1
-    ? pass(`one design layer: ${layers[0]}`)
-    : fail(`${layers.length} design layer(s): ${layers.join(', ') || 'none'}. Exactly one is required`);
+  const expectedLayer = family === 'location' ? 'locations.css' : 'landing.css';
+  layers.length === 1 && layers[0] === expectedLayer
+    ? pass(`one design layer, the right one: ${layers[0]}`)
+    : fail(`design layer(s): ${layers.join(', ') || 'none'}. This family loads exactly ${expectedLayer}`);
 
   /* ---------------------------------------------------------- rendered --- */
   head('Rendered checks');
@@ -325,9 +364,10 @@ note('No orphaned single word on a heading at 390.');
 note('Register matches the segment, see each page BRIEF.md.');
 
 const built = pages.map((p) => p.key).join(', ');
-const waiting = registry.segments
-  .filter((s) => s.status === 'planned' && !existsSync(s.page || ''))
-  .map((s) => s.key);
+const waiting = [
+  ...registry.segments.filter((s) => s.status === 'planned' && !existsSync(s.page || '')).map((s) => s.key),
+  ...locations.filter((l) => l.page && !existsSync(l.page)).map((l) => l.slug),
+];
 
 console.log(`\nChecked: ${built}`);
 if (waiting.length) console.log(`Not built yet: ${waiting.join(', ')}`);

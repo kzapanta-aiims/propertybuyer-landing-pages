@@ -1,7 +1,9 @@
 # Location inner pages, brief
 
-Nothing built. This file is the input the first build needs, and the reasons
-it has not started.
+Melbourne is built, 21 August 2026. This file is now the input the other
+two builds need, and the list of what Melbourne still ships in brackets: the
+third proof record, the named team, the six regions, the fee and the tracked
+phone number. See `melbourne/COPY.md` flags for the full list.
 
 **Scope, set 21 August 2026: one template, three pages.** Melbourne, Adelaide
 and Perth. The template is derived from the live Brisbane page, supplied as

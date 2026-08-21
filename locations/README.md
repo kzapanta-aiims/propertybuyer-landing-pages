@@ -8,8 +8,17 @@ traffic. Plain HTML, CSS and JavaScript, no framework and no build step, which
 is what the repository already is. The Vercel deploy is a preview for review
 and handoff.
 
-Empty. Three pages planned: Melbourne, Adelaide and Perth, from one template
-derived from the live Brisbane page.
+Three pages, one template, derived from the live Brisbane page's anatomy
+but composed to this family's own layout.
+
+| Page | Status | Holding it back |
+|---|---|---|
+| `melbourne/` | **built 21 Aug 2026** | five bracketed slots, listed in its COPY.md flags |
+| `adelaide/` | not started | proof extraction from the investor deck |
+| `perth/` | not started | the local presence question, see `BRIEF.md` |
+
+`npm run check melbourne` passes every hard rule, with no deliberate
+failures: this family carries no POC scaffolding.
 
 - `REFERENCE.md` carries the Brisbane page's anatomy, its SEO gaps, and where it
   conflicts with `../DESIGN.md`. Read this first.
@@ -20,11 +29,17 @@ derived from the live Brisbane page.
 ## Shape, once pages exist
 
 ```
-locations/melbourne/index.html   build first, it can fill every slot
-locations/melbourne/COPY.md      the copy deck, written and reviewed before HTML
+locations/melbourne/index.html   built, the template the other two copy
+locations/melbourne/COPY.md      its copy deck, one draft for the SEO team
 locations/adelaide/...           proof needs extracting from the investor deck
 locations/perth/...              blocked, see BRIEF.md
 ```
+
+The Melbourne page is also where the family's markup contract is written
+down: forms carry `data-location` and never `data-segment`, no chip is
+pre-selected and the group is `required`, the suburb field is prefilled and
+editable, and the FAQ structured data carries only the answers that are
+complete. `tools/check.mjs` enforces all of it per page.
 
 The folder name is the slug, and the slug is the URL segment in the client's
 existing `/location/<slug>` pattern. The two never differ.
@@ -79,3 +94,8 @@ rule to `New Builds/` instead would have quietly stopped covering `/` and
 Two things follow. Do not widen the rule back to `/(.*)`. And do not serve a
 location page from a path outside this directory without moving the carve out
 with it.
+
+The `/melbourne` rewrite in `vercel.json` is a convenience alias for the
+client, and it lands on the noindex side of the rule on purpose: the alias
+should never be indexed as a duplicate of `/locations/melbourne/`, which is
+the crawlable path.
