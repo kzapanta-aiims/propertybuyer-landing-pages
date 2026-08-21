@@ -207,12 +207,11 @@ job title where the register asks for a person in a room.
 
 Tier 2, unchanged except the award count.
 
-The bullet reads **50+ industry awards**, matching the change the client
-directed on the commercial page. Note that the stat callout directly above it
-still reads 53, and `DESIGN.md` section Claims resolves the count at 53 and
-says it replaces 50+ everywhere. This page inherits that contradiction rather
-than introducing it; recorded under `commercialAwardsCount` in
-`shared/segments.json`, and it wants settling once across all three pages.
+The bullet and the stat callout above it both read **50+ industry awards**.
+The two disagreed when this page was built, the callout saying 53; the client
+settled it at 50+ on 21 August 2026 and `DESIGN.md` section Claims was
+corrected to match. Recorded under `awardsCountOnStatRow` in
+`shared/segments.json`.
 
 Review count: verify on the day it ships, per the claims register.
 

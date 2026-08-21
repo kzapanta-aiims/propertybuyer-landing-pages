@@ -167,8 +167,8 @@ making a judgement call in the markup."
 ### 11. The Tier 2 budget is exceeded roughly sixfold.
 
 `DESIGN.md` allows Tier 2 "One inline line per page. No badge, no icon, no
-card." The stats band ships three stat callouts, 5,000+, 53 and 4.9 star, plus
-three bullets restating them: "Over 5,000 properties purchased.", "53 industry
+card." The stats band ships three stat callouts, 5,000+, 50+ and 4.9 star, plus
+three bullets restating them: "Over 5,000 properties purchased.", "50+ industry
 awards." and "Over 300 total genuine Google reviews".
 
 That is six Tier 2 statements where the budget is one, with two of the three
@@ -276,9 +276,13 @@ email and phone in step two.
 what the rule guards. The breaks are tuned per heading and the checker finds no
 clipping or horizontal scroll at any of the four widths.
 
-**The 53 awards correction is live here.** `New Builds/buyer/index.html:499`
-still reads "Over 50+ industry awards" beside a stat callout of 53. That fix
-belongs to the buyer page and was deliberately not made in this branch.
+**The award count is settled, 21 August 2026.** At the time of this review the
+buyer page read "Over 50+ industry awards" beside a stat callout that
+disagreed with it. The client chose 50+, so both now read 50+ on all three
+pages and `DESIGN.md` section Claims was corrected to match. See
+`awardsCountOnStatRow` in `shared/segments.json`. The buyer bullet still
+doubles the qualifier as "Over 50+", which is a wording nit rather than a
+claim conflict.
 
 ## Nits
 
