@@ -97,15 +97,28 @@ copies it from a client deck. Nothing is derived and nothing is rounded.
 |---|---|---|---|
 | 1 | Bought $263,800 under appraisal | 31/32 | Geoff, Melbourne. A 952 sqm office bought as an owner occupier in May 2025 for $3,908,748, against a $4,172,548 appraisal. That is $4,106 per square metre. Commercial deck p.7 |
 | 2 | Portfolio added in Melbourne | 28/32 | Wendy, Melbourne. Bought 2024 for $1,175,000 on a 5.0% initial yield. Valued at $1,400,000 in 2026, $225,000 of equity created, renting at $1,200 a week. Investor deck p37 |
-| 3 | `[Melbourne home buyer record]` | | `[Unfilled. The home buyer deck holds Melbourne records and the register notes Melbourne is its largest unslotted group, so this is an extraction job rather than a request to the client. Three per page is the Tier 1 rule.]` |
+| 3 | `[Melbourne home buyer record]` | | `[Unfilled, and blocked on the client. Both Melbourne candidates in the register are re-narrated in the investor deck as investments, Stephen and Melanie with identical figures. A contested claim is Tier 3 and does not render. Three per page is the Tier 1 rule.]` |
 
-Two notes for whoever fills slot 3. A home buyer record is the one this page
-most needs, because the other two are commercial and investor and the dominant
-organic intent on "buyers agent Melbourne" is residential. And both filled
-records already appear on other pages, Geoff on the commercial page and Wendy
-on the investor page. Reusing a real purchase across a segment page and a city
-page is defensible, since it is the same purchase, but it is worth a look
-before it ships.
+Three notes for whoever fills slot 3.
+
+**It is blocked on the client, not on extraction.** This deck originally
+recorded the opposite, on the basis that the records existed in material the
+client had already supplied. They do exist. Checked against the investor deck
+on 21 August 2026, both are also narrated there as investments: Stephen and
+Melanie with identical figures, $2,500,000 in 2013 to $4,200,000, and Suzy
+probably. Either would publish a contested claim, which DESIGN.md puts at
+Tier 3. The full evidence is in `../../paper/proof-register.md`.
+
+**A home buyer record is still the one this page most needs**, because the
+other two are commercial and investor, and the dominant organic intent on
+"buyers agent Melbourne" is residential.
+
+**The two filled records were audited and are clean.** Geoff does not appear
+in the investor deck at all, and Wendy's figures on the page match that deck
+exactly. Both also appear on other pages, Geoff on the commercial page and
+Wendy on the investor page; reusing a real purchase across a segment page and
+a city page is defensible, since it is the same purchase, but it is worth a
+look before it ships.
 
 ### 4. The local team, named
 
@@ -171,8 +184,9 @@ page already carries. All additive, none touching layout.
 
 ## Flags
 
-- **The third proof slot is empty** and ships bracketed. A home buyer record
-  is the one the page most wants.
+- **The third proof slot is empty, and blocked on the client.** Both Melbourne
+  candidates are contested. This is the one flag on this list that cannot be
+  cleared inside this repository.
 - **The Melbourne team is unnamed.** Section 4 does not work without names.
 - **The six regions are unfilled**, and must not be guessed.
 - **The tracked phone number is a placeholder.** A head office number here

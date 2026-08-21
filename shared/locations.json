@@ -33,9 +33,9 @@
       "url": "/location/melbourne",
       "page": "locations/melbourne/index.html",
       "copy": "locations/melbourne/COPY.md",
-      "readiness": "BUILT 21 Aug 2026, with the third proof slot, the team, the regions, the fee and the tracked number shipping in visible brackets",
+      "readiness": "BUILT 21 Aug 2026 with two of three proof records. The third is blocked on the client, not on extraction; the team, the regions, the fee and the tracked number are client-supply items.",
       "office": "yes, named in the client supplied office list",
-      "proof": "Records exist in the register. Geoff, Melbourne VIC office, May 2025, $3,908,748 against a $4,172,548 appraisal, commercial deck p.7. Wendy, portfolio addition, 2024, $1,175,000, investor deck p37. The register also notes Melbourne is the largest unslotted group in the home buyer deck, so more records are available without asking the client for anything new.",
+      "proof": "Two of three filled and audited clean. Geoff, Melbourne office, May 2025, $3,908,748 against a $4,172,548 appraisal, commercial deck p.7, and absent from the investor deck. Wendy, 2024, $1,175,000 on a 5.0 percent initial yield, $1,400,000 in 2026, $225,000 equity created, investor deck p37, figures verified against that deck directly. THE THIRD SLOT IS BLOCKED ON THE CLIENT: both Melbourne home buyer candidates are re-narrated in the investor deck as investments, one with identical figures. See openDecisions.melbourneThirdProofContested.",
       "note": "The first page of the family, and the honest test of the template. Its bracketed slots are the extraction and client-supply list in locations/BRIEF.md."
     },
     {
@@ -129,6 +129,19 @@
       "decision": "The location pages carry no data-poc, no data-experts-count and no demo availability toggle. The paid pages must delete those before launch; a family born after that lesson does not inherit the debt.",
       "status": "RESOLVED 21 Aug 2026",
       "consequence": "npm run check passes a location page outright, with no known deliberate failure to explain away."
+    },
+    "melbourneThirdProofContested": {
+      "problem": "The Melbourne page needs a home buyer record for its third Tier 1 slot. The proof register named two Melbourne candidates from the home buyer deck and recorded them as an extraction job needing nothing from the client. Checked against Legacy All Investor.pdf on 21 Aug 2026, both are also in that deck, narrated as investments.",
+      "evidence": "Stephen and Melanie, CONFIRMED: the investor deck holds Melbourne VIC, 2013, $2,500,000, 2026 value $4,200,000, equity created $1,700,000, let at $2,000 pw, 3.6 percent initial yield, on a prestige backstory. The register records the home buyer deck p29 as $2,500,000 in 2013 to $4,200,000. Identical figures and the same city, which is the register own test for re-narration rather than coincidence. Suzy, PROBABLE: investor deck holds 2023, $3,850,000, 2026 value $4,200,000, equity created $350,000, let at $1,800 pw, against the register home buyer figure of a $346,000 client saving. Different measures, four thousand dollars apart, same name and city, and $346,000 appears nowhere in the investor deck.",
+      "status": "BLOCKING THE THIRD SLOT, NEEDS THE CLIENT",
+      "consequence": "DESIGN.md puts a contested claim at Tier 3, which does not render, so neither candidate can be published. The page ships with two records and a visibly bracketed third rather than a plausible one. It also widens the deck overlap problem from three records to at least four confirmed, and the two records independently picked as the strongest Melbourne home buyer material are both in it, so the overlap can no longer be read as an isolated oddity.",
+      "options": [
+        "Ask the client to confirm the framing for Stephen and Melanie, which is the strongest Melbourne record in either deck and would be a strong card if the home purchase framing is the true one.",
+        "Work through the other 21 Melbourne home buyer records, which needs the home buyer deck back on disk; only the investor deck is there.",
+        "Ship with two records, which is the current state, and say so."
+      ],
+      "alsoDone": "The two records that did ship were audited. Geoff does not appear in the investor deck at all. Wendy figures on the page match that deck exactly. Neither carries a contradiction this repository can see.",
+      "raised": "21 Aug 2026"
     }
   }
 }

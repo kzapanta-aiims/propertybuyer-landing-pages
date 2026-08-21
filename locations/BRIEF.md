@@ -5,6 +5,14 @@ two builds need, and the list of what Melbourne still ships in brackets: the
 third proof record, the named team, the six regions, the fee and the tracked
 phone number. See `melbourne/COPY.md` flags for the full list.
 
+**One of those five got worse rather than better on 21 August.** The third
+proof record was recorded as an extraction job needing nothing from the
+client. It is not: both Melbourne home buyer candidates turn out to be
+re-narrated in the investor deck as investments, one of them with identical
+figures. It now needs the client. See "Both Melbourne home buyer candidates
+are contested" in `../paper/proof-register.md`, and expect the same check to
+be needed for Adelaide before its proof is selected rather than after.
+
 **Scope, set 21 August 2026: one template, three pages.** Melbourne, Adelaide
 and Perth. The template is derived from the live Brisbane page, supplied as
 the reference because it performs. Its anatomy, its SEO gaps and its three
@@ -76,13 +84,15 @@ three pages.
       voice exception, or the new pages apply the new voice and diverge from
       the page used as evidence. Both are defensible. See `REFERENCE.md` and
       `openDecisions.referencePageIsNotACopyModel`.
-- [ ] **Tier 1 proof, three per page.** Melbourne is covered: the register
-      already holds Melbourne records, and the register notes Melbourne is the
-      largest unslotted group in the home buyer deck, so more are available
-      without asking the client for anything. **Adelaide is an extraction job,
-      not a client request**: the investor deck holds 75 records across Sydney,
-      Melbourne, Brisbane and Adelaide, and the Adelaide ones have simply never
-      been pulled into `../paper/proof-register.md`. Perth has none, see above.
+- [ ] **Tier 1 proof, three per page.** Melbourne ships with two of three,
+      and its third is blocked on the client: both candidates are contested,
+      see above. **Adelaide's proof needs extracting from the investor deck**,
+      which holds 75 records across Sydney, Melbourne, Brisbane and Adelaide,
+      and the Adelaide ones have never been pulled into
+      `../paper/proof-register.md`. Run the cross-deck check as part of
+      selecting them, not after: the Melbourne experience is that the
+      strongest looking candidates are the ones most likely to be
+      re-narrated. Perth has none, see above.
 - [ ] **The capture form question.** On a segment page the segment is fixed and
       the visitor types the location. A location page inverts that. Whether
       `location` is prefilled and locked, prefilled and editable, or only
