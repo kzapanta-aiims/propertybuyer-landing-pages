@@ -83,9 +83,10 @@
       "raised": "21 Aug 2026"
     },
     "locationPageSegmentField": {
-      "problem": "Every capture point posts segment, budget_band and location. On a segment page the segment is fixed by the page and the location is typed by the visitor. A location page inverts that: the location is fixed by the page and the segment is not known. Whether the location field is prefilled and locked, prefilled and editable, or left free text with the page name only as a default, changes what arrives in HubSpot.",
-      "status": "OPEN, DECIDE BEFORE THE FIRST BUILD",
-      "consequence": "Getting it wrong quietly degrades lead data rather than breaking anything visible, so it will not be caught by review.",
+      "problem": "On a segment page the segment is fixed by the page and the visitor types the location. A location page inverts that.",
+      "status": "RECOMMENDED 21 Aug 2026, NOT YET CONFIRMED",
+      "recommendation": "Prefill location from the page and leave it editable. Do not lock it. Somebody on the Melbourne page may be buying in Geelong, and a locked field turns that into a mislabelled lead, which is worse than an unasked question. Prefilled costs nothing and keeps the HubSpot payload identical to the paid pages.",
+      "consequence": "The form becomes three steps rather than four: segment, budget band, contact. That removes one field from a form whose own research names budget, phone and timeframe as the fields that suppress completion, so it is a conversion gain rather than only a tidy up.",
       "raised": "21 Aug 2026"
     },
     "handWrittenOrGenerated": {
@@ -108,6 +109,13 @@
       "decision": "The live Brisbane page is the structural and SEO reference for this family. It is not the design or copy model. Its anatomy, its 23 sections, its SEO gaps and its three conflicts with DESIGN.md are recorded in locations/REFERENCE.md.",
       "status": "RESOLVED 21 Aug 2026 as to structure, OPEN as to voice",
       "open": "The page that performs is written in the voice the current design system was created to replace. Its meta description opens with \"Discover the expertise of\", and discover is on the banned CTA list. Its H1 second line is typed in capitals, which is what the Proyale capitals decision explicitly ruled out. Its authority claim is unquantified. Either this family carries an explicit voice exception, or the new pages apply the new voice and diverge from the page used as evidence. Both are defensible, guessing is not, and the choice is visible to the client.",
+      "raised": "21 Aug 2026"
+    },
+    "finalUrlExpansionCollision": {
+      "problem": "paper/context-segments.md records that Performance Max Final URL Expansion is on by default and lets Google replace the chosen landing page with any indexable page on the domain, so a page can be built, paid for and then quietly bypassed. It must be off for the lead generation campaigns. Three new indexable, high intent, conversion tuned city pages enlarge the surface for exactly that substitution.",
+      "status": "OPEN, CONFIRM BEFORE THESE PAGES ARE INDEXED",
+      "consequence": "If the setting is on when these pages go live, paid budget starts landing on pages that carry no campaign labelling, and the segment attribution the paid pages were built to produce is muddied at the source. The failure is silent: the pages still convert, the labels are just wrong.",
+      "note": "The converse is also a decision rather than a default. If a location page later out converts a segment page and somebody wants to point paid traffic at it, that should be its own Final URL with its own labelling, not the result of leaving a default on.",
       "raised": "21 Aug 2026"
     }
   }
