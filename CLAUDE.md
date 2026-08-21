@@ -53,7 +53,7 @@ Pages sit two levels down, so every asset reference is `../../` relative.
 | `home` | built, client-reviewed | nothing |
 | `commercial` | built, client-reviewed, merged | budget bands unconfirmed |
 | `investor` | **built, not yet reviewed** | budget bands unconfirmed |
-| `developer` | **built, not yet reviewed** | three Tier 1 proof records, which now need only a date |
+| `developer` | **built, not yet reviewed** | the three story records are home purchases, not development sites. Framing needs the client |
 | `prestige`, `expat` | no page, deliberately | chip only, see segments.json |
 
 **Next step: a purchase date for three sites the client already publishes.**

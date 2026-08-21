@@ -233,16 +233,36 @@
 </section>
 
 <!-- ==========================================================================
-     Published client stories. White band. Three proof cards, all three
-     unfilled: no developer deck exists, and the twenty site purchases the
-     client publishes carry a street, a suburb and a price but no date, so
-     they fail the Tier 1 requirement to be attributable AND dated.
-     The candidate record for each slot is named in the bracket, so the ask
-     is a purchase month and a client first name rather than a new deck.
-     Each media panel ships with no photograph, on purpose. Borrowing a
-     residential photo for a Tier 1 development card would be a false claim;
-     the panel renders as a flat brand block instead. Same reasoning as
-     investorProofSelection in shared/segments.json.
+     Published client stories. White band. Three proof cards.
+
+     READ THIS BEFORE CHANGING THE THREE CARDS BELOW.
+
+     These three records are RESIDENTIAL HOME PURCHASES, not development
+     sites. They come from "Legacy All Homebuyer (1).pdf" by way of
+     paper/proof-register.md, placed here on 21 Aug 2026 at the client
+     direction as an interim fill for client review. Every figure is copied
+     from the register and none is invented.
+
+     THE FRAMING IS THE OPEN ITEM, NOT THE FIGURES. A home purchase is not a
+     development acquisition, so on this page these cards say less than they
+     appear to. The copy is therefore written as what the records actually
+     are, a family home and a downsize, rather than dressed as sites: the
+     pills and headings are the visible signal a reviewer needs.
+
+     Slot 3, Roderick and Denise, is ALSO live on the buyer page and is ALSO
+     retold as an investment purchase in the investor deck. See
+     investorDeckOverlap. One record, three framings.
+
+     Slots 1 and 2 appear on no other page. Slot 2 carries brackets because
+     the register holds its figures and not its story or its time to
+     purchase.
+
+     The panels carry NO PHOTOGRAPH. Only slot 3 has one in the repository;
+     the other two were never extracted from the deck, and one real photo
+     beside two blanks reads as a bug. Supplying the home buyer PDF in
+     .deck-src/ and running "npm run deck-images" would produce all three.
+
+     Full record: developerProofSlots in shared/segments.json.
      ========================================================================== -->
 <section class="section testimonials">
   <div class="wrap">
@@ -313,14 +333,14 @@
           </p>
         </div>
         <div class="story-card__body">
-          <p class="pill pill--light">[Site type]</p>
+          <p class="pill pill--light">Family home</p>
           <div class="story-card__text">
-            <h3>[Site type] <br>in [Suburb]</h3>
-            <p>[Slot 1. Candidate record, published by the client and undated: Heath Rd, Leppington, land subdivision, $7,000,000. Needs the purchase month and year, the client first name, and the end value.]</p>
+            <h3>Family home <br>in Sydney</h3>
+            <p>Stephen and Veronica lost three auctions in a row and were ready to stop looking. We found the family home they wanted, and they never sat in an auction room again.</p>
             <dl class="story-stats">
-              <div class="story-stat"><dt>Bought [Mon YYYY]</dt><dd>[$0.00M]</dd></div>
-              <div class="story-stat"><dt>End value</dt><dd>[$0.00M]</dd></div>
-              <div class="story-stat"><dt>To purchase</dt><dd>[N weeks]</dd></div>
+              <div class="story-stat"><dt>Bought 2012</dt><dd>$1.88M</dd></div>
+              <div class="story-stat"><dt>Value today</dt><dd>$6.2M</dd></div>
+              <div class="story-stat"><dt>To purchase</dt><dd>6 weeks</dd></div>
             </dl>
           </div>
         </div>
@@ -334,13 +354,13 @@
           </p>
         </div>
         <div class="story-card__body">
-          <p class="pill pill--light">[Site type]</p>
+          <p class="pill pill--light">Family home</p>
           <div class="story-card__text">
-            <h3>[Site type] <br>in [Suburb]</h3>
-            <p>[Slot 2. Candidate record, published by the client and undated: Merlin St, Neutral Bay, unit site, $15,000,000. Needs the purchase month and year, the client first name, and the end value.]</p>
+            <h3>Purchased <br>in Melbourne</h3>
+            <p>Stephen and Melanie bought in Melbourne in 2013 for $2,500,000. It is valued at $4,200,000 in 2026. [The deck records the figures and not the story, so the reason behind this purchase is unconfirmed.]</p>
             <dl class="story-stats">
-              <div class="story-stat"><dt>Bought [Mon YYYY]</dt><dd>[$0.00M]</dd></div>
-              <div class="story-stat"><dt>End value</dt><dd>[$0.00M]</dd></div>
+              <div class="story-stat"><dt>Bought 2013</dt><dd>$2.5M</dd></div>
+              <div class="story-stat"><dt>Value today</dt><dd>$4.2M</dd></div>
               <div class="story-stat"><dt>To purchase</dt><dd>[N weeks]</dd></div>
             </dl>
           </div>
@@ -355,14 +375,14 @@
           </p>
         </div>
         <div class="story-card__body">
-          <p class="pill pill--light">[Site type]</p>
+          <p class="pill pill--light">Downsizer</p>
           <div class="story-card__text">
-            <h3>[Site type] <br>in [Suburb]</h3>
-            <p>[Slot 3. Candidate record, published by the client and undated: Kurraba Rd, Kurraba Point, landmark unit site, $57,000,000. Needs the purchase month and year, the client first name, and the end value.]</p>
+            <h3>Downsized <br>in Sydney</h3>
+            <p>Roderick and Denise were downsizing and refused to trade quality or location for it. We secured an eastern suburbs home that met every point of the brief.</p>
             <dl class="story-stats">
-              <div class="story-stat"><dt>Bought [Mon YYYY]</dt><dd>[$0.00M]</dd></div>
-              <div class="story-stat"><dt>End value</dt><dd>[$0.00M]</dd></div>
-              <div class="story-stat"><dt>To purchase</dt><dd>[N weeks]</dd></div>
+              <div class="story-stat"><dt>Bought 2014</dt><dd>$4.87M</dd></div>
+              <div class="story-stat"><dt>Value today</dt><dd>$15M</dd></div>
+              <div class="story-stat"><dt>To purchase</dt><dd>8 weeks</dd></div>
             </dl>
           </div>
         </div>

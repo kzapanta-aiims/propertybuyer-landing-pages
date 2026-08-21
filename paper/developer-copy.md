@@ -188,7 +188,62 @@ recorded as behind. Do not silently overwrite the DESIGN.md figure.
 **Changing these values after launch breaks HubSpot routing the same way the
 segment strings do.**
 
-## testimonials, the three Tier 1 slots, STILL BRACKETED
+## testimonials, FILLED 21 Aug 2026 from the home buyer deck
+
+**At the client direction, for client review, after the concern below was
+raised and the instruction confirmed.** The three slots no longer ship
+bracketed. They carry three residential home purchases.
+
+| Slot | Client | Pill | Heading | Stats |
+|---|---|---|---|---|
+| 1 | Stephen and Veronica | Family home | Family home in Sydney, 21/32 | `$1.88M` Bought 2012, `$6.2M` Value today, `6 weeks` To purchase |
+| 2 | Stephen and Melanie | Family home | Purchased in Melbourne, 22/32 | `$2.5M` Bought 2013, `$4.2M` Value today, `[N weeks]` To purchase |
+| 3 | Roderick and Denise | Downsizer | Downsized in Sydney, 19/32 | `$4.87M` Bought 2014, `$15M` Value today, `8 weeks` To purchase |
+
+Every figure is copied from `paper/proof-register.md`. Every abbreviation is
+exact, so no figure on a card is rounded.
+
+### The framing is the open item, not the figures
+
+**All three are residential home purchases. None is a development site.** The
+copy is written as what the records actually are, a family home and a
+downsize, rather than dressed as sites. That is deliberate: the pills and the
+headings are the visible signal a reviewer needs, and rewriting them to read
+as development acquisitions would have been a false claim rather than a
+segment adaptation.
+
+Two things this cost, both worth knowing before the review:
+
+- **Slot 1 sits below the page own budget floor** at $1.88m, where the bands
+  start at $2.5m. No unused record exists between $1.88m and $4.87m.
+- **Slot 3 now carries one record in three framings.** Roderick and Denise are
+  a downsize on the live buyer page, a portfolio addition let at $4,500 per
+  week in the investor deck, and a development proof point here. The first two
+  were already recorded as mutually exclusive and unresolved under
+  `investorDeckOverlap`. This is the third.
+
+### Why these three and not others
+
+The home buyer PDF is not in the repository, so the only records available
+were the five that carry figures in the register. Three of the five are live
+on the buyer page. The two unused ones were both taken, and the third slot
+needed the only other record above $2.5m, which is already live on the buyer
+page.
+
+### Slot 2 ships two brackets on purpose
+
+The register holds Stephen and Melanie figures but not their story or their
+time to purchase, so the body says the story is unconfirmed and the third stat
+reads `[N weeks]`. Inventing either is the one thing this build refuses to do.
+
+### No photographs, on any of the three
+
+Only slot 3 has one in the repository. One real photograph beside two flat
+brand blocks reads as a rendering bug rather than a deliberate gap, so all
+three stay unphotographed. Supplying the home buyer PDF in `.deck-src/` and
+running `npm run deck-images` would produce all three.
+
+## What the page still wants instead, superseded but not wrong
 
 There is still no developer deck, and the named purchases the client publishes
 **cannot fill these slots as they stand.**
