@@ -180,11 +180,11 @@ Unchanged from the buyer page except one correction.
 | String | Note |
 |---|---|
 | 5,000+ properties purchased. KEPT | cleared claim |
-| 53 industry awards. KEPT | cleared claim |
+| 50+ industry awards. KEPT | cleared claim, reduced from 53 on 21 Aug 2026 |
 | 4.9 star google reviews. KEPT | verify on the day it ships |
 | H2: Reviewed by buyers only, since 2001. KEPT | 38/60 |
 | Over 5,000 properties purchased. KEPT | |
-| **53 industry awards. CORRECTED** | The buyer page reads "Over 50+ industry awards" in this bullet while the stat callout beside it reads 53. DESIGN.md section Claims: 53 "replaces '50+' everywhere". The buyer page is wrong here and should be corrected to match. |
+| **50+ industry awards. CORRECTED** | Settled 21 Aug 2026. The callout and the bullet disagreed, 53 against 50+; the client chose 50+, so both read 50+ on all three pages and DESIGN.md section Claims was corrected to match. See awardsCountOnStatRow in shared/segments.json. |
 | Over 300 total genuine Google reviews. KEPT | DESIGN.md says 315+ was true at time of writing and moves. Verify on the day. |
 
 ## steps band

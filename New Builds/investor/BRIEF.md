@@ -69,9 +69,10 @@ A page missing any of these is not finished.
    exclusive. None of them is used here, but it questions how the decks are
    assembled, and it may mean the live buyer page is mis-labelled. Recorded
    under `openDecisions.investorDeckOverlap`.
-4. **The award count contradicts itself**, inherited from the change made on
-   the commercial page. The bullet reads 50+ and the stat callout above it
-   reads 53. Wants settling once, across all three pages.
+4. ~~**The award count contradicts itself**~~. Settled 21 August 2026: the
+   client chose 50+, so the callout and the bullet both read 50+ on all three
+   pages, and `DESIGN.md` section Claims was corrected to match. See
+   `awardsCountOnStatRow` in `shared/segments.json`.
 5. **No purpose field.** The commercial page carries one because that page has
    two psychographics pulling opposite ways. `DESIGN.md` describes this segment
    as a single spread rather than a fork, so nothing was invented. If a fork is
