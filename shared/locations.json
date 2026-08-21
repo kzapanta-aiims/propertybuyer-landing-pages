@@ -1,0 +1,44 @@
+{
+  "_comment": [
+    "Single source of truth for the location inner pages, the way",
+    "shared/segments.json is for the paid segment pages. Two registries, not",
+    "one, because they answer different questions: segments.json fixes six",
+    "HubSpot routing strings that never change, this file lists an open set of",
+    "places that grows as the client picks them.",
+    "",
+    "SCAFFOLD 21 Aug 2026. The list is empty on purpose. No location is added",
+    "here until the client has picked it and the SEO call below is resolved,",
+    "because a slug added speculatively becomes a URL somebody links to.",
+    "",
+    "'slug' is the URL segment and the folder name, and the two never differ.",
+    "'status' is one of: planned, built, deferred. 'proof' names the rows in",
+    "paper/proof-register.md that carry this page's Tier 1 claims; a page with",
+    "no proof rows is not buildable, the same rule the segment pages follow.",
+    "",
+    "DECISIONS THAT SPAN BOTH PAGE FAMILIES LIVE IN segments.json, not here.",
+    "The CSS layer split of 21 Aug 2026 is recorded there under",
+    "openDecisions.cssLayerSplit. This file only carries decisions that affect",
+    "the location pages alone."
+  ],
+  "locations": [],
+  "openDecisions": {
+    "seoCannibalisation": {
+      "problem": "DESIGN.md records that the propertybuyer.com.au homepage H1 is untouchable because it holds position one for the core commercial terms, and that this constrains what a landing page H1 may compete with. Location inner pages target local commercial terms by definition, so they are the case that constraint was written against. Nobody has ruled on whether these pages sit on the main domain, on a subdomain, or are handed to the client to publish inside the existing site.",
+      "status": "BLOCKING, NOT RAISED WITH CLIENT",
+      "consequence": "Building pages before this is settled risks either wasted work or a live page competing with the client's own ranking asset.",
+      "raised": "21 Aug 2026"
+    },
+    "locationPageSegmentField": {
+      "problem": "Every capture point posts segment, budget_band and location. On a segment page the segment is fixed by the page and the location is typed by the visitor. A location page inverts that: the location is fixed by the page and the segment is not known. Whether the location field is prefilled and locked, prefilled and editable, or left free text with the page name only as a default, changes what arrives in HubSpot.",
+      "status": "OPEN, DECIDE BEFORE THE FIRST BUILD",
+      "consequence": "Getting it wrong quietly degrades lead data rather than breaking anything visible, so it will not be caught by review.",
+      "raised": "21 Aug 2026"
+    },
+    "handWrittenOrGenerated": {
+      "problem": "The segment pages are four hand written files and that is the right shape for four. Location pages are plausibly dozens of near identical files, which is the shape a generator serves. The repository currently has no build step and that is a deliberate property, recorded in README.md.",
+      "status": "OPEN, DEPENDS ON THE LOCATION COUNT",
+      "alternative": "Keep it hand written up to roughly six pages. Past that, a generator in tools/ that writes locations/<slug>/index.html from shared/locations.json plus a copy deck, run locally and committed, so Vercel still serves static files and the no build step property survives.",
+      "raised": "21 Aug 2026"
+    }
+  }
+}

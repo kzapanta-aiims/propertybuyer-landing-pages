@@ -1,7 +1,18 @@
 # propertybuyer-landing-pages
 
-Segment landing pages for Propertybuyer, built for Google Ads and Performance
-Max traffic.
+Propertybuyer landing pages. Two families of page in one repository, because
+they share the tokens, the two self hosted faces, the base components, the
+decision log and the checker.
+
+| Family | Where | Traffic | Indexed |
+|---|---|---|---|
+| Paid segment pages | `New Builds/` | Google Ads, Performance Max | no, deliberately |
+| Location inner pages | `locations/` | organic search | yes, once they exist |
+
+They are separate directories with separate design layers and separate
+registries. They are not separate repositories: see `locations/BRIEF.md` for
+why, and `shared/segments.json` under `openDecisions.cssLayerSplit` for what
+that costs and what it buys.
 
 Static HTML and CSS. No build step, no framework, no CDN dependency.
 
@@ -47,9 +58,16 @@ New Builds/commercial/index.html   built 20 Aug 2026 from that template
 New Builds/investor/index.html     built 21 Aug 2026 from that template
 New Builds/developer/BRIEF.md
 
+locations/BRIEF.md                 the location pages, nothing built yet
+locations/README.md                the shape they take when they are
+
 shared/segments.json     the segment list, single source of truth
-assets/css/styles.css    one stylesheet, every page. Tokens and font faces
-                         only; the design layer goes in below the marker
+shared/locations.json    the location list, same job, still empty
+assets/css/tokens.css    tokens and the two faces. Shared, and never
+                         edited by a page build
+assets/css/base.css      reset, base type, buttons, pills. Shared
+assets/css/landing.css   design layer, the paid segment pages
+assets/css/locations.css design layer, the location pages. Empty so far
 assets/fonts/            both faces are in, see the README there
 assets/img/              both logo colourways
 
@@ -76,6 +94,32 @@ repository.
 
 Pages sit two levels down, so every asset reference inside a page is `../../`
 relative. The checker fails a page that gets this wrong.
+
+## Stylesheets
+
+Four files, three loaded per page, in this order:
+
+```html
+<link rel="stylesheet" href="../../assets/css/tokens.css">
+<link rel="stylesheet" href="../../assets/css/base.css">
+<link rel="stylesheet" href="../../assets/css/landing.css">   <!-- or locations.css -->
+```
+
+`tokens.css` and `base.css` are shared by every page. A change to either lands
+on pages someone else may be building on another branch, so treat it the way
+you would treat a change to Figma Variables. The design layers are owned by
+their page family and never loaded together.
+
+This was one file, `styles.css`, until 21 August 2026. It was split because a
+single stylesheet serving every page means parallel branches collide in the
+file where a bad merge costs most, which was tolerable for four segment pages
+built one at a time and is not tolerable with a second page family in flight.
+Every code line was carried across unchanged and none was added. `styles.css`
+was deleted rather than kept as a shim, because a path that still works is how
+two stylesheets drift apart.
+
+`npm run check` enforces all of it: the load order, exactly one design layer
+per page, no raw hex in any layer, and no `:root` block outside `tokens.css`.
 
 ## Run it
 
@@ -133,10 +177,11 @@ Two standing rules from the design system apply to every edit here:
 2. Never soften a constraint because a brief seems to want it softened. Name
    the conflict in your handover.
 
-Every colour, space, radius and size in `styles.css` is an alias of a token in
+Every colour, space, radius and size in `tokens.css` is an alias of a token in
 Figma `2. Mapped`, declared once in the `:root` block at the top of the file
-with its Figma token name in a comment. Nothing below that block holds a raw
-value, and `npm run check` fails if one appears.
+with its Figma token name in a comment. No other stylesheet holds a raw
+value, and `npm run check` fails if one appears, or if a layer other than
+`tokens.css` declares a `:root` block.
 
 ## Deploying the preview
 
@@ -154,13 +199,22 @@ reasoning is here instead.
   to send a client, so a rewrite maps `/` and `/buyer` to it. This works
   because every asset path in the page is `../../assets/...` and browsers
   clamp `..` at the root, so they still resolve to `/assets/...`.
-- **`X-Robots-Tag: noindex, nofollow` on everything, and it must come off
-  before launch.** While this is a proof of concept the page carries
-  bracketed footer links such as `[Terms]`, an unverified availability
-  count, and award and review figures nobody has checked. None of that
-  should be indexed against the client's brand. Vercel noindexes its preview
-  URLs on its own, but this header also covers the production URL, which is
-  the one that would otherwise get crawled.
+- **`X-Robots-Tag: noindex, nofollow` on everything except `locations/`, and
+  it must come off the paid pages before launch.** While this is a proof of
+  concept the page carries bracketed footer links such as `[Terms]`, an
+  unverified availability count, and award and review figures nobody has
+  checked. None of that should be indexed against the client's brand. Vercel
+  noindexes its preview URLs on its own, but this header also covers the
+  production URL, which is the one that would otherwise get crawled.
+
+  The rule denies by default and carves one directory out,
+  `"source": "/((?!locations).*)"`, because the location pages are organic
+  search pages and are worthless with it. Deny by default is the safe
+  direction and the reason it is written as a negative lookahead rather than
+  as a rule scoped to `New Builds/`: Vercel matches a header `source` against
+  the incoming request path, before rewrites, so a rule naming `New Builds/`
+  would have stopped covering `/` and `/buyer`, which are the URLs the client
+  actually opens. Do not widen it back to `/(.*)`.
 
 ## Remove before launch
 
@@ -170,7 +224,7 @@ must not reach live traffic. Both hang off attributes on `<body>` in
 
 | Attribute | What it does | Before launch |
 |---|---|---|
-| `data-poc="true"` | Renders the demo toggle in the fixed mobile CTA, which flips the bar between available and nobody available | **Delete the attribute**, then delete the two blocks marked `POC ONLY` in `index.html`, `styles.css` and `page.js` |
+| `data-poc="true"` | Renders the demo toggle in the fixed mobile CTA, which flips the bar between available and nobody available | **Delete the attribute**, then delete the two blocks marked `POC ONLY` in `index.html`, `landing.css` and `page.js` |
 | `data-experts-count="6"` | Seeds the expert count in that bar. Demo data, not a measured number | Replace with a real presence feed via `readAvailability()` in `page.js`, or delete the attribute so the bar shows the unquantified line |
 
 The toggle is the urgent one. It lets any visitor rewrite an availability

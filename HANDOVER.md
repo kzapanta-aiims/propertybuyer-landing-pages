@@ -16,7 +16,9 @@ layer, Figma Variables, then Colours, Type & Tone, then Assets.
 
 ```
 New Builds/buyer/index.html   the page, rebuilt 17 Aug 2026 from Paper
-assets/css/styles.css         Figma token block, Paper token addendum, design layer
+assets/css/tokens.css         Figma token block, Paper token addendum, faces
+assets/css/base.css           reset, base type, buttons, pills
+assets/css/landing.css        design layer, the paid segment pages
 assets/img/                   photography, badges and shader stills from Paper
 assets/fonts/                 both faces are in, see the README there
 tools/check.mjs               the acceptance checklist, updated for the rebuild
@@ -49,7 +51,7 @@ scaffolding.** Two earlier failures are resolved rather than outstanding.
    Paddington", 31 characters against the 32 limit.
 
 Token deltas, Paper versus the 13 Aug Figma snapshot. Declared in the
-addendum `:root` block of `styles.css`, and Figma should be updated to match:
+addendum `:root` block of `tokens.css`, and Figma should be updated to match:
 
 - `space/section-y` is now 120 desktop (was 80). 48 at 390 unchanged.
 - `type/h3` on cards is 24 desktop (was 20). Mobile derived at 20, no
@@ -157,7 +159,7 @@ Substitutions and judgment calls:
   now carry home buyer records, and the commercial three moved to Reserves in
   the register as the starting content for the commercial page.
 - **The privacy badge on the story photos is hidden, not deleted**, at the
-  client's request of 18 Aug 2026. One declaration in `styles.css` restores
+  client's request of 18 Aug 2026. One declaration in `landing.css` restores
   it. Note a street number is legible on two of the three photographs, though
   the deck is the client's own published material.
 - **Images are compressed**: 33.5 MB of exports became 2.3 MB of WebP via
@@ -346,7 +348,7 @@ The header and the footer both sit on a dark band (`bg/brand`,
 `bg/brand-deep`), so both use the **White** colourway. The text wordmark
 stand-in is gone. There is no logo-height token in the system, since none is
 warranted for a single fixed lockup, so the rendered height (36px header,
-40px footer) is a plain editorial value, commented as such in `styles.css`.
+40px footer) is a plain editorial value, commented as such in `landing.css`.
 
 **Two things in the supplied files worth naming, neither of them a build bug
 and neither changed here, because a brand asset is not a design decision.**

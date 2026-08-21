@@ -95,7 +95,7 @@ applies to `story-*` assets. They are the actual properties purchased.
 
 **The privacy badge is hidden from 18 Aug 2026** at the client’s request. It
 is hidden in CSS, not deleted: the markup stays and one declaration in
-`styles.css` brings it back. Worth knowing that a street number is legible on
+`landing.css` brings it back. Worth knowing that a street number is legible on
 two of the three photographs; the deck is the client’s own published material,
 so this publishes nothing they have not already published themselves.
 

@@ -1,0 +1,28 @@
+/* ==========================================================================
+   Propertybuyer, design layer: the location inner pages.
+   --------------------------------------------------------------------------
+   Serves every page under "locations/". Organic search traffic, indexable,
+   which is the opposite posture to the paid pages under "New Builds/". See
+   vercel.json: the noindex header is scoped away from this directory on
+   purpose, so anything that lands here can be crawled the day it ships.
+
+   REQUIRES assets/css/tokens.css and assets/css/base.css, in that order,
+   loaded before this file. Declares no tokens and holds no raw values.
+   npm run check fails on a raw hex anywhere in here.
+
+   EMPTY ON PURPOSE, 21 August 2026. Nothing is written here until the first
+   location page is designed, because a component invented ahead of the design
+   is a value invented ahead of the design, and this repository does not do
+   that. See locations/BRIEF.md for what is still blocked.
+
+   When the first page is built:
+
+   1. Take what you can from base.css unchanged. The reset, the type
+      utilities, the button and pill components are already token bound and
+      already shared. Reuse beats reimplementation.
+   2. If a component from landing.css is wanted verbatim, promote it to
+      base.css rather than copying it. A copy is where the drift starts.
+      Record the promotion in shared/segments.json under openDecisions.
+   3. If a component only looks similar, write it here instead. A near copy
+      in base.css is worse than two honest implementations.
+   ========================================================================== */
