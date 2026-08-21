@@ -29,29 +29,6 @@
    straight off the artboard; 390 values follow the mobile-390 token mode.
    ========================================================================== */
 /* ==========================================================================
-   Header
-   ========================================================================== */
-
-.site-header { background: var(--bg-brand); padding-top: var(--gap-sm); }
-.site-header .wrap {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--gap);
-  min-height: 76px;
-  padding-block: 14px;
-}
-.site-header .logo { flex-shrink: 0; display: inline-flex; align-items: center; min-height: var(--tap-min); }
-.header-right { display: flex; align-items: center; gap: var(--gap); }
-.header-tag {
-  font-size: var(--type-small);
-  font-weight: var(--weight-regular);
-  letter-spacing: var(--tracking-caps);
-  line-height: 18px;
-  color: var(--text-on-brand-muted);
-}
-
-/* ==========================================================================
    Hero
    ========================================================================== */
 
@@ -142,103 +119,12 @@
 }
 
 /* --- Hero form card -------------------------------------------------------- */
+/* The card itself is the shared capture component in base.css. Only its
+   hero composition lives here: the fixed desktop width, full width below
+   1024 in the responsive block. */
 
-.lead-card {
-  width: 460px;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-sm);
-  padding: 28px;
-  border-radius: var(--radius-card);
-  background: var(--bg-surface);
-  color: var(--text-body);
-}
-.lead-card__mark { display: flex; justify-content: center; }
-.lead-card__title {
-  font-size: var(--type-h3-card);
-  font-weight: var(--weight-semibold);
-  letter-spacing: var(--tracking-heading);
-  line-height: 1;
-  text-align: center;
-  color: var(--text-heading);
-  padding-top: var(--space-gutter);
-  padding-bottom: 16px;
-}
-.lead-card__rule { border: 0; border-top: 1px solid var(--border-default); width: 100%; margin: 0; }
-.lead-card .field { display: flex; flex-direction: column; gap: var(--gap-sm); padding-bottom: 14px; }
-/* Fieldsets ignore flex layout and legends escape it entirely, which
-   collapsed the 12px label-to-chips gap the Paper design specifies. Lay the
-   fieldset out as a block and give the legend the gap as a margin. */
-fieldset.field { display: block; }
-fieldset.field legend { margin-bottom: var(--gap-sm); padding: 0; }
+.hero .lead-card { width: 460px; flex-shrink: 0; }
 
-.chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
-.chip { position: relative; }
-.chip input {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  cursor: pointer;
-}
-.chip span {
-  display: inline-flex;
-  align-items: center;
-  min-height: var(--tap-min);
-  padding: 10px 18px;
-  border-radius: var(--radius-pill);
-  background: var(--bg-surface);
-  border: 1px solid var(--border-muted);
-  font-size: var(--type-small);
-  font-weight: var(--weight-regular);
-  line-height: 18px;
-  color: var(--text-body);
-  cursor: pointer;
-  transition: border-color 260ms ease-out, background-color 260ms ease-out;
-}
-.chip:hover span { border-color: var(--border-brand); }
-.chip input:checked + span {
-  padding: 9px 17px;
-  background: var(--bg-info-subtle);
-  border: 2px solid var(--border-brand);
-  font-weight: var(--weight-semibold);
-  color: var(--text-heading);
-}
-.chip input:focus-visible + span { outline: 2px solid var(--border-focus); outline-offset: 2px; }
-
-.input, .select-wrap select {
-  display: block;
-  width: 100%;
-  min-height: var(--tap-min);
-  padding: 10px 14px;
-  border-radius: var(--radius-card);
-  background: var(--bg-page);
-  border: 1px solid var(--border-muted);
-  font-family: var(--family-text);
-  font-size: var(--type-body);
-  font-weight: var(--weight-regular);
-  line-height: 20px;
-  color: var(--text-body);
-  transition: border-color 260ms ease-out;
-}
-.input::placeholder { color: var(--text-muted); opacity: 1; }
-.input:hover, .select-wrap:hover select { border-color: var(--border-brand); }
-.select-wrap { position: relative; }
-.select-wrap select { appearance: none; cursor: pointer; }
-.select-wrap select:invalid { color: var(--text-muted); }
-.select-wrap svg { position: absolute; right: 14px; top: 50%; translate: 0 -50%; pointer-events: none; }
-
-.lead-card .btn--primary { width: 100%; }
-.lead-card__privacy {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: var(--gap-xs);
-  font-size: var(--type-micro);
-  line-height: 1.6;
-  color: var(--text-muted);
-}
-.lead-card__privacy strong { font-weight: var(--weight-semibold); }
 
 /* --- Awards marquee --------------------------------------------------------- */
 
@@ -872,45 +758,6 @@ fieldset.field legend { margin-bottom: var(--gap-sm); padding: 0; }
 .faq-item__a { padding: 0 20px 18px; max-width: 68ch; }
 
 /* ==========================================================================
-   Footer
-   ========================================================================== */
-
-.site-footer { background: var(--bg-brand-deep); color: var(--text-on-brand); padding-block: 48px; }
-.site-footer .wrap { display: flex; flex-direction: column; align-items: center; gap: var(--gap-sm); text-align: center; }
-.site-footer .footer-logo { width: 274px; height: 75px; object-fit: contain; }
-.site-footer .site-link {
-  display: inline-flex;
-  align-items: center;
-  min-height: var(--tap-min);
-  font-size: var(--type-small);
-  font-weight: var(--weight-regular);
-  line-height: 18px;
-  color: var(--text-on-brand);
-}
-.site-footer .blurb {
-  font-size: var(--type-micro);
-  line-height: 16px;
-  max-width: 368px;
-  color: var(--text-on-brand-muted);
-}
-.legal-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--gap-sm);
-  width: 100%;
-  padding-top: 10px;
-  border-top: 1px solid var(--border-on-brand);
-  flex-wrap: wrap;
-}
-.legal-row span {
-  font-size: var(--type-small);
-  font-weight: var(--weight-body);
-  line-height: 18px;
-  color: var(--text-on-brand-muted);
-}
-
-/* ==========================================================================
    Motion preferences
    ========================================================================== */
 
@@ -931,7 +778,7 @@ fieldset.field legend { margin-bottom: var(--gap-sm); padding: 0; }
 
 @media (max-width: 1023px) {
   .hero-grid { flex-direction: column; align-items: stretch; }
-  .lead-card { width: 100%; }
+  .hero .lead-card { width: 100%; }
   .hero-awards { flex-direction: column; align-items: flex-start; gap: var(--gap); }
   .hero-awards__strip { width: 100%; }
   .truth-head { flex-direction: column; align-items: flex-start; }
@@ -961,8 +808,6 @@ fieldset.field legend { margin-bottom: var(--gap-sm); padding: 0; }
 }
 
 @media (max-width: 767px) {
-  .site-header .wrap { flex-wrap: wrap; justify-content: center; }
-  .header-right { flex-wrap: wrap; justify-content: center; }
   .hero .wrap { padding-top: 48px; padding-bottom: 56px; }
   .story-cards { flex-direction: column; }
   .truth-card { flex-direction: column; align-items: stretch; padding: var(--space-gutter); gap: var(--gap); }
@@ -986,37 +831,12 @@ fieldset.field legend { margin-bottom: var(--gap-sm); padding: 0; }
   .stats-visual__medal { width: 64px; height: 64px; }
   .hero-vs { gap: 8px; }
   .avatar-card__img { width: 72px; height: 72px; }
-  .legal-row { flex-direction: column; gap: var(--gap-xs); }
 }
 
 
 /* ==========================================================================
    Round 2, 17 Aug 2026: form step two, scroll reveals, live shader hosts.
    ========================================================================== */
-
-/* --- Lead form steps ------------------------------------------------------ */
-
-.lead-step { display: flex; flex-direction: column; gap: var(--gap-sm); }
-/* display:flex on the step beats the UA [hidden] rule, which is display:
-   none at lower precedence, so step two showed on load. Restate it. */
-.lead-step[hidden] { display: none; }
-.btn-back {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: var(--tap-min);
-  border: 0;
-  background: none;
-  cursor: pointer;
-  font-family: var(--family-text);
-  font-size: var(--type-small);
-  font-weight: var(--weight-regular);
-  letter-spacing: var(--tracking-body);
-  color: var(--text-muted);
-  text-decoration: underline 1px;
-  text-underline-offset: 4px;
-}
-.btn-back:hover { color: var(--text-heading); }
 
 /* --- Scroll reveals --------------------------------------------------------
    States exist only when script has run (html.js) and motion is welcome.
@@ -1069,27 +889,6 @@ fieldset.field legend { margin-bottom: var(--gap-sm); padding: 0; }
 /* ==========================================================================
    Round 5, 18 Aug 2026: mobile refinements and the closer band.
    ========================================================================== */
-
-/* --- Header call action, mobile only -------------------------------------- */
-
-.header-call {
-  display: none;
-  align-items: center;
-  justify-content: center;
-  width: var(--tap-min);
-  height: var(--tap-min);
-  border-radius: var(--radius-pill);
-  border: 2px solid var(--action-primary);
-  background: var(--action-primary);
-  color: var(--text-on-brand);
-  flex-shrink: 0;
-  transition: background-color 280ms ease-out, border-color 280ms ease-out;
-}
-.header-call:hover {
-  background: var(--action-primary-hover);
-  border-color: var(--action-primary-hover);
-}
-.header-call:active { background: var(--action-primary-pressed); border-color: var(--action-primary-pressed); }
 
 /* --- Closer band, desktop and mobile --------------------------------------- */
 
@@ -1228,15 +1027,6 @@ fieldset.field legend { margin-bottom: var(--gap-sm); padding: 0; }
    auction CTA card and the prestige band on small screens only. */
 
 @media (max-width: 767px) {
-  /* Header: smaller logo left, call icon right, tagline gone. */
-  .site-header .wrap { flex-wrap: nowrap; justify-content: space-between; gap: var(--gap-sm); }
-  .logo { min-width: 0; }
-  .logo svg { width: min(62vw, 232px); height: auto; }
-  .header-right { flex-wrap: nowrap; }
-  .header-tag { display: none; }
-  .header-right .btn--outline { display: none; }
-  .header-call { display: inline-flex; }
-
   /* Hero: everything centres. */
   .hero-copy { text-align: center; }
   .hero-copy-top { align-items: center; }

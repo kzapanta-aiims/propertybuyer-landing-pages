@@ -97,15 +97,28 @@ copies it from a client deck. Nothing is derived and nothing is rounded.
 |---|---|---|---|
 | 1 | Bought $263,800 under appraisal | 31/32 | Geoff, Melbourne. A 952 sqm office bought as an owner occupier in May 2025 for $3,908,748, against a $4,172,548 appraisal. That is $4,106 per square metre. Commercial deck p.7 |
 | 2 | Portfolio added in Melbourne | 28/32 | Wendy, Melbourne. Bought 2024 for $1,175,000 on a 5.0% initial yield. Valued at $1,400,000 in 2026, $225,000 of equity created, renting at $1,200 a week. Investor deck p37 |
-| 3 | `[Melbourne home buyer record]` | | `[Unfilled. The home buyer deck holds Melbourne records and the register notes Melbourne is its largest unslotted group, so this is an extraction job rather than a request to the client. Three per page is the Tier 1 rule.]` |
+| 3 | `[Melbourne home buyer record]` | | `[Unfilled, and blocked on the client. Both Melbourne candidates in the register are re-narrated in the investor deck as investments, Stephen and Melanie with identical figures. A contested claim is Tier 3 and does not render. Three per page is the Tier 1 rule.]` |
 
-Two notes for whoever fills slot 3. A home buyer record is the one this page
-most needs, because the other two are commercial and investor and the dominant
-organic intent on "buyers agent Melbourne" is residential. And both filled
-records already appear on other pages, Geoff on the commercial page and Wendy
-on the investor page. Reusing a real purchase across a segment page and a city
-page is defensible, since it is the same purchase, but it is worth a look
-before it ships.
+Three notes for whoever fills slot 3.
+
+**It is blocked on the client, not on extraction.** This deck originally
+recorded the opposite, on the basis that the records existed in material the
+client had already supplied. They do exist. Checked against the investor deck
+on 21 August 2026, both are also narrated there as investments: Stephen and
+Melanie with identical figures, $2,500,000 in 2013 to $4,200,000, and Suzy
+probably. Either would publish a contested claim, which DESIGN.md puts at
+Tier 3. The full evidence is in `../../paper/proof-register.md`.
+
+**A home buyer record is still the one this page most needs**, because the
+other two are commercial and investor, and the dominant organic intent on
+"buyers agent Melbourne" is residential.
+
+**The two filled records were audited and are clean.** Geoff does not appear
+in the investor deck at all, and Wendy's figures on the page match that deck
+exactly. Both also appear on other pages, Geoff on the commercial page and
+Wendy on the investor page; reusing a real purchase across a segment page and
+a city page is defensible, since it is the same purchase, but it is worth a
+look before it ships.
 
 ### 4. The local team, named
 
@@ -169,10 +182,53 @@ page already carries. All additive, none touching layout.
 | `FAQPage` | section 12 | mirrors the rendered questions exactly, no extra questions in the markup |
 | `BreadcrumbList` | page level | Home, then Locations, then Melbourne |
 
+## Photography
+
+Added 21 August 2026, because the first build shipped with one photograph and
+read as a text document. Fourteen image slots now exist, ratio locked so
+filling one cannot reflow the page. Two of them hold real images.
+
+**Filled, from the client's own decks.** Both 685 x 419, which is what
+`tools/extract-deck-images.mjs` writes and what every other story image in
+this repository already ships at.
+
+| Slot | File | Source |
+|---|---|---|
+| Proof 1, Geoff's office | `story-melbourne-office.webp` | commercial deck p.7. Shared with the commercial page, so read only: writing over an unprefixed name changes that page too |
+| Proof 2, Wendy's home | `investor-story-2.webp` | investor deck p.37, the same page her figures come from |
+
+**Needed, and worth asking for in one request rather than six.** Twelve slots.
+The ratio matters more than the exact pixel count: anything larger at the same
+ratio downscales cleanly, anything smaller upscales and looks soft. At 1440 the
+record photographs render 340 wide and the establishing shot 548, so the sizes
+below all leave headroom.
+
+| Count | Slot | Ratio | Deliver at | Brief |
+|---|---|---|---|---|
+| 1 | Proof 3, the property | 685:419 | 1370 x 838 | The home the third record is about, once that record is unblocked |
+| 3 | Agent portraits | 1:1 | 800 x 800 | Three named Melbourne agents. Square crop, consistent framing across the three, because they sit in a row |
+| 1 | Melbourne establishing shot | 685:419 | 1370 x 838 | The city or a recognisable inner suburb streetscape. **Not a stock skyline**: this is the one image that has to say Melbourne rather than Australia |
+| 6 | Region cards | 4:3 | 800 x 600 | One per surrounding region, and they arrive with the region names. An image under the wrong region label is worse than an empty slot, because these become internal links |
+| 1 | Testimonial | 685:419 | 1370 x 838 | The person quoted, or the home they bought. A face outperforms a house here, with permission |
+
+Until they arrive the slots render as dashed containers carrying their own
+brief and dimensions. That is deliberate: a client reviewing this page should
+see where photography goes and how much is needed, and a placeholder that
+looks like a design slot reads better than one that looks like a broken image.
+
+**The hero stays flat teal, deliberately.** It is the treatment the paid pages
+use, so it needs no photograph and no slot was added there. An image behind
+the H1 would compete with the one thing on the page that has to be read first.
+
+**Naming.** Everything new takes a `melbourne-` prefix, per `CLAUDE.md`.
+Unprefixed names in `assets/img/` belong to the buyer page, and writing over
+them changes it as a side effect.
+
 ## Flags
 
-- **The third proof slot is empty** and ships bracketed. A home buyer record
-  is the one the page most wants.
+- **The third proof slot is empty, and blocked on the client.** Both Melbourne
+  candidates are contested. This is the one flag on this list that cannot be
+  cleared inside this repository.
 - **The Melbourne team is unnamed.** Section 4 does not work without names.
 - **The six regions are unfilled**, and must not be guessed.
 - **The tracked phone number is a placeholder.** A head office number here
@@ -182,4 +238,6 @@ page already carries. All additive, none touching layout.
   `assets/img/` belong to the buyer page, and `CLAUDE.md` records that writing
   over them changes the other page as a side effect. Follow the pattern
   `tools/import-paper-images.mjs` set for the commercial page.
+- **Twelve image slots are empty**, listed with ratios under Photography
+  above. Two are filled from the client's own decks.
 - **Not character counted below Zone A.** Zone B is heading level draft only.

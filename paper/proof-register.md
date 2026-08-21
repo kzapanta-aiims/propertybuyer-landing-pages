@@ -103,9 +103,13 @@ so this publishes nothing they have not already published themselves.
 single group in the deck at 23 records and is not represented in the three;
 its strongest by equity is Stephen and Melanie, page 29, $2,500,000 in 2013
 to $4,200,000, and its strongest by client saving is Suzy, page 30, $346,000.
-Either could take a slot if the client would rather show three states than
-three life stages. The rules budget three Tier 1 blocks per page, so the
-ladder was chosen over the map.
+The rules budget three Tier 1 blocks per page, so the ladder was chosen over
+the map.
+
+**Neither of those two is usable, checked 21 August 2026.** Both are
+re-narrated in the investor deck, one of them provably. Do not take either as
+the Melbourne home buyer record without asking the client first. See "Both
+Melbourne home buyer candidates are contested" below.
 
 ## Reserves, qualified but not slotted
 
@@ -241,8 +245,56 @@ they carry no contradiction. But if three records were re-narrated, the other
 footnote.
 
 **Needed from the client.** Confirmation of which framing is correct for
-Roderick and Denise, Rozanne and Shane, and whether any record in the investor
-deck also appears in the homebuyer or commercial decks under a different story.
+Roderick and Denise, Rozanne and Shane, Stephen and Melanie, and probably
+Suzy, and whether any record in the investor deck also appears in the
+homebuyer or commercial decks under a different story.
+
+### Both Melbourne home buyer candidates are contested, 21 August 2026
+
+The Melbourne location page needs a home buyer record for its third Tier 1
+slot. The two candidates this register named above were checked against
+"Legacy All Investor.pdf" directly, by pulling the deck's text. Both are in
+it, and both are narrated there as investments.
+
+| Candidate | Home buyer deck, per this register | Investor deck, read 21 Aug 2026 | Verdict |
+|---|---|---|---|
+| **Stephen and Melanie** | p29, $2,500,000 in 2013 to $4,200,000, listed as a home buyer record | Melbourne VIC. 2013, $2,500,000, 2026 value $4,200,000, equity created $1,700,000, let at $2,000 pw, 3.6 percent initial yield, 4.2 percent current. Backstory is prestige: a demanding brief and the budget to match it, with the right prestige asset slipping away | **CONTESTED, CONFIRMED.** Identical figures and the same city, which is this register's own test for re-narration rather than coincidence. A fourth instance of the contradiction above |
+| **Suzy** | p30, client saving $346,000 | Melbourne VIC. 2023, $3,850,000, 2026 value $4,200,000, equity created $350,000, let at $1,800 pw, 2.2 percent initial yield. Backstory is portfolio building, wanting a family grade asset to draw quality tenants | **CONTESTED, PROBABLE.** $346,000 does not appear anywhere in the investor deck, and a saving against appraisal is not the same measure as equity created, so this is not proven identical. Same name, same city, and a number four thousand dollars away from the equity figure. Not clean enough to publish |
+
+**So the third slot stays unfilled, and it is no longer an extraction job.**
+It was recorded as one, on the basis that the records existed in material the
+client had already supplied. They do exist. They are also both contested, and
+DESIGN.md puts a contested claim at Tier 3, which does not render. The slot
+now needs the client, not the deck.
+
+**Three ways forward, none of them a guess.** Ask the client to confirm the
+framing for Stephen and Melanie, which is the strongest Melbourne record in
+either deck and would be a genuinely strong card if the home purchase framing
+is the true one. Or work through the other 21 Melbourne home buyer records,
+which needs the home buyer deck back on disk: it is not there, so this could
+not be done here. Or ship Melbourne with two records and say so, which is
+worse than three but honest, and is the state the page is in.
+
+**What this changes about the wider problem.** The overlap was three records
+out of 75 and could be read as an isolated oddity in how one deck was
+written. It is now at least four confirmed, and the two records independently
+picked as the strongest Melbourne home buyer material are both in it. That is
+no longer an oddity. Until the client answers, treat any record that appears
+in more than one deck as Tier 3, and check before selecting rather than after.
+
+**The two records that did ship on the Melbourne page were audited, and are
+clean.** Geoff, the commercial office, does not appear in the investor deck at
+all. Wendy's figures on the page match the deck exactly: $1,175,000 in 2024,
+$1,400,000 in 2026, $225,000 equity created, $1,200 pw, 5.0 percent initial
+yield. Neither carries a contradiction that this repository can see.
+
+**Still unverifiable from here.** Whether Wendy, or Mathew and Pui Kwan and
+Janis on the investor page, also appear in the home buyer or commercial decks.
+That direction needs those two decks, and only the investor deck is on disk.
+This register asserted on 21 Aug that the investor page's three "appear only
+in the investor deck"; that claim was made when the overlap was thought to be
+three records, and it is worth re-running against the other decks when they
+are next available.
 
 ## Tier 2 verification notes
 
