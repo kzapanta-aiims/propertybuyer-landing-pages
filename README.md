@@ -11,16 +11,16 @@ Four pages. `home` is built first and is the template the other three copy.
 It builds into the `buyer` folder, so that one segment's key and folder name
 differ; every other segment's folder is named after its key.
 
-`commercial` was built from that template on 20 August 2026. Build the
-remaining two one at a time rather than in parallel: one stylesheet serves
-every page, so parallel branches collide in the file where a bad merge costs
-most, and each page teaches you what is genuinely template before the next
-one starts.
+`commercial` was built from that template on 20 August 2026 and `investor` on
+21 August 2026. Build `developer` on its own rather than alongside anything
+else: one stylesheet serves every page, so parallel branches collide in the
+file where a bad merge costs most, and each page teaches you what is genuinely
+template before the next one starts.
 
 | Segment | Status | Page |
 |---|---|---|
 | `home` | **built** | `New Builds/buyer/index.html` |
-| `investor` | planned | `New Builds/investor/BRIEF.md` |
+| `investor` | **built** | `New Builds/investor/index.html` |
 | `commercial` | **built** | `New Builds/commercial/index.html` |
 | `developer` | planned | `New Builds/developer/BRIEF.md` |
 | `prestige` | deferred | chip only, no page |
@@ -44,7 +44,7 @@ and each page gets a folder of its own under `New Builds/`.
 ```
 New Builds/buyer/index.html        the page being rebuilt, and the template
 New Builds/commercial/index.html   built 20 Aug 2026 from that template
-New Builds/investor/BRIEF.md       what the build needs before it starts
+New Builds/investor/index.html     built 21 Aug 2026 from that template
 New Builds/developer/BRIEF.md
 
 shared/segments.json     the segment list, single source of truth
@@ -59,6 +59,7 @@ HANDOVER.md              read this before touching anything
 tools/check.mjs          the acceptance checklist, automated
 paper/buyer-copy.md      copy deck, home
 paper/commercial-copy.md copy deck, commercial
+paper/investor-copy.md   copy deck, investor
 paper/proof-register.md  every Tier 1 proof point, with its source
 paper/TRANSFER.md        token transfer into Paper.Design, runs locally only
 paper/theme-tokens.css   the Mapped collection as CSS, for that transfer
@@ -191,13 +192,19 @@ silently discards a lead is worse than no form. Tracked in `HANDOVER.md`.
 
 ## Open, and blocking more than one page
 
-- **Tier 1 proof: buyer page done, nine still needed.** Twelve proof points
-  are needed in total, three per page, each with a number, a location, a month
-  and year and a client name. The buyer page's three were filled 18 August
-  2026 from the client's commercial purchase deck, so it carries no proof
-  brackets; every figure traces to a row in `paper/proof-register.md`. The
-  remaining nine, for the investor, commercial and developer pages, are still
-  outstanding.
+- **Tier 1 proof: nine done, three still needed.** Twelve proof points are
+  needed in total, three per page, each with a number, a location, a year and a
+  client name. Home, commercial and investor are all filled from client decks
+  and every figure traces to a row in `paper/proof-register.md`. Only the three
+  for `developer` are outstanding.
+
+  The investor three came from "Legacy All Investor.pdf" on 21 August 2026 and
+  give three states, which the commercial three could not. Their photographs
+  are not in place: the deck carries them but they could not be extracted, so
+  the three media panels ship visibly empty rather than showing a different
+  property. That deck also retells all three of the buyer page records as
+  investment purchases, with identical figures and an incompatible story; see
+  `investorDeckOverlap` in `shared/segments.json`.
 
   The three are home buyer records, from the client's legacy home buyer deck:
   a first home in Brisbane, a family home in Sydney bought after three auction

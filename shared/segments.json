@@ -36,7 +36,7 @@
     {
       "key": "investor",
       "label": "Investor",
-      "status": "planned",
+      "status": "built",
       "page": "New Builds/investor/index.html",
       "register": "Evidence-forward. Lead with independence and no developer commissions."
     },
@@ -89,7 +89,7 @@
       "decision": "The home page slots were filled 18 Aug 2026 from the client-supplied deck \"Legacy All Homebuyer (1).pdf\", 80 residential purchases each carrying a purchase year and price, a 2026 valuation, client savings, equity created and a time to purchase. Every figure is copied from that deck rather than derived, and abbreviated figures on the cards are exact rather than rounded. Each of the three traces to a row in paper/proof-register.md. The page carries no proof brackets; the three that remain are footer legal links.",
       "openQuestion": "Melbourne is the largest single group in the deck at 23 of 80 records and is not represented in the three, because the ladder was chosen over geographic spread. The register names the two Melbourne records that could take a slot if the client would rather show three states than three life stages.",
       "safeguard": "Unfilled values stay wrapped in square brackets, so an unfilled slot renders as visibly unfilled rather than as a plausible claim. tools/check.mjs used to fail hard on any bracket in visible copy; that rule was retired 18 Aug 2026 at the client's direction, because the values arrive after the proof of concept and a permanent failure on every run was drowning out the checks that still matter. The brackets remain the safeguard, the automated stop does not.",
-      "outstanding": "Six real proof points still needed, three each for investor and developer. The commercial three were taken 20 Aug 2026 from the Reserves table in paper/proof-register.md, sourced from \"Latest Recent Purchases - Commercial.pdf\": Geoff (Melbourne office, owner occupier), Jamie and Tamara (Brisbane warehouse), Stella (Sydney office, bought from overseas). Every figure is copied from that deck. A price that does not abbreviate exactly is written in full in the card body and kept out of the stat row, so no figure on a card is rounded.",
+      "outstanding": "Three real proof points still needed, for developer. Investor was filled 21 Aug 2026 from \"Legacy All Investor.pdf\"; see investorProofSelection and the investor section of paper/proof-register.md. The commercial three were taken 20 Aug 2026 from the Reserves table in paper/proof-register.md, sourced from \"Latest Recent Purchases - Commercial.pdf\": Geoff (Melbourne office, owner occupier), Jamie and Tamara (Brisbane warehouse), Stella (Sydney office, bought from overseas). Every figure is copied from that deck. A price that does not abbreviate exactly is written in full in the card body and kept out of the stat row, so no figure on a card is rounded.",
       "selection": "The three chosen ladder by life stage and by price so a visitor finds themselves in one of them: first home (Shane, Brisbane, 2008), family home after three auction losses (Stephen and Veronica, Sydney, 2012), downsize (Roderick and Denise, Sydney, 2014). The middle one is the closest match in all 80 records to this segment register, which asks the page to lead with handover of risk."
     },
     "proyaleCase": {
@@ -144,6 +144,37 @@
       "consequence": "THREE THINGS. First, step one now has four inputs where DESIGN.md says never more than three. Accepted deliberately: the field is a two option tap on the same chip component as the router above it, lighter than the budget select beside it, and it is the qualification that makes this page work. Second, \"purpose\" is a new name on the integration surface and needs its own HubSpot property, values exactly \"occupier\" and \"investment\", or it arrives nowhere. Third, DESIGN.md section Backend Handover lists three field names and now lists neither this one nor the two the page already disagrees with; see the field name finding in New Builds/commercial/REVIEW.md.",
       "note": "Neither option is pre-selected. Pre-checking one would bias the distribution the field exists to measure, the same reasoning as segmentRanking. Required, so the fork actually arrives. assets/js/page.js was changed to validate every required control in step one rather than only the budget select, because a required control left unset inside a hidden step blocks the step two submit with an error the browser refuses to surface. That fix is generic and covers the buyer page too, whose behaviour is unchanged and was retested.",
       "outstanding": "The form now asks which buyer someone is; the copy still does not answer them differently. The hero names both and then says \"We run the same due diligence for both\", which is the averaging DESIGN.md warns about. Forking the copy is the other half of this and has not been done.",
+      "raised": "21 Aug 2026"
+    },
+    "investorProofSelection": {
+      "problem": "The investor page could not be built while its three Tier 1 slots had no source. CLAUDE.md held both investor and developer as blocked for that reason, because empty proof slots are the one thing this build refuses to fill with plausible copy.",
+      "decision": "RESOLVED 21 Aug 2026 from \"Legacy All Investor.pdf\", 75 records across four states. The three chosen ladder by portfolio stage, matching the DESIGN.md description of the segment: Mathew, first investment, Sydney 2007; Wendy, portfolio addition, Melbourne 2024; Pui Kwan and Janis, interstate with no inspection, Brisbane 2023. Every figure is copied from the deck, purchase plus equity reconciles to the 2026 value on all three, and every abbreviation is exact so no figure had to be pushed out of a stat row. Full traces in paper/proof-register.md.",
+      "status": "DONE, PHOTOGRAPHS OUTSTANDING",
+      "consequence": "The three story media panels ship visibly empty. The buyer page's story images are the hero shots from its own deck and the register records them as the actual properties purchased; the investor deck carries the equivalent images but the build environment has no PDF renderer, so they could not be extracted. Shipping a different property's photograph on a Tier 1 card would be a false claim, so the panel renders as an unfilled teal block instead. Three crops at 2x the 361x342 panel are needed to finish the page.",
+      "note": "This page gives three states where the commercial page gave one, which answers the geographic spread question raised under tier1Proof for that page. Three records remain outstanding for developer.",
+      "raised": "21 Aug 2026"
+    },
+    "investorBudgetBands": {
+      "problem": "New Builds/investor/BRIEF.md needed investor ranges confirmed before build. They were not supplied, the same position the commercial page was in.",
+      "assumed": "Five bands derived from the $650k to $2m investor range stated in DESIGN.md section Segments: under-650k, 650k-1m, 1m-1.5m, 1.5m-2m, 2m-plus. Derived from a stated range rather than invented, and shipped as the visible assumption rather than blocking the page.",
+      "status": "ASSUMED, NOT CONFIRMED",
+      "consequence": "Changing these option values after launch breaks HubSpot routing the same way the segment strings do. Confirm before the page takes paid traffic. The union across the three built pages is now fourteen distinct values with no overlap, which is the concrete input the HubSpot schema decision described in DESIGN.md section Backend Handover has been waiting on.",
+      "note": "The scale runs wider than the stated range at both ends on purpose, so a lead outside it still arrives labelled rather than bouncing off the dropdown. Slot 1 of the proof sits below the band at $580,000, but it was bought in 2007 and the card carries the year.",
+      "raised": "21 Aug 2026"
+    },
+    "investorDeckOverlap": {
+      "problem": "\"Legacy All Investor.pdf\" retells all three of the buyer page's live Tier 1 records as investment purchases, with identical figures and near-identical sentences. Roderick and Denise are downsizers on the live page and a portfolio addition let at $4,500 pw in the deck. Rozanne is an upsizer on the page and expanding a portfolio at $1,000 pw in the deck. Shane bought his first home after years of renting on the page, and his first investment let at 5.3 percent in the deck.",
+      "status": "RAISED 21 Aug 2026, UNRESOLVED, NEEDS THE CLIENT",
+      "decision": "None of the three overlapping records is used on the investor page. The three selected appear only in the investor deck, so they carry no contradiction of their own.",
+      "consequence": "The two framings are mutually exclusive: an owner-occupied home does not carry a rental yield and a weekly rent. If the investment framing is the accurate one, the three Tier 1 cards on the buyer page now in production are mis-labelled. That page sits on another branch and was not touched. And if three records were re-narrated, the other 72 in the deck cannot be assumed clean.",
+      "alternative": "DESIGN.md places contested claims at Tier 3, which does not render. Applied strictly, that would pull the buyer page's three cards until the client confirms which framing is correct. That is a call for the design lead rather than for a build.",
+      "outstanding": "Confirmation from the client of which framing is correct for those three, and whether any record in the investor deck also appears in the homebuyer or commercial decks under a different story.",
+      "raised": "21 Aug 2026"
+    },
+    "prestigeBandOnInvestor": {
+      "decision": "REMOVED 21 Aug 2026, the same decision and the same reasoning as prestigeBandOnCommercial. DESIGN.md puts prestige on the home page only, in both section Segments and section Voice, and the band's copy is residential owner-occupier language with no investor equivalent in the claims register. The prestige CHIP stays in the router, so a prestige lead still arrives labelled.",
+      "status": "DECIDED IN THE BUILD, OPEN TO OVERRULE",
+      "consequence": "The investor page has nine sections where the buyer page has ten, matching the commercial page. Two of the three built pages now drop this band, so it is the home page that is the exception rather than these.",
       "raised": "21 Aug 2026"
     }
   }
