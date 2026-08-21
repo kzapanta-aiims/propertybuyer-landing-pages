@@ -19,16 +19,7 @@
 <link rel="stylesheet" href="../../assets/css/base.css">
 <link rel="stylesheet" href="../../assets/css/landing.css">
 </head>
-<!-- data-experts-count is DEMO DATA for the 18 Aug 2026 proof of concept,
-     not a verified claim. It stands in for a live presence count from the
-     client's CRM or HR app. See assets/js/page.js for the integration seam
-     and HANDOVER.md for what has to be true before this ships. Append
-     ?experts=0 to the URL to demonstrate the nobody-available state.
-
-     data-poc="true" additionally renders the demo toggle inside the fixed
-     mobile CTA. REMOVE data-poc BEFORE LAUNCH: it lets a visitor rewrite an
-     availability claim. Removing this one attribute removes the control. -->
-<body data-experts-count="6" data-poc="true">
+<body>
 <a class="skip" href="#main">Skip to content</a>
 
 <!-- ==========================================================================
@@ -793,18 +784,6 @@
   <div class="mobile-cta__top">
     <p class="mobile-cta__hint"><span class="mobile-cta__dot" aria-hidden="true"></span><span data-experts-hint>Our experts are ready to talk</span></p>
 
-    <!-- ======================================================================
-         POC ONLY. DELETE BEFORE LAUNCH, WITH data-poc ON <body>.
-         A demo switch for showing the nobody-available state in a client
-         meeting without touching the URL. It renders only while
-         <body data-poc="true">, so removing that one attribute removes the
-         control everywhere. This must not exist on live: it lets a visitor
-         rewrite an availability claim. Tracked in HANDOVER.md and README.md.
-         ====================================================================== -->
-    <button class="poc-toggle" type="button" role="switch" aria-checked="true" aria-label="Demo switch, expert availability">
-      <span class="poc-toggle__track" aria-hidden="true"><span class="poc-toggle__knob"></span></span>
-    </button>
-    <!-- ============================ end POC ONLY ============================ -->
   </div>
   <a class="btn btn--primary mobile-cta__btn" href="#lead-form" data-cta-label>Speak to a team member</a>
 </div>

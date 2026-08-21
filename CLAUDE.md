@@ -140,10 +140,17 @@ npm run check <segment>
 `npm run check` with no argument checks every built page, at 390, 768, 1100
 and 1440. It needs `npx playwright install chromium` once.
 
-**Known failure, on every page, deliberate:** three POC demo items
+**Known failure, buyer page only, deliberate:** three POC demo items
 (`data-poc`, `data-experts-count`, `.poc-toggle`) fail the shippability check.
 They are the client-demo availability switch and must be deleted before
 launch. A page that fails only these is otherwise passing.
+
+Stripped from `commercial` and `investor` on 21 Aug 2026, so both now report
+"All hard rules pass". The CSS rule and the `page.js` handler stay, because
+both are gated on `data-poc` and the buyer page still demos with them; they
+are inert wherever the attribute is gone. Not yet closed: `?experts=N` in the
+URL still overrides availability on any page, so a visitor can put a count on
+screen that nobody verified.
 
 ## Git
 
