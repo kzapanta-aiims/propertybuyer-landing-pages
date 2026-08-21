@@ -872,7 +872,6 @@ fieldset.field legend { margin-bottom: var(--gap-sm); padding: 0; }
   background: var(--fade-photo-dark);
   z-index: 1;
 }
-.truth-card__glass { position: absolute; left: 0; right: 0; bottom: 0; height: 101px; width: 100%; object-fit: cover; z-index: 2; }
 .truth-card__copy { display: flex; flex-direction: column; gap: var(--gap-lg); max-width: 540px; }
 .truth-card__copy .swoosh { flex-shrink: 0; }
 .truth-card__copy h2 {
@@ -1154,7 +1153,6 @@ fieldset.field legend { margin-bottom: var(--gap-sm); padding: 0; }
   flex-shrink: 0;
 }
 .auction-photo > img:first-child { width: 100%; height: 100%; object-fit: cover; filter: blur(0.5px); }
-.auction-photo__glass { position: absolute; left: 50%; bottom: 0; translate: -50%; height: 137px; max-width: none; }
 
 .auction-moves {
   display: flex;
@@ -1385,7 +1383,6 @@ fieldset.field legend { margin-bottom: var(--gap-sm); padding: 0; }
   .auction-strip { margin-block: var(--gap-lg) 0; overflow-x: auto; -webkit-overflow-scrolling: touch; }
   .auction-strip__row { width: max-content; margin: 0; padding-inline: var(--space-gutter); }
   .auction-photo { width: 78vw; max-width: 420px; height: auto; aspect-ratio: 573 / 680; }
-  .auction-photo__glass { height: 20%; }
   .auction-moves { gap: var(--gap-lg); margin-top: var(--gap-lg); }
   .moves-row { flex-direction: column; gap: var(--gap-lg); }
   .auction-cta { flex-direction: column; align-items: flex-start; gap: var(--gap); padding: var(--space-gutter); }
@@ -1462,12 +1459,6 @@ fieldset.field legend { margin-bottom: var(--gap-sm); padding: 0; }
 .shader-host canvas { width: 100%; height: 100%; display: block; }
 
 .still-behind-shader { transition: opacity 600ms ease; opacity: 0 !important; }
-
-.truth-card__media .shader-host { left: 0; right: 0; bottom: 0; height: 101px; }
-.auction-photo .shader-host { left: 0; right: 0; bottom: 0; height: 137px; }
-@media (max-width: 767px) {
-  .auction-photo .shader-host { height: 20%; }
-}
 
 .prestige-visual { position: relative; }
 .prestige-visual .shader-host {
