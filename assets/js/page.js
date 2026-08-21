@@ -20,11 +20,21 @@
 
     var onStepOne = function () { return step2 && step2.hidden; };
 
+    /* Validate every required control in step one, not just the budget
+       select. A required control left unset inside a hidden step blocks the
+       step two submit with a validation error the browser cannot surface,
+       because it refuses to focus a hidden field, and the submit then fails
+       silently. The commercial page added a required purpose radio pair,
+       which is what surfaced this; any future required field is covered now.
+       Chip radios are opacity 0 rather than display none, so they are
+       focusable and reportValidity can anchor to them. */
     var advance = function () {
-      var budget = form.querySelector('#budget');
-      if (budget && !budget.value) {
-        budget.reportValidity();
-        return;
+      var controls = step1.querySelectorAll('input, select, textarea');
+      for (var i = 0; i < controls.length; i++) {
+        if (!controls[i].checkValidity()) {
+          controls[i].reportValidity();
+          return;
+        }
       }
       step1.hidden = true;
       step2.hidden = false;
