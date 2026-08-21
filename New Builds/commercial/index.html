@@ -121,7 +121,7 @@
 
         <div class="lead-step lead-step--1">
 
-        <!-- Input 1 of 3. Segment is a tap chip row, not a dropdown. All six
+        <!-- Input 1 of 4. Segment is a tap chip row, not a dropdown. All six
              segments stay in the router; prestige and expat capture a
              labelled lead here even though they have no page yet. -->
         <fieldset class="field">
@@ -136,7 +136,30 @@
           </div>
         </fieldset>
 
-        <!-- Input 2 of 3. Budget is a band, never a typed number. -->
+        <!-- Input 2 of 4. The commercial page carries two psychographics.
+             DESIGN.md section Segments asks this page to fork owner occupier
+             from investor near the top rather than average them, and calls
+             this the page most likely to underperform if it does not. Until
+             now nothing captured which one a visitor was.
+
+             Same chip component as the router above, so this adds no CSS.
+             Neither option is pre-selected on purpose: pre-checking one
+             would bias the distribution this field exists to measure, which
+             is the reasoning recorded under segmentRanking in segments.json.
+             Required, because a lead without it cannot be routed to the right
+             follow up and the fork is the whole point of the field.
+
+             This takes step one to four inputs where DESIGN.md says three.
+             Recorded, with the reason, under commercialPurposeField. -->
+        <fieldset class="field">
+          <legend class="micro">What is it for</legend>
+          <div class="chip-row">
+            <label class="chip"><input type="radio" name="purpose" value="occupier" required><span>Premises to occupy</span></label>
+            <label class="chip"><input type="radio" name="purpose" value="investment" required><span>An investment</span></label>
+          </div>
+        </fieldset>
+
+        <!-- Input 3 of 4. Budget is a band, never a typed number. -->
         <div class="field">
           <label class="micro" for="budget">Your budget</label>
           <div class="select-wrap">
@@ -152,7 +175,7 @@
           </div>
         </div>
 
-        <!-- Input 3 of 3. -->
+        <!-- Input 4 of 4. -->
         <div class="field">
           <label class="micro" for="suburb">Suburb or postcode</label>
           <input class="input" type="text" id="suburb" name="suburb" placeholder="Where do you want to buy?" autocomplete="off">

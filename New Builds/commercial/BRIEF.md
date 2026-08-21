@@ -64,8 +64,9 @@ The voice does not change between segments; the fear you answer first does.
 ## Inherited from home, do not re-decide
 
 - `data-segment="commercial"` on both capture points. Done.
-- Field names `segment`, `budget`, `suburb`. Three inputs maximum in the first
-  screen. Name, email and phone come after, never before.
+- Field names `segment`, `budget`, `suburb`, and now `purpose`. Name, email and
+  phone come after, never before. **The three input maximum no longer holds on
+  this page**, see the purpose field below.
 - Chip row is native radio inputs, all six segments, selected state is border
   and weight with no fill. `commercial` carries `checked`.
 - Asset paths are two levels up: `../../assets/css/styles.css`.
@@ -96,6 +97,31 @@ look before this takes paid traffic.
 Three slots on the artboard are still placeholder frames rather than artwork,
 so step 1 and the outer two service cards keep the buyer photography. Paper
 names what they are waiting for.
+
+## The purpose field, added 21 August 2026
+
+The client asked whether the segment router was redundant here, since it offers
+home, prestige and expat to a commercial visitor. It is not: it is the HubSpot
+routing contract, `tools/check.mjs` fails a page missing any of the six chips,
+and `openDecisions.segmentRanking` records that the router measures demand
+before it converts it. It also catches misrouted paid traffic.
+
+The question did expose a real gap though. `DESIGN.md` says this page carries
+two psychographics and should fork them near the top, and nothing captured
+which one a visitor was. So step one gained a required two option pair,
+`purpose`, values `occupier` and `investment`, under the legend "What is it
+for". Same chip component as the router, so no new CSS.
+
+**Two things this needs from someone else.** `purpose` is a new name on the
+integration surface, so HubSpot needs a property for it with exactly those two
+values, or the answer arrives nowhere. And step one now carries four inputs
+where `DESIGN.md` says three; that is deliberate and recorded, not an
+oversight.
+
+**Half of this is still undone.** The form now asks which buyer someone is,
+and the copy still answers them the same way. The hero names both and then
+says "We run the same due diligence for both". Forking the copy is the other
+half.
 
 ## Fluted glass, removed 21 August 2026
 
