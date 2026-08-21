@@ -3,24 +3,65 @@
     "Single source of truth for the location inner pages, the way",
     "shared/segments.json is for the paid segment pages. Two registries, not",
     "one, because they answer different questions: segments.json fixes six",
-    "HubSpot routing strings that never change, this file lists an open set of",
-    "places that grows as the client picks them.",
+    "HubSpot routing strings that never change, this file lists the places the",
+    "client has picked.",
     "",
-    "SCAFFOLD 21 Aug 2026. The list is empty on purpose. No location is added",
-    "here until the client has picked it and the SEO call below is resolved,",
-    "because a slug added speculatively becomes a URL somebody links to.",
+    "SCOPE SET 21 Aug 2026: one template, three pages. Adelaide, Perth and",
+    "Melbourne. The template is derived from the live Brisbane page, which the",
+    "design lead supplied as the reference because it performs. Its anatomy and",
+    "its gaps are recorded in locations/REFERENCE.md.",
     "",
-    "'slug' is the URL segment and the folder name, and the two never differ.",
-    "'status' is one of: planned, built, deferred. 'proof' names the rows in",
-    "paper/proof-register.md that carry this page's Tier 1 claims; a page with",
-    "no proof rows is not buildable, the same rule the segment pages follow.",
+    "URL pattern is the client's existing one, /location/<slug>, so these pages",
+    "are siblings of a page that already ranks rather than new competitors for",
+    "the homepage. The slug is the URL segment and the folder name, and the two",
+    "never differ.",
+    "",
+    "'readiness' is what the page can honestly carry today, not a build status.",
+    "It is separate from status on purpose: a page can be unblocked to build and",
+    "still be unable to fill a slot. Perth is the case that forced the split.",
     "",
     "DECISIONS THAT SPAN BOTH PAGE FAMILIES LIVE IN segments.json, not here.",
     "The CSS layer split of 21 Aug 2026 is recorded there under",
     "openDecisions.cssLayerSplit. This file only carries decisions that affect",
     "the location pages alone."
   ],
-  "locations": [],
+  "locations": [
+    {
+      "slug": "melbourne",
+      "label": "Melbourne",
+      "status": "planned",
+      "url": "/location/melbourne",
+      "page": "locations/melbourne/index.html",
+      "copy": "locations/melbourne/COPY.md",
+      "readiness": "READY TO BUILD FIRST",
+      "office": "yes, named in the client supplied office list",
+      "proof": "Records exist in the register. Geoff, Melbourne VIC office, May 2025, $3,908,748 against a $4,172,548 appraisal, commercial deck p.7. Wendy, portfolio addition, 2024, $1,175,000, investor deck p37. The register also notes Melbourne is the largest unslotted group in the home buyer deck, so more records are available without asking the client for anything new.",
+      "note": "Build this one first. It is the only one of the three that can fill every slot the Brisbane template has, so it is the honest test of the template."
+    },
+    {
+      "slug": "adelaide",
+      "label": "Adelaide",
+      "status": "planned",
+      "url": "/location/adelaide",
+      "page": "locations/adelaide/index.html",
+      "copy": "locations/adelaide/COPY.md",
+      "readiness": "BLOCKED ON EXTRACTION, NOT ON THE CLIENT",
+      "office": "yes, named in the client supplied office list",
+      "proof": "None extracted. The investor deck holds 75 records across Sydney, Melbourne, Brisbane and Adelaide, per paper/proof-register.md, so Adelaide records exist in material the client has already supplied. They have not been pulled into the register. This is an extraction job here, not a request to the client."
+    },
+    {
+      "slug": "perth",
+      "label": "Perth",
+      "status": "blocked",
+      "url": "/location/perth",
+      "page": "locations/perth/index.html",
+      "copy": "locations/perth/COPY.md",
+      "readiness": "BLOCKED, AND NOT BY ANYTHING THIS REPOSITORY CAN FIX",
+      "office": "NO. The office list supplied by the client and recorded independently in paper/commercial-copy.md and paper/investor-copy.md is Sydney, Melbourne, Brisbane and Adelaide. Perth is not in it.",
+      "proof": "None, and none available. Zero Perth records across the register, and paper/commercial-copy.md records explicitly that no proof record is in Perth, Adelaide or Canberra.",
+      "note": "See openDecisions.perthHasNoLocalPresence. Three slots in the Brisbane template assume a local presence that does not exist in Perth."
+    }
+  ],
   "openDecisions": {
     "ownLayout": {
       "decision": "The location pages take their own layout. They are not derived from the buyer page the way a segment page is. What carries over is the design language and the context, not the page structure: the same Figma tokens, the same two faces, the same base components, the same voice, banned language, claim tiers and proof discipline, and the same DESIGN.md and HANDOVER.md.",
@@ -35,9 +76,10 @@
       "watch": "Two things travel badly into HubSpot and are worth designing around rather than discovering late. The asset paths are ../../ relative and become HubSpot file manager URLs, so keep every reference in one place rather than scattered inline. The two faces are self hosted from assets/fonts and need uploading to the HubSpot file manager with the same cache headers, or the largest contentful paint regresses on the H1."
     },
     "seoCannibalisation": {
-      "problem": "DESIGN.md records that the propertybuyer.com.au homepage H1 is untouchable because it holds position one for the core commercial terms, and that this constrains what a landing page H1 may compete with. Location inner pages target local commercial terms by definition, so they are the case that constraint was written against. Nobody has ruled on whether these pages sit on the main domain, on a subdomain, or are handed to the client to publish inside the existing site.",
-      "status": "BLOCKING, NOT RAISED WITH CLIENT",
-      "consequence": "Building pages before this is settled risks either wasted work or a live page competing with the client's own ranking asset.",
+      "problem": "DESIGN.md records that the propertybuyer.com.au homepage H1 is untouchable because it holds position one for the core commercial terms, and that this constrains what a landing page H1 may compete with.",
+      "status": "MOSTLY ANSWERED 21 Aug 2026 BY THE REFERENCE PAGE",
+      "answer": "These pages slot into an existing pattern, /location/<slug>, alongside a Brisbane page that already ranks and carries a self referencing canonical. They are siblings of a working page rather than new competitors for the homepage, so the constraint that worried me is much narrower than it looked. A city page targeting \"buyers agent <city>\" is not competing with the homepage for the generic term.",
+      "remaining": "Whether /location/adelaide, /location/perth and /location/melbourne already exist. If they do, this is a replacement and needs a plan for the existing URL and its rankings, which is a very different job to publishing a new page. Attempting to check this from here tripped the site bot protection, so it is unverified and the client or the developer can answer it in one look.",
       "raised": "21 Aug 2026"
     },
     "locationPageSegmentField": {
@@ -47,10 +89,25 @@
       "raised": "21 Aug 2026"
     },
     "handWrittenOrGenerated": {
-      "problem": "Location pages are plausibly dozens of near identical pages, which is the shape a generator serves. This repository has no build step and that is deliberate, and as of 21 Aug 2026 it is also a handoff requirement, see hubspotDelivery.",
-      "status": "MOSTLY ANSWERED 21 Aug 2026 BY THE HUBSPOT DECISION",
-      "answer": "Do not build a generator here. HubSpot repeats a template across rows itself, so the multiplication belongs at the destination rather than in this repository. What is handed over is one reference page per distinct layout, plus locations.css and the copy decks, and the client developer turns that into a HubSpot template driven by whatever the client uses for the location list.",
-      "remaining": "How many distinct layouts there are. One template covering every location is the assumption; if a capital city page differs from a suburb page, that is two reference pages and the client developer needs to be told before the build starts, not after.",
+      "problem": "Whether the location pages need a generator, given the repository deliberately has no build step and that is now a handoff requirement.",
+      "status": "RESOLVED 21 Aug 2026",
+      "answer": "No generator. One template, three pages, confirmed by the design lead. Three hand written pages is below the threshold where a generator earns its cost, and HubSpot repeats a template across rows itself, so the multiplication belongs at the destination rather than here. What is handed over is the reference pages, locations.css and the copy decks."
+    },
+    "perthHasNoLocalPresence": {
+      "problem": "Perth is one of the three chosen locations, and the client has no Perth office and no Perth proof records. The office list they supplied is Sydney, Melbourne, Brisbane and Adelaide, recorded independently in two copy decks. The proof register holds zero Perth records across 75 plus, and commercial-copy.md states outright that no record is in Perth, Adelaide or Canberra.",
+      "consequence": "Three sections of the Brisbane template assume a local presence: \"Our purchases in <City>\", \"Your local <City> buyers' agents\" with 14 named agents, and \"Contact our nearest office\". On a Perth page all three are empty. Filling them claims a local office and local purchases that do not exist, which is not a copy problem but a truthfulness one, and it is the exact thing DESIGN.md rule one forbids.",
+      "status": "BLOCKING PERTH ONLY, RAISED 21 Aug 2026",
+      "options": [
+        "Ask the client whether a Perth office or Perth purchases exist and were simply never supplied. Cheapest answer if it is yes.",
+        "Build Perth on a variant with those three sections removed rather than emptied, and say so on the page: served from the nearest office, inspected in person. That is the claim the copy decks already make and it is true.",
+        "Drop Perth and build Adelaide and Melbourne. Two honest pages beat three where one cannot support its own structure."
+      ],
+      "doNot": "Do not fill the three slots with records from other cities, and do not name agents who are not in Perth. Do not soften this because the brief asks for three pages."
+    },
+    "referencePageIsNotACopyModel": {
+      "decision": "The live Brisbane page is the structural and SEO reference for this family. It is not the design or copy model. Its anatomy, its 23 sections, its SEO gaps and its three conflicts with DESIGN.md are recorded in locations/REFERENCE.md.",
+      "status": "RESOLVED 21 Aug 2026 as to structure, OPEN as to voice",
+      "open": "The page that performs is written in the voice the current design system was created to replace. Its meta description opens with \"Discover the expertise of\", and discover is on the banned CTA list. Its H1 second line is typed in capitals, which is what the Proyale capitals decision explicitly ruled out. Its authority claim is unquantified. Either this family carries an explicit voice exception, or the new pages apply the new voice and diverge from the page used as evidence. Both are defensible, guessing is not, and the choice is visible to the client.",
       "raised": "21 Aug 2026"
     }
   }

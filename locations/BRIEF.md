@@ -3,6 +3,16 @@
 Nothing built. This file is the input the first build needs, and the reasons
 it has not started.
 
+**Scope, set 21 August 2026: one template, three pages.** Melbourne, Adelaide
+and Perth. The template is derived from the live Brisbane page, supplied as
+the reference because it performs. Its anatomy, its SEO gaps and its three
+conflicts with `../DESIGN.md` are recorded in `REFERENCE.md`, which you should
+read before this file's blockers make sense.
+
+**Build order is Melbourne, then Adelaide, then Perth if it survives the
+question below.** That is not a preference. It is the order of what each page
+can honestly carry, recorded per location in `../shared/locations.json`.
+
 Two differences from the paid pages under `New Builds/` drive almost
 everything below.
 
@@ -21,29 +31,84 @@ same way they govern the segment pages: same tokens, same voice, same banned
 language, same claim tiers, same rule that an unfilled value ships in
 `[square brackets]` rather than as plausible copy.
 
-## Blocked, and blocking the whole family
+## Perth cannot support the template, and this is the first thing to settle
 
-- [ ] **The SEO call.** `DESIGN.md` records that the propertybuyer.com.au
-      homepage H1 is untouchable, because it holds position one for the core
-      commercial terms, and that this constrains what a landing page H1 may
-      compete with. Location pages target local commercial terms by
-      definition. Where these sit relative to the client's existing site is a
-      client decision and it has not been raised. See
-      `../shared/locations.json`, `openDecisions.seoCannibalisation`.
-- [ ] **The list.** Which locations, and how many. Nothing goes into
-      `../shared/locations.json` until the client picks it, because a slug
-      added speculatively becomes a URL somebody links to.
-- [ ] **Tier 1 proof, three per page.** Attributable and dated, and for these
-      pages the named suburb has to be the page's own suburb or the proof does
-      not do its job. This is the same blocker holding the investor and
-      developer pages, and it is harder here: it scales with the number of
-      pages rather than being three per family. Source rows go in
-      `../paper/proof-register.md`.
+Raised 21 August 2026. Not a copy problem.
+
+The client has **no Perth office and no Perth proof records**. The office list
+they supplied is Sydney, Melbourne, Brisbane and Adelaide, recorded
+independently in `../paper/commercial-copy.md` and `../paper/investor-copy.md`.
+The proof register holds zero Perth records out of more than 75, and
+`../paper/commercial-copy.md` states outright that no record is in Perth,
+Adelaide or Canberra.
+
+Three sections of the Brisbane template assume a local presence:
+
+- "Our purchases in `<City>`"
+- "Your local `<City>` buyers' agents", 14 named people on the Brisbane page
+- "Contact our nearest office"
+
+On a Perth page all three are empty, and filling them claims an office and
+purchases that do not exist. That is rule one, and it is the reason this is
+listed above the SEO work rather than below it.
+
+Three ways out, in `../shared/locations.json` under
+`openDecisions.perthHasNoLocalPresence`. The cheapest is to ask whether a
+Perth presence exists and was simply never supplied. The honest fallback is a
+Perth variant with those three sections removed rather than emptied, saying
+what is true: served from the nearest office, inspected in person, which is
+the claim the copy decks already make.
+
+**Do not** fill those slots with records from other cities, and do not name
+agents who are not in Perth. Do not soften this because the brief asks for
+three pages.
+
+## Blocked, and blocking more than one page
+
+- [ ] **The voice call on this family.** The page supplied as evidence is
+      written in the voice the current design system was created to replace.
+      Its meta description opens with "Discover the expertise of", and
+      `discover` is on the banned CTA list. Its H1 second line is typed in
+      capitals, which is exactly what the Proyale capitals decision ruled out.
+      Its authority claim carries no count. Either this family gets an explicit
+      voice exception, or the new pages apply the new voice and diverge from
+      the page used as evidence. Both are defensible. See `REFERENCE.md` and
+      `openDecisions.referencePageIsNotACopyModel`.
+- [ ] **Tier 1 proof, three per page.** Melbourne is covered: the register
+      already holds Melbourne records, and the register notes Melbourne is the
+      largest unslotted group in the home buyer deck, so more are available
+      without asking the client for anything. **Adelaide is an extraction job,
+      not a client request**: the investor deck holds 75 records across Sydney,
+      Melbourne, Brisbane and Adelaide, and the Adelaide ones have simply never
+      been pulled into `../paper/proof-register.md`. Perth has none, see above.
 - [ ] **The capture form question.** On a segment page the segment is fixed and
       the visitor types the location. A location page inverts that. Whether
       `location` is prefilled and locked, prefilled and editable, or only
       defaulted, changes what arrives in HubSpot and will not be caught by
       visual review. See `openDecisions.locationPageSegmentField`.
+- [ ] **Whether the three URLs already exist.** `/location/adelaide`,
+      `/location/perth` and `/location/melbourne`. If they do, this is a
+      replacement with existing rankings to protect, which is a different job
+      to publishing a new page. Checking this from here tripped the site's bot
+      protection, so it is unverified and one look answers it.
+- [ ] **Six surrounding regions per page.** The Brisbane page carries Brisbane,
+      Redlands, Ipswich, Logan, Moreton Bay and Toowoomba. Each new page needs
+      its own six, and that is local knowledge rather than anything derivable
+      here.
+
+## Mostly settled
+
+- **The SEO call is narrower than it looked.** These pages slot into the
+  client's existing `/location/<slug>` pattern, beside a Brisbane page that
+  already ranks and carries a self referencing canonical. They are siblings of
+  a working page rather than new competitors for the homepage, so the
+  `DESIGN.md` constraint about the untouchable homepage H1 does not bite the
+  way it first appeared to. A city page targeting "buyers agent `<city>`" is
+  not competing for the generic term. What remains is the replacement question
+  above.
+- **One template, no generator.** Three hand written pages sit below the
+  threshold where a generator earns its cost, and HubSpot repeats a template
+  across rows itself, so the multiplication belongs at the destination.
 
 ## Decided, do not re-decide
 

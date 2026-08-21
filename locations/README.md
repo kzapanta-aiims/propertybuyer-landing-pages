@@ -8,15 +8,26 @@ traffic. Plain HTML, CSS and JavaScript, no framework and no build step, which
 is what the repository already is. The Vercel deploy is a preview for review
 and handoff.
 
-Empty. See `BRIEF.md` for what is blocked, and `../shared/locations.json` for
-the registry and the open decisions.
+Empty. Three pages planned: Melbourne, Adelaide and Perth, from one template
+derived from the live Brisbane page.
+
+- `REFERENCE.md` carries the Brisbane page's anatomy, its SEO gaps, and where it
+  conflicts with `../DESIGN.md`. Read this first.
+- `BRIEF.md` lists what is blocked. Perth is blocked hardest, and not by anything
+  this repository can fix.
+- `../shared/locations.json` holds the registry and the open decisions.
 
 ## Shape, once pages exist
 
 ```
-locations/<slug>/index.html    one folder per location, folder name is the slug
-locations/<slug>/COPY.md       the copy deck, written and reviewed before HTML
+locations/melbourne/index.html   build first, it can fill every slot
+locations/melbourne/COPY.md      the copy deck, written and reviewed before HTML
+locations/adelaide/...           proof needs extracting from the investor deck
+locations/perth/...              blocked, see BRIEF.md
 ```
+
+The folder name is the slug, and the slug is the URL segment in the client's
+existing `/location/<slug>` pattern. The two never differ.
 
 Two levels below the repository root, the same depth as the segment pages
 under `New Builds/`, so every asset reference is `../../` relative and the
