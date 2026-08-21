@@ -100,7 +100,7 @@
     "storyPrivacyBadge": {
       "problem": "The story cards carried a \"Privacy protection\" badge over each photograph, from the Paper design.",
       "status": "HIDDEN 18 Aug 2026 at the client's request",
-      "decision": "Hidden in CSS, not deleted. The markup and the base rule stay intact, so removing one declaration in assets/css/styles.css brings the badge back.",
+      "decision": "Hidden in CSS, not deleted. The markup and the base rule stay intact, so removing one declaration in assets/css/landing.css brings the badge back.",
       "note": "The story photographs are the actual properties purchased, taken from the client's own published success-story decks. A street number is legible on two of the three. Hiding the badge publishes nothing the client has not already published themselves, but it is worth a look before the page takes paid traffic.",
       "raised": "18 Aug 2026"
     },
@@ -201,6 +201,14 @@
       "consequence": "The exposure runs the safe way. 50+ understates a verified 53, so the pages now claim less than the client can evidence rather than more, and the contradiction inside the section is gone. DESIGN.md section Claims was corrected in the same pass, along with HANDOVER.md, both page BRIEFs, the commercial REVIEW, all three copy decks and the proof register, so no document now tells the next build to put 53 back. Where 53 still appears it is dated history describing the change. The hero award list names the individual wins rather than a total and is unaffected.",
       "outstanding": "The buyer page bullet reads \"Over 50+ industry awards\", which doubles the qualifier and is the only one of the three phrased that way. Left as found because it was outside the instruction. Commercial and investor both read \"50+ industry awards.\"",
       "raised": "21 Aug 2026"
+    },
+    "cssLayerSplit": {
+      "decision": "assets/css/styles.css was split into four layers on 21 Aug 2026: tokens.css (the Figma Mapped aliases, the Paper addendum and the two faces), base.css (reset, base type, buttons, pills), landing.css (the paid segment pages) and locations.css (the location pages, empty). Every page loads tokens, then base, then exactly one design layer. styles.css was deleted rather than kept as a shim, because a path that still works is how two stylesheets drift apart.",
+      "status": "RESOLVED 21 Aug 2026",
+      "reason": "One stylesheet serving every page means parallel branches collide in the file where a bad merge costs most. That was tolerable for four segment pages built one at a time. It stopped being tolerable when the location pages became a second page family with its own branch.",
+      "verification": "The split is comment level only. Every code line was preserved and none was added, checked by sorted line comparison, and the brace count is identical at 436. npm run check passes every rendered check at 390, 768, 1100 and 1440 on the buyer page, including the H1 and H2 token sizes and the section rhythm, so the rendered result is unchanged.",
+      "consequence": "tokens.css and base.css are shared, so a change to either lands on pages someone else may be building on another branch. Treat them the way you would treat a change to Figma Variables. A component wanted by both families gets promoted into base.css and recorded here, never copied.",
+      "enforcement": "tools/check.mjs fails a page whose first two stylesheets are not tokens.css then base.css, a page loading zero or two design layers, a raw hex in any layer, and a :root block in any layer other than tokens.css."
     }
   }
 }

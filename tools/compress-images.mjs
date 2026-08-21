@@ -3,7 +3,7 @@
  *
  * Converts every raster in assets/img to WebP, capped at 2x its largest
  * rendered size, alpha preserved. SVGs are untouched. Prints a rename map;
- * references in index.html and styles.css must be updated to .webp (the
+ * references in index.html and landing.css must be updated to .webp (the
  * build commit that introduced this script did that).
  *
  *   node tools/compress-images.mjs

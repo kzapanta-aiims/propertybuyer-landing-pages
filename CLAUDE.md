@@ -21,7 +21,10 @@ New Builds/commercial/index.html   built 20 Aug 2026 from that template
 New Builds/investor/index.html     built 21 Aug 2026 from that template
 New Builds/developer/BRIEF.md      not built, content blocked
 
-assets/css/styles.css    ONE stylesheet, every page
+assets/css/tokens.css    tokens and both faces. Shared, never edited by a build
+assets/css/base.css      reset, base type, buttons, pills. Shared
+assets/css/landing.css   design layer, the four paid segment pages
+assets/css/locations.css design layer, the location pages. Empty so far
 assets/js/page.js        ONE script, every page
 shared/segments.json     segment list plus the decision log
 paper/proof-register.md  every Tier 1 proof point, with its source
@@ -69,10 +72,30 @@ figures and an incompatible story. See `investorDeckOverlap` in
 `shared/segments.json`. Nothing on the investor page depends on it, but the
 buyer page may be mis-labelled.
 
-**Build the pages one at a time, not in parallel.** One stylesheet serves every
-page, so parallel branches collide in the file where a bad merge costs most.
-Each page also teaches you what is genuinely template and what was quietly
-buyer-specific; fold that back before starting the next.
+**Build the pages one at a time, not in parallel.** Each page teaches you what
+is genuinely template and what was quietly buyer-specific; fold that back
+before starting the next.
+
+This used to be enforced by the stylesheet: one file served every page, so
+parallel branches collided where a bad merge costs most. That was split into
+four layers on 21 Aug 2026, so the collision risk is now confined to whichever
+design layer you are in. Within a family the advice still stands, because the
+four paid pages all share `landing.css`.
+
+**Three stylesheets per page, in this order:** `tokens.css`, `base.css`, then
+exactly one design layer. `tokens.css` and `base.css` are shared by every page,
+so a change to either lands on pages someone else may be building on another
+branch. Treat it the way you would treat a change to Figma Variables. The two
+design layers are never loaded together. `npm run check` fails a page that gets
+the order wrong, loads zero or two design layers, holds a raw hex in any layer,
+or declares a `:root` block outside `tokens.css`.
+
+**The location pages are a second family, and they take their own layout.**
+`locations/`, organic search, shipped in HubSpot rather than on Vercel. They
+share the design language and the context, not the page structure, so
+`landing.css` is not their starting point. Do not derive one from the buyer
+page the way a segment page is derived. See `locations/BRIEF.md` and
+`shared/locations.json`.
 
 ## The rules that get broken most
 

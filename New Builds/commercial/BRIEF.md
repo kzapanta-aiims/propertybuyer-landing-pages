@@ -69,7 +69,9 @@ The voice does not change between segments; the fear you answer first does.
   this page**, see the purpose field below.
 - Chip row is native radio inputs, all six segments, selected state is border
   and weight with no fill. `commercial` carries `checked`.
-- Asset paths are two levels up: `../../assets/css/styles.css`.
+- Asset paths are two levels up. Three stylesheets, in order:
+  `../../assets/css/tokens.css`, `../../assets/css/base.css`, then
+  `../../assets/css/landing.css`. Never `locations.css` as well.
 - The three POC demo items (`data-poc`, `data-experts-count`, `.poc-toggle`)
   are inherited from the template and fail the shippability check on every
   page. Delete before launch, on every page at once.

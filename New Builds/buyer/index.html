@@ -5,14 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Buy with an expert on your side | Propertybuyer</title>
 <meta name="description" content="Independent buyers agency, established 2001. We act for buyers only, never for sellers, from the first brief to the keys.">
-<!-- Both faces are declared inside styles.css, so without these the browser
+<!-- Both faces are declared inside tokens.css, so without these the browser
      cannot discover them until the stylesheet has downloaded and parsed.
      Proyale sets the H1, which is the largest contentful paint on this page,
      so it is the one that matters most. crossorigin is required on font
      preloads even same-origin, or the fetch is made twice. -->
 <link rel="preload" href="../../assets/fonts/proyale-regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../../assets/fonts/geist-variable.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../../assets/css/styles.css">
+<!-- Three sheets, one order: tokens, base, then the design layer for this
+     page family. The split landed 21 Aug 2026 so the paid pages and the
+     location pages stop sharing one file. See assets/css/tokens.css. -->
+<link rel="stylesheet" href="../../assets/css/tokens.css">
+<link rel="stylesheet" href="../../assets/css/base.css">
+<link rel="stylesheet" href="../../assets/css/landing.css">
 </head>
 <!-- data-experts-count is DEMO DATA for the 18 Aug 2026 proof of concept,
      not a verified claim. It stands in for a live presence count from the

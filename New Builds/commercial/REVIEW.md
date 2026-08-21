@@ -191,7 +191,7 @@ not exist.
 
 ### 13. The review stars are filled with a token marked do-not-use.
 
-`assets/css/styles.css:23` carries "FLAG, do not use until resolved" above
+`assets/css/tokens.css:35` carries "FLAG, do not use until resolved" above
 `--bg-prestige`, because `DESIGN.md` Stop and Flag records that
 `bg/prestige` is inconsistent with its own documentation and says "Do not pick
 one." Both pages then use `var(--bg-prestige)` as the fill for fifteen review

@@ -56,4 +56,6 @@ segment strings do.
   first screen. Name, email and phone come after, never before.
 - Chip row is native radio inputs, selected state is border and weight with no
   fill.
-- Asset paths are two levels up: `../../assets/css/styles.css`.
+- Asset paths are two levels up. Three stylesheets, in order:
+  `../../assets/css/tokens.css`, `../../assets/css/base.css`, then
+  `../../assets/css/landing.css`. Never `locations.css` as well.

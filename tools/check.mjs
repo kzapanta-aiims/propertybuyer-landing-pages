@@ -16,7 +16,7 @@
  * root relative. The pages themselves live under "New Builds/".
  */
 
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
 import { chromium } from 'playwright';
 
@@ -43,7 +43,13 @@ if (pages.length === 0) {
   process.exit(1);
 }
 
-const css = readFileSync('assets/css/styles.css', 'utf8');
+/* styles.css was split into four layers on 21 Aug 2026: tokens, base, and one
+   design layer per page family. Read whatever is in the folder rather than a
+   fixed list, so a fifth layer is covered the day someone adds it. */
+const sheets = readdirSync('assets/css')
+  .filter((f) => f.endsWith('.css'))
+  .sort()
+  .map((f) => ({ name: f, css: readFileSync(`assets/css/${f}`, 'utf8') }));
 
 let failures = 0;
 const pass = (m) => console.log(`  ok    ${m}`);
@@ -194,6 +200,24 @@ for (const { key, file } of pages) {
     ? pass('asset paths are relative to the page folder')
     : fail(`asset paths need ../../ : ${badRefs.join(', ')}`);
 
+  /* Three sheets, in order. tokens.css carries the Figma aliases and the two
+     faces, base.css the reset and the shared components, then exactly one
+     design layer. A page that loads both design layers is a mistake rather
+     than a variation: they define the same class names for different page
+     families. A page missing tokens.css renders unstyled, because every var()
+     falls back to nothing, and that reads as a layout bug rather than as a
+     missing file. */
+  const sheetRefs = [...html.matchAll(/<link[^>]+rel="stylesheet"[^>]+href="[^"]*assets\/css\/([^"]+)"/g)]
+    .map((m) => m[1]);
+  const layers = sheetRefs.filter((f) => f === 'landing.css' || f === 'locations.css');
+  const wanted = ['tokens.css', 'base.css'];
+  wanted.every((f, i) => sheetRefs[i] === f)
+    ? pass('tokens.css then base.css, first and second')
+    : fail(`stylesheet order is ${sheetRefs.join(', ') || 'none'}, wanted ${wanted.join(', ')} first`);
+  layers.length === 1
+    ? pass(`one design layer: ${layers[0]}`)
+    : fail(`${layers.length} design layer(s): ${layers.join(', ') || 'none'}. Exactly one is required`);
+
   /* ---------------------------------------------------------- rendered --- */
   head('Rendered checks');
 
@@ -261,18 +285,34 @@ for (const { key, file } of pages) {
 await browser.close();
 
 /* ======================================================= once, not per page */
-/* One stylesheet serves every page, so this is a repository check. */
+/* The stylesheets are shared, so this is a repository check rather than a page
+   one. Only tokens.css is allowed to hold values at all, so the other layers
+   are checked whole. That is stricter than the single file this replaced. */
 
-banner('Shared stylesheet');
+banner('Shared stylesheets');
 head('Token discipline, CSS');
 
-/* Everything except the :root token declarations. A hex anywhere else means a
-   value was chosen by hand rather than bound to a token in 2. Mapped. */
-const outside = (css.match(/:root\s*\{[\s\S]*?\n\}/g) || [])
-  .reduce((acc, block) => acc.replace(block, ''), css)
-  .replace(/\/\*[\s\S]*?\*\//g, '');
-const rawHex = [...outside.matchAll(/:\s*(#[0-9a-fA-F]{3,8})/g)].map((m) => m[1]);
-rawHex.length === 0 ? pass('no raw hex outside the token block') : fail(`raw hex in rules: ${rawHex.join(', ')}`);
+for (const { name, css } of sheets) {
+  /* Everything except the :root token declarations. A hex anywhere else means a
+     value was chosen by hand rather than bound to a token in 2. Mapped. */
+  const outside = (css.match(/:root\s*\{[\s\S]*?\n\}/g) || [])
+    .reduce((acc, block) => acc.replace(block, ''), css)
+    .replace(/\/\*[\s\S]*?\*\//g, '');
+  const rawHex = [...outside.matchAll(/:\s*(#[0-9a-fA-F]{3,8})/g)].map((m) => m[1]);
+  rawHex.length === 0
+    ? pass(`${name}: no raw hex outside the token block`)
+    : fail(`${name}: raw hex in rules: ${rawHex.join(', ')}`);
+}
+
+/* Only tokens.css declares tokens. A :root block in another layer is a second
+   source of truth, which is the thing the split was done to prevent. */
+for (const { name, css } of sheets) {
+  if (name === 'tokens.css') continue;
+  const roots = (css.match(/:root\s*\{/g) || []).length;
+  roots === 0
+    ? pass(`${name}: declares no tokens`)
+    : fail(`${name}: ${roots} :root block(s). Tokens belong in tokens.css`);
+}
 
 /* --------------------------------------------------------------- human --- */
 
