@@ -2,6 +2,12 @@ node_modules/
 package-lock.json
 .DS_Store
 
+# Paper artwork downloaded by tools/import-paper-images.mjs. Scratch, and
+# large: the originals are several MB each and the committed WebP crops are
+# derived from them. The tool re-fetches anything missing, so nothing here
+# needs keeping.
+.paper-src/
+
 # The repository root is the client folder, so these two sit inside it without
 # being part of the build. They are client working files, not source, and the
 # remote is not where they belong.

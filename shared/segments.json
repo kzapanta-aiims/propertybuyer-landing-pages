@@ -43,7 +43,7 @@
     {
       "key": "commercial",
       "label": "Commercial",
-      "status": "planned",
+      "status": "built",
       "page": "New Builds/commercial/index.html",
       "register": "Competent, transactional. Lead with due diligence and buy-versus-lease certainty."
     },
@@ -85,11 +85,11 @@
     },
     "tier1Proof": {
       "problem": "The rules budget three Tier 1 proof blocks per page, attributable and dated. No real examples were supplied, and the slots shipped empty.",
-      "status": "RESOLVED for home 18 Aug 2026, nine still outstanding",
+      "status": "RESOLVED for home 18 Aug 2026 and for commercial 20 Aug 2026, six still outstanding",
       "decision": "The home page slots were filled 18 Aug 2026 from the client-supplied deck \"Legacy All Homebuyer (1).pdf\", 80 residential purchases each carrying a purchase year and price, a 2026 valuation, client savings, equity created and a time to purchase. Every figure is copied from that deck rather than derived, and abbreviated figures on the cards are exact rather than rounded. Each of the three traces to a row in paper/proof-register.md. The page carries no proof brackets; the three that remain are footer legal links.",
       "openQuestion": "Melbourne is the largest single group in the deck at 23 of 80 records and is not represented in the three, because the ladder was chosen over geographic spread. The register names the two Melbourne records that could take a slot if the client would rather show three states than three life stages.",
       "safeguard": "Unfilled values stay wrapped in square brackets, so an unfilled slot renders as visibly unfilled rather than as a plausible claim. tools/check.mjs used to fail hard on any bracket in visible copy; that rule was retired 18 Aug 2026 at the client's direction, because the values arrive after the proof of concept and a permanent failure on every run was drowning out the checks that still matter. The brackets remain the safeguard, the automated stop does not.",
-      "outstanding": "Nine real proof points still needed, three each for investor, commercial and developer. The three commercial records used briefly on the home page are held in paper/proof-register.md under Reserves as the starting content for the commercial page.",
+      "outstanding": "Six real proof points still needed, three each for investor and developer. The commercial three were taken 20 Aug 2026 from the Reserves table in paper/proof-register.md, sourced from \"Latest Recent Purchases - Commercial.pdf\": Geoff (Melbourne office, owner occupier), Jamie and Tamara (Brisbane warehouse), Stella (Sydney office, bought from overseas). Every figure is copied from that deck. A price that does not abbreviate exactly is written in full in the card body and kept out of the stat row, so no figure on a card is rounded.",
       "selection": "The three chosen ladder by life stage and by price so a visitor finds themselves in one of them: first home (Shane, Brisbane, 2008), family home after three auction losses (Stephen and Veronica, Sydney, 2012), downsize (Roderick and Denise, Sydney, 2014). The middle one is the closest match in all 80 records to this segment register, which asks the page to lead with handover of risk."
     },
     "proyaleCase": {
@@ -103,6 +103,39 @@
       "decision": "Hidden in CSS, not deleted. The markup and the base rule stay intact, so removing one declaration in assets/css/styles.css brings the badge back.",
       "note": "The story photographs are the actual properties purchased, taken from the client's own published success-story decks. A street number is legible on two of the three. Hiding the badge publishes nothing the client has not already published themselves, but it is worth a look before the page takes paid traffic.",
       "raised": "18 Aug 2026"
+    },
+    "commercialBudgetBands": {
+      "problem": "The buyer page ships four residential budget bands. New Builds/commercial/BRIEF.md asks for commercial ranges to be confirmed before build. They were not supplied.",
+      "assumed": "Five bands derived from the $600k to $20m commercial range stated in DESIGN.md section Segments: under-1m, 1m-3m, 3m-6m, 6m-20m, 20m-plus. Derived from a stated range rather than invented, and shipped as the visible assumption rather than blocking the page.",
+      "status": "ASSUMED, NOT CONFIRMED",
+      "consequence": "Changing these option values after launch breaks HubSpot routing the same way the segment strings do. Confirm before the page takes paid traffic.",
+      "note": "All three commercial proof records fall in 3m-6m. That is weak evidence about the middle of the scale and none at all about either end.",
+      "raised": "20 Aug 2026"
+    },
+    "prestigeBandOnCommercial": {
+      "problem": "The template carries a prestige band reading \"A quieter way to buy, for homes valued from $2m and above\". That is residential copy, and DESIGN.md puts prestige on the home page only, as one restrained band, in both section Segments and section Voice.",
+      "decision": "REMOVED from the commercial page 20 Aug 2026. No commercial claim exists in the claims register to put in its place, and writing one would be inventing a service. The prestige CHIP stays in the router, so a prestige lead still arrives labelled.",
+      "status": "DECIDED IN THE BUILD, OPEN TO OVERRULE",
+      "consequence": "The commercial page has nine sections where the buyer page has ten. This is the only structural difference between them.",
+      "alternative": "Keep the band and the rhythm it gives the page. That needs a commercial claim from the client, not from us.",
+      "raised": "20 Aug 2026"
+    },
+    "commercialPhotography": {
+      "problem": "The commercial page was derived from the buyer template and inherited its residential photography. Four truth cards, three step cards, one service card and the three auction photos all showed houses on a page about offices and warehouses. Four alt strings said home outright.",
+      "decision": "REPLACED 21 Aug 2026 from the COMMERCIAL -- v1 artboard in the Paper file 01KZW0Y27PGW3NV0QJRPXAJ9DZ. Eleven slots, being every slot on that artboard that carries real artwork. Reproducible with 'npm run import-images'; tools/import-paper-images.mjs records the Paper node id, the content addressed asset URL and the crop geometry per slot, so the crops are re-derived rather than re-eyeballed.",
+      "status": "DONE, NOT YET CLIENT REVIEWED",
+      "consequence": "THE FILES ARE PREFIXED, AND THIS IS THE POINT. Both pages share one assets/img and the unprefixed names belong to the buyer page. The first attempt wrote the commercial artwork over truth-card-1.webp and the rest, which silently replaced the buyer page photography as well; caught before it left the branch. Every commercial photograph is now commercial-*.webp and the buyer files were restored byte for byte from main. Any future page does the same.",
+      "openQuestion": "Three of the eleven are visibly AI generated and carry garbled text a client may read as a defect: the valuation report on truth card 3, the glass wall logo behind step 4, and the small print on the auction sign. Two more are worth a look: auction 2 is the lowest resolution of the set at 672px against a 1146px target, and auction 3 is a couple on a residential balcony on a commercial page. All five are the artwork as supplied in Paper, not a processing artefact.",
+      "note": "Three slots on the artboard are still unfilled placeholder frames rather than artwork, so step 1 and service cards 1 and 3 keep the buyer photography. Paper names what they should hold: notes taken during a strategy call, the Propertybuyer buyers agents, and a buyer shaking hands with the agent after winning at auction.",
+      "raised": "21 Aug 2026"
+    },
+    "commercialAwardsCount": {
+      "problem": "DESIGN.md section Claims resolves the award count at 53 and states it replaces 50+ everywhere, sourced to the client onboarding USP document of 6 Aug 2026. The commercial page shipped 53 in both the stat callout and the bullet beside it.",
+      "decision": "The BULLET was changed to '50+ industry awards.' on 21 Aug 2026 at the client's direction. The stat callout above it still reads 53, because only the bullet was asked for.",
+      "status": "DONE AT REQUEST, CONTRADICTS DESIGN.md AND ITSELF",
+      "consequence": "Two numbers for one claim now sit within one screen of each other: the callout says 53, the bullet says 50+. Whichever is right, the page should not say both. DESIGN.md is also now behind the page rather than ahead of it, which inverts the usual direction and will mislead the next build.",
+      "alternative": "Either change the callout to match and correct the DESIGN.md Claims entry, or revert the bullet to 53. Flagged to the client; awaiting the call.",
+      "raised": "21 Aug 2026"
     }
   }
 }
