@@ -27,18 +27,19 @@ Four pages. `home` is built first and is the template the other three copy.
 It builds into the `buyer` folder, so that one segment's key and folder name
 differ; every other segment's folder is named after its key.
 
-`commercial` was built from that template on 20 August 2026 and `investor` on
-21 August 2026. Build `developer` on its own rather than alongside anything
-else: one stylesheet serves every page, so parallel branches collide in the
-file where a bad merge costs most, and each page teaches you what is genuinely
-template before the next one starts.
+`commercial` was built from that template on 20 August 2026, `investor` on
+21 August 2026 and `developer` on 21 August 2026. **All four are now built.**
+Each was built on its own rather than alongside another, which is still the
+advice: the four paid pages share `landing.css`, so parallel branches collide
+in the file where a bad merge costs most, and each page teaches you what is
+genuinely template before the next one starts.
 
 | Segment | Status | Page |
 |---|---|---|
 | `home` | **built** | `New Builds/buyer/index.html` |
 | `investor` | **built** | `New Builds/investor/index.html` |
 | `commercial` | **built** | `New Builds/commercial/index.html` |
-| `developer` | planned | `New Builds/developer/BRIEF.md` |
+| `developer` | **built** | `New Builds/developer/index.html` |
 | `prestige` | deferred | chip only, no page |
 | `expat` | deferred | chip only, no page |
 
@@ -61,7 +62,7 @@ and each page gets a folder of its own under `New Builds/`.
 New Builds/buyer/index.html        the page being rebuilt, and the template
 New Builds/commercial/index.html   built 20 Aug 2026 from that template
 New Builds/investor/index.html     built 21 Aug 2026 from that template
-New Builds/developer/BRIEF.md
+New Builds/developer/index.html    built 21 Aug 2026 from that template
 
 locations/BRIEF.md                 the location pages, nothing built yet
 locations/README.md                the shape they take when they are
@@ -258,11 +259,22 @@ silently discards a lead is worse than no form. Tracked in `HANDOVER.md`.
 
 ## Open, and blocking more than one page
 
-- **Tier 1 proof: nine done, three still needed.** Twelve proof points are
-  needed in total, three per page, each with a number, a location, a year and a
-  client name. Home, commercial and investor are all filled from client decks
-  and every figure traces to a row in `paper/proof-register.md`. Only the three
-  for `developer` are outstanding.
+- **Tier 1 proof: nine done, three still needed, and the last three need only
+  a date.** Twelve proof points are needed in total, three per page, each with
+  a number, a location, a year and a client name. Home, commercial and investor
+  are all filled from client decks and every figure traces to a row in
+  `paper/proof-register.md`. The three for `developer` are outstanding but no
+  longer blocked on a deck: the client publishes twenty named site purchases
+  with a street, a suburb and a price, and they were checked directly to be
+  completely undated. A purchase month and year plus a client first name turns
+  three of them into filled Tier 1 cards. The three candidates are named in the
+  brackets on the page itself and under `developerProofSlots` in
+  `shared/segments.json`.
+
+  The developer story panels ship with **no photograph**, deliberately. A
+  different property's picture on a Tier 1 card is a false claim, so the panel
+  renders as a flat brand block, which is the same call recorded for the
+  investor page before its photographs arrived.
 
   The investor three came from "Legacy All Investor.pdf" on 21 August 2026 and
   give three states, which the commercial three could not. Their photographs

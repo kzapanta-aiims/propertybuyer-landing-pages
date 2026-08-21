@@ -19,7 +19,7 @@ context; they record decisions that look arbitrary from the code alone.
 New Builds/buyer/index.html        the home segment, and the template
 New Builds/commercial/index.html   built 20 Aug 2026 from that template
 New Builds/investor/index.html     built 21 Aug 2026 from that template
-New Builds/developer/BRIEF.md      not built, content blocked
+New Builds/developer/index.html    built 21 Aug 2026 from that template
 
 assets/css/tokens.css    tokens and both faces. Shared, never edited by a build
 assets/css/base.css      reset, base type, buttons, pills. Shared
@@ -31,6 +31,7 @@ paper/proof-register.md  every Tier 1 proof point, with its source
 paper/buyer-copy.md      copy deck, home
 paper/commercial-copy.md copy deck, commercial
 paper/investor-copy.md   copy deck, investor
+paper/developer-copy.md  copy deck, developer
 tools/check.mjs          the acceptance checklist, automated
 tools/import-paper-images.mjs  Paper artwork in, with the crop geometry
 tools/extract-deck-images.mjs  story photographs out of the client decks
@@ -52,13 +53,23 @@ Pages sit two levels down, so every asset reference is `../../` relative.
 | `home` | built, client-reviewed | nothing |
 | `commercial` | built, client-reviewed, merged | budget bands unconfirmed |
 | `investor` | **built, not yet reviewed** | budget bands unconfirmed |
-| `developer` | not started | three Tier 1 proof points, and a call on cutting a mid-page section |
+| `developer` | **built, not yet reviewed** | three Tier 1 proof records, which now need only a date |
 | `prestige`, `expat` | no page, deliberately | chip only, see segments.json |
 
-**Next step: proof records for developer**, in the same shape as the homebuyer,
-commercial and investor decks already supplied. It cannot be honestly built
-without them, because empty proof slots are the one thing this build refuses to
-fill with plausible copy.
+**Next step: a purchase date for three sites the client already publishes.**
+All four segment pages are now built. The developer page is the only one whose
+three Tier 1 slots are still bracketed, and the ask is no longer a deck: the
+client publishes twenty named site purchases with prices, and they lack only a
+month and year plus a client first name. Each bracket on the page names the
+candidate record it is waiting on. See `developerProofSlots`.
+
+**The client's own website is a claim source, and it beat DESIGN.md twice.**
+Two pages of propertybuyer.com.au were read on 21 Aug 2026 and they resolved
+what DESIGN.md could not: whether the agency touches feasibility, and what a
+developer budget band actually looks like. Both answers contradict or exceed
+DESIGN.md, and DESIGN.md is behind rather than corrected. Check the equivalent
+`services/` and `who-we-help/` pages before deriving any future segment page
+from DESIGN.md alone. See `developerClientSiteAsSource`.
 
 **Story photographs come out of the client decks, and they do not need a
 renderer.** `tools/extract-deck-images.mjs` reads the embedded image streams

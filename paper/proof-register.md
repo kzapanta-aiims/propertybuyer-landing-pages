@@ -261,6 +261,100 @@ deck also appears in the homebuyer or commercial decks under a different story.
   said "96%". Two numbers in circulation confirms the register's ruling:
   GATED, does not render.
 
+## Developer page, UNFILLED 21 August 2026
+
+**No developer deck exists.** The three client success-story decks supplied so
+far are "Legacy All Homebuyer (1).pdf", "Latest Recent Purchases -
+Commercial.pdf" and "Legacy All Investor.pdf". There is no developer
+equivalent anywhere in the repository, so all three Tier 1 slots on the page
+ship in `[square brackets]` per CLAUDE.md rule 2.
+
+**The ask is a date, not a deck.** The client publishes twenty named
+development site purchases on
+`propertybuyer.com.au/services/development-site-acquisitions`, read
+21 August 2026. Each carries a street, a suburb, a price and a site type.
+Checked directly against the source: **every one is undated**, and none names
+a client. DESIGN.md Tier 1 requires a claim to be attributable AND dated, so
+they cannot fill a slot as they stand.
+
+They are also not Tier 2. DESIGN.md defines Tier 2 as what "any competitor
+could say", and a $57,000,000 landmark unit site at Kurraba Point is not that.
+They are a Tier 1 grade fact set missing one required Tier 1 attribute.
+
+### Candidates, laddered by scale
+
+Home ladders by life stage and investor by portfolio stage. This page ladders
+by scale, so a visitor finds themselves in one of the three.
+
+| Slot | Record | Price | Type | Why this one |
+|---|---|---|---|---|
+| 1 | Heath Rd, Leppington | $7,000,000 | Land subdivision | the small subdivision end of the span DESIGN.md states |
+| 2 | Merlin St, Neutral Bay | $15,000,000 | Unit site | the middle, and unit sites are the most common type in the published list |
+| 3 | Kurraba Rd, Kurraba Point | $57,000,000 | Landmark unit site | the institutional end, and the largest purchase the client publishes |
+
+### What each slot still needs
+
+- **The purchase month and year.** The only thing standing between the
+  published list and three filled Tier 1 cards.
+- **The client's first name**, as carried on all three other pages.
+- **The end value or sale value estimate.** This is the stat that makes it a
+  developer proof point rather than a generic one. The client's own published
+  role statement says they estimate sale values, so the figure should exist
+  internally even though it is not published.
+- Optionally the saving against appraisal, which is what the commercial page
+  leads its cards with.
+
+**Figures on cards are exact, never rounded.** None of the three prices above
+abbreviates exactly to two decimal places except $15,000,000, so on current
+information two of the three would carry the price in the card body and keep
+it out of the stat row, which is what the commercial page did with $3,908,748.
+
+### The photographs are withheld, not missing
+
+All three story media panels ship with no `<img>` at all, and render as a flat
+`--bg-brand` block. This is deliberate and follows `investorProofSelection`:
+a different property's photograph on a Tier 1 card is a false claim. The buyer
+page's residential artwork was removed from the panels rather than inherited,
+and nothing in `assets/img` was written, so no other page moved.
+
+### Tier 2, taken from the client site the same day
+
+- **"Over $250 million in development sites."** SOURCED from
+  `services/development-site-acquisitions`. The source reads "over $250
+  million in development sites in past 8 years"; the duration is **dropped**,
+  because DESIGN.md is explicit that a hardcoded duration expires. The figure
+  is unattributed and undated on the source page, the same standing as the
+  review count and the 5,000+ figure. It replaces the "Over 5,000 properties
+  purchased." bullet on this page only, which had duplicated the stat callout
+  directly above it. See `developerStatBullet`.
+- **"30 to 60 days"** is corroborated again on
+  `who-we-help/property-developers`: "We find our clients the ideal property
+  on average within 30 to 60 days of engagement."
+
+### Gated, does not render
+
+- **Richard Anderson**, Senior Acquisitions Manager for Development and
+  Investment, credited with "$700M+ in gross development value and 800+
+  dwellings delivered". Not in the DESIGN.md claims register, which clears
+  Rich Harvey by name and nobody else, and the source phrasing "more than 25
+  years of experience" is the construction DESIGN.md bans. Wants a register
+  row rather than a build decision.
+- **"Remove the common risks of DA approval"**, a published joint venture
+  benefit. The strongest claim on either client URL, addressed to land owners
+  rather than developers, and the only DA claim anywhere in the material. The
+  page makes no DA claim at all.
+
+Both are recorded under `developerGatedClaims` in `shared/segments.json` and
+sit as an HTML comment above the closer band on the page.
+
+### Currency
+
+Everything in this section was read from two live marketing pages on
+21 August 2026. Nothing there carries a date or a source of its own. Confirm
+both pages are current before this page takes paid traffic, and confirm the
+$250 million total and the twenty named purchases specifically, because those
+are the two that reach a live page.
+
 ## Not hunted, per the claims register
 
 Off-market percentages (competitors quote 69 and 70), the purchase-rate

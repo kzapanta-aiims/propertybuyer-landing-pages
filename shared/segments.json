@@ -64,7 +64,7 @@
     {
       "key": "developer",
       "label": "Developer",
-      "status": "planned",
+      "status": "built",
       "page": "New Builds/developer/index.html",
       "register": "Numerical. Lead with site access and resale numbers, shortest copy of any segment."
     }
@@ -209,6 +209,81 @@
       "verification": "The split is comment level only. Every code line was preserved and none was added, checked by sorted line comparison, and the brace count is identical at 436. npm run check passes every rendered check at 390, 768, 1100 and 1440 on the buyer page, including the H1 and H2 token sizes and the section rhythm, so the rendered result is unchanged.",
       "consequence": "tokens.css and base.css are shared, so a change to either lands on pages someone else may be building on another branch. Treat them the way you would treat a change to Figma Variables. A component wanted by both families gets promoted into base.css and recorded here, never copied.",
       "enforcement": "tools/check.mjs fails a page whose first two stylesheets are not tokens.css then base.css, a page loading zero or two design layers, a raw hex in any layer, and a :root block in any layer other than tokens.css."
+    },
+    "developerSectionCount": {
+      "problem": "New Builds/developer/BRIEF.md reads \"expect to drop or compress one of the mid-page sections rather than pad it to match home\", and treats cutting one as following the rules rather than deviating. DESIGN.md sections Segments and Voice both call for the shortest copy of any segment.",
+      "decision": "NO MID-PAGE SECTION CUT, 21 Aug 2026, at the client direction. The page ships nine sections, dropping only the prestige band, which matches commercial and investor exactly. The shortest-copy rule is met inside the sections instead: all four step bodies, both changed real-access bodies and three of four truth card bodies are shorter than their buyer-page equivalents.",
+      "status": "DECIDED IN THE BUILD, OPEN TO OVERRULE",
+      "consequence": "All three derived pages now have the same nine sections, so the structure is uniform across the set and the home page is the only ten-section page. The cost is that \"shortest copy of any segment\" is now a claim about compression rather than a visible structural difference, and nothing automated measures it. tools/check.mjs does not count body copy, so a later edit could pad this page past commercial or investor without failing anything.",
+      "alternative": "Cut the services band, which was the recommendation before the client site was read. It is now the weakest of the three candidates, because two of its three cards carry the client own development-specific service names.",
+      "raised": "21 Aug 2026"
+    },
+    "developerClientSiteAsSource": {
+      "problem": "The developer page could not be honestly built from DESIGN.md alone. Three Tier 1 slots had no source, the feasibility capability was unknown and therefore ungatable, and the budget was a single open-ended number.",
+      "decision": "TWO CLIENT PAGES READ 21 Aug 2026 and used as a claim source: propertybuyer.com.au/services/development-site-acquisitions and propertybuyer.com.au/who-we-help/property-developers. Treated as the client own published claims, the same footing the live site was given under awardsCountOnStatRow where it overruled DESIGN.md.",
+      "status": "DONE, NEEDS A CURRENCY CHECK",
+      "consequence": "Five things on the page trace to those URLs rather than to DESIGN.md or a deck: the feasibility claim on truth card 2 and in FAQ 1, the $250 million stat bullet, two of the three service names, the budget bands, and the three named candidate records in the bracketed Tier 1 slots. Everything drawn from them is marked SOURCED in paper/developer-copy.md.",
+      "note": "They are marketing pages, not verified records. Nothing there carries a date or a source of its own. Confirm both pages are current before this page takes paid traffic, and confirm the two figures that reach a live page: the $250 million total and the twenty named purchases.",
+      "raised": "21 Aug 2026"
+    },
+    "developerFeasibilityClaim": {
+      "problem": "The question a developer asks before any other is whether the agency touches feasibility, planning or a DA. Nothing in the DESIGN.md claims register covered it, so the first draft of this page gated the question at Tier 3 and shipped without answering it, which left the page answering the wrong fear first.",
+      "decision": "RESOLVED 21 Aug 2026 from the client own site. They publish \"We typically run our own internal feasibility before presenting the site to a client\" and \"Our role in the development process is primarily locating a suitable development site and estimating sale values\", and they list town planners among referral partners rather than services. So the page claims feasibility and sale value estimates, and hands planning to a referral. It appears on truth card 2 and as FAQ 1.",
+      "status": "DONE, ONE WORD WORTH CONFIRMING",
+      "consequence": "This is the sentence the page is built around, and it is the second half of the segment register: DESIGN.md asks this page to lead with site access and resale numbers, and \"estimating sale values\" is the resale number in the client own words.",
+      "openQuestion": "The source says \"typically\" run our own internal feasibility. The card and the FAQ both say it is run, without the hedge, which is the normal reading of that word in marketing copy. Confirm feasibility is run on every site rather than most.",
+      "note": "DA, zoning, yield modelling and highest-and-best-use are claimed NOWHERE on either client page, checked directly, and are claimed nowhere on this page either. The FAQ answer names four referral professions where the source names six, cut to avoid a triadic rhythm.",
+      "raised": "21 Aug 2026"
+    },
+    "developerBudgetBands": {
+      "problem": "DESIGN.md section Segments puts this segment at \"$2.5m upward\": one number and an open top, where commercial had a closed $600k to $20m range and investor a closed $650k to $2m. The BRIEF asked for the ranges to be confirmed before build. They were not supplied.",
+      "decision": "FIVE BANDS DERIVED FROM THE CLIENT OWN PUBLISHED DEALS, 21 Aug 2026: under-2.5m, 2.5m-5m, 5m-10m, 10m-20m, 20m-plus. The client publishes twenty named site purchases and every one of the five bands is evidenced by at least one of them.",
+      "status": "DERIVED FROM PUBLISHED EVIDENCE, STRONGER THAN THE OTHER TWO PAGES",
+      "consequence": "This contradicts DESIGN.md at both ends and DESIGN.md is behind, NOT corrected here. The published deals run from $1.35m, which is below the stated $2.5m floor, to $57m at Kurraba Point, which is far above the $25m top band the first draft derived from DESIGN.md alone. Either the site is out of date or DESIGN.md is, and that is a client question rather than a build decision. The precedent is awardsCountOnStatRow.",
+      "note": "Unlike commercialBudgetBands and investorBudgetBands, these are not ASSUMED. Each band points at a real purchase. 20m-plus is byte-identical to the commercial page top band, which slightly reduces the fourteen-distinct-values sprawl recorded under investorBudgetBands as the input the HubSpot schema decision is waiting on.",
+      "outstanding": "Whether the DESIGN.md $2.5m floor or the published $1.35m deal is current. Changing these option values after launch breaks HubSpot routing the same way the segment strings do.",
+      "raised": "21 Aug 2026"
+    },
+    "developerProofSlots": {
+      "problem": "Three Tier 1 slots, and no developer deck exists. The three client decks supplied so far are homebuyer, commercial and investor. There is no developer equivalent anywhere in the repository.",
+      "decision": "ALL THREE SLOTS SHIP BRACKETED, 21 Aug 2026, per CLAUDE.md rule 2. The client publishes twenty named site purchases carrying a street, a suburb, a price and a site type, and they were checked directly: they are completely undated, and carry no client first name. DESIGN.md Tier 1 requires a claim to be attributable AND dated, so they cannot fill these slots as they stand.",
+      "status": "BRACKETED, AND THE ASK HAS COLLAPSED TO A DATE",
+      "consequence": "The ask is no longer a deck. Each bracket names the candidate record it is waiting on, so the client needs a purchase month and year plus a first name for three sites they already publish. Three candidates are named, laddering by scale the way home ladders by life stage and investor by portfolio stage: Heath Rd Leppington at $7,000,000 for the small subdivision end, Merlin St Neutral Bay at $15,000,000 for the middle and the most common type in the list, and Kurraba Rd Kurraba Point at $57,000,000 for the institutional end.",
+      "note": "The three media panels ship with NO PHOTOGRAPH, which is deliberate and is the reasoning recorded under investorProofSelection: a different property photograph on a Tier 1 card is a false claim, so the panel renders as a flat brand block instead. The buyer residential artwork was removed rather than inherited. Nothing in assets/img was written, so no other page moved.",
+      "outstanding": "A purchase month and year, a client first name, and an end value for three of the published sites. The end value is the stat that makes it a developer proof point rather than a generic one, and the client own published role statement says they estimate sale values, so the figure should exist internally.",
+      "raised": "21 Aug 2026"
+    },
+    "prestigeBandOnDeveloper": {
+      "decision": "REMOVED 21 Aug 2026, the same decision and the same reasoning as prestigeBandOnCommercial and prestigeBandOnInvestor. DESIGN.md puts prestige on the home page only, in both section Segments and section Voice, and \"For homes valued from $2m and above\" is residential owner-occupier language with no development equivalent in the claims register. The prestige CHIP stays in the router, so a prestige lead still arrives labelled.",
+      "status": "DECIDED IN THE BUILD, OPEN TO OVERRULE",
+      "consequence": "All three derived pages now drop this band. The home page is the exception rather than these being deviations, and that is now true of the whole set rather than of two pages out of three.",
+      "note": "The client does publish \"prestige waterfront development sites\" as a site type. That is a category of site, not the prestige service the band describes, so it does not rescue the band.",
+      "raised": "21 Aug 2026"
+    },
+    "developerGatedClaims": {
+      "problem": "The two client URLs surfaced two things worth using that this page cannot claim as they stand. DESIGN.md puts a Tier 3 claim in the markup as a comment with the reason it is gated, and this is that record.",
+      "decision": "BOTH GATED 21 Aug 2026, and both sit as an HTML comment above the closer band.",
+      "status": "GATED, BOTH NEED THE DESIGN LEAD",
+      "jointVentures": "The client runs a joint venture offering connecting land owners with developers, with no equivalent on any other segment page. Gated for three reasons. Its published benefits are addressed to the LAND OWNER, not to the developer reading this page, so lifting them points the copy at the wrong reader. One of them reads \"Remove the common risks of DA approval\", which is the strongest claim on either URL while the rest of this page makes no DA claim at all. And it would be a tenth section on the page whose one structural rule is shortest copy of any segment. Worth raising: a developer wants sites, and a joint venture pipeline is site access by another route.",
+      "richardAnderson": "Richard Anderson, Senior Acquisitions Manager for Development and Investment, credited by the client with $700M+ gross development value and 800+ dwellings delivered. This is the only segment in the set with a named specialist whose job is that segment, and it is a real asset for the page. Gated for two reasons: the DESIGN.md claims register clears Rich Harvey by name and nobody else, and DESIGN.md says where a claim is not in the register, add a row rather than making a judgement call in the markup. Separately the source phrasing is \"more than 25 years of experience\", the exact construction DESIGN.md bans because hardcoded durations expire.",
+      "outstanding": "A claims register row for Richard Anderson, and a developer-facing joint venture claim from the client rather than a translation of the land owner benefit list by us.",
+      "raised": "21 Aug 2026"
+    },
+    "developerStatBullet": {
+      "problem": "The stats band bullet read \"Over 5,000 properties purchased.\" directly under a stat callout reading \"5,000+ properties purchased\". One claim, twice, within one screen, which is the shape awardsCountOnStatRow was raised about.",
+      "decision": "ON THIS PAGE ONLY, the bullet becomes \"Over $250 million in development sites.\" 21 Aug 2026, SOURCED from the client own development site page. The stat callout above it still reads 5,000+ and is unchanged, so the two now say different things rather than the same thing twice.",
+      "status": "DONE, THE DURATION WAS DROPPED ON PURPOSE",
+      "consequence": "This is the first segment-specific Tier 2 claim on any of the four pages. The other three carry only brand-level aggregates. It also means this page states less of the 5,000+ claim than its siblings, which is deliberate: on a development page the dollar figure is the stronger of the two.",
+      "note": "The source reads \"over $250 million in development sites in past 8 years\". The duration is DROPPED rather than shipped, because DESIGN.md is explicit that a hardcoded duration expires and asks for \"since 2001\" rather than \"25 years\". If the client supplies the start year it can read \"since 2018\" or whichever year it is, which is the form DESIGN.md prefers. The figure itself is unattributed and undated on the source page.",
+      "raised": "21 Aug 2026"
+    },
+    "developerAuctionBidding": {
+      "problem": "The services band holds exactly three cards, and the client publishes two development-specific services, Development Sourcing and Subdivisions, that were invisible from inside the repository until the client site was read.",
+      "decision": "AUCTION BIDDING COMES OFF the services band on this page, 21 Aug 2026, so Development Sourcing and Subdivisions can take real named cards rather than the band re-skinning three residential services. It stays answerable: auction bidding is still described in the auction-ready move in the real access band.",
+      "status": "DECIDED IN THE BUILD, OPEN TO OVERRULE",
+      "consequence": "This is the only page in the set whose services band does not name all three of Full Search, Appraise and Negotiate, and Auction Bidding. Development sites transact off market and by expression of interest far more often than under the hammer, so the trade reads correctly for the segment, but it is a real divergence from the template and the client may want the third residential service back.",
+      "note": "All three card names on this page are the client own published service names. None was invented. Full Search was replaced rather than kept because Development Sourcing is the same engagement named for this segment.",
+      "raised": "21 Aug 2026"
     }
   }
 }
