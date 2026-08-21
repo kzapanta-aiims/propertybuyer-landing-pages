@@ -57,6 +57,7 @@ CLAUDE.md                read order, current state and next step, for agents
 DESIGN.md                the rules layer, corrected against Figma Variables
 HANDOVER.md              read this before touching anything
 tools/check.mjs          the acceptance checklist, automated
+tools/extract-deck-images.mjs  story photographs out of the client decks
 paper/buyer-copy.md      copy deck, home
 paper/commercial-copy.md copy deck, commercial
 paper/investor-copy.md   copy deck, investor
@@ -200,11 +201,16 @@ silently discards a lead is worse than no form. Tracked in `HANDOVER.md`.
 
   The investor three came from "Legacy All Investor.pdf" on 21 August 2026 and
   give three states, which the commercial three could not. Their photographs
-  are not in place: the deck carries them but they could not be extracted, so
-  the three media panels ship visibly empty rather than showing a different
-  property. That deck also retells all three of the buyer page records as
-  investment purchases, with identical figures and an incompatible story; see
-  `investorDeckOverlap` in `shared/segments.json`.
+  are the hero shots from the same deck pages, at the same 685x419 the buyer
+  page's story images already ship at, extracted by
+  `tools/extract-deck-images.mjs`.
+
+  Two things about that deck are worth knowing. It retells all three of the
+  buyer page records as investment purchases, with identical figures and an
+  incompatible story; see `investorDeckOverlap` in `shared/segments.json`. And
+  its page 20 copy calls the property an apartment twice while its own
+  photographs of that property show a freestanding cottage, so that card names
+  no dwelling type at all.
 
   The three are home buyer records, from the client's legacy home buyer deck:
   a first home in Brisbane, a family home in Sydney bought after three auction

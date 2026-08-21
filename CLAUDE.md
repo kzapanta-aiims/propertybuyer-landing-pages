@@ -30,14 +30,15 @@ paper/commercial-copy.md copy deck, commercial
 paper/investor-copy.md   copy deck, investor
 tools/check.mjs          the acceptance checklist, automated
 tools/import-paper-images.mjs  Paper artwork in, with the crop geometry
+tools/extract-deck-images.mjs  story photographs out of the client decks
 ```
 
 **All pages share one `assets/img`, and the unprefixed photograph names
 belong to the buyer page.** `truth-card-1.webp`, `auction-1.webp`,
 `step-research.webp` and the rest are referenced by both pages, so writing new
 artwork over them changes the other page as a side effect. The commercial page
-holds its own photographs under a `commercial-` prefix for that reason. Any
-future page does the same.
+holds its own photographs under a `commercial-` prefix for that reason, and the
+investor page under `investor-`. Any future page does the same.
 
 Pages sit two levels down, so every asset reference is `../../` relative.
 
@@ -47,15 +48,20 @@ Pages sit two levels down, so every asset reference is `../../` relative.
 |---|---|---|
 | `home` | built, client-reviewed | nothing |
 | `commercial` | built, client-reviewed, merged | budget bands unconfirmed |
-| `investor` | **built, not yet reviewed** | three story photographs, budget bands unconfirmed |
+| `investor` | **built, not yet reviewed** | budget bands unconfirmed |
 | `developer` | not started | three Tier 1 proof points, and a call on cutting a mid-page section |
 | `prestige`, `expat` | no page, deliberately | chip only, see segments.json |
 
-**Next step: three story photographs for the investor page**, and proof
-records for developer in the same shape as the homebuyer, commercial and
-investor decks already supplied. Developer cannot be honestly built without
-them, because empty proof slots are the one thing this build refuses to fill
-with plausible copy.
+**Next step: proof records for developer**, in the same shape as the homebuyer,
+commercial and investor decks already supplied. It cannot be honestly built
+without them, because empty proof slots are the one thing this build refuses to
+fill with plausible copy.
+
+**Story photographs come out of the client decks, and they do not need a
+renderer.** `tools/extract-deck-images.mjs` reads the embedded image streams
+directly; in these decks they are already JPEG. Put the deck in `.deck-src/`
+and run `npm run deck-images`. A page rasteriser being unavailable here is not
+a reason to leave a story panel empty.
 
 **Also open, and it reaches a live page.** The investor deck retells all three
 of the buyer page Tier 1 records as investment purchases, with identical

@@ -88,17 +88,17 @@ which is the input the HubSpot schema decision has been waiting on.
 All three records come from "Legacy All Investor.pdf", supplied 21 Aug 2026.
 Every figure is copied from the deck rather than derived, and each abbreviates
 exactly, so nothing on a card is rounded. Full traces in
-`proof-register.md`. **The photographs are not in place**, see below.
+`proof-register.md`. **The photographs are in place**, see below.
 
-### Slot 1, first investment, Sydney apartment
+### Slot 1, first investment, Sydney inner west
 
 Deck page 20. Mathew, Sydney NSW, inner west, 2 bed 1 bath 1 car.
 
 | Field | String |
 |---|---|
 | Pill | First investment |
-| H3 | Apartment in Sydney (19/32) |
-| Body | Mathew had watched the inner west for years without ever buying. We secured an apartment near the light rail as his first investment, inside two weeks. It has created $1.44M in equity and now rents for $1,000 a week. |
+| H3 | Inner west, Sydney (18/32) |
+| Body | Mathew had watched the inner west for years without ever buying. We secured his first investment a short walk from the light rail, inside two weeks. It has created $1.44M in equity and now rents for $1,000 a week. |
 | Stat | Bought 2007 / $580K |
 | Stat | Initial yield / 6.0% |
 | Stat | Value today / $2.02M |
@@ -154,17 +154,35 @@ prices that span the budget band the form offers. Slot 1 sits below that band
 at $580,000, but it was bought in 2007 and the card carries the year, so the
 scale reads correctly.
 
-### Photographs, NOT IN PLACE
+### Photographs, IN PLACE
 
-The buyer page's story photographs are the hero shots from its own deck, and
-the register records that they are the actual properties purchased. The
-investor deck carries the equivalent images but they could not be extracted in
-the build environment, which has no PDF renderer.
+All three are the hero shots from the deck pages the records came from, the
+same source as the buyer page's three. Extracted by
+`../tools/extract-deck-images.mjs`, which reads the embedded image streams
+rather than rendering a page, so it needs no rasteriser.
 
-So the three media panels ship **visibly empty**, as a teal panel, rather than
-carrying a different property's photograph. That is the same safeguard as a
-bracketed value: an unfilled slot renders as unfilled rather than as a
-plausible claim. Three files are needed, cropped to 2x the 361x342 panel.
+They ship at their native 685x419, which is exactly what every story image
+already on the buyer page ships at, so this is parity rather than a
+compromise. CSS `object-fit: cover` does the crop to the card panel.
+
+| File | Deck page | Property |
+|---|---|---|
+| `investor-story-1.webp` | p20 | Sydney inner west |
+| `investor-story-2.webp` | p37 | Melbourne single fronted |
+| `investor-story-3.webp` | p63 | Brisbane, city outlook |
+
+### The deck disagrees with itself on slot 1
+
+Page 20's copy calls the property "a sunny apartment" and then "an apartment
+that suits exactly the renter profile". The photograph on that same page is a
+freestanding cottage with a picket fence and a courtyard garden, and the two
+secondary photographs are of the same cottage.
+
+Rather than pick a side, the card **stops naming the dwelling type**. The
+heading reads "Inner west, Sydney" and the body says "his first investment a
+short walk from the light rail". Every figure is unchanged, and nothing on the
+card can now contradict the photograph beside it. Worth a client answer, since
+the deck is the thing that is inconsistent.
 
 ## the truth band, four cards
 
@@ -269,8 +287,8 @@ labelled. This page has nine sections where the buyer page has ten.
 
 ## still open
 
-1. **Three photographs**, above. The only thing stopping this page being
-   complete.
+1. **The deck disagrees with itself on slot 1**, above. The copy says apartment,
+   the photograph is a cottage. The card names neither.
 2. **Budget bands are assumed**, not confirmed.
 3. **The award count contradicts itself**, inherited.
 4. **The deck retells the buyer page's three records as investments.** Roderick

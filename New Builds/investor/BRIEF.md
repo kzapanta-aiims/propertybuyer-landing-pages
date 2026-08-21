@@ -50,14 +50,11 @@ A page missing any of these is not finished.
 
 ## Still open, in priority order
 
-1. **The three story photographs are missing, and this is the only thing
-   stopping the page being complete.** The buyer page's story images are the
-   hero shots from its own deck and the register records them as the actual
-   properties purchased. The investor deck carries the equivalent images, but
-   the build environment has no PDF renderer, so they could not be extracted.
-   The three media panels therefore ship visibly empty rather than showing a
-   different property, which would be a false claim on a Tier 1 card. Three
-   crops are needed at 2x the 361x342 panel.
+1. **The deck disagrees with itself on slot 1.** Page 20's copy calls the
+   property an apartment twice; the photographs on that page are of a
+   freestanding cottage. The card names no dwelling type as a result, and every
+   figure is unchanged. Worth a client answer, because the deck is the thing
+   that is inconsistent.
 2. **Budget bands are ASSUMED, not confirmed.** Five bands derived from the
    $650k to $2m range in `DESIGN.md`, not supplied. Changing the option values
    later affects HubSpot routing the same way the segment strings do. Recorded
@@ -77,11 +74,30 @@ A page missing any of these is not finished.
    as a single spread rather than a fork, so nothing was invented. If a fork is
    wanted, the honest split is by portfolio stage.
 
+## Photographs, in place
+
+All three story photographs are the hero shots from the deck pages the records
+came from, the same source as the buyer page's three, at the same native
+685x419. `npm run deck-images` regenerates them from `.deck-src/`, which holds
+the client decks and is gitignored. Deleting the three files and re-running
+reproduces them byte for byte.
+
+The first attempt concluded the images were unreachable, because no page
+rasteriser is available here. That was wrong: the photographs are embedded
+image streams, and in these decks they are already JPEG, so there is nothing
+to render. `../../tools/extract-deck-images.mjs` walks the page tree and writes
+the bytes out.
+
 ## Inherited from home, do not re-decide
 
 - `data-segment="investor"` on both capture points.
-- Field names `segment`, `budget_band`, `location`. Three inputs maximum in the
-  first screen. Name, email and phone come after, never before.
+- Field names `segment`, `budget`, `suburb`, matching what the buyer and
+  commercial pages actually post, not the `budget_band` and `location` the
+  `DESIGN.md` Backend Handover table names. That table and the built pages
+  disagree, and this page followed the pages so all three post one vocabulary
+  into HubSpot. See the field-name finding in `../commercial/REVIEW.md`.
+- Three inputs in the first screen. Name, email and phone come after, never
+  before.
 - Chip row is native radio inputs, selected state is border and weight with no
   fill.
 - Asset paths are two levels up: `../../assets/css/styles.css`.
