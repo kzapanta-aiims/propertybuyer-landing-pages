@@ -81,15 +81,30 @@ file: the four truth cards, steps 2 to 4, the middle service card and all
 three auction photos. Four alt strings said "home" on a page about offices and
 warehouses and were rewritten.
 
-Reproduce with `npm run import-images` then `npm run bake-glass`. The crop
-geometry, the Paper node ids and the asset URLs are recorded in
-`../../tools/import-paper-images.mjs`. Recorded under
-`openDecisions.commercialPhotography` in `../../shared/segments.json`, with the
-five artwork concerns worth a client look before this takes paid traffic.
+**The files are prefixed `commercial-`, and that matters.** Both pages share
+one `assets/img`, and `truth-card-1.webp`, `auction-1.webp` and the rest are
+referenced by the buyer page too. Writing over them changes that page as a
+side effect, which is exactly what the first attempt did before it was caught.
+
+Reproduce with `npm run import-images`. The crop geometry, the Paper node ids
+and the content addressed asset URLs are recorded per slot in
+`../../tools/import-paper-images.mjs`, so the crops are re-derived rather than
+re-eyeballed. Recorded under `openDecisions.commercialPhotography` in
+`../../shared/segments.json`, with the five artwork concerns worth a client
+look before this takes paid traffic.
 
 Three slots on the artboard are still placeholder frames rather than artwork,
 so step 1 and the outer two service cards keep the buyer photography. Paper
 names what they are waiting for.
+
+## Fluted glass, removed 21 August 2026
+
+The truth cards and the auction photos each carried a fluted-glass strip
+across the foot of the photograph, mounted live over an exported still. The
+buyer page dropped them in PR #8 and took the shared CSS, the shader wiring
+and all fourteen glass assets with it. The commercial page dropped its own
+seven strips in the same round, at the client's request. Nothing references
+the glass on either page now.
 
 ## One correction carried back to the buyer page
 

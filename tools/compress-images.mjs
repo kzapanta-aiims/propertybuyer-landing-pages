@@ -16,6 +16,15 @@ const DIR = 'assets/img';
 
 /* Max width in device pixels: 2x the largest CSS rendering. */
 const CAPS = [
+  /* The commercial page holds its own photographs under a prefix, because
+     both pages share this folder and the unprefixed names belong to the
+     buyer page. Written by tools/import-paper-images.mjs, already at these
+     sizes; the caps are here so a later run of this script cannot quietly
+     resize them to the 1440 default. */
+  [/^commercial-truth/, 722],
+  [/^commercial-step/, 454],
+  [/^commercial-service/, 746],
+  [/^commercial-auction/, 1146],
   [/^auction-\d/, 1146],
   [/^truth-card/, 722],
   [/^truth-docs/, 1300],

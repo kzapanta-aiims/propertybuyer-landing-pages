@@ -8,7 +8,6 @@
     "serve": "npx --yes serve .",
     "compress": "node tools/compress-images.mjs",
     "bake": "node tools/bake-liquid-metal.mjs",
-    "bake-glass": "node tools/bake-fluted-glass.mjs",
     "import-images": "node tools/import-paper-images.mjs",
     "hints": "node tools/add-image-hints.mjs"
   },
