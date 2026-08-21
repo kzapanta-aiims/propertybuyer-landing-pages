@@ -22,6 +22,18 @@
   ],
   "locations": [],
   "openDecisions": {
+    "ownLayout": {
+      "decision": "The location pages take their own layout. They are not derived from the buyer page the way a segment page is. What carries over is the design language and the context, not the page structure: the same Figma tokens, the same two faces, the same base components, the same voice, banned language, claim tiers and proof discipline, and the same DESIGN.md and HANDOVER.md.",
+      "status": "RESOLVED 21 Aug 2026, from the design lead",
+      "consequence": "assets/css/locations.css is expected to become a substantial layer rather than a thin one. Nothing is lifted out of landing.css on the assumption it will be reused: its 1330 lines are almost entirely the composition of the buyer page, and that composition does not apply here. The site header and footer are the only likely exception, and are the one open promotion, noted at the top of locations.css.",
+      "contrast": "The segment pages are built by copying New Builds/buyer/index.html and changing only the copy and the data-segment attribute. That instruction is the one thing from the segment build that does not carry over to this family."
+    },
+    "hubspotDelivery": {
+      "decision": "These pages ship in HubSpot, not on Vercel. What this repository produces is the reference implementation that gets handed to the client developer to port: plain HTML, CSS and JavaScript, no framework and no React. The Vercel deploy is a preview for review and handoff, not the host.",
+      "status": "RESOLVED 21 Aug 2026, from the design lead",
+      "consequence": "The constraint is already met and must stay met. This repository has no build step, no framework and no CDN dependency, and that is now a handoff requirement rather than a preference. Nothing here may grow a compile step, a component framework or a runtime dependency, because the receiving developer works in HubSpot templates.",
+      "watch": "Two things travel badly into HubSpot and are worth designing around rather than discovering late. The asset paths are ../../ relative and become HubSpot file manager URLs, so keep every reference in one place rather than scattered inline. The two faces are self hosted from assets/fonts and need uploading to the HubSpot file manager with the same cache headers, or the largest contentful paint regresses on the H1."
+    },
     "seoCannibalisation": {
       "problem": "DESIGN.md records that the propertybuyer.com.au homepage H1 is untouchable because it holds position one for the core commercial terms, and that this constrains what a landing page H1 may compete with. Location inner pages target local commercial terms by definition, so they are the case that constraint was written against. Nobody has ruled on whether these pages sit on the main domain, on a subdomain, or are handed to the client to publish inside the existing site.",
       "status": "BLOCKING, NOT RAISED WITH CLIENT",
@@ -35,9 +47,10 @@
       "raised": "21 Aug 2026"
     },
     "handWrittenOrGenerated": {
-      "problem": "The segment pages are four hand written files and that is the right shape for four. Location pages are plausibly dozens of near identical files, which is the shape a generator serves. The repository currently has no build step and that is a deliberate property, recorded in README.md.",
-      "status": "OPEN, DEPENDS ON THE LOCATION COUNT",
-      "alternative": "Keep it hand written up to roughly six pages. Past that, a generator in tools/ that writes locations/<slug>/index.html from shared/locations.json plus a copy deck, run locally and committed, so Vercel still serves static files and the no build step property survives.",
+      "problem": "Location pages are plausibly dozens of near identical pages, which is the shape a generator serves. This repository has no build step and that is deliberate, and as of 21 Aug 2026 it is also a handoff requirement, see hubspotDelivery.",
+      "status": "MOSTLY ANSWERED 21 Aug 2026 BY THE HUBSPOT DECISION",
+      "answer": "Do not build a generator here. HubSpot repeats a template across rows itself, so the multiplication belongs at the destination rather than in this repository. What is handed over is one reference page per distinct layout, plus locations.css and the copy decks, and the client developer turns that into a HubSpot template driven by whatever the client uses for the location list.",
+      "remaining": "How many distinct layouts there are. One template covering every location is the assumption; if a capital city page differs from a suburb page, that is two reference pages and the client developer needs to be told before the build starts, not after.",
       "raised": "21 Aug 2026"
     }
   }

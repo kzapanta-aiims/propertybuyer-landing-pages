@@ -4,10 +4,15 @@ Propertybuyer landing pages. Two families of page in one repository, because
 they share the tokens, the two self hosted faces, the base components, the
 decision log and the checker.
 
-| Family | Where | Traffic | Indexed |
-|---|---|---|---|
-| Paid segment pages | `New Builds/` | Google Ads, Performance Max | no, deliberately |
-| Location inner pages | `locations/` | organic search | yes, once they exist |
+| Family | Where | Traffic | Indexed | Ships as |
+|---|---|---|---|---|
+| Paid segment pages | `New Builds/` | Google Ads, Performance Max | no, deliberately | static, on Vercel |
+| Location inner pages | `locations/` | organic search | yes, once they exist | HubSpot, ported by the client developer |
+
+The location pages are a reference implementation rather than a deployment
+target. That is the reason the no build step, no framework, no CDN property at
+the bottom of this section is a requirement and not a preference: the developer
+receiving them works in HubSpot templates, in plain HTML, CSS and JavaScript.
 
 They are separate directories with separate design layers and separate
 registries. They are not separate repositories: see `locations/BRIEF.md` for

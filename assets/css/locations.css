@@ -10,19 +10,42 @@
    loaded before this file. Declares no tokens and holds no raw values.
    npm run check fails on a raw hex anywhere in here.
 
-   EMPTY ON PURPOSE, 21 August 2026. Nothing is written here until the first
+   THESE PAGES TAKE A DIFFERENT LAYOUT to the four paid pages. Confirmed by
+   the design lead 21 August 2026. Same design language, same tokens, same
+   voice, same claim tiers, different composition. So this file is expected to
+   grow into a substantial layer rather than a thin one, and landing.css is
+   not its starting point.
+
+   What that means in practice. landing.css is 1330 lines and almost all of it
+   is the composition of the buyer page: hero, truth cards, stats band, steps,
+   services, auction strip, prestige, FAQ. None of that carries over, and
+   nothing should be lifted out of it on the assumption that it will.
+
+   What does carry over is already shared:
+
+     tokens.css   every colour, space, radius, size and both faces
+     base.css     the reset, base typography, the two type utilities, and the
+                  button and pill components, all token bound and layout free
+     .wrap        the brand container, max-width and gutter from tokens
+     .section     band padding from the --band-y token
+
+   That is the design reference. It holds under any layout, which is why it
+   sits in base.css rather than in either design layer.
+
+   EMPTY ON PURPOSE, 21 August 2026. Nothing is written below until the first
    location page is designed, because a component invented ahead of the design
    is a value invented ahead of the design, and this repository does not do
    that. See locations/BRIEF.md for what is still blocked.
 
-   When the first page is built:
+   The one open promotion. The site header (5 rules) and the footer (7 rules)
+   are brand furniture rather than page layout, and are the only parts of
+   landing.css likely to be wanted here verbatim. They have not been promoted
+   to base.css, because whether a location page carries the same header is a
+   design question and nobody has answered it. When it is answered:
 
-   1. Take what you can from base.css unchanged. The reset, the type
-      utilities, the button and pill components are already token bound and
-      already shared. Reuse beats reimplementation.
-   2. If a component from landing.css is wanted verbatim, promote it to
-      base.css rather than copying it. A copy is where the drift starts.
-      Record the promotion in shared/segments.json under openDecisions.
-   3. If a component only looks similar, write it here instead. A near copy
-      in base.css is worse than two honest implementations.
+   1. If they are wanted unchanged, move them into base.css and record the
+      promotion in shared/segments.json under openDecisions. Move, do not
+      copy. A copy is where the drift starts.
+   2. If they only look similar, write the location version here instead. A
+      near copy in base.css is worse than two honest implementations.
    ========================================================================== */
