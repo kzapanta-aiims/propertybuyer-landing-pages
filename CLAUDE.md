@@ -148,9 +148,14 @@ launch. A page that fails only these is otherwise passing.
 Stripped from `commercial` and `investor` on 21 Aug 2026, so both now report
 "All hard rules pass". The CSS rule and the `page.js` handler stay, because
 both are gated on `data-poc` and the buyer page still demos with them; they
-are inert wherever the attribute is gone. Not yet closed: `?experts=N` in the
-URL still overrides availability on any page, so a visitor can put a count on
-screen that nobody verified.
+are inert wherever the attribute is gone.
+
+The `?experts=N` URL override was closed the same day, by gating it on
+`data-poc` inside `readAvailability`. It is a demo affordance, so it now
+lives and dies with the demo: still available on the buyer page for showing
+both states in a meeting, ignored anywhere the attribute is absent. Before
+that gate any visitor to a live page could render an unverified count with
+`?experts=99`, which is a Tier 3 claim as visible text.
 
 ## Git
 

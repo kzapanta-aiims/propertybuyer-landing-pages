@@ -234,8 +234,14 @@ must not reach live traffic. Both hang off attributes on `<body>` in
 | `data-experts-count="6"` | Seeds the expert count in that bar. Demo data, not a measured number | Replace with a real presence feed via `readAvailability()` in `page.js`, or delete the attribute so the bar shows the unquantified line |
 
 The toggle is the urgent one. It lets any visitor rewrite an availability
-claim, and `?experts=N` in the URL does the same, so neither should survive
-into a page that carries ad spend. See `HANDOVER.md`.
+claim, so it should not survive into a page that carries ad spend. See
+`HANDOVER.md`.
+
+`?experts=N` in the URL did the same on every page, and was closed on
+21 Aug 2026 by gating it on `data-poc` inside `readAvailability`. It works
+on this page, because the demo needs it, and is ignored wherever the
+attribute is absent. Deleting `data-poc` therefore closes the toggle and the
+URL override together.
 
 `npm run check` now fails while any of this is present, listing each item by
 name, so the reminder is a gate rather than a note. It fails today, which is

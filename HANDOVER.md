@@ -114,14 +114,16 @@ Substitutions and judgment calls:
   everywhere. The markup, the CSS and the JS are each fenced in comment
   banners reading `POC ONLY`; delete all three before launch. This is not
   a product control. It rewrites an availability claim, which no visitor
-  may be able to do, and the same objection applies to `?experts=N`.
-  Also listed in README.md under "Remove before launch".
+  may be able to do, and the same objection applied to `?experts=N` until
+  that override was gated on `data-poc` on 21 Aug 2026, so it too now dies
+  with the attribute. Also listed in README.md under "Remove before launch".
 - **The mobile CTA expert count is a PROOF OF CONCEPT, not a claim.**
   Raised 18 Aug as unprovable, then requested anyway for a client demo, so
   it ships as demo data and is labelled as such in three places: the
   comment above `<body>`, the comment in `page.js`, and here.
   `data-experts-count="6"` on `<body>` is the seed; `?experts=N` in the
-  URL overrides it so both states can be shown live in a meeting.
+  URL overrides it so both states can be shown live in a meeting, and that
+  override is gated on `data-poc` so it reaches no page without the demo.
   `readAvailability()` in `page.js` is the integration seam: point it at
   the CRM or HR presence endpoint, resolve to a non-negative integer or
   null, and nothing else changes. Zero available switches the button to

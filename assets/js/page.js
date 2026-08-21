@@ -103,9 +103,15 @@
          null     neither is asserted, the unquantified line stays
 
        ?experts=N in the URL overrides, so both states can be shown in a
-       meeting without a code change. */
+       meeting without a code change. That override is gated on data-poc,
+       because it is a demo affordance and not a product one: on a page
+       without the attribute a visitor could otherwise put a count nobody
+       verified on screen with ?experts=99, which is a Tier 3 claim
+       rendering as visible text. */
     var readAvailability = function () {
-      var q = new URLSearchParams(location.search).get('experts');
+      var q = document.body.getAttribute('data-poc') === 'true'
+        ? new URLSearchParams(location.search).get('experts')
+        : null;
       var raw = q !== null ? q : document.body.getAttribute('data-experts-count');
       if (raw === null || raw === '') return Promise.resolve(null);
       var n = parseInt(raw, 10);
