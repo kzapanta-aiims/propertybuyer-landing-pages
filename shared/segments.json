@@ -176,6 +176,14 @@
       "status": "DECIDED IN THE BUILD, OPEN TO OVERRULE",
       "consequence": "The investor page has nine sections where the buyer page has ten, matching the commercial page. Two of the three built pages now drop this band, so it is the home page that is the exception rather than these.",
       "raised": "21 Aug 2026"
+    },
+    "investorPhotography": {
+      "problem": "The investor page was derived from the buyer template and inherited its residential photography in every slot. The INVESTOR -- v1 artboard is not residential; it is the COMMERCIAL -- v1 artboard with five slots deliberately reverted to the home photography, because an investor buys both a warehouse and a unit.",
+      "decision": "MATCHED TO THE ARTBOARD 21 Aug 2026, six slots moved to the commercial photography and eleven left on the buyer photography. Commercial now: truth cards 1 and 3, step 2, and all three auction strip photos. Buyer kept: truth cards 2 and 4, steps 1, 3 and 4, all three service cards, the hero trio, the truth documents and the stats collage. Every slot was read off the artboard by its Paper node fill rather than by eye, and the six commercial files already existed from the commercial build, so no artwork was imported or re-cropped.",
+      "status": "DONE, NOT YET CLIENT REVIEWED",
+      "consequence": "One alt string changed with its picture: step 2 is now an agent inspecting shortlisted premises rather than a shortlisted home. The other five carry alt text that already described the subject rather than the property type, or are decorative. No file in assets/img was written, so neither the buyer nor the commercial page moved.",
+      "openQuestion": "Auction 3 is the couple on a residential balcony flagged under commercialPhotography as wrong for a commercial page. On an investor page it reads correctly, so the same photograph is a defect on one page and right on the other. The two AI artefacts flagged there also arrive here: the garbled valuation report on truth card 3 and the small print on the auction sign.",
+      "raised": "21 Aug 2026"
     }
   }
 }
