@@ -1,5 +1,6 @@
 /**
- * Imports the commercial photography from the Paper file into assets/img.
+ * Imports photography from the Paper file into assets/img, for every page
+ * that takes its artwork from a Paper artboard.
  *
  * WHY THIS EXISTS
  * The commercial page was derived from the buyer template and inherited its
@@ -81,6 +82,33 @@ const SLOTS = [
   { out: 'commercial-auction-3.webp', src: 'auction-3.jpg', size: [1146, 1360],
     crop: { left: 100, top: 102, width: 1264, height: 1497 }, node: 'BCZ-0',
     asset: '01M0GTZDHN6RQWA5GPXDE5DWF2.jpg' },
+  /* --- Buyer page, auction strip. 573x680 in CSS, so 2x is 1146x1360.
+     Replaced 21 Aug 2026 from BUYER v3, where the section reads "Off Market
+     and auction ready". These are the unprefixed names, which belong to the
+     buyer page; the commercial equivalents sit above. ------------------- */
+
+  /* Rect 680x680 at 0,0 inside a 573x680 frame, so it overflows to the right
+     and fits exactly down. Source 2048x2048, scale 3.01176. The crop is
+     1726x2048, past 2x, so it ships at the full 1146x1360. */
+  { out: 'auction-1.webp', src: 'buyer-auction-1.jpg', size: [1146, 1360],
+    crop: { left: 0, top: 0, width: 1726, height: 2048 }, node: 'D2P-0',
+    asset: '01M0H7Z6XHC671HBSQMZNH55KD.jpg' },
+
+  /* Rect 1024x681 at x=-225 y=-0.297 inside 573x680. Source 5568x3712, scale
+     5.4375 across and 5.45081 down. The crop is 3116x3707, well past 2x, so
+     it ships at the full 1146x1360. */
+  { out: 'auction-2.webp', src: 'buyer-auction-2.jpg', size: [1146, 1360],
+    crop: { left: 1223, top: 2, width: 3116, height: 3707 }, node: 'D2M-0',
+    asset: '01M0H7A6YTMTDA10Z2MMZFFA9N.jpg' },
+
+  /* Rect 1295x863 at x=-722 y=-183.297 inside 573x680. Source 2048x1365,
+     scale 1.58147 across and 1.58169 down. Rounding put the crop one pixel
+     past the bottom edge, so the height is clamped to 1075. At 906x1075 it is
+     short of 2x, so it ships native, the lowest resolution of the three. */
+  { out: 'auction-3.webp', src: 'buyer-auction-3.jpg', size: [906, 1075],
+    crop: { left: 1142, top: 290, width: 906, height: 1075 }, node: 'D2U-0',
+    asset: '01M0H7ZWSVSQF7JDWWRKMY51VJ.jpg' },
+
 ];
 
 if (!existsSync(OUT)) mkdirSync(OUT, { recursive: true });
