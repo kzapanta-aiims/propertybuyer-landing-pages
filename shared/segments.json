@@ -176,6 +176,13 @@
       "status": "DECIDED IN THE BUILD, OPEN TO OVERRULE",
       "consequence": "The investor page has nine sections where the buyer page has ten, matching the commercial page. Two of the three built pages now drop this band, so it is the home page that is the exception rather than these.",
       "raised": "21 Aug 2026"
+    },
+    "buyerOffMarketPhotography": {
+      "decision": "Replaced the three photographs in the buyer page Off-market and auction ready strip on 21 Aug 2026, from the BUYER v3 artboard in Paper, image row 8BR-0. Paper crops by oversizing a rectangle inside a smaller frame, so each visible window is a function of the rectangle size and its offset against the 573x680 frame. Those numbers are recorded in tools/import-paper-images.mjs against the asset ids they were measured from, rather than being read back off a screenshot. Two of the three reach 1146x1360; the third ships native at 906x1075 because its source has no more pixels and nothing is ever enlarged.",
+      "status": "DONE 21 Aug 2026, side effect on the investor page accepted",
+      "consequence": "The investor page references the same unprefixed auction-1, auction-2 and auction-3 files, so its Off-market strip changed with the buyer page. Both pages carry the identical section under the identical heading, and both were already showing the same images, so the new photography suits each equally. If the investor page should hold different photography it needs its own investor- prefixed copies, which is the rule CLAUDE.md already states for every page after the buyer.",
+      "alternative": "Give the buyer page buyer- prefixed copies and leave the shared names pointing at the older images. Rejected because the unprefixed names belong to the buyer page by the stated convention, so prefixing the owner rather than the borrower would invert it.",
+      "raised": "21 Aug 2026"
     }
   }
 }
