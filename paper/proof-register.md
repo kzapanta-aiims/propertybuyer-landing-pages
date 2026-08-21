@@ -261,7 +261,47 @@ deck also appears in the homebuyer or commercial decks under a different story.
   said "96%". Two numbers in circulation confirms the register's ruling:
   GATED, does not render.
 
-## Developer page, UNFILLED 21 August 2026
+## Developer page, FILLED FROM THE HOME BUYER DECK 21 August 2026
+
+**The framing is the open item, not the figures.** The three slots were
+filled on 21 August 2026 at the client direction, for client review, after
+the concern below was raised and the instruction confirmed. **All three
+records are residential home purchases, not development sites.**
+
+| Slot | Client | Record | Source |
+|---|---|---|---|
+| 1 | Stephen and Veronica | Sydney NSW, 4 bed 3 bath 2 car. Bought 2012 for $1,880,000, valued at $6,200,000 in 2026. 6 weeks to purchase | Homebuyer deck p.7 |
+| 2 | Stephen and Melanie | Melbourne VIC. Bought 2013 for $2,500,000, valued at $4,200,000 in 2026. Time to purchase not recorded | Homebuyer deck p.29 |
+| 3 | Roderick and Denise | Sydney NSW eastern suburbs, 5 bed 2 bath 2 car. Bought 2014 for $4,870,000, valued at $15,000,000 in 2026. 8 weeks to purchase | Homebuyer deck p.3 |
+
+Every figure is copied from the sections above rather than re-read, and every
+abbreviation is exact: $1.88M is $1,880,000, $6.2M is $6,200,000, $2.5M is
+$2,500,000, $4.2M is $4,200,000, $4.87M is $4,870,000, $15M is $15,000,000.
+
+**Why these three, and what it cost.** The home buyer PDF is not in the
+repository, so the only available records were the five carrying figures in
+this register. Three of the five are live on the buyer page. The two that
+were unused, slots 1 and 2, were both taken. Slot 3 needed the only other
+record above this page own $2.5m budget floor, and that record is already
+live on the buyer page.
+
+Two consequences worth stating plainly. **Slot 1 sits below the page own
+budget floor** at $1.88m, because no unused record exists between $1.88m and
+$4.87m. And **slot 3 now carries one record in three framings**: a downsize
+on the buyer page, a portfolio addition let at $4,500 per week in the
+investor deck, and a development proof point here. See the deck overlap
+section below, which was already unresolved before this was added to it.
+
+**Slot 2 ships two brackets deliberately.** The register holds Stephen and
+Melanie figures but not their story or their time to purchase, so the body
+says so and the third stat reads `[N weeks]`.
+
+**No photographs, on any of the three.** Only slot 3 has one in the
+repository. One real photograph beside two flat blocks reads as a bug, so
+all three stay unphotographed. Supplying the home buyer PDF in `.deck-src/`
+and running `npm run deck-images` would produce all three.
+
+## Developer page, the development records this page actually wants
 
 **No developer deck exists.** The three client success-story decks supplied so
 far are "Legacy All Homebuyer (1).pdf", "Latest Recent Purchases -
