@@ -134,7 +134,11 @@ the glass on either page now.
 
 ## One correction carried back to the buyer page
 
-The stats band bullet reads "Over 50+ industry awards" on the buyer page while
-the stat callout beside it reads 53. `DESIGN.md` section Claims says 53
-"replaces 50+ everywhere". The commercial page ships the corrected string.
-**The buyer page still needs the same fix.**
+**Settled 21 August 2026, no longer outstanding.** The stat callout read 53
+while the bullet beside it read 50+. The client chose 50+, so the callout now
+reads 50+ on all three pages and `DESIGN.md` section Claims has been corrected
+to match. See `awardsCountOnStatRow` in `shared/segments.json`.
+
+The buyer page bullet still reads "Over 50+ industry awards", which doubles the
+qualifier and is the only one of the three phrased that way. That is a wording
+nit rather than a claim conflict.

@@ -140,7 +140,7 @@ Substitutions and judgment calls:
   `:root`. It resolves a step darker than `bg/brand` and lighter than the
   footer's `bg/brand-deep`, so the two bands separate. Author a real token
   if this band is keeping that colour.
-- **Stats are visible unproven claims**: 5,000+ purchases, 53 awards, 4.9
+- **Stats are visible unproven claims**: 5,000+ purchases, 50+ awards, 4.9
   stars, 300 reviews, "most awarded", "Best Buyers Agency of the Year
   2025". They came from the design, not from the proof register. Verify
   before launch and record sources in `paper/proof-register.md`. This does

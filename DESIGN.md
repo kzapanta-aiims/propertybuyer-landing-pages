@@ -551,13 +551,20 @@ agents · Rich Harvey's credentials (Masters in Economics, REBAA President four
 years, Chairman REINSW Buyers Agent Chapter) · the fee schedule, 1.5 to 2
 percent full search and 1 percent appraise and negotiate.
 
-**53 awards.** Resolved. The landing page build brief of 6 August 2026 clears
-53 and states it replaces "50+" everywhere, sourced to the client's own
-onboarding USP document. Use 53. Note that the Figma Stop and Flag list still
-carries this as gated and is behind; Figma should be corrected rather than this
-file reverted. Treatment is unchanged: one aggregate line naming the count plus
-the two most significant wins, never a badge grid. Which two are the marquee
-wins is not recorded anywhere, so name the count alone until they are.
+**50+ awards.** Resolved twice, and 50+ is the number that stands. The landing
+page build brief of 6 August 2026 cleared 53 and said it replaced "50+"
+everywhere, sourced to the client's own onboarding USP document. The client
+reversed that on 21 August 2026 and asked for 50+ on the stat row, so **use
+50+**, and no page carries 53 any more. Recorded under `awardsCountOnStatRow`
+in `shared/segments.json`. Two things worth knowing about the reversal: 50+
+understates a count the client can evidence, so the exposure runs the safe
+way, and it agrees with what propertybuyer.com.au itself says, which the proof
+register had flagged as a discrepancy against this file. Note that the Figma
+Stop and Flag list still carries this as gated and is behind; Figma should be
+corrected rather than this file reverted. Treatment is unchanged: one aggregate
+line naming the count plus the two most significant wins, never a badge grid.
+Which two are the marquee wins is not recorded anywhere, so name the count
+alone until they are.
 
 **Gated, does not render:** the 96 percent purchase rate, because the
 denominator is ambiguous as written and a claim nobody can define is a claim
@@ -659,7 +666,7 @@ be the client.
 - **Deliberate divergences from the live site** that the client has not yet been told about: the accent darkened to `#A26246` for accessibility, body face moved to Geist, H1 in Proyale capped at 44. Defensible, but flag them in handovers; do not let the client discover them.
 - **The success colour ramp is invented.** The build has no success state, so it has no source. The first form that ships with it makes it brand by accident; get it looked at first.
 - **Prestige sub-brand:** `prestigepropertybuyer.com.au` is a non-functional shell. Prestige buyers land on the core site; there is no separate destination to route to. Design the prestige band on `home` as a terminus, not as a signpost to somewhere else.
-- **Which two awards are the marquee wins.** The count is cleared at 53 but the two named wins the treatment calls for are not recorded in any document we hold. Name the count alone until they are.
+- **Which two awards are the marquee wins.** The count is cleared at 50+ but the two named wins the treatment calls for are not recorded in any document we hold. Name the count alone until they are.
 
 **Resolved, kept for the record.**
 
@@ -671,7 +678,7 @@ be the client.
 - 13 Aug 2026: **the segment list. Six to four.** `home`, `investor`, `commercial`, `developer`. Prestige becomes a treatment and a derived flag; expat is retired as a circumstance rather than a motive. See Segments.
 - 13 Aug 2026: **Proyale renders in capitals, and that is accepted.** A capitals-only face is a property of the face. The sentence case rule governs how copy is written, not how a chosen display face renders it. Keep writing H1 and H2 in sentence case: the fallback, Georgia, is mixed case and renders them that way until Proyale loads. The `-2 percent` display tracking was checked optically on Proyale at 44 on a capitals setting and holds.
 - 13 Aug 2026: **segment ranking. Deliberately equal, do not rank.** There is no lead qualification data to rank against, so a ranking would encode a guess as a design decision. The router measures demand before it converts it. Rank later, on observed distribution.
-- 13 Aug 2026: **the award count. 53**, per the build brief. Figma's Stop and Flag list is behind on this.
+- 13 Aug 2026, revised 21 Aug 2026: **the award count. 50+.** Cleared at 53 per the build brief, then reduced to 50+ at the client's direction. The earlier figure is kept here so the change has a record; 50+ is what to use. Figma's Stop and Flag list is behind on both steps.
 
 **Where Figma is now behind this file.** These are not conflicts to reason
 about, they are edits queued against the Figma source. Until they land, Figma
@@ -683,7 +690,7 @@ and this file disagree and this file is the newer of the two:
 | Design Rules § 5 | "The six values" | The four values |
 | Design Rules § 10 | "data-segment with one of the six values" | four |
 | Context § 8 | Segment ranking open, award count open | Both resolved 13 Aug 2026 |
-| Design Rules § 11 | Award count gated, PMax and Final URL Expansion | 53 cleared; the PMax item is not a design constraint and belongs elsewhere |
+| Design Rules § 11 | Award count gated, PMax and Final URL Expansion | 50+ cleared; the PMax item is not a design constraint and belongs elsewhere |
 
 The standing precedence rule still holds for **values**: Figma Variables win on
 any token. It does not extend to segment scope or claims status, which are

@@ -64,7 +64,7 @@ at review rather than silently reconciled.
 
 | String | Count / budget |
 |---|---|
-| 315+ Google reviews. Buyers only since 2001, more than 5,000 properties purchased and 53 industry awards. | one line, count-only awards, review count verify-at-publish |
+| 315+ Google reviews. Buyers only since 2001, more than 5,000 properties purchased and 50+ industry awards. | one line, count-only awards, review count verify-at-publish |
 
 ## why-choose — SHIPPED verbatim, all strings
 

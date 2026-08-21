@@ -238,10 +238,12 @@ deck also appears in the homebuyer or commercial decks under a different story.
 - **"315+ Google reviews"** could not be verified from public search on
   13 Aug 2026. The claim stays on the page exactly as shipped, with its
   verify-at-publish flag intact. The client targets 500.
-- **Award count.** The live site's home-buyers page says "50+ industry
-  awards"; the repo's claims register resolved **53** as cleared on
-  13 Aug 2026. The design uses 53 per the register. Flag the live-site
-  discrepancy to the client rather than silently matching it.
+- **Award count. Resolved 21 Aug 2026, and the discrepancy is gone.** The
+  live site's home-buyers page says "50+ industry awards", while the claims
+  register had resolved **53** as cleared on 13 Aug 2026, so the pages and the
+  live site disagreed. This was flagged to the client rather than silently
+  matched, and the client chose **50+**. All three pages and `DESIGN.md` now
+  say 50+, which agrees with the live site.
 - **"30 to 60 days"** is corroborated in public use: the live home-buyers
   page leads with "Find Your Home in 30 - 60 Days".
 - **Success rate.** The live site now publishes "98%" where older material
