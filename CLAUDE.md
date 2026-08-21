@@ -156,10 +156,16 @@ and 1440. It needs `npx playwright install chromium` once.
 They are the client-demo availability switch and must be deleted before
 launch. A page that fails only these is otherwise passing.
 
-Stripped from `commercial` and `investor` on 21 Aug 2026, so both now report
-"All hard rules pass". The CSS rule and the `page.js` handler stay, because
-both are gated on `data-poc` and the buyer page still demos with them; they
-are inert wherever the attribute is gone.
+Stripped from `commercial`, `investor` and `developer` on 21 Aug 2026, so all
+three now report "All hard rules pass". The CSS rule and the `page.js` handler
+stay, because both are gated on `data-poc` and the buyer page still demos with
+them; they are inert wherever the attribute is gone.
+
+**The template is the page that keeps the scaffolding**, so any page derived
+from `New Builds/buyer/index.html` inherits all three items again. Strip them
+as the last step of a new build, before the first `npm run check`. The
+developer page shipped with them on 21 Aug 2026 for exactly this reason and
+needed a follow-up commit. See `pocScaffoldingState`.
 
 The `?experts=N` URL override was closed the same day, by gating it on
 `data-poc` inside `readAvailability`. It is a demo affordance, so it now
