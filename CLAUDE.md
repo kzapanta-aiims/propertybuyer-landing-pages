@@ -24,14 +24,17 @@ New Builds/developer/BRIEF.md      not built, content blocked
 assets/css/tokens.css    tokens and both faces. Shared, never edited by a build
 assets/css/base.css      reset, base type, buttons, pills. Shared
 assets/css/landing.css   design layer, the four paid segment pages
-assets/css/locations.css design layer, the location pages. Empty so far
+assets/css/locations.css design layer, the location pages
 assets/js/page.js        ONE script, every page
 shared/segments.json     segment list plus the decision log
 paper/proof-register.md  every Tier 1 proof point, with its source
 paper/buyer-copy.md      copy deck, home
 paper/commercial-copy.md copy deck, commercial
 paper/investor-copy.md   copy deck, investor
-tools/check.mjs          the acceptance checklist, automated
+tools/check.mjs          the acceptance checklist, both families
+locations/melbourne/index.html the first location page, built 21 Aug 2026
+locations/STRATEGY.md    the location family's structure argument
+shared/locations.json    the location registry and its decision log
 tools/import-paper-images.mjs  Paper artwork in, with the crop geometry
 ```
 
@@ -87,9 +90,17 @@ or declares a `:root` block outside `tokens.css`.
 **The location pages are a second family, and they take their own layout.**
 `locations/`, organic search, shipped in HubSpot rather than on Vercel. They
 share the design language and the context, not the page structure, so
-`landing.css` is not their starting point. Do not derive one from the buyer
-page the way a segment page is derived. See `locations/BRIEF.md` and
-`shared/locations.json`.
+`landing.css` is not their starting point. Melbourne is built and is that
+family's template. Its capture contract inverts the paid pages, and the
+checker enforces it: forms carry `data-location`, never `data-segment`, no
+chip is pre-selected and the segment group is required. See
+`locations/BRIEF.md` and `shared/locations.json`.
+
+**The header, the footer and the lead capture component live in base.css**
+since 21 Aug 2026, promoted from landing.css when the location family needed
+them. They land on every page in both families; treat a change to them like
+a change to Figma Variables. See `baseCssPromotion` in
+`shared/segments.json`.
 
 ## The rules that get broken most
 

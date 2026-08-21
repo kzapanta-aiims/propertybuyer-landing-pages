@@ -7,45 +7,332 @@
    purpose, so anything that lands here can be crawled the day it ships.
 
    REQUIRES assets/css/tokens.css and assets/css/base.css, in that order,
-   loaded before this file. Declares no tokens and holds no raw values.
-   npm run check fails on a raw hex anywhere in here.
+   loaded before this file. Declares no tokens and holds no raw colour
+   values. npm run check fails a raw hex anywhere in here.
 
-   THESE PAGES TAKE A DIFFERENT LAYOUT to the four paid pages. Confirmed by
-   the design lead 21 August 2026. Same design language, same tokens, same
-   voice, same claim tiers, different composition. So this file is expected to
-   grow into a substantial layer rather than a thin one, and landing.css is
-   not its starting point.
+   FIRST BUILT 21 August 2026, with locations/melbourne/index.html. The
+   family takes its own layout, decided by the design lead: what carries
+   over from the paid pages is the design language, the tokens, the two
+   faces and the shared furniture in base.css, not the page composition.
 
-   What that means in practice. landing.css is 1330 lines and almost all of it
-   is the composition of the buyer page: hero, truth cards, stats band, steps,
-   services, auction strip, prestige, FAQ. None of that carries over, and
-   nothing should be lifted out of it on the assumption that it will.
+   The composition idea, so the next page reads this layer the way it was
+   meant: a city ledger. Zone A, the first two screens, is dense and
+   instrumented, and carries the promise, the proof, the people and the
+   capture. Zone B is a quiet editorial column on alternating sand grounds,
+   where the search copy lives. Brand teal appears exactly three times, on
+   the hero, the team band and the closing capture, so the three conversion
+   moments are also the three loudest. The rationale and the research are in
+   locations/STRATEGY.md.
 
-   What does carry over is already shared:
-
-     tokens.css   every colour, space, radius, size and both faces
-     base.css     the reset, base typography, the two type utilities, and the
-                  button and pill components, all token bound and layout free
-     .wrap        the brand container, max-width and gutter from tokens
-     .section     band padding from the --band-y token
-
-   That is the design reference. It holds under any layout, which is why it
-   sits in base.css rather than in either design layer.
-
-   EMPTY ON PURPOSE, 21 August 2026. Nothing is written below until the first
-   location page is designed, because a component invented ahead of the design
-   is a value invented ahead of the design, and this repository does not do
-   that. See locations/BRIEF.md for what is still blocked.
-
-   The one open promotion. The site header (5 rules) and the footer (7 rules)
-   are brand furniture rather than page layout, and are the only parts of
-   landing.css likely to be wanted here verbatim. They have not been promoted
-   to base.css, because whether a location page carries the same header is a
-   design question and nobody has answered it. When it is answered:
-
-   1. If they are wanted unchanged, move them into base.css and record the
-      promotion in shared/segments.json under openDecisions. Move, do not
-      copy. A copy is where the drift starts.
-   2. If they only look similar, write the location version here instead. A
-      near copy in base.css is worse than two honest implementations.
+   Class vocabulary is loc- prefixed throughout, so this layer can never be
+   confused with landing.css, which is never loaded with it. Pixel values
+   here are editorial layout values, commented where they matter; every
+   colour, face, weight and space is a token.
    ========================================================================== */
+
+/* --- Shared, this family --------------------------------------------------- */
+
+/* Dark bands set their own ink. Base h2 pins --text-heading, which vanishes
+   on teal, so the on-dark context restates it. */
+.on-dark h1, .on-dark h2 { color: var(--text-on-brand); }
+.on-dark .micro { color: var(--text-on-brand-muted); }
+.on-dark p { color: var(--text-on-brand); }
+
+/* Visibly unfilled content. The repository rule is that a missing value
+   ships in square brackets rather than as plausible copy; this face makes
+   the placeholder read as scaffolding rather than as finished copy. */
+.loc-unfilled { color: var(--text-muted); }
+.loc-tile--unfilled {
+  border: 1px dashed var(--border-muted);
+  border-radius: var(--radius-card);
+  background: none;
+}
+.on-dark .loc-tile--unfilled { border-color: var(--border-on-brand); }
+
+/* Section rhythm comes from base .section; these grounds alternate the
+   Zone B column. */
+.loc-sec--tint { background: var(--bg-surface); }
+.loc-sec--alt { background: var(--bg-surface-alt); }
+
+/* The reading column. Zone B is one measured column, not a card wall. */
+.loc-prose { display: flex; flex-direction: column; gap: var(--gap); max-width: var(--measure-intro); }
+.loc-prose p { font-size: var(--type-body); line-height: 1.6; }
+.loc-sec__head { display: flex; flex-direction: column; gap: var(--gap-sm); margin-bottom: var(--gap-lg); }
+.loc-sec__head .micro { letter-spacing: var(--tracking-caps); }
+
+/* --- Hero, Zone A ----------------------------------------------------------- */
+
+.loc-hero { background: var(--bg-brand); color: var(--text-on-brand); }
+.loc-hero .wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 460px; /* copy beside the capture card */
+  gap: var(--gap-xl);
+  align-items: start;
+  padding-block: 72px 80px;
+}
+.loc-hero__copy { display: flex; flex-direction: column; gap: var(--gap); }
+.loc-hero__copy h1 { color: var(--text-on-brand); }
+.hero__subhead {
+  font-size: var(--type-h3-card);
+  font-weight: var(--weight-body);
+  line-height: 1.4;
+  color: var(--text-on-brand);
+}
+.loc-hero__body { max-width: var(--measure-intro); color: var(--text-on-brand-muted); }
+
+/* The dominant proof point. One number, framed, inside the fold. */
+.loc-hero__proof {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xs);
+  padding: var(--space-gutter);
+  border-radius: var(--radius-card);
+  background: var(--bg-frost);
+  border: 1px solid var(--border-on-brand);
+  max-width: 420px;
+}
+.loc-hero__proof-num {
+  font-family: var(--family-display);
+  font-weight: var(--weight-display);
+  font-size: var(--type-display);
+  line-height: 1.1;
+  letter-spacing: var(--tracking-display);
+  color: var(--text-on-brand);
+}
+.loc-hero__proof-line { font-size: var(--type-small); color: var(--text-on-brand-muted); line-height: 1.5; }
+
+.loc-hero__actions { display: flex; flex-wrap: wrap; gap: var(--gap-sm); align-items: center; margin-top: var(--gap-xs); }
+.loc-hero__phone-note { font-size: var(--type-micro); color: var(--text-on-brand-muted); }
+
+/* --- Proof band, Zone A ------------------------------------------------------ */
+
+.loc-proof { background: var(--bg-page); }
+.loc-records { display: flex; flex-direction: column; }
+.loc-record {
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr) minmax(200px, auto);
+  gap: var(--gap-lg);
+  align-items: center;
+  padding-block: var(--gap-lg);
+  border-top: 1px solid var(--border-default);
+}
+.loc-record:last-child { border-bottom: 1px solid var(--border-default); }
+.loc-record--nophoto { grid-template-columns: minmax(0, 1fr) minmax(200px, auto); }
+.loc-record__media {
+  width: 200px;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  background: var(--bg-photo-fallback);
+}
+.loc-record__media img { width: 100%; height: 100%; object-fit: cover; }
+.loc-record__copy { display: flex; flex-direction: column; gap: var(--gap-sm); }
+.loc-record__copy h3 { font-size: var(--type-h3-card); font-weight: var(--weight-semibold); color: var(--text-heading); }
+.loc-record__copy p { font-size: var(--type-body); color: var(--text-body); }
+.loc-record__source { font-size: var(--type-micro); color: var(--text-muted); }
+
+/* Figures as a ledger: label over number, exact and never rounded. */
+.loc-record__figures { display: flex; flex-direction: column; gap: var(--gap-sm); margin: 0; }
+.loc-record__figures div { display: flex; flex-direction: column; gap: 2px; }
+.loc-record__figures dt {
+  font-size: var(--type-micro);
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.loc-record__figures dd {
+  margin: 0;
+  font-size: var(--type-h3);
+  font-weight: var(--weight-semibold);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-heading);
+}
+
+.loc-record--unfilled {
+  border: 1px dashed var(--border-muted);
+  border-radius: var(--radius-card);
+  padding: var(--gap-lg);
+  margin-block: var(--gap-lg);
+  display: block;
+}
+.loc-record--unfilled h3 { color: var(--text-muted); font-size: var(--type-h3-card); font-weight: var(--weight-semibold); }
+.loc-record--unfilled p { color: var(--text-muted); max-width: var(--measure-intro); margin-top: var(--gap-xs); }
+
+/* --- Team band, Zone A ------------------------------------------------------- */
+
+.loc-team { background: var(--bg-brand-deep); color: var(--text-on-brand); }
+.loc-team__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--gap);
+  margin-top: var(--gap-lg);
+}
+.loc-team__tile { padding: var(--space-gutter); min-height: 132px; display: flex; flex-direction: column; gap: var(--gap-xs); justify-content: end; }
+.loc-team__tile p { color: var(--text-on-brand-muted); font-size: var(--type-small); }
+.loc-team__note { margin-top: var(--gap); color: var(--text-on-brand-muted); font-size: var(--type-small); max-width: var(--measure-intro); }
+
+/* --- Market data, Zone B ------------------------------------------------------ */
+
+.loc-data {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--gap);
+  margin-top: var(--gap-lg);
+}
+.loc-data__tile { padding: var(--space-gutter); display: flex; flex-direction: column; gap: var(--gap-xs); }
+.loc-data__tile .loc-data__num {
+  font-size: var(--type-h3);
+  font-weight: var(--weight-semibold);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+}
+.loc-data__tile p { font-size: var(--type-micro); color: var(--text-muted); }
+
+/* --- Process, Zone B ---------------------------------------------------------- */
+
+/* A numbered list because the content is genuinely a sequence. */
+.loc-steps { display: flex; flex-direction: column; counter-reset: loc-step; max-width: var(--measure-intro); }
+.loc-steps li {
+  counter-increment: loc-step;
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  gap: var(--gap);
+  padding-block: var(--gap);
+  border-top: 1px solid var(--border-default);
+}
+.loc-steps li::before {
+  content: counter(loc-step, decimal-leading-zero);
+  font-size: var(--type-h3);
+  font-weight: var(--weight-semibold);
+  font-variant-numeric: tabular-nums;
+  color: var(--action-primary);
+  line-height: 1.4;
+}
+.loc-steps h3 { font-size: var(--type-h3-card); font-weight: var(--weight-semibold); color: var(--text-heading); }
+.loc-steps p { margin-top: var(--gap-xs); color: var(--text-body); }
+.loc-fee { margin-top: var(--gap-lg); max-width: var(--measure-intro); }
+
+/* --- Segment fork, Zone B ------------------------------------------------------ */
+
+.loc-fork {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--gap);
+  margin-top: var(--gap-lg);
+}
+.loc-fork__block {
+  padding: var(--space-gutter);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-card);
+  background: var(--bg-surface);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-sm);
+}
+.loc-fork__block h3 { font-size: var(--type-h3-card); font-weight: var(--weight-semibold); color: var(--text-heading); }
+.loc-fork__block p { font-size: var(--type-body); color: var(--text-body); flex: 1; }
+.loc-fork__block a {
+  font-size: var(--type-small);
+  font-weight: var(--weight-semibold);
+  color: var(--text-link);
+  text-underline-offset: 4px;
+  min-height: var(--tap-min);
+  display: inline-flex;
+  align-items: center;
+}
+
+/* --- Regions, Zone B ------------------------------------------------------------ */
+
+.loc-regions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--gap);
+  margin-top: var(--gap-lg);
+}
+.loc-regions .loc-tile--unfilled { padding: var(--space-gutter); min-height: 96px; display: flex; align-items: end; }
+.loc-regions p { color: var(--text-muted); font-weight: var(--weight-medium); }
+.loc-regions__note { margin-top: var(--gap); font-size: var(--type-small); color: var(--text-muted); max-width: var(--measure-intro); }
+
+/* --- FAQ, Zone B ----------------------------------------------------------------- */
+
+.loc-faq { max-width: var(--content-max); }
+.loc-faq details { border-top: 1px solid var(--border-default); }
+.loc-faq details:last-child { border-bottom: 1px solid var(--border-default); }
+.loc-faq summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap);
+  min-height: var(--tap-min);
+  padding-block: var(--gap);
+  font-size: var(--type-h3-card);
+  font-weight: var(--weight-medium);
+  color: var(--text-heading);
+}
+.loc-faq summary::-webkit-details-marker { display: none; }
+.loc-faq summary::after {
+  content: "+";
+  font-size: var(--type-h3);
+  font-weight: var(--weight-body);
+  color: var(--action-primary);
+  flex-shrink: 0;
+}
+.loc-faq details[open] summary::after { content: "\2212"; } /* minus sign */
+.loc-faq details > p { padding-bottom: var(--gap); max-width: var(--measure-intro); color: var(--text-body); }
+
+/* --- Closing capture, Zone B ends on brand --------------------------------------- */
+
+.loc-closer { background: var(--bg-brand); color: var(--text-on-brand); }
+.loc-closer .wrap { display: flex; flex-direction: column; gap: var(--gap); align-items: flex-start; }
+.loc-closer__lede { color: var(--text-on-brand-muted); max-width: var(--measure-intro); }
+.loc-closer__form { display: flex; flex-wrap: wrap; gap: var(--gap-sm); align-items: end; width: 100%; max-width: 560px; }
+.loc-closer__form .field { flex: 1; min-width: 220px; display: flex; flex-direction: column; gap: var(--gap-sm); }
+.loc-closer__form .micro { color: var(--text-on-brand-muted); }
+.loc-closer__phone { font-size: var(--type-small); color: var(--text-on-brand-muted); }
+
+/* --- Other locations, Zone B ------------------------------------------------------- */
+
+.loc-siblings { background: var(--bg-surface); }
+.loc-siblings__row { display: flex; flex-wrap: wrap; gap: var(--gap); margin-top: var(--gap-lg); }
+.loc-siblings__row a, .loc-siblings__row span {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap-min);
+  padding: 10px 18px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-muted);
+  font-size: var(--type-small);
+  color: var(--text-body);
+  text-decoration: none;
+}
+.loc-siblings__row a { border-color: var(--border-brand); color: var(--text-link); font-weight: var(--weight-medium); }
+.loc-siblings__row a:hover { background: var(--bg-info-subtle); }
+.loc-siblings__row span { border-style: dashed; color: var(--text-muted); }
+
+/* --- Responsive --------------------------------------------------------------------
+   Same breakpoints as the rest of the repository: 768 and 1024, designed at
+   1440, checked hard at 390. */
+
+@media (max-width: 1023px) {
+  .loc-hero .wrap { grid-template-columns: minmax(0, 1fr); padding-block: 48px 56px; }
+  .loc-data { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .loc-record { grid-template-columns: 160px minmax(0, 1fr); }
+  .loc-record--nophoto { grid-template-columns: minmax(0, 1fr); }
+  .loc-record__figures { flex-direction: row; flex-wrap: wrap; gap: var(--gap); grid-column: 2; }
+  .loc-record--nophoto .loc-record__figures { grid-column: 1; }
+  .loc-record__media { width: 160px; }
+}
+
+@media (max-width: 767px) {
+  .loc-fork { grid-template-columns: minmax(0, 1fr); }
+  .loc-regions { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .loc-team__grid { grid-template-columns: minmax(0, 1fr); }
+  .loc-record { grid-template-columns: minmax(0, 1fr); }
+  .loc-record__media { width: 100%; aspect-ratio: 16 / 9; }
+  .loc-record__figures { grid-column: 1; }
+  .loc-hero__actions .btn { width: 100%; }
+  .loc-closer__form { flex-direction: column; align-items: stretch; }
+}

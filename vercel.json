@@ -4,19 +4,45 @@
   "buildCommand": "",
   "outputDirectory": ".",
   "rewrites": [
-    { "source": "/", "destination": "/New Builds/buyer/index.html" },
-    { "source": "/buyer", "destination": "/New Builds/buyer/index.html" },
-    { "source": "/commercial", "destination": "/New Builds/commercial/index.html" },
-    { "source": "/investor", "destination": "/New Builds/investor/index.html" }
+    {
+      "source": "/",
+      "destination": "/New Builds/buyer/index.html"
+    },
+    {
+      "source": "/buyer",
+      "destination": "/New Builds/buyer/index.html"
+    },
+    {
+      "source": "/commercial",
+      "destination": "/New Builds/commercial/index.html"
+    },
+    {
+      "source": "/investor",
+      "destination": "/New Builds/investor/index.html"
+    },
+    {
+      "source": "/melbourne",
+      "destination": "/locations/melbourne/index.html"
+    }
   ],
   "headers": [
     {
       "source": "/((?!locations).*)",
-      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
     },
     {
       "source": "/assets/fonts/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     }
   ]
 }

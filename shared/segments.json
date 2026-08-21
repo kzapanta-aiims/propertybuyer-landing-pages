@@ -208,6 +208,12 @@
       "verification": "The split is comment level only. Every code line was preserved and none was added, checked by sorted line comparison, and the brace count is identical at 436. npm run check passes every rendered check at 390, 768, 1100 and 1440 on the buyer page, including the H1 and H2 token sizes and the section rhythm, so the rendered result is unchanged.",
       "consequence": "tokens.css and base.css are shared, so a change to either lands on pages someone else may be building on another branch. Treat them the way you would treat a change to Figma Variables. A component wanted by both families gets promoted into base.css and recorded here, never copied.",
       "enforcement": "tools/check.mjs fails a page whose first two stylesheets are not tokens.css then base.css, a page loading zero or two design layers, a raw hex in any layer, and a :root block in any layer other than tokens.css."
+    },
+    "baseCssPromotion": {
+      "decision": "The site header, the site footer and the lead capture component (lead-card, chips, fields, inputs, form steps) moved from landing.css into base.css on 21 Aug 2026, when the first location page needed them. Moved, not copied.",
+      "status": "RESOLVED 21 Aug 2026",
+      "reason": "The header and footer were byte identical across all three built paid pages, which is the evidence the split left the promotion waiting for. The capture component is contractual with assets/js/page.js and carries the settled chip selected state, so two copies would drift apart exactly where HubSpot routing depends on them.",
+      "consequence": "base.css now lands on every page in both families. Treat a change to it like a change to Figma Variables. The lead card hero sizing stayed in landing.css on a .hero .lead-card selector, because a fixed 460px width is hero composition, not component. Two conflicting mobile header rules from different rounds were collapsed to the winning one; behaviour is unchanged and npm run check verified every rendered check on all built pages after the move."
     }
   }
 }

@@ -29,14 +29,14 @@
     {
       "slug": "melbourne",
       "label": "Melbourne",
-      "status": "planned",
+      "status": "built",
       "url": "/location/melbourne",
       "page": "locations/melbourne/index.html",
       "copy": "locations/melbourne/COPY.md",
-      "readiness": "READY TO BUILD FIRST",
+      "readiness": "BUILT 21 Aug 2026, with the third proof slot, the team, the regions, the fee and the tracked number shipping in visible brackets",
       "office": "yes, named in the client supplied office list",
       "proof": "Records exist in the register. Geoff, Melbourne VIC office, May 2025, $3,908,748 against a $4,172,548 appraisal, commercial deck p.7. Wendy, portfolio addition, 2024, $1,175,000, investor deck p37. The register also notes Melbourne is the largest unslotted group in the home buyer deck, so more records are available without asking the client for anything new.",
-      "note": "Build this one first. It is the only one of the three that can fill every slot the Brisbane template has, so it is the honest test of the template."
+      "note": "The first page of the family, and the honest test of the template. Its bracketed slots are the extraction and client-supply list in locations/BRIEF.md."
     },
     {
       "slug": "adelaide",
@@ -117,6 +117,18 @@
       "consequence": "If the setting is on when these pages go live, paid budget starts landing on pages that carry no campaign labelling, and the segment attribution the paid pages were built to produce is muddied at the source. The failure is silent: the pages still convert, the labels are just wrong.",
       "note": "The converse is also a decision rather than a default. If a location page later out converts a segment page and somebody wants to point paid traffic at it, that should be its own Final URL with its own labelling, not the result of leaving a default on.",
       "raised": "21 Aug 2026"
+    },
+    "locationBudgetBands": {
+      "problem": "The capture form needs budget bands and a location page serves every segment at once, so no one band set is right for all of them.",
+      "assumed": "The residential set from the buyer page: under-650k, 650k-1m, 1m-1.5m, 1.5m-2m, 2m-plus. Residential intent dominates the organic query these pages target, and reusing the existing option values keeps the HubSpot payload identical to the paid pages.",
+      "status": "ASSUMED, NOT CONFIRMED",
+      "consequence": "A commercial buyer lands in 2m-plus, which is coarse but not wrong. Changing option values after launch breaks HubSpot routing the same way the segment strings do, so confirm before the page takes traffic.",
+      "raised": "21 Aug 2026"
+    },
+    "noPocOnLocationPages": {
+      "decision": "The location pages carry no data-poc, no data-experts-count and no demo availability toggle. The paid pages must delete those before launch; a family born after that lesson does not inherit the debt.",
+      "status": "RESOLVED 21 Aug 2026",
+      "consequence": "npm run check passes a location page outright, with no known deliberate failure to explain away."
     }
   }
 }
