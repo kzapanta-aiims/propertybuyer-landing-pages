@@ -28,7 +28,14 @@ paper/proof-register.md  every Tier 1 proof point, with its source
 paper/buyer-copy.md      copy deck, home
 paper/commercial-copy.md copy deck, commercial
 tools/check.mjs          the acceptance checklist, automated
+tools/import-paper-images.mjs  Paper artwork in, with the crop geometry
+tools/bake-fluted-glass.mjs    the seven glass strips, baked from those crops
 ```
+
+A photograph in a truth card or an auction photo is three files, not one: the
+photograph, the `glass-src-*` crop the live shader refracts, and the exported
+still it mounts over. Change one and re-run both tools, or the previous
+photograph keeps refracting in the strip.
 
 Pages sit two levels down, so every asset reference is `../../` relative.
 

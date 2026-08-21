@@ -73,6 +73,24 @@ The voice does not change between segments; the fear you answer first does.
   are inherited from the template and fail the shippability check on every
   page. Delete before launch, on every page at once.
 
+## Photography, replaced 21 August 2026
+
+The build inherited the buyer page's residential photography. Eleven slots now
+carry commercial artwork from the `COMMERCIAL -- v1` artboard in the Paper
+file: the four truth cards, steps 2 to 4, the middle service card and all
+three auction photos. Four alt strings said "home" on a page about offices and
+warehouses and were rewritten.
+
+Reproduce with `npm run import-images` then `npm run bake-glass`. The crop
+geometry, the Paper node ids and the asset URLs are recorded in
+`../../tools/import-paper-images.mjs`. Recorded under
+`openDecisions.commercialPhotography` in `../../shared/segments.json`, with the
+five artwork concerns worth a client look before this takes paid traffic.
+
+Three slots on the artboard are still placeholder frames rather than artwork,
+so step 1 and the outer two service cards keep the buyer photography. Paper
+names what they are waiting for.
+
 ## One correction carried back to the buyer page
 
 The stats band bullet reads "Over 50+ industry awards" on the buyer page while
