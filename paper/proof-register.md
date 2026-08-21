@@ -175,11 +175,22 @@ $2.02M all abbreviate without rounding, so every figure can sit in a stat row
 rather than being pushed into body text the way the commercial page had to do
 with $3,908,748.
 
-**Photographs are not in place.** The buyer page's three story images are the
-hero shots from its own deck. The investor deck carries the equivalent images
-but they could not be extracted in the build environment, which has no PDF
-renderer available. The three media panels therefore ship visibly empty rather
-than carrying a different property's photograph. Three crops are outstanding.
+**Photographs are in place.** All three are the hero shots from the deck pages
+the records came from, the same source as the buyer page's three, and they
+ship at the same native 685x419 those already do. Extracted by
+tools/extract-deck-images.mjs, which reads the embedded image streams rather
+than rendering a page, so no rasteriser is involved and the result is
+reproducible: deleting the three files and re-running reproduces them byte for
+byte. Each record page in the deck carries three photographs of the same
+property; the card uses the large hero.
+
+**The deck disagrees with itself on slot 1.** Page 20's copy calls the property
+an apartment twice. The photographs on that same page are of a freestanding
+cottage with a picket fence. The card therefore names no dwelling type at all:
+the heading is "Inner west, Sydney" and the body says "his first investment a
+short walk from the light rail". Every figure is unchanged. This is the deck
+contradicting itself rather than a transcription error, and it is worth a
+client answer alongside the overlap question below.
 
 **Not used, and why.** 72 records were not slotted. The strongest unslotted
 candidates, kept here in case a slot changes:

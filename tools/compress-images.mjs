@@ -32,6 +32,7 @@ const CAPS = [
   [/^hero-/, 400],
   [/^badge-/, 160],
   [/^story-/, 800],
+  [/^investor-story/, 800],
   [/^stats-team/, 1100],
   [/^medal/, 200],
   [/^prestige-liquid/, 1100],
