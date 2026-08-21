@@ -145,6 +145,94 @@ year, and the natural content for this page if it returns to residential.
 | Hannah | Eastern Suburbs | Dream family home purchased | new-testimonial |
 | Sarah & Jeff | Northern Beaches | Off-market access, "Rich was on the ball all the time" | who-we-help/home-buyers |
 
+## Investor page, selected 21 August 2026
+
+**Filled from "Legacy All Investor.pdf"**, supplied by the client 21 Aug 2026.
+75 records across Sydney, Melbourne, Brisbane and Adelaide, each carrying a
+purchase year and price, a 2026 valuation, equity created, an initial yield, a
+2026 weekly rent and a current yield on the purchase price. Every figure below
+is copied from the deck rather than derived.
+
+**Why these three.** The ladder is portfolio stage, which is how DESIGN.md
+describes the segment: "first timers through to portfolio builders and SMSF
+buyers, heavily interstate". First investment, then an addition to existing
+holdings, then a purchase made from another state with no inspection. The three
+also give three states, which the commercial page could not, and prices that
+ascend across the band the form offers.
+
+| Slot | Client | Location | Bought | Price | Initial yield | Equity created | 2026 value | 2026 rent | Deck page |
+|---|---|---|---|---|---|---|---|---|---|
+| 1 · First investment | Mathew | Sydney NSW, inner west | 2007 | $580,000 | 6.0% | $1,440,000 | $2,020,000 | $1,000 pw | p20 |
+| 2 · Portfolio addition | Wendy | Melbourne VIC | 2024 | $1,175,000 | 5.0% | $225,000 | $1,400,000 | $1,200 pw | p37 |
+| 3 · Interstate | Pui Kwan and Janis | Brisbane QLD | 2023 | $1,230,000 | 4.6% | $520,000 | $1,750,000 | $1,200 pw | p63 |
+
+**Arithmetic checked.** Purchase price plus equity created equals the 2026
+current value on all three. The deck's current-yield figures also reconcile
+against the stated weekly rent: 9.0, 5.3 and 5.1 percent respectively.
+
+**Abbreviations are exact.** $580K, $1.175M, $1.23M, $1.44M, $1.4M, $1.75M and
+$2.02M all abbreviate without rounding, so every figure can sit in a stat row
+rather than being pushed into body text the way the commercial page had to do
+with $3,908,748.
+
+**Photographs are not in place.** The buyer page's three story images are the
+hero shots from its own deck. The investor deck carries the equivalent images
+but they could not be extracted in the build environment, which has no PDF
+renderer available. The three media panels therefore ship visibly empty rather
+than carrying a different property's photograph. Three crops are outstanding.
+
+**Not used, and why.** 72 records were not slotted. The strongest unslotted
+candidates, kept here in case a slot changes:
+
+| Client | Location | Bought | Price | Initial yield | Note | Deck page |
+|---|---|---|---|---|---|---|
+| Mary | Sydney NSW, Northern Beaches | 2007 | $790,000 | 6.1% | Highest initial yield in the in-band set, $1,810,000 equity | p18 |
+| Stephanie | Brisbane QLD | 2017 | $630,000 | 4.8% | First investment, secured inside five weeks | p72 |
+| Gary | Sydney NSW | 2006 | $760,000 | 4.0% | Portfolio addition, harbour outlook | p19 |
+| Peter | Regional SA | 2009 | $365,000 | 4.6% | Interstate, "never had to fly down once" | p77 |
+
+Peter's record is the cleanest interstate story in the deck but his quote uses
+a word the DESIGN.md banned list rules out, so quoting him verbatim would put
+banned copy on the page. Pui Kwan and Janis carry the same story without that
+problem.
+
+## Deck overlap, RAISED 21 August 2026, UNRESOLVED
+
+**The investor deck retells all three of the buyer page's Tier 1 records as
+investment purchases**, with identical figures and near-identical sentences.
+
+| Client | Live on the buyer page as | In the investor deck as | Figures |
+|---|---|---|---|
+| Roderick and Denise | Downsizer, "downsizing and refused to trade quality or location" | "adding to their portfolio", let at $4,500 pw, 3.5% initial yield | 2014, $4,870,000, 2026 value $15,000,000. Identical. |
+| Rozanne | Upsizer, "spent two years missing the school zone she needed" | "trying to expand her portfolio for two years", let at $1,000 pw, 4.4% initial yield | 2025, $1,140,000, 2026 value $1,250,000. Identical. |
+| Shane | First home, "had rented for years and wanted a first home" | "his first investment", let at $1,100 pw, 5.3% initial yield | 2008, $700,000, 2026 value $2,000,000. Identical. |
+
+**Why this matters rather than being a curiosity.** The two framings are
+mutually exclusive. An owner-occupied home does not carry a rental yield and a
+weekly rent. Shane either bought his first home after years of renting, or he
+bought his first investment and let it at 5.3 percent. Both cannot be true of
+one purchase, and both are currently published, one on a live page and one in a
+client deck.
+
+**What is not known.** Whether the client's decks re-narrate one purchase
+history per audience, or whether these are coincidentally identical purchases
+by same-named clients. Nothing in the documents settles it, and it is not ours
+to guess: DESIGN.md places contested claims at Tier 3, which does not render.
+
+**Consequence, and it reaches a live page.** If the investment framing is the
+accurate one, the three Tier 1 cards on the buyer page now in production are
+mis-labelled. That page belongs to another branch and was not touched.
+
+**What was done here.** None of the three overlapping records is used on the
+investor page. The three selected above appear only in the investor deck, so
+they carry no contradiction. But if three records were re-narrated, the other
+72 cannot be assumed clean, which is why this section exists rather than a
+footnote.
+
+**Needed from the client.** Confirmation of which framing is correct for
+Roderick and Denise, Rozanne and Shane, and whether any record in the investor
+deck also appears in the homebuyer or commercial decks under a different story.
+
 ## Tier 2 verification notes
 
 - **"315+ Google reviews"** could not be verified from public search on

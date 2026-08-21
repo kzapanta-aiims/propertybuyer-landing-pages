@@ -18,7 +18,7 @@ context; they record decisions that look arbitrary from the code alone.
 ```
 New Builds/buyer/index.html        the home segment, and the template
 New Builds/commercial/index.html   built 20 Aug 2026 from that template
-New Builds/investor/BRIEF.md       not built, content blocked
+New Builds/investor/index.html     built 21 Aug 2026 from that template
 New Builds/developer/BRIEF.md      not built, content blocked
 
 assets/css/styles.css    ONE stylesheet, every page
@@ -27,11 +27,12 @@ shared/segments.json     segment list plus the decision log
 paper/proof-register.md  every Tier 1 proof point, with its source
 paper/buyer-copy.md      copy deck, home
 paper/commercial-copy.md copy deck, commercial
+paper/investor-copy.md   copy deck, investor
 tools/check.mjs          the acceptance checklist, automated
 tools/import-paper-images.mjs  Paper artwork in, with the crop geometry
 ```
 
-**Both pages share one `assets/img`, and the unprefixed photograph names
+**All pages share one `assets/img`, and the unprefixed photograph names
 belong to the buyer page.** `truth-card-1.webp`, `auction-1.webp`,
 `step-research.webp` and the rest are referenced by both pages, so writing new
 artwork over them changes the other page as a side effect. The commercial page
@@ -40,20 +41,27 @@ future page does the same.
 
 Pages sit two levels down, so every asset reference is `../../` relative.
 
-## Current state, 20 August 2026
+## Current state, 21 August 2026
 
 | Segment | Status | Blocked on |
 |---|---|---|
 | `home` | built, client-reviewed | nothing |
-| `commercial` | **built, not yet reviewed** | budget bands unconfirmed |
-| `investor` | not started | three Tier 1 proof points |
+| `commercial` | built, client-reviewed, merged | budget bands unconfirmed |
+| `investor` | **built, not yet reviewed** | three story photographs, budget bands unconfirmed |
 | `developer` | not started | three Tier 1 proof points, and a call on cutting a mid-page section |
 | `prestige`, `expat` | no page, deliberately | chip only, see segments.json |
 
-**Next step: get the client to supply proof records for investor and
-developer**, in the same shape as the homebuyer and commercial decks already
-supplied. Those two pages cannot be honestly built without them, because empty
-proof slots are the one thing this build refuses to fill with plausible copy.
+**Next step: three story photographs for the investor page**, and proof
+records for developer in the same shape as the homebuyer, commercial and
+investor decks already supplied. Developer cannot be honestly built without
+them, because empty proof slots are the one thing this build refuses to fill
+with plausible copy.
+
+**Also open, and it reaches a live page.** The investor deck retells all three
+of the buyer page Tier 1 records as investment purchases, with identical
+figures and an incompatible story. See `investorDeckOverlap` in
+`shared/segments.json`. Nothing on the investor page depends on it, but the
+buyer page may be mis-labelled.
 
 **Build the pages one at a time, not in parallel.** One stylesheet serves every
 page, so parallel branches collide in the file where a bad merge costs most.
