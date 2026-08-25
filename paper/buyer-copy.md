@@ -18,14 +18,14 @@ prestige band, no triadic default rhythm. Australian English throughout.
 
 | String | Count / budget |
 |---|---|
-| Buyers only, since 2001 — SHIPPED micro | 23, display line not a field label |
+| 25 Years Property Investment Excellence — SHIPPED micro | 39, display line not a field label |
 | Call [1300 000 000] — phone link | 19/20 beside logo |
 
 ## hero
 
 | String | Count / budget |
 |---|---|
-| H1: Buy with an expert on your side — SHIPPED, "expert" in highlight | 31/60, renders in capitals, 3 lines at 390 (verified in HTML build) |
+| H1: Buy Your Home with an expert on your side — SHIPPED, "expert" in highlight | 41/60, renders 5 lines at 390 not 3, remeasured 25 Aug 2026 |
 | Subhead: We act for buyers only, never for sellers. — SHIPPED | 42/42 HARD, at the cap, re-verify no clip on canvas |
 | Body: Going direct hands the selling agent your budget and your deadline. They are paid to use both against you. We sit on your side of the table, from the first brief to the keys. — SHIPPED | body copy, no cap |
 | Capture title: Tell us about your search — SHIPPED | 25 |

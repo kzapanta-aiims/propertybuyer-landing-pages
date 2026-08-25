@@ -28,7 +28,7 @@ the first truth card is the independence claim rather than the inspection one.
 
 ## site-header
 
-Unchanged. "On your side, since 2001" and "Speak to an expert" both KEPT.
+Header tag now "25 Years Property Investment Excellence", 39, display line. NEW. "Speak to an expert" KEPT.
 
 ## hero
 

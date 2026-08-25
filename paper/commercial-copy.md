@@ -48,7 +48,7 @@ tabbed band. Raise it before building it.
 
 | String | Count / budget |
 |---|---|
-| On your side, since 2001. KEPT | 24, display line |
+| 25 Years Property Investment Excellence. NEW | 39, display line |
 | Speak to an expert. KEPT button | 18/20 beside logo |
 
 Note: DESIGN.md clears "Talk to our commercial team" as a CTA label, but it
