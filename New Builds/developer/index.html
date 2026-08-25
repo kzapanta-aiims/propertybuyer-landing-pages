@@ -19,16 +19,7 @@
 <link rel="stylesheet" href="../../assets/css/base.css">
 <link rel="stylesheet" href="../../assets/css/landing.css">
 </head>
-<!-- data-experts-count is DEMO DATA for the 18 Aug 2026 proof of concept,
-     not a verified claim. It stands in for a live presence count from the
-     client's CRM or HR app. See assets/js/page.js for the integration seam
-     and HANDOVER.md for what has to be true before this ships. Append
-     ?experts=0 to the URL to demonstrate the nobody-available state.
-
-     data-poc="true" additionally renders the demo toggle inside the fixed
-     mobile CTA. REMOVE data-poc BEFORE LAUNCH: it lets a visitor rewrite an
-     availability claim. Removing this one attribute removes the control. -->
-<body data-experts-count="6" data-poc="true">
+<body>
 <a class="skip" href="#main">Skip to content</a>
 
 <!-- ==========================================================================
@@ -242,16 +233,36 @@
 </section>
 
 <!-- ==========================================================================
-     Published client stories. White band. Three proof cards, all three
-     unfilled: no developer deck exists, and the twenty site purchases the
-     client publishes carry a street, a suburb and a price but no date, so
-     they fail the Tier 1 requirement to be attributable AND dated.
-     The candidate record for each slot is named in the bracket, so the ask
-     is a purchase month and a client first name rather than a new deck.
-     Each media panel ships with no photograph, on purpose. Borrowing a
-     residential photo for a Tier 1 development card would be a false claim;
-     the panel renders as a flat brand block instead. Same reasoning as
-     investorProofSelection in shared/segments.json.
+     Published client stories. White band. Three proof cards.
+
+     READ THIS BEFORE CHANGING THE THREE CARDS BELOW.
+
+     These three records are RESIDENTIAL HOME PURCHASES, not development
+     sites. They come from "Legacy All Homebuyer (1).pdf" by way of
+     paper/proof-register.md, placed here on 21 Aug 2026 at the client
+     direction as an interim fill for client review. Every figure is copied
+     from the register and none is invented.
+
+     THE FRAMING IS THE OPEN ITEM, NOT THE FIGURES. A home purchase is not a
+     development acquisition, so on this page these cards say less than they
+     appear to. The copy is therefore written as what the records actually
+     are, a family home and a downsize, rather than dressed as sites: the
+     pills and headings are the visible signal a reviewer needs.
+
+     Slot 3, Roderick and Denise, is ALSO live on the buyer page and is ALSO
+     retold as an investment purchase in the investor deck. See
+     investorDeckOverlap. One record, three framings.
+
+     Slots 1 and 2 appear on no other page. Slot 2 carries brackets because
+     the register holds its figures and not its story or its time to
+     purchase.
+
+     The panels carry NO PHOTOGRAPH. Only slot 3 has one in the repository;
+     the other two were never extracted from the deck, and one real photo
+     beside two blanks reads as a bug. Supplying the home buyer PDF in
+     .deck-src/ and running "npm run deck-images" would produce all three.
+
+     Full record: developerProofSlots in shared/segments.json.
      ========================================================================== -->
 <section class="section testimonials">
   <div class="wrap">
@@ -322,14 +333,14 @@
           </p>
         </div>
         <div class="story-card__body">
-          <p class="pill pill--light">[Site type]</p>
+          <p class="pill pill--light">Family home</p>
           <div class="story-card__text">
-            <h3>[Site type] <br>in [Suburb]</h3>
-            <p>[Slot 1. Candidate record, published by the client and undated: Heath Rd, Leppington, land subdivision, $7,000,000. Needs the purchase month and year, the client first name, and the end value.]</p>
+            <h3>Family home <br>in Sydney</h3>
+            <p>Stephen and Veronica lost three auctions in a row and were ready to stop looking. We found the family home they wanted, and they never sat in an auction room again.</p>
             <dl class="story-stats">
-              <div class="story-stat"><dt>Bought [Mon YYYY]</dt><dd>[$0.00M]</dd></div>
-              <div class="story-stat"><dt>End value</dt><dd>[$0.00M]</dd></div>
-              <div class="story-stat"><dt>To purchase</dt><dd>[N weeks]</dd></div>
+              <div class="story-stat"><dt>Bought 2012</dt><dd>$1.88M</dd></div>
+              <div class="story-stat"><dt>Value today</dt><dd>$6.2M</dd></div>
+              <div class="story-stat"><dt>To purchase</dt><dd>6 weeks</dd></div>
             </dl>
           </div>
         </div>
@@ -343,13 +354,13 @@
           </p>
         </div>
         <div class="story-card__body">
-          <p class="pill pill--light">[Site type]</p>
+          <p class="pill pill--light">Family home</p>
           <div class="story-card__text">
-            <h3>[Site type] <br>in [Suburb]</h3>
-            <p>[Slot 2. Candidate record, published by the client and undated: Merlin St, Neutral Bay, unit site, $15,000,000. Needs the purchase month and year, the client first name, and the end value.]</p>
+            <h3>Purchased <br>in Melbourne</h3>
+            <p>Stephen and Melanie bought in Melbourne in 2013 for $2,500,000. It is valued at $4,200,000 in 2026. [The deck records the figures and not the story, so the reason behind this purchase is unconfirmed.]</p>
             <dl class="story-stats">
-              <div class="story-stat"><dt>Bought [Mon YYYY]</dt><dd>[$0.00M]</dd></div>
-              <div class="story-stat"><dt>End value</dt><dd>[$0.00M]</dd></div>
+              <div class="story-stat"><dt>Bought 2013</dt><dd>$2.5M</dd></div>
+              <div class="story-stat"><dt>Value today</dt><dd>$4.2M</dd></div>
               <div class="story-stat"><dt>To purchase</dt><dd>[N weeks]</dd></div>
             </dl>
           </div>
@@ -364,14 +375,14 @@
           </p>
         </div>
         <div class="story-card__body">
-          <p class="pill pill--light">[Site type]</p>
+          <p class="pill pill--light">Downsizer</p>
           <div class="story-card__text">
-            <h3>[Site type] <br>in [Suburb]</h3>
-            <p>[Slot 3. Candidate record, published by the client and undated: Kurraba Rd, Kurraba Point, landmark unit site, $57,000,000. Needs the purchase month and year, the client first name, and the end value.]</p>
+            <h3>Downsized <br>in Sydney</h3>
+            <p>Roderick and Denise were downsizing and refused to trade quality or location for it. We secured an eastern suburbs home that met every point of the brief.</p>
             <dl class="story-stats">
-              <div class="story-stat"><dt>Bought [Mon YYYY]</dt><dd>[$0.00M]</dd></div>
-              <div class="story-stat"><dt>End value</dt><dd>[$0.00M]</dd></div>
-              <div class="story-stat"><dt>To purchase</dt><dd>[N weeks]</dd></div>
+              <div class="story-stat"><dt>Bought 2014</dt><dd>$4.87M</dd></div>
+              <div class="story-stat"><dt>Value today</dt><dd>$15M</dd></div>
+              <div class="story-stat"><dt>To purchase</dt><dd>8 weeks</dd></div>
             </dl>
           </div>
         </div>
@@ -407,7 +418,7 @@
     <div class="truth-cards">
       <article class="truth-card">
         <div class="truth-card__media">
-          <img src="../../assets/img/truth-card-1.webp" alt="A buyer and their agent on the same side of the table" loading="lazy" decoding="async">
+          <img src="../../assets/img/commercial-truth-1.webp" alt="A buyer and their agent on the same side of the table" loading="lazy" decoding="async">
         </div>
         <div class="truth-card__copy">
           <svg class="swoosh" viewBox="0 8.931 41.979 19.01" width="42" height="19" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M41.56 16.31C26.823 21.043 21.185 9.573 12.372 9.065 11.537 9.016 10.748 9.065 10.008 9.186 10.008 9.186 0 18.772 0 18.772 13.089 18.653 16.743 41.014 41.56 16.31Z" fill="#B9795D"/></svg>
@@ -419,7 +430,7 @@
       </article>
       <article class="truth-card">
         <div class="truth-card__media">
-          <img src="../../assets/img/truth-card-2.webp" alt="A feasibility prepared before a site is presented" loading="lazy" decoding="async">
+          <img src="../../assets/img/truth-card-2.webp" alt="An agent inspecting a property in person" loading="lazy" decoding="async">
         </div>
         <div class="truth-card__copy">
           <svg class="swoosh" viewBox="0 8.931 41.979 19.01" width="42" height="19" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M41.56 16.31C26.823 21.043 21.185 9.573 12.372 9.065 11.537 9.016 10.748 9.065 10.008 9.186 10.008 9.186 0 18.772 0 18.772 13.089 18.653 16.743 41.014 41.56 16.31Z" fill="#B9795D"/></svg>
@@ -431,7 +442,7 @@
       </article>
       <article class="truth-card">
         <div class="truth-card__media">
-          <img src="../../assets/img/truth-card-3.webp" alt="A valuation prepared against comparable sales" loading="lazy" decoding="async">
+          <img src="../../assets/img/commercial-truth-3.webp" alt="A valuation prepared against comparable sales" loading="lazy" decoding="async">
         </div>
         <div class="truth-card__copy">
           <svg class="swoosh" viewBox="0 8.931 41.979 19.01" width="42" height="19" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M41.56 16.31C26.823 21.043 21.185 9.573 12.372 9.065 11.537 9.016 10.748 9.065 10.008 9.186 10.008 9.186 0 18.772 0 18.772 13.089 18.653 16.743 41.014 41.56 16.31Z" fill="#B9795D"/></svg>
@@ -561,7 +572,7 @@
           <h3>Feasibility<br>&amp; due diligence</h3>
           <p>We read the market against recent site sales, run our own feasibility, and check the site and the contract before you commit.</p>
         </div>
-        <div class="step-card__img"><img src="../../assets/img/step-research.webp" alt="An agent inspecting a shortlisted home" loading="lazy" decoding="async"></div>
+        <div class="step-card__img"><img src="../../assets/img/commercial-step-research.webp" alt="An agent inspecting shortlisted premises" loading="lazy" decoding="async"></div>
         <svg class="step-card__swoosh" viewBox="0 8.931 41.979 19.01" width="42" height="19" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M41.56 16.31C26.823 21.043 21.185 9.573 12.372 9.065 11.537 9.016 10.748 9.065 10.008 9.186 10.008 9.186 0 18.772 0 18.772 13.089 18.653 16.743 41.014 41.56 16.31Z" fill="#B9795D"/></svg>
       </article>
       <article class="step-card step-card--3 on-dark">
@@ -654,9 +665,9 @@
 
   <div class="auction-strip" aria-hidden="true">
     <div class="auction-strip__row">
-      <div class="auction-photo"><img src="../../assets/img/auction-1.webp" alt="" loading="lazy" decoding="async"></div>
-      <div class="auction-photo"><img src="../../assets/img/auction-2.webp" alt="" loading="lazy" decoding="async"></div>
-      <div class="auction-photo"><img src="../../assets/img/auction-3.webp" alt="" loading="lazy" decoding="async"></div>
+      <div class="auction-photo"><img src="../../assets/img/commercial-auction-1.webp" alt="" loading="lazy" decoding="async"></div>
+      <div class="auction-photo"><img src="../../assets/img/commercial-auction-2.webp" alt="" loading="lazy" decoding="async"></div>
+      <div class="auction-photo"><img src="../../assets/img/commercial-auction-3.webp" alt="" loading="lazy" decoding="async"></div>
     </div>
   </div>
 
@@ -826,18 +837,6 @@
   <div class="mobile-cta__top">
     <p class="mobile-cta__hint"><span class="mobile-cta__dot" aria-hidden="true"></span><span data-experts-hint>Our experts are ready to talk</span></p>
 
-    <!-- ======================================================================
-         POC ONLY. DELETE BEFORE LAUNCH, WITH data-poc ON <body>.
-         A demo switch for showing the nobody-available state in a client
-         meeting without touching the URL. It renders only while
-         <body data-poc="true">, so removing that one attribute removes the
-         control everywhere. This must not exist on live: it lets a visitor
-         rewrite an availability claim. Tracked in HANDOVER.md and README.md.
-         ====================================================================== -->
-    <button class="poc-toggle" type="button" role="switch" aria-checked="true" aria-label="Demo switch, expert availability">
-      <span class="poc-toggle__track" aria-hidden="true"><span class="poc-toggle__knob"></span></span>
-    </button>
-    <!-- ============================ end POC ONLY ============================ -->
   </div>
   <a class="btn btn--primary mobile-cta__btn" href="#lead-form" data-cta-label>Speak to a team member</a>
 </div>

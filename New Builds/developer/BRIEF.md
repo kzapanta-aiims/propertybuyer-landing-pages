@@ -37,7 +37,16 @@ A page missing any of these is not finished.
 - [x] **Hero subhead.** "We never act for a vendor or an agent", 38/42.
       Four under the cap, the most headroom of the four pages, and it passes
       the checker at 390.
-- [ ] **Three Tier 1 proof points.** STILL OUTSTANDING, and the only thing on
+- [~] **Three Tier 1 proof points.** FILLED 21 Aug 2026 from the home buyer
+      deck at the client direction, for client review, and **the framing is
+      unresolved**: all three records are residential home purchases rather
+      than development sites. Figures are exact and copied from the register.
+      Slot 1 sits below the page own $2.5m budget floor and slot 3 is also
+      live on the buyer page and also retold in the investor deck. Photographs
+      are still absent on all three. See `developerProofSlots`. The original
+      position, which still describes what the page actually wants, follows.
+
+- [ ] **Development proof records.** STILL OUTSTANDING, and the only thing on
       this page that is. All three slots ship bracketed. No developer deck
       exists, and the twenty site purchases the client publishes carry a
       street, a suburb and a price but **no date**, which is the one Tier 1

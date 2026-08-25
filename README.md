@@ -7,7 +7,7 @@ decision log and the checker.
 | Family | Where | Traffic | Indexed | Ships as |
 |---|---|---|---|---|
 | Paid segment pages | `New Builds/` | Google Ads, Performance Max | no, deliberately | static, on Vercel |
-| Location inner pages | `locations/` | organic search | yes, once they exist | HubSpot, ported by the client developer |
+| Location inner pages | `locations/` | organic search | yes, melbourne is built | HubSpot, ported by the client developer |
 
 The location pages are a reference implementation rather than a deployment
 target. That is the reason the no build step, no framework, no CDN property at
@@ -73,7 +73,7 @@ assets/css/tokens.css    tokens and the two faces. Shared, and never
                          edited by a page build
 assets/css/base.css      reset, base type, buttons, pills. Shared
 assets/css/landing.css   design layer, the paid segment pages
-assets/css/locations.css design layer, the location pages. Empty so far
+assets/css/locations.css design layer, the location pages
 assets/fonts/            both faces are in, see the README there
 assets/img/              both logo colourways
 
