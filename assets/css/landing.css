@@ -48,6 +48,15 @@
 
 .hero h1 { color: var(--text-on-brand); }
 
+/* The H1 breaks in different places at each viewport. Desktop carries the
+   home up onto the first line; at 390 that line is wider than the 350 the
+   column allows, so it splits again after "Buy your" and the H1 runs four
+   lines. Both sets of breaks ship in the markup and the viewport removes
+   the pair it does not want, which keeps the heading a single text node so
+   its character count still measures the way paper/buyer-copy.md records it. */
+.br--desktop { display: inline; }
+.br--mobile { display: none; }
+
 .hero__subhead {
   font-size: var(--type-h3-card);
   font-weight: var(--weight-regular);
@@ -1027,6 +1036,10 @@
    auction CTA card and the prestige band on small screens only. */
 
 @media (max-width: 767px) {
+  /* H1: four lines rather than three, see .br--mobile above. */
+  .br--desktop { display: none; }
+  .br--mobile { display: inline; }
+
   /* Hero: everything centres. */
   .hero-copy { text-align: center; }
   .hero-copy-top { align-items: center; }

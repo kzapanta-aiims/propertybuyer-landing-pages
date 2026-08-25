@@ -25,7 +25,7 @@ prestige band, no triadic default rhythm. Australian English throughout.
 
 | String | Count / budget |
 |---|---|
-| H1: Buy Your Home with an expert on your side — SHIPPED, "expert" in highlight | 41/60, renders 5 lines at 390 not 3, remeasured 25 Aug 2026 |
+| H1: Buy your home with an expert on your side — SHIPPED, "expert" in highlight | 41/60, 3 lines from 768 up, 4 below via .br--mobile, measured 25 Aug 2026 |
 | Subhead: We act for buyers only, never for sellers. — SHIPPED | 42/42 HARD, at the cap, re-verify no clip on canvas |
 | Body: Going direct hands the selling agent your budget and your deadline. They are paid to use both against you. We sit on your side of the table, from the first brief to the keys. — SHIPPED | body copy, no cap |
 | Capture title: Tell us about your search — SHIPPED | 25 |
