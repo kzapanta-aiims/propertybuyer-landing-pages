@@ -34,9 +34,9 @@ Header tag now "25 Years Property Investment Excellence", 39, display line. NEW.
 
 | String | Count / budget |
 |---|---|
-| H1: Buy an investment with no developer commission. NEW, three lines at 390 | **46/60** |
-| Subhead: We never act for a developer or a vendor. NEW | **41/42 HARD** |
-| Body: You have probably already seen numbers from someone who is paid on the sale. We take no commission from developers, vendors or agents. The read you get on a property is the one we would act on ourselves. NEW | body, no cap |
+| H1: Build your investment portfolio with an expert on your side. NEW, four lines | **59/60** |
+| Subhead: Helping Investors Succeed in Australia. NEW | **38/42 HARD** |
+| Body: At Propertybuyer, we understand the unique needs and goals of property investors in Australia. Whether you're a seasoned investor or just starting, our team of dedicated professionals is here to guide you through the journey of property investment. NEW | body, no cap |
 | Award pill: Best Buyers Agency of the Year 2025. KEPT | pill |
 | Capture title: Tell us about your investment. NEW | 29 |
 | Legend: What are you buying. KEPT micro | 19/20 |
@@ -47,8 +47,16 @@ Header tag now "25 Years Property Investment Excellence", 39, display line. NEW.
 | Next: Contact details. KEPT | 21 |
 | Send my details. KEPT | 15 |
 
-The subhead has one character of headroom against the hard limit. Any edit to
-it has to be counted, not eyeballed.
+The subhead has four characters of headroom against the hard limit. Any edit
+to it has to be counted, not eyeballed.
+
+The client supplied all three strings on 25 August 2026. Two were cut to fit:
+the H1 arrived at 68 against the 60 cap and lost "property", which the rest of
+the line already implies; the subhead arrived at 55 against the 42 hard cap as
+"Helping Property Investors Achieve Success in Australia". The body kept the
+word "journey", which was on the banned list until the same date. It was taken
+off the list in `tools/check.mjs` rather than worked around, so the removal
+applies to every page, not just this one.
 
 **No purpose field.** The commercial page carries one because that page has two
 psychographics pulling in opposite directions and the client asked for it.
@@ -188,20 +196,26 @@ the deck is the thing that is inconsistent.
 
 | Card | String |
 |---|---|
-| Lede | No developer or vendor pays us, so neither can influence what we put in front of you. NEW |
-| 1 H2 | No incentives to sell to you, ever. KEPT |
-| 1 body | We take no commission from developers, vendors or agents. You are the only person paying us, so you are the only person we answer to. NEW |
-| 2 H2 | Someone stands in the property. NEW (30/32) |
-| 2 body | Your agent works the market you are buying in, and inspects the property, the tenancy and the condition in person before you commit. NEW |
-| 3 H2 | We tell you what it is worth. KEPT |
-| 3 body | You get an independent read on value against recent comparable sales and current rents. Then we hold the line in the negotiation. NEW |
-| 4 H2 | Access before it is listed. KEPT |
-| 4 body | Agents bring us off-market stock before it reaches the portals, because we buy often enough to be worth calling. NEW |
+| Title | We buy property Australia wide. NEW |
+| Lede | Your Preferred Area or Suggest Area from our experts. NEW |
+| 1 H2 | The Most Comprehensive Research. NEW |
+| 1 body | None. Dropped 25 Aug 2026 at the client's direction. |
+| 2 H2 | Only the most superior Opportunities. NEW |
+| 2 body | None. Dropped 25 Aug 2026 at the client's direction. |
+| 3 H2 | Pay the absolute Minimum. NEW |
+| 3 body | We will negotiate the lowest possible price saving you tens of thousands of dollars. NEW |
+| 4 H2 | Guidance from Sales to Settlement. NEW |
+| 4 body | We have experts and trusted advisors to settlement and beyond. Best related professional to ensure your interests are protected. NEW |
 
-Card 2's heading is the one place this page departs from the template's
-wording rather than its content. `DESIGN.md` asks this segment for "an honest
-on-the-ground assessment, not more data", and "Local Buyers Agent" describes a
-job title where the register asks for a person in a room.
+The whole band was rewritten by the client on 25 August 2026 and no longer
+tracks the template. Cards 1 and 2 carry a heading and no body: the four cards
+still render at a matched height because the media block sets it, so the two
+short cards do not collapse.
+
+Card 3 says "the lowest possible price". The banned list holds "lowest price"
+as a contiguous string, which this does not contain, so it passes the checker.
+It is the client's wording and it sits close to a claim the register would
+otherwise gate. Worth raising before the page carries paid traffic.
 
 ## stats band
 
@@ -214,6 +228,18 @@ corrected to match. Recorded under `awardsCountOnStatRow` in
 `shared/segments.json`.
 
 Review count: verify on the day it ships, per the claims register.
+
+The three laurelled bullets under the heading, which carried the aggregate
+claims (5,000+ properties, 50+ awards, 300+ reviews), were replaced on
+25 August 2026 by the Sydney, Melbourne and Brisbane rating rows the
+testimonials header already carries. The client asked for this band to read as
+reviews on the investor page. The rows were drawn for a light surface, so the
+place names, scores and stars are recoloured for teal/700 through
+`.rating-rows--on-brand`; the stars take gold/400, which is the colour the
+laurels they replaced were already using.
+
+The stat callouts floating over the photograph are untouched and still read
+5,000+, 50+ and 4.9 star.
 
 ## the process rail, four steps
 
@@ -245,6 +271,19 @@ rather than at the keys, because an investor does not take the keys.
 | Your position stays yours. KEPT |
 | Auction ready when it counts. KEPT |
 
+The capture card at the foot of the band carries three strings:
+
+| String |
+|---|
+| Most investors only ever see the advertised market. NEW, was "Most buyers" |
+| Tell us what you are looking for and we will put it to our agent network. KEPT |
+| Strip: We see off-market, pre-market and are privy to information on on-market properties not available to anyone else. NEW |
+
+The strip is a brand-filled bar across the foot of that card, from the Paper
+file, investor only. It is carried by `.auction-cta--strip` so the other three
+segment pages, which have no third child in that form, keep the single row
+they were built with.
+
 Off-market is framed as access rather than as a discount, per the claims
 register. No off-market percentage appears anywhere; that claim is gated.
 
@@ -252,14 +291,18 @@ register. No off-market percentage appears anywhere; that claim is gated.
 
 | Q | A |
 |---|---|
-| What does a buyer's agent do for an investor? | We find the property, inspect it, tell you what it is worth, and negotiate or bid for you. You keep the decision. We do the work and carry the risk of getting it wrong. KEPT |
-| Do you take any commission from developers? | No. We take no commission from developers, vendors or agents. You are the only person paying us, so you are the only person we answer to. NEW |
+| What does a buyer's agent do for an investor? | Two paragraphs. First, NEW: We provide industry leading research and analysis - to give you a high level of confidence. We assess and enlighten you of areas that will outperform the market for your budget and have experts within them. Second, KEPT: We find the property, inspect it, tell you what it is worth, and negotiate or bid for you. You keep the decision. We do the work and carry the risk of getting it wrong. |
+| Do you work for me exclusively? | Some clients can purchase within 48 hours, others want to feel the market out first before making any decisions and we are here to support and guide you into finding the right property and giving you the confidence in a major financial decision. NEW |
 | Can you buy in a state I do not live in? | Yes. We have offices in Sydney, Melbourne, Brisbane and Adelaide, and we inspect in person so you do not have to fly. NEW |
 | How long does it usually take? | Most clients go from engagement to purchase in 30 to 60 days. A tight brief in a liquid market can be faster; a rare one takes as long as it takes to find the right property. KEPT |
 | What do you charge? | A full search is 1.5 to 2 percent of the purchase price. Appraise and negotiate, where you have already found the property, is 1 percent. NEW |
 
-The second question is the one this segment actually arrives with, so it sits
-second rather than last. The fee answer uses the schedule cleared in the
+The second question was replaced on 25 August 2026. As supplied, the question
+asks about exclusivity and the answer describes how long a purchase takes, so
+the pair does not currently meet. It is recorded here as given; both halves are
+the client's. Note also that dropping the old entry removed the page's only
+statement that no commission is taken from developers, which was the segment's
+independence claim. The fee answer uses the schedule cleared in the
 `DESIGN.md` claims register, unchanged.
 
 **Nothing here advises on yield or growth.** Every answer describes the

@@ -111,8 +111,10 @@ for (const { key, file, family } of pages) {
     n === 0 ? pass(`no ${label} in visible copy`) : fail(`${n} ${label}(s) in visible copy`);
   }
 
+  /* 'journey' came off this list on 25 Aug 2026 at the client's direction,
+     for the investor hero body. The rest stand. */
   const banned = [
-    'lowest price', 'unlock', 'elevate', 'seamless', 'journey', 'empower',
+    'lowest price', 'unlock', 'elevate', 'seamless', 'empower',
     "in today's market", 'now more than ever', 'passionate about',
     'pride ourselves', 'solutions', 'click here', 'find out more',
   ];

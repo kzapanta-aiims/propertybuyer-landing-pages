@@ -433,6 +433,15 @@
 .stats-point__laurels { display: flex; gap: var(--gap-xs); flex-shrink: 0; }
 .stats-point p { color: var(--text-on-brand); }
 .stats-cta { display: flex; flex-direction: column; align-items: flex-start; gap: var(--gap-sm); }
+
+/* The reviews band trades the three aggregate claims for the city ratings
+   the testimonials header already carries. Those rows were drawn for a light
+   surface: the place name uses text/muted and the stars are filled
+   bg/prestige, both of which vanish on teal/700. The gold matches the
+   laurels this band used before, so the section keeps the colour it had. */
+.rating-rows--on-brand .rating-row__place span { color: var(--text-on-brand-muted); }
+.rating-rows--on-brand .rating-row__score strong { color: var(--text-on-brand); }
+.rating-rows--on-brand .stars svg path { fill: var(--text-prestige); }
 .stats-cta .btn-note { color: var(--text-on-brand-muted); }
 
 .review-pill {
@@ -678,6 +687,20 @@
 .auction-cta__lines p:first-child { font-weight: var(--weight-semibold); }
 .auction-cta__action { display: flex; flex-direction: column; align-items: center; gap: var(--gap-sm); flex-shrink: 0; }
 .auction-cta__action .btn-note { font-weight: var(--weight-medium); }
+
+/* Investor only. A claim strip across the foot of the capture card. The
+   modifier carries the wrap so the other three segment pages, which have no
+   third child in this form, keep the single row they were built with. */
+.auction-cta--strip { flex-wrap: wrap; row-gap: var(--gap); }
+.auction-cta__strip {
+  flex-basis: 100%;
+  margin: 0;
+  padding: var(--gap-sm) var(--gap);
+  background: var(--bg-brand);
+  color: var(--text-on-brand);
+  text-align: center;
+  font-weight: var(--weight-semibold);
+}
 
 /* ==========================================================================
    Prestige
