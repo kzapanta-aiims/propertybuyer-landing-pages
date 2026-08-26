@@ -60,8 +60,8 @@ budget is 34.
 | String | Count / budget |
 |---|---|
 | H1: Buy commercial with due diligence done first. NEW, "commercial" in highlight, three lines at 390 | 44/60 |
-| Subhead: We never act for a vendor or a landlord. NEW | 40/42 HARD |
-| Body: Two buyers arrive on this page. One is facing a lease expiry and working out whether to buy the premises instead. The other is buying for yield. We run the same due diligence for both, and we take nothing from the seller. NEW, this is the fork | body, no cap |
+| Subhead: We act for businesses, SMSF buyers, private investors and larger organisations. CLIENT EDIT 26 Aug 2026 | 78/42, OVER a hard budget, see the note below |
+| Body: We source and secure premium commercial assets at a variety of price points, tailored to your specific needs. CLIENT EDIT 26 Aug 2026, replaces the fork | 109, body, no cap |
 | Award pill: Best Buyers Agency of the Year 2025. KEPT | pill |
 | Capture title: Tell us about your requirement. NEW | 30 |
 | Legend: What are you buying. KEPT micro | 19/20 |
@@ -72,6 +72,33 @@ budget is 34.
 | Placeholder: Where do you want to buy? KEPT | placeholder |
 | Next: Contact details. KEPT | 21 |
 | Send my details. KEPT | 15 |
+
+### The client copy edits of 26 August 2026
+
+Seven strings were replaced at the client's direction. Two things about them
+are worth recording, because neither is visible in the strings themselves.
+
+**The subhead is 78 against a 42 hard budget.** That budget existed because
+the slot is a single display line at `--type-h3-card` with no max width, so
+40 characters was one line at 390. The supplied string wraps to three lines on
+mobile and two on desktop, which pushes the hero body and the award pill down.
+It ships as supplied, because it is client copy and the ask was explicit, and
+the wrap was checked at all four widths rather than assumed. If the client
+wants one line back, the shortest faithful cut is "We act for businesses, SMSF
+buyers and investors" at 48, still over.
+
+**The independence claim left the page in three places at once.** The old
+subhead ("We never act for a vendor or a landlord"), the old hero body ("we
+take nothing from the seller") and the whole first truth card ("No incentives
+to sell to you, ever", the no-commission proof) all carried it, and all three
+are now gone. DESIGN.md builds the commercial register on due diligence and
+buy-versus-lease certainty, so the direction is not off-brief, but the page no
+longer states anywhere near the top that no vendor pays us. What still carries
+it, all of it below the fold: FAQ 4, "Does the vendor pay you anything?", which
+keeps the deleted card's body verbatim; the meta description; truth card 3, on
+value rather than on who pays; and the closer note, "Buyers only, since 2001".
+Recorded as
+`openDecisions.commercialIndependenceClaim`.
 
 ### Budget bands, ASSUMED, NOT CONFIRMED
 
@@ -118,8 +145,9 @@ and kept out of the stat row.
 - **Pill:** `Owner occupier`. **H3:** `Office in Melbourne` (19/32)
 - **Body:** Geoff wanted premises of his own rather than another lease. We
   appraised a 952 sqm office at $4,172,548 and bought it for $3,908,748.
-- **Stats:** `May 2025` Bought. `$263,800` Under appraisal. `952 sqm` Floor
-  area.
+- **Stats:** `$263,800` Under appraisal. `952 sqm` Floor area. Two, not three:
+  the purchase date came off all three cards on 26 Aug 2026 at the client's
+  request.
 - **Why the price is not a stat:** $3,908,748 does not abbreviate exactly,
   and the register forbids rounding a figure on a card. The saving does
   abbreviate exactly, is the stronger number, and is the one the segment
@@ -135,7 +163,7 @@ and kept out of the stat row.
 - **Body:** Jamie and Tamara wanted an industrial asset with a tenant already
   in place. We bought a 650 sqm warehouse returning $335,310 a year on a
   three year lease.
-- **Stats:** `Dec 2024` Bought. `$5.55M` Price. `6.0%` Yield.
+- **Stats:** `$5.55M` Price. `6.0%` Yield. Date removed 26 Aug 2026.
 - **Note:** the deck does not say whether the yield is net or gross. It is
   published as "yield", which is what the deck says, and nothing is added.
 
@@ -149,7 +177,7 @@ and kept out of the stat row.
 - **Body:** Stella was buying from overseas and never saw the building. We
   inspected it for her and secured a 431 sqm office let on a five plus five
   year lease.
-- **Stats:** `Apr 2024` Bought. `$4.475M` Price. `4.9%` Yield.
+- **Stats:** `$4.475M` Price. `4.9%` Yield. Date removed 26 Aug 2026.
 - **Why this one is third:** it carries the remote purchase, which is the
   content DESIGN.md retired the `expat` segment into. It belongs on this page
   and on `investor`, not in a segment of its own.
@@ -159,8 +187,8 @@ and kept out of the stat row.
 | String | Count / budget |
 |---|---|
 | Pill: The Truth. KEPT | 9/20 |
-| H2: We buy property. We have never sold one. KEPT | 42/60 |
-| Lede: No vendor or landlord pays us, so neither can influence what we put in front of you. NEW, "seller" to "vendor or landlord" | lede |
+| H2: The best commercial assets are never on the market. CLIENT EDIT 26 Aug 2026, two-tone split after "assets" | 50/60 |
+| Lede: You need to access properties not available on the open market in order to achieve a superior price or yield outcome. CLIENT EDIT 26 Aug 2026 | 117, lede |
 | CTA: Book a free consultation. KEPT | 25/34 |
 | Note: No obligation. No upfront fees. Just a conversation. KEPT | note |
 
@@ -168,10 +196,10 @@ and kept out of the stat row.
 
 | Heading | Count | Body |
 |---|---|---|
-| No incentives to sell to you, ever. KEPT | 34/60 | NEW: We take no commission from vendors, developers or agents. You are the only person paying us, so you are the only person we answer to. |
+| Unwavering due diligence. CLIENT EDIT 26 Aug 2026, was "No incentives to sell to you, ever" | 24/60 | CLIENT EDIT: Risk is not measured just in what you see on paper. We uncover and assess the real risks and opportunities behind an asset. |
 | We inspect the asset ourselves. NEW, was "Local Buyers Agent" | 30/60 | NEW: Your agent works the market you are buying in, and inspects the building, the tenancy and the condition in person before you see it. |
 | We tell you what it is worth. KEPT | 28/60 | NEW: You get an independent read on value against recent comparable sales and current rents. Then we hold the line in the negotiation. |
-| Access before it is listed. KEPT | 26/60 | NEW: Agents bring us off-market stock before it reaches the portals, because we buy often enough to be worth calling. |
+| Access opportunities others will not see. CLIENT EDIT 26 Aug 2026, was "Access before it is listed" | 40/60 | KEPT: Agents bring us off-market stock before it reaches the portals, because we buy often enough to be worth calling. |
 
 ## stats band, Tier 2
 

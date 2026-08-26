@@ -155,9 +155,25 @@ for (const { key, file, family } of pages) {
   head('Mobile character budgets, checked at 390');
 
   const subhead = text((stripped.match(/class="hero__subhead">([\s\S]*?)<\/p>/) || [])[1] || '');
-  subhead.length <= 42
-    ? pass(`hero subhead ${subhead.length}/42`)
-    : fail(`hero subhead ${subhead.length}/42: "${subhead}"`);
+  /* Per page, deliberately. The budget is 42 because the slot is one display
+     line at --type-h3-card with no max width, and 42 is what fits on one line
+     at 390.
+
+     The commercial page is over it on purpose. On 26 Aug 2026 the client
+     supplied a 78 character subhead naming who the agency acts for, and
+     overruled the budget rather than the copy. It wraps to two lines on
+     desktop and three at 390, so it costs vertical space in the hero; the
+     clipping, scroll and tap target checks below still pass at all four
+     widths, which is why this is a budget exception rather than a render bug.
+     Recorded as openDecisions.commercialClientCopyEdits.
+
+     A client overrule on one page is not a new house rule, so the other three
+     pages still answer to 42. */
+  const subheadBudget = key === 'commercial' ? 78 : 42;
+
+  subhead.length <= subheadBudget
+    ? pass(`hero subhead ${subhead.length}/${subheadBudget}`)
+    : fail(`hero subhead ${subhead.length}/${subheadBudget}: "${subhead}"`);
 
   const over = (list, max, what) => {
     const bad = list.filter((t) => t.length > max);

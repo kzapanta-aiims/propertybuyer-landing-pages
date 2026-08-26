@@ -144,3 +144,57 @@ to match. See `awardsCountOnStatRow` in `shared/segments.json`.
 The buyer page bullet still reads "Over 50+ industry awards", which doubles the
 qualifier and is the only one of the three phrased that way. That is a wording
 nit rather than a claim conflict.
+
+## Client copy edits, 26 August 2026
+
+Seven strings changed at the client's direction, after the page was built,
+reviewed and merged. Applied as supplied. The strings themselves are in
+`../../paper/commercial-copy.md`; what they cost is here.
+
+| Slot | Now reads |
+|---|---|
+| Hero subhead | We act for businesses, SMSF buyers, private investors and larger organisations |
+| Hero body | We source and secure premium commercial assets at a variety of price points, tailored to your specific needs |
+| Truth band H2 | The best commercial assets are never on the market |
+| Truth band lede | You need to access properties not available on the open market in order to achieve a superior price or yield outcome |
+| Truth card 1 | Unwavering due diligence, was "No incentives to sell to you, ever" |
+| Truth card 4 | Access opportunities others will not see, was "Access before it is listed" |
+| Story cards | The purchase date came off all three |
+
+**Three things this changed that the strings do not show.**
+
+1. **The subhead is 78 against a 42 hard budget.** `tools/check.mjs` failed
+   the page on it, correctly. The budget is now per page: 78 for `commercial`,
+   42 everywhere else, with the reason in a comment at the check. The subhead
+   wraps to two lines on desktop and three at 390, which pushes the hero body
+   and the award pill down. Clipping, scroll and tap targets still pass at 390,
+   768, 1100 and 1440, and the wrap was looked at rather than assumed.
+2. **The independence claim left the top of the page in three places at once.**
+   The old subhead, the old hero body and the whole of truth card 1 each
+   carried it, and all three are gone. What still carries it is below the fold:
+   FAQ 4, which keeps the deleted card's body verbatim, truth card 3, the
+   closer note and the meta description. The register DESIGN.md sets for this
+   page is due diligence and buy-versus-lease certainty, which the new copy
+   leads with, so this is not off-brief. It is still the strongest
+   differentiator moving down the page as a side effect rather than by
+   decision. See `openDecisions.commercialIndependenceClaim`.
+3. **The two psychographics are now unaddressed in copy.** The hero used to
+   name the owner occupier and the investor and then average them, which the
+   review flagged as finding 6. The new hero body addresses one commercial
+   buyer. The `purpose` field still asks which one a visitor is, so the page
+   collects the fork and answers neither side of it. That reopens the
+   outstanding half of `openDecisions.commercialPurposeField`.
+
+**Two art notes, unresolved.** Truth card 1 keeps the photograph chosen for
+the independence argument, three people on one side of a table, now under a
+due diligence heading. It is generic enough to pass and it is not wrong, but a
+due diligence card would rather show the inspection or the paperwork. Its alt
+text, "A buyer and their agent on the same side of the table", still describes
+the photograph accurately and was left alone.
+
+**Four typographic corrections** were made to the supplied strings, under the
+DESIGN.md mechanics, none touching meaning: sentence case on "Unwavering due
+diligence", "variaty" to "variety", "pricepoints" to "price points", "wont" to
+"will not". The supplied "risks / and opportunities" was set as "risks and
+opportunities" and "a superior price and/or yield outcome" as "a superior price
+or yield outcome".
