@@ -66,6 +66,16 @@ client publishes twenty named site purchases with prices, and they lack only a
 month and year plus a client first name. Each bracket on the page names the
 candidate record it is waiting on. See `developerProofSlots`.
 
+**The buyer page is ahead of the other three on entry animations, since 28
+August 2026.** It declares its `reveal` and `reveal-glass` classes in the
+markup and sets `html.js` from a script in its head, so the from-state is
+there at the first paint. The other three still assemble both in `page.js` at
+the foot of the body, which paints the cards visible and blanks them about
+150ms later, and they still flash. `page.js` serves both arrangements, so
+nothing is broken by the gap. Rolling it to a page means moving the classes
+into its markup and copying the head script, then re-testing the three
+guards. See `revealStateBeforeFirstPaint` and the HANDOVER.md section.
+
 **The client's own website is a claim source, and it beat DESIGN.md twice.**
 Two pages of propertybuyer.com.au were read on 21 Aug 2026 and they resolved
 what DESIGN.md could not: whether the agency touches feasibility, and what a

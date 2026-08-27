@@ -381,6 +381,56 @@ Do not let the client discover them:
 - the body face is Geist rather than Gotham Pro,
 - the H1 is Proyale 400 capped at 44, with no 52 step.
 
+## Entry animations and the first paint, 28 August 2026
+
+The reveals used to be assembled entirely by script. `page.js` sits at the
+foot of the body, so `html.js` and the `reveal` classes both landed after the
+whole document had parsed, on cards the browser had already drawn. Measured at
+390 on a throttled 3G profile: first contentful paint at 832ms, the cards
+blanked at 987ms, the animation starting later still. The entry read as a
+flash, because the visitor was watching content get taken away rather than
+arrive.
+
+The from-state now ships in the page. This page declares `reveal` and
+`reveal-glass` in its markup and sets `html.js` from a two line script in the
+head, so a card is at opacity 0 from the first paint and is never shown and
+then hidden. Nothing about the animation itself changed: same keyframes, same
+700ms and 1400ms durations, same easing, same 110ms and 380ms stagger, same
+IntersectionObserver trigger.
+
+`page.js` still carries its `FADE` and `GLASS` lists and still adds the classes
+at runtime, because the commercial, investor and developer pages have not
+moved yet. Adding a class an element already has is a no-op, so one pass
+serves both. **Those three pages still flash, and this page is the template
+for fixing them.**
+
+Declaring the state in markup means the body cannot appear if `page.js` never
+arrives, which was not possible before. Three guards, all tested:
+
+- the head script sets `data-reveals="rescued"` after three seconds, and
+  `landing.css` drops the from-state document-wide on that attribute, so it
+  covers markup that has not parsed yet
+- `page.js` reads that attribute on arrival and leaves a rescued page alone,
+  rather than re-hiding it and causing the flash a second time
+- `page.js` strips the classes instead of returning early when there is no
+  `IntersectionObserver`, which would otherwise hold the page at opacity 0
+
+Under reduced motion the from-state never applies at all, as before.
+
+Two step cards and the third auction photo sit outside their rails
+horizontally, so they never intersect and stay unrevealed until the rail is
+dragged. That predates this change and is unchanged by it.
+
+Alongside it, two image corrections. The hero awards strip is at 859px at
+1440x900, inside the first viewport, and `add-image-hints.mjs` had made it
+lazy on the assumption that only the hero portraits were above the fold; it is
+eager now. The closer band's copy of the same badge set, and everything else,
+stays lazy. And all 41 raster images carry their true intrinsic width and
+height, so a card reserves its box before the file lands instead of resizing
+under its own animation. That needs `height: auto`, which is now on `img` in
+`base.css`: without it the height attribute lands as a presentational hint and
+stretches any image the design layer sizes by width alone.
+
 ## For the developer
 
 Backend and integration, none of it stubbed in a way that hides work:

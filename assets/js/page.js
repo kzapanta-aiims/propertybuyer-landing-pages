@@ -275,9 +275,33 @@
 
   /* ---- Scroll reveals ----------------------------------------------------
      The auction photos get the glass entry: in from the right, blur to
-     sharp, staggered. Everything else gets a quiet fade-up. Classes are
-     added here at runtime so the page stays static without script. */
-  if (reduced || !('IntersectionObserver' in window)) return;
+     sharp, staggered. Everything else gets a quiet fade-up.
+
+     Classes are added here at runtime for any page that does not declare
+     them, which is what keeps that page static without script. The buyer
+     page declares them in its markup instead, so the from-state is in place
+     at the first paint rather than landing on cards the browser has already
+     drawn. Adding a class an element already carries is a no-op, so the one
+     pass below still serves both. See the head of that page. */
+
+  /* A page that declares its reveals in markup also ships a head timer that
+     gives up on this script and lifts the from-state if it never arrives.
+     Where that has already happened the page is visible and static, and
+     re-hiding it now would be the flash all of this exists to remove. */
+  if (docEl.getAttribute('data-reveals') === 'rescued') return;
+  docEl.setAttribute('data-reveals', 'on');
+
+  /* Markup-declared reveals have to be cleared here rather than left to
+     hold. Without IntersectionObserver nothing ever adds revealed, so the
+     from-state would keep the page at opacity 0 for good. Under reduced
+     motion the from-state never applies, and a runtime-classed page has
+     nothing to clear yet, so this is inert in both of those. */
+  if (reduced || !('IntersectionObserver' in window)) {
+    document.querySelectorAll('.reveal, .reveal-glass').forEach(function (el) {
+      el.classList.remove('reveal', 'reveal-glass');
+    });
+    return;
+  }
 
   var FADE = [
     '.testimonials-head__intro', '.rating-rows', '.story-card',

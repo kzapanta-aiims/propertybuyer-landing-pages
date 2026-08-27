@@ -31,7 +31,14 @@ body {
   overflow-x: hidden;
 }
 
-img { max-width: 100%; display: block; }
+/* height: auto is what makes the width and height attributes on an img safe.
+   The attributes arrive as presentational hints, so on any image the design
+   layer sizes by width alone the height hint would otherwise be taken
+   literally and the picture would stretch. With this it is the ratio that
+   survives, which is the whole point of carrying the attributes: the box is
+   reserved at the right shape before the file lands. Added 28 Aug 2026 with
+   the buyer page's dimensions. */
+img { max-width: 100%; height: auto; display: block; }
 h1, h2, h3, p, ul, ol, figure, fieldset { margin: 0; }
 ul { padding: 0; list-style: none; }
 fieldset { padding: 0; border: 0; }
