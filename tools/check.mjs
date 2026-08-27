@@ -151,6 +151,18 @@ for (const { key, file, family } of pages) {
     ? pass('no proof-of-concept scaffolding left in the page')
     : fail(`${poc.length} demo item(s) present, NOT SHIPPABLE: ${poc.join('; ')}`);
 
+  /* Client review overlay. Every page carries the loader so a review link
+     works on any page, and only the loader: review.js self-mounting without
+     the ?review=1 gate would put the overlay in front of real visitors, the
+     same class of mistake as the demo toggle above. Added 28 Aug 2026, see
+     the client-review skill and the feedback-hub repo. */
+  /<script[^>]*review-loader\.js[^>]*data-review-site=/.test(html)
+    ? pass('review overlay loader present')
+    : fail('review overlay loader missing (script tag with data-review-site)');
+  !/<script[^>]*src="[^"]*\breview\.js"/.test(html)
+    ? pass('review.js loads only through its gate')
+    : fail('review.js referenced directly, bypassing the ?review=1 gate');
+
   /* ------------------------------------------------- character budgets --- */
   head('Mobile character budgets, checked at 390');
 

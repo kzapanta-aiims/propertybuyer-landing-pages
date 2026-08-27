@@ -825,6 +825,10 @@
 <!-- Behaviour: two-step form, scroll reveals, glass entry. Classic script,
      runs from disk too. FORMS ARE STUBBED, no endpoint exists yet. -->
 <script src="../../assets/js/page.js"></script>
+<!-- Client review overlay. Inert on a normal visit: the loader reads the
+     ?review=1 gate and loads nothing without it. See the client-review
+     skill and the feedback-hub repo. -->
+<script defer src="../../assets/js/review-loader.js" data-review-site="propertybuyer" data-review-hub="https://feedback-hub-navy.vercel.app"></script>
 <!-- Live Paper shaders, progressive enhancement over the exported stills.
      Module scripts need http, so `npm run serve`; from disk the stills
      simply remain, which is the intended fallback. -->

@@ -613,5 +613,9 @@
      endpoint exists yet; see HANDOVER.md before wiring one up. No shader
      script on this family: there are no shader hosts to mount. -->
 <script src="../../assets/js/page.js"></script>
+<!-- Client review overlay. Inert on a normal visit: the loader reads the
+     ?review=1 gate and loads nothing without it. See the client-review
+     skill and the feedback-hub repo. -->
+<script defer src="../../assets/js/review-loader.js" data-review-site="propertybuyer" data-review-hub="https://feedback-hub-navy.vercel.app"></script>
 </body>
 </html>
