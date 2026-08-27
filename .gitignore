@@ -18,3 +18,8 @@ package-lock.json
 # remote is not where they belong.
 Brand Assets/
 CRO/
+
+# Pulled client feedback rounds, written by the client-review skill
+# (/client-review pull). Working material for acting on a round; the threads
+# themselves live in the feedback hub, so nothing here needs keeping.
+.feedback/

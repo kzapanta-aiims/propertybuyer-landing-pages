@@ -26,6 +26,8 @@ assets/css/base.css      reset, base type, buttons, pills. Shared
 assets/css/landing.css   design layer, the four paid segment pages
 assets/css/locations.css design layer, the location pages
 assets/js/page.js        ONE script, every page
+assets/js/review-loader.js  client review gate, every page. Vendored, see below
+assets/js/review.js         the review overlay, loaded only behind ?review=1
 shared/segments.json     segment list plus the decision log
 paper/proof-register.md  every Tier 1 proof point, with its source
 paper/buyer-copy.md      copy deck, home
@@ -184,6 +186,23 @@ lives and dies with the demo: still available on the buyer page for showing
 both states in a meeting, ignored anywhere the attribute is absent. Before
 that gate any visitor to a live page could render an unverified count with
 `?experts=99`, which is a Tier 3 claim as visible text.
+
+## Client review overlay
+
+Every page carries `assets/js/review-loader.js`, added 28 Aug 2026. On a
+normal visit it reads a gate and loads nothing: zero requests, zero DOM. With
+`?review=1` on the URL it loads `review.js`, which lets the client click any
+element or leave general feedback, with photos, no account needed. The gate
+persists in a cookie for 14 days; `?review=0` clears it.
+
+Both files are vendored verbatim from the `feedback-hub` repo and are never
+edited here; fix them there and re-copy. Threads land in the feedback hub
+(`https://feedback-hub-navy.vercel.app`, admin token required). The
+`/client-review` skill pulls a round into `.feedback/` (gitignored), and
+replies and resolves threads once changes ship. `npm run check` fails a page
+that drops the loader or references `review.js` directly.
+
+Review links for the client: production URL plus `?review=1`, one per page.
 
 ## Git
 

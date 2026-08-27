@@ -1,0 +1,777 @@
+/* Client review overlay.
+ *
+ * Loaded only by review-loader.js, only behind the ?review=1 gate. Lets a
+ * client click any element and leave a comment with photos, or leave
+ * general feedback about the page as a whole, all with no account and no
+ * signup. Threads live in the feedback hub (see data-review-hub); the
+ * owner pulls them, makes the changes, replies and resolves, and the
+ * client sees a green tick with a note on their next visit.
+ *
+ * House rules this file must keep, in the spirit of the pages it rides on:
+ *   - the entire UI lives in a shadow root on one fixed host, so no style
+ *     leaks in either direction and the page's own stylesheets never see it
+ *   - it never mutates the page's DOM outside its own host: what the
+ *     client reviews is exactly the page, not the page plus our edits
+ *   - all motion respects prefers-reduced-motion
+ *   - classic script, so it also runs when a page is opened from disk
+ */
+(function () {
+  'use strict';
+
+  var script = document.currentScript;
+  if (!script) return;
+  var SITE = script.getAttribute('data-review-site');
+  var HUB = (script.getAttribute('data-review-hub') || '').replace(/\/$/, '');
+  if (!SITE || !HUB) return;
+
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var PAGE = window.location.pathname.replace(/index\.html$/, '') || '/';
+
+  /* ---- state ------------------------------------------------------------ */
+
+  var threads = [];        /* every thread for this page, anchored or general */
+  var pins = [];           /* { thread, el } for anchored threads we resolved */
+  var mode = null;         /* null | 'pick' */
+  var openPopover = null;  /* the one popover allowed at a time */
+  var rafPending = false;
+
+  function store(key, val) {
+    try {
+      if (arguments.length === 2) localStorage.setItem(key, JSON.stringify(val));
+      else return JSON.parse(localStorage.getItem(key));
+    } catch (e) { return null; }
+  }
+
+  var myName = store('review:name') || '';
+  var myId = store('review:id');
+  if (!myId) { myId = 'anon_' + Math.random().toString(36).slice(2, 8); store('review:id', myId); }
+
+  /* ---- api -------------------------------------------------------------- */
+
+  function api(path, opts) {
+    opts = opts || {};
+    return fetch(HUB + path, {
+      method: opts.method || 'GET',
+      headers: opts.body ? { 'Content-Type': 'application/json' } : undefined,
+      body: opts.body ? JSON.stringify(opts.body) : undefined,
+    }).then(function (res) {
+      return res.json().catch(function () { return {}; }).then(function (json) {
+        if (!res.ok) throw new Error(json.error || ('request failed (' + res.status + ')'));
+        return json;
+      });
+    });
+  }
+
+  function uploadImage(file) {
+    return downscale(file).then(function (out) {
+      return fetch(HUB + '/api/upload?site=' + encodeURIComponent(SITE) +
+                   '&name=' + encodeURIComponent(out.name), {
+        method: 'POST',
+        headers: { 'X-Image-Type': out.type },
+        body: out.blob,
+      }).then(function (res) {
+        return res.json().then(function (json) {
+          if (!res.ok) throw new Error(json.error || 'upload failed');
+          return json.url;
+        });
+      });
+    });
+  }
+
+  /* Longest edge 1600px, JPEG q0.82. A phone photo lands at 200-500 KB,
+     far under the hub's 4 MB refusal point. GIFs pass through untouched
+     so animation survives. */
+  function downscale(file) {
+    if (file.type === 'image/gif') {
+      return Promise.resolve({ blob: file, type: file.type, name: file.name || 'photo.gif' });
+    }
+    return new Promise(function (resolve, reject) {
+      var url = URL.createObjectURL(file);
+      var img = new Image();
+      img.onload = function () {
+        URL.revokeObjectURL(url);
+        var scale = Math.min(1, 1600 / Math.max(img.width, img.height));
+        var canvas = document.createElement('canvas');
+        canvas.width = Math.round(img.width * scale);
+        canvas.height = Math.round(img.height * scale);
+        canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+        canvas.toBlob(function (blob) {
+          if (!blob) return reject(new Error('could not read image'));
+          resolve({ blob: blob, type: 'image/jpeg', name: (file.name || 'photo').replace(/\.\w+$/, '') + '.jpg' });
+        }, 'image/jpeg', 0.82);
+      };
+      img.onerror = function () { URL.revokeObjectURL(url); reject(new Error('could not read image')); };
+      img.src = url;
+    });
+  }
+
+  /* ---- anchors ----------------------------------------------------------- */
+
+  function normText(el) {
+    return (el.innerText || '').replace(/\s+/g, ' ').trim();
+  }
+
+  function hashText(s) {
+    var h = 5381;
+    for (var i = 0; i < s.length; i++) h = ((h << 5) + h + s.charCodeAt(i)) | 0;
+    return (h >>> 0).toString(16);
+  }
+
+  function cssPath(el) {
+    var parts = [];
+    var node = el;
+    while (node && node.nodeType === 1 && node !== document.body) {
+      if (node.id) { parts.unshift('#' + node.id); break; }
+      var tag = node.tagName.toLowerCase();
+      var idx = 1, sib = node;
+      while ((sib = sib.previousElementSibling)) if (sib.tagName === node.tagName) idx++;
+      parts.unshift(tag + ':nth-of-type(' + idx + ')');
+      node = node.parentElement;
+    }
+    if (parts[0] && parts[0][0] !== '#') parts.unshift('body >');
+    return parts.join(' > ').replace('body > >', 'body >');
+  }
+
+  function nearestHeading(el) {
+    var headings = document.querySelectorAll('h1, h2, h3, h4');
+    var best = '';
+    for (var i = 0; i < headings.length; i++) {
+      var pos = headings[i].compareDocumentPosition(el);
+      if (pos & Node.DOCUMENT_POSITION_FOLLOWING || headings[i].contains(el)) {
+        best = normText(headings[i]).slice(0, 120);
+      }
+    }
+    return best;
+  }
+
+  function buildAnchor(el, clientX, clientY) {
+    var rect = el.getBoundingClientRect();
+    var text = normText(el);
+    var sections = document.getElementsByTagName('section');
+    var sectionIndex = null;
+    var sec = el.closest ? el.closest('section') : null;
+    if (sec) for (var i = 0; i < sections.length; i++) if (sections[i] === sec) sectionIndex = i;
+    return {
+      selector: cssPath(el),
+      tag: el.tagName,
+      id: el.id || null,
+      classes: Array.prototype.slice.call(el.classList, 0, 10),
+      text: text.slice(0, 120),
+      textHash: hashText(text),
+      heading: nearestHeading(el),
+      sectionIndex: sectionIndex,
+      rect: {
+        x: rect.left + window.scrollX, y: rect.top + window.scrollY,
+        w: rect.width, h: rect.height,
+      },
+      point: {
+        fx: rect.width ? (clientX - rect.left) / rect.width : 0.5,
+        fy: rect.height ? (clientY - rect.top) / rect.height : 0.5,
+      },
+      viewport: { w: window.innerWidth, h: window.innerHeight, dpr: window.devicePixelRatio || 1 },
+    };
+  }
+
+  /* Re-finding the element behind an anchor on a page that may have been
+     edited since the comment was made. Text first: on hand-written pages,
+     the copy is the most durable handle. Selector second. */
+  function resolveAnchor(a) {
+    if (!a) return null;
+    if (a.id) {
+      var byId = document.getElementById(a.id);
+      if (byId && byId.tagName === a.tag) return byId;
+    }
+    if (a.text) {
+      var candidates = document.getElementsByTagName(a.tag || '*');
+      var matches = [];
+      for (var i = 0; i < candidates.length; i++) {
+        var t = normText(candidates[i]);
+        if (t && (t.slice(0, 120) === a.text || t.indexOf(a.text) === 0)) matches.push(candidates[i]);
+      }
+      if (matches.length === 1) return matches[0];
+      if (matches.length > 1 && a.rect) {
+        matches.sort(function (m, n) {
+          var my = m.getBoundingClientRect().top + window.scrollY;
+          var ny = n.getBoundingClientRect().top + window.scrollY;
+          return Math.abs(my - a.rect.y) - Math.abs(ny - a.rect.y);
+        });
+        return matches[0];
+      }
+    }
+    if (a.selector) {
+      try {
+        var bySel = document.querySelector(a.selector);
+        if (bySel) return bySel;
+      } catch (e) { /* selector no longer parses: fall through */ }
+    }
+    return null;
+  }
+
+  function anchorChanged(a, el) {
+    return !!(a && el && a.textHash && hashText(normText(el)) !== a.textHash);
+  }
+
+  /* ---- shadow host and styles ------------------------------------------- */
+
+  var host = document.createElement('div');
+  host.style.cssText = 'position:fixed;top:0;left:0;width:0;height:0;z-index:2147483000;';
+  var root = host.attachShadow({ mode: 'open' });
+  document.documentElement.appendChild(host);
+
+  var css = '' +
+    ':host{all:initial}' +
+    '*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,Segoe UI,Roboto,sans-serif;' +
+      '-webkit-font-smoothing:antialiased}' +
+    'button{cursor:pointer;border:0;background:none;font:inherit;color:inherit}' +
+    'textarea,input{font:inherit}' +
+
+    '.pill{position:fixed;left:16px;bottom:16px;display:flex;align-items:center;gap:8px;' +
+      'background:#16181d;color:#f4f5f7;padding:12px 18px;border-radius:999px;font-size:14px;' +
+      'font-weight:600;box-shadow:0 4px 18px rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.12);' +
+      (reduced ? '' : 'transition:transform .15s ease;') + '}' +
+    '.pill:hover{transform:scale(1.04)}' +
+    '.pill .count{background:#4f8ef7;border-radius:999px;min-width:20px;height:20px;display:inline-flex;' +
+      'align-items:center;justify-content:center;font-size:12px;padding:0 6px}' +
+    '@media (max-width:760px){.pill{bottom:84px}}' +
+
+    '.panel{position:fixed;left:16px;bottom:72px;width:320px;max-height:min(65vh,560px);' +
+      'background:#16181d;color:#f4f5f7;border-radius:14px;border:1px solid rgba(255,255,255,.12);' +
+      'box-shadow:0 10px 40px rgba(0,0,0,.45);display:flex;flex-direction:column;overflow:hidden}' +
+    '@media (max-width:760px){.panel{left:8px;right:8px;width:auto;bottom:140px}}' +
+    '.panel header{padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,.09)}' +
+    '.panel header h2{font-size:15px;font-weight:700}' +
+    '.panel header p{font-size:12px;color:#9aa1ad;margin-top:2px}' +
+    '.panel .actions{display:flex;gap:8px;padding:12px 16px}' +
+    '.panel .actions button{flex:1;background:#2a2e37;border-radius:9px;padding:10px 8px;font-size:13px;' +
+      'font-weight:600;color:#f4f5f7;border:1px solid rgba(255,255,255,.09)}' +
+    '.panel .actions button.primary{background:#4f8ef7;border-color:transparent}' +
+    '.panel ul{list-style:none;overflow-y:auto;padding:4px 8px 10px}' +
+    '.panel li button{display:flex;gap:10px;width:100%;text-align:left;padding:9px 8px;border-radius:9px;' +
+      'font-size:13px;line-height:1.35;align-items:flex-start}' +
+    '.panel li button:hover{background:#22252c}' +
+    '.panel .num{flex:none;width:20px;height:20px;border-radius:999px;background:#4f8ef7;color:#fff;' +
+      'font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;margin-top:1px}' +
+    '.panel .num.done{background:#34a26b}' +
+    '.panel .who{color:#9aa1ad;font-size:11px;display:block;margin-top:2px}' +
+    '.panel .empty{padding:8px 16px 14px;font-size:13px;color:#9aa1ad}' +
+
+    '.hl{position:fixed;pointer-events:none;border:2px solid #4f8ef7;border-radius:4px;' +
+      'background:rgba(79,142,247,.10);display:none}' +
+    '.hl .tag{position:absolute;top:-24px;left:-2px;background:#4f8ef7;color:#fff;font-size:11px;' +
+      'font-weight:700;padding:2px 8px;border-radius:4px;white-space:nowrap}' +
+    '.capture{position:fixed;inset:0;cursor:crosshair}' +
+    '.hint{position:fixed;top:14px;left:50%;transform:translateX(-50%);background:#16181d;color:#f4f5f7;' +
+      'font-size:13px;font-weight:600;padding:9px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.14);' +
+      'box-shadow:0 4px 18px rgba(0,0,0,.4)}' +
+
+    '.dot{position:fixed;width:24px;height:24px;border-radius:999px;background:#4f8ef7;color:#fff;' +
+      'font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;' +
+      'box-shadow:0 2px 10px rgba(0,0,0,.35);border:2px solid #fff}' +
+    '.dot.done{background:#34a26b}' +
+
+    '.pop{position:fixed;width:340px;max-width:calc(100vw - 24px);background:#16181d;color:#f4f5f7;' +
+      'border-radius:14px;border:1px solid rgba(255,255,255,.12);box-shadow:0 10px 40px rgba(0,0,0,.5);' +
+      'padding:14px;font-size:13px}' +
+    '@media (max-width:760px){.pop{left:8px!important;right:8px;width:auto;bottom:12px;top:auto!important}}' +
+    '.pop h3{font-size:13px;font-weight:700;margin-bottom:2px}' +
+    '.pop .ctx{color:#9aa1ad;font-size:12px;margin-bottom:10px;overflow:hidden;text-overflow:ellipsis;' +
+      'white-space:nowrap}' +
+    '.pop textarea{width:100%;min-height:74px;background:#0e0f12;color:#f4f5f7;border:1px solid ' +
+      'rgba(255,255,255,.14);border-radius:9px;padding:9px;resize:vertical}' +
+    '.pop textarea:focus{outline:2px solid #4f8ef7;outline-offset:-1px}' +
+    '.pop .name{width:100%;background:#0e0f12;color:#f4f5f7;border:1px solid rgba(255,255,255,.14);' +
+      'border-radius:9px;padding:8px 9px;margin-top:8px}' +
+    '.pop .row{display:flex;gap:8px;margin-top:10px;align-items:center}' +
+    '.pop .row .grow{flex:1}' +
+    '.pop button.send{background:#4f8ef7;color:#fff;font-weight:700;border-radius:9px;padding:9px 16px}' +
+    '.pop button.send[disabled]{opacity:.5;cursor:default}' +
+    '.pop button.ghost{color:#9aa1ad;padding:9px 10px;font-weight:600}' +
+    '.pop button.attach{background:#2a2e37;border-radius:9px;padding:9px 12px;font-weight:600;font-size:12px}' +
+    '.pop .thumbs{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}' +
+    '.pop .thumbs .t{position:relative;width:52px;height:52px;border-radius:7px;overflow:hidden;' +
+      'border:1px solid rgba(255,255,255,.15)}' +
+    '.pop .thumbs img{width:100%;height:100%;object-fit:cover;display:block}' +
+    '.pop .thumbs .x{position:absolute;top:0;right:0;background:rgba(0,0,0,.65);color:#fff;width:18px;' +
+      'height:18px;font-size:11px;line-height:18px;text-align:center}' +
+    '.pop .msgs{max-height:280px;overflow-y:auto;margin-bottom:10px}' +
+    '.pop .msg{padding:8px 0;border-bottom:1px solid rgba(255,255,255,.07)}' +
+    '.pop .msg .by{font-size:11px;color:#9aa1ad;margin-bottom:3px;font-weight:600}' +
+    '.pop .msg .by.owner{color:#7db4ff}' +
+    '.pop .msg img{max-width:96px;max-height:96px;border-radius:7px;margin:6px 6px 0 0;display:inline-block;' +
+      'border:1px solid rgba(255,255,255,.15);cursor:zoom-in}' +
+    '.pop .status{display:inline-block;font-size:11px;font-weight:700;border-radius:5px;padding:2px 8px;' +
+      'margin-left:6px;vertical-align:1px}' +
+    '.pop .status.open{background:#3a3320;color:#e8c15a}' +
+    '.pop .status.resolved{background:#1d3a2c;color:#5ad391}' +
+    '.pop .warn{background:#3a2a20;color:#e8a15a;font-size:12px;border-radius:7px;padding:7px 9px;' +
+      'margin-bottom:8px}' +
+
+    '.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#16181d;' +
+      'color:#f4f5f7;padding:11px 18px;border-radius:10px;font-size:13px;font-weight:600;' +
+      'border:1px solid rgba(255,255,255,.14);box-shadow:0 6px 24px rgba(0,0,0,.5)}' +
+    '.toast.err{border-color:#c0564f}';
+
+  var style = document.createElement('style');
+  style.textContent = css;
+  root.appendChild(style);
+
+  function el(tag, cls, text) {
+    var node = document.createElement(tag);
+    if (cls) node.className = cls;
+    if (text != null) node.textContent = text;
+    return node;
+  }
+
+  /* ---- toast ------------------------------------------------------------- */
+
+  var toastTimer = null;
+  function toast(msg, isErr) {
+    var t = root.querySelector('.toast');
+    if (t) t.remove();
+    t = el('div', 'toast' + (isErr ? ' err' : ''), msg);
+    root.appendChild(t);
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { t.remove(); }, 3600);
+  }
+
+  /* ---- pill and panel ----------------------------------------------------- */
+
+  var pill = el('button', 'pill');
+  pill.setAttribute('aria-label', 'Design feedback');
+  var pillText = el('span', null, '💬 Feedback');
+  var pillCount = el('span', 'count', '0');
+  pill.appendChild(pillText);
+  pill.appendChild(pillCount);
+  root.appendChild(pill);
+
+  var panel = null;
+
+  function openCount() {
+    var n = 0;
+    for (var i = 0; i < threads.length; i++) if (threads[i].status === 'open') n++;
+    return n;
+  }
+
+  function renderPill() {
+    pillCount.textContent = String(openCount());
+    pillCount.style.display = threads.length ? '' : 'none';
+  }
+
+  function closePanel() { if (panel) { panel.remove(); panel = null; } }
+
+  function togglePanel() {
+    if (panel) return closePanel();
+    closePopover();
+    panel = el('div', 'panel');
+    var head = el('header');
+    head.appendChild(el('h2', null, 'Design feedback'));
+    head.appendChild(el('p', null, 'Comment on anything, no account needed. A green tick means it has been actioned.'));
+    panel.appendChild(head);
+
+    var actions = el('div', 'actions');
+    var pick = el('button', 'primary', '📍 Comment on an element');
+    var general = el('button', null, '📝 General feedback');
+    actions.appendChild(pick);
+    actions.appendChild(general);
+    panel.appendChild(actions);
+
+    pick.addEventListener('click', function () { closePanel(); enterPickMode(); });
+    general.addEventListener('click', function () {
+      closePanel();
+      showComposer(null, { x: window.innerWidth / 2 - 170, y: window.innerHeight * 0.25 });
+    });
+
+    if (!threads.length) {
+      panel.appendChild(el('p', 'empty', 'Nothing yet on this page. Click an element to leave the first comment.'));
+    } else {
+      var listEl = el('ul');
+      threads.forEach(function (t, i) {
+        var li = el('li');
+        var b = el('button');
+        var num = el('span', 'num' + (t.status === 'resolved' ? ' done' : ''),
+                     t.status === 'resolved' ? '✓' : String(i + 1));
+        var wrap = el('span');
+        var first = t.messages[0] || {};
+        var label = t.anchor ? (t.anchor.text || t.anchor.tag || 'Element') : 'General feedback';
+        wrap.appendChild(el('span', null, (first.body || '').slice(0, 90)));
+        wrap.appendChild(el('span', 'who', (t.author && t.author.name || 'Anonymous') + ' · ' + label.slice(0, 46)));
+        b.appendChild(num);
+        b.appendChild(wrap);
+        b.addEventListener('click', function () { closePanel(); showThread(t); });
+        li.appendChild(b);
+        listEl.appendChild(li);
+      });
+      panel.appendChild(listEl);
+    }
+    root.appendChild(panel);
+  }
+
+  pill.addEventListener('click', togglePanel);
+
+  /* ---- dots --------------------------------------------------------------- */
+
+  var dotsWrap = el('div');
+  root.appendChild(dotsWrap);
+
+  function rebuildPins() {
+    pins = [];
+    dotsWrap.textContent = '';
+    var num = 0;
+    threads.forEach(function (t, i) {
+      if (!t.anchor) return;
+      var target = resolveAnchor(t.anchor);
+      var dot = el('button', 'dot' + (t.status === 'resolved' ? ' done' : ''),
+                   t.status === 'resolved' ? '✓' : String(i + 1));
+      dot.setAttribute('aria-label', 'Feedback thread');
+      dot.addEventListener('click', function () { showThread(t); });
+      if (target) {
+        pins.push({ thread: t, el: target, dot: dot });
+        dotsWrap.appendChild(dot);
+      }
+      num++;
+    });
+    layoutDots();
+  }
+
+  function layoutDots() {
+    for (var i = 0; i < pins.length; i++) {
+      var p = pins[i];
+      var r = p.el.getBoundingClientRect();
+      var visible = r.bottom > -30 && r.top < window.innerHeight + 30;
+      p.dot.style.display = visible ? '' : 'none';
+      if (!visible) continue;
+      var fx = p.thread.anchor.point ? p.thread.anchor.point.fx : 0.5;
+      var fy = p.thread.anchor.point ? p.thread.anchor.point.fy : 0.5;
+      p.dot.style.left = Math.round(r.left + r.width * Math.min(Math.max(fx, 0), 1) - 12) + 'px';
+      p.dot.style.top = Math.round(r.top + r.height * Math.min(Math.max(fy, 0), 1) - 12) + 'px';
+    }
+  }
+
+  function queueLayout() {
+    if (rafPending) return;
+    rafPending = true;
+    requestAnimationFrame(function () { rafPending = false; layoutDots(); });
+  }
+
+  window.addEventListener('scroll', queueLayout, { passive: true });
+  window.addEventListener('resize', function () { rebuildPins(); });
+
+  /* ---- pick mode ----------------------------------------------------------- */
+
+  var capture = null, hl = null, hint = null;
+
+  function enterPickMode() {
+    if (mode === 'pick') return;
+    mode = 'pick';
+    closePopover();
+    capture = el('div', 'capture');
+    hl = el('div', 'hl');
+    hl.appendChild(el('span', 'tag', ''));
+    hint = el('div', 'hint', 'Click the thing you want to comment on · Esc to cancel');
+    root.appendChild(hl);
+    root.appendChild(capture);
+    root.appendChild(hint);
+    capture.addEventListener('mousemove', onPickMove);
+    capture.addEventListener('click', onPickClick);
+  }
+
+  function exitPickMode() {
+    mode = null;
+    if (capture) capture.remove();
+    if (hl) hl.remove();
+    if (hint) hint.remove();
+    capture = hl = hint = null;
+  }
+
+  /* The capture layer swallows the click so the page never acts on it; to
+     see what is underneath we drop the host's pointer events for the
+     lookup. elementFromPoint retargets shadow children to their host, so
+     without this the answer would always be the host itself. */
+  function elementAt(x, y) {
+    host.style.pointerEvents = 'none';
+    var found = document.elementFromPoint(x, y);
+    host.style.pointerEvents = '';
+    if (!found || found === document.documentElement || found === document.body) return null;
+    return found;
+  }
+
+  function onPickMove(e) {
+    var target = elementAt(e.clientX, e.clientY);
+    if (!target) { hl.style.display = 'none'; return; }
+    var r = target.getBoundingClientRect();
+    hl.style.display = 'block';
+    hl.style.left = r.left - 2 + 'px';
+    hl.style.top = r.top - 2 + 'px';
+    hl.style.width = r.width + 'px';
+    hl.style.height = r.height + 'px';
+    var label = target.tagName.toLowerCase() + (target.id ? '#' + target.id : '');
+    var text = normText(target).slice(0, 40);
+    hl.firstChild.textContent = text ? label + ' · ' + text : label;
+  }
+
+  function onPickClick(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    var target = elementAt(e.clientX, e.clientY);
+    if (!target) return;
+    var anchor = buildAnchor(target, e.clientX, e.clientY);
+    exitPickMode();
+    showComposer(anchor, { x: e.clientX, y: e.clientY });
+  }
+
+  window.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    if (mode === 'pick') exitPickMode();
+    else if (openPopover) closePopover();
+    else if (panel) closePanel();
+  });
+
+  /* ---- popovers ------------------------------------------------------------ */
+
+  function closePopover() {
+    if (openPopover) { openPopover.remove(); openPopover = null; }
+  }
+
+  function placePopover(pop, at) {
+    var x = Math.min(Math.max(at.x, 12), window.innerWidth - 352);
+    var y = Math.min(Math.max(at.y + 14, 12), window.innerHeight - 260);
+    pop.style.left = x + 'px';
+    pop.style.top = y + 'px';
+  }
+
+  /* The composer: new thread, anchored or general. */
+  function showComposer(anchor, at, draftBody) {
+    closePopover();
+    var pop = el('div', 'pop');
+    openPopover = pop;
+
+    pop.appendChild(el('h3', null, anchor ? 'Comment on this element' : 'General feedback'));
+    pop.appendChild(el('p', 'ctx', anchor
+      ? (anchor.text ? '“' + anchor.text.slice(0, 70) + '”' : anchor.tag.toLowerCase())
+      : 'About this page or the design as a whole'));
+
+    var ta = document.createElement('textarea');
+    ta.maxLength = 4000;
+    ta.placeholder = anchor ? 'What should change here?' : 'What should change?';
+    if (draftBody) ta.value = draftBody;
+    pop.appendChild(ta);
+
+    var name = document.createElement('input');
+    name.className = 'name';
+    name.placeholder = 'Your name';
+    name.maxLength = 60;
+    name.value = myName;
+    pop.appendChild(name);
+
+    var thumbs = el('div', 'thumbs');
+    pop.appendChild(thumbs);
+    var files = [];
+
+    var fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = 'image/*';
+    fileInput.multiple = true;
+    fileInput.style.display = 'none';
+    pop.appendChild(fileInput);
+
+    function addFiles(list) {
+      for (var i = 0; i < list.length && files.length < 3; i++) {
+        if (!/^image\//.test(list[i].type)) continue;
+        (function (f) {
+          files.push(f);
+          var t = el('span', 't');
+          var img = document.createElement('img');
+          img.src = URL.createObjectURL(f);
+          var x = el('button', 'x', '×');
+          x.addEventListener('click', function () {
+            files.splice(files.indexOf(f), 1);
+            URL.revokeObjectURL(img.src);
+            t.remove();
+          });
+          t.appendChild(img);
+          t.appendChild(x);
+          thumbs.appendChild(t);
+        })(list[i]);
+      }
+      if (list.length && files.length >= 3) toast('Up to 3 photos per comment');
+    }
+
+    fileInput.addEventListener('change', function () { addFiles(fileInput.files); fileInput.value = ''; });
+    ta.addEventListener('paste', function (e) {
+      if (e.clipboardData && e.clipboardData.files.length) { addFiles(e.clipboardData.files); e.preventDefault(); }
+    });
+    pop.addEventListener('dragover', function (e) { e.preventDefault(); });
+    pop.addEventListener('drop', function (e) { e.preventDefault(); if (e.dataTransfer) addFiles(e.dataTransfer.files); });
+
+    var row = el('div', 'row');
+    var attach = el('button', 'attach', '📷 Add photo');
+    attach.addEventListener('click', function () { fileInput.click(); });
+    var grow = el('span', 'grow');
+    var cancel = el('button', 'ghost', 'Cancel');
+    var send = el('button', 'send', 'Send');
+    row.appendChild(attach);
+    row.appendChild(grow);
+    row.appendChild(cancel);
+    row.appendChild(send);
+    pop.appendChild(row);
+
+    cancel.addEventListener('click', closePopover);
+    send.addEventListener('click', function () {
+      var body = ta.value.trim();
+      if (!body) { toast('Write a comment first'); return; }
+      myName = name.value.trim() || 'Anonymous';
+      store('review:name', myName);
+      send.disabled = true;
+      send.textContent = files.length ? 'Uploading…' : 'Sending…';
+
+      var uploads = files.reduce(function (chain, f) {
+        return chain.then(function (urls) {
+          return uploadImage(f).then(function (u) { urls.push(u); return urls; });
+        });
+      }, Promise.resolve([]));
+
+      uploads.then(function (urls) {
+        send.textContent = 'Sending…';
+        return api('/api/threads', {
+          method: 'POST',
+          body: {
+            site: SITE, path: PAGE,
+            author: { name: myName, id: myId },
+            anchor: anchor, body: body, images: urls,
+          },
+        });
+      }).then(function (json) {
+        clearDraft();
+        threads.push(json.thread);
+        renderPill();
+        rebuildPins();
+        closePopover();
+        toast('Sent, thank you');
+      }).catch(function (err) {
+        saveDraft(body, anchor);
+        send.disabled = false;
+        send.textContent = 'Send';
+        toast((err.message || 'Could not send') + '. Your text is saved, try again', true);
+      });
+    });
+
+    root.appendChild(pop);
+    placePopover(pop, at);
+    ta.focus();
+  }
+
+  /* The thread view: messages, replies, status. */
+  function showThread(t) {
+    closePopover();
+    var pop = el('div', 'pop');
+    openPopover = pop;
+
+    var title = el('h3', null, t.anchor ? 'Comment' : 'General feedback');
+    title.appendChild(el('span', 'status ' + t.status, t.status === 'resolved' ? 'Actioned ✓' : 'Open'));
+    pop.appendChild(title);
+    pop.appendChild(el('p', 'ctx', t.anchor
+      ? (t.anchor.text ? '“' + t.anchor.text.slice(0, 70) + '”' : (t.anchor.tag || '').toLowerCase())
+      : 'About the page as a whole'));
+
+    var target = t.anchor ? resolveAnchor(t.anchor) : null;
+    if (t.anchor && target && anchorChanged(t.anchor, target)) {
+      pop.appendChild(el('p', 'warn', 'This part of the page has changed since the comment was made.'));
+    }
+
+    var msgs = el('div', 'msgs');
+    t.messages.forEach(function (m) {
+      var box = el('div', 'msg');
+      var isOwner = m.role === 'owner';
+      box.appendChild(el('p', 'by' + (isOwner ? ' owner' : ''),
+        (isOwner ? 'Site owner' : (m.author || (t.author && t.author.name) || 'Anonymous')) +
+        ' · ' + new Date(m.at).toLocaleDateString()));
+      box.appendChild(el('p', null, m.body));
+      (m.images || []).forEach(function (u) {
+        var img = document.createElement('img');
+        img.src = u;
+        img.alt = 'attached photo';
+        img.addEventListener('click', function () { window.open(u, '_blank', 'noopener'); });
+        box.appendChild(img);
+      });
+      msgs.appendChild(box);
+    });
+    pop.appendChild(msgs);
+
+    var ta = document.createElement('textarea');
+    ta.maxLength = 4000;
+    ta.placeholder = 'Reply…';
+    ta.style.minHeight = '48px';
+    pop.appendChild(ta);
+
+    var row = el('div', 'row');
+    var grow = el('span', 'grow');
+    var close = el('button', 'ghost', 'Close');
+    var send = el('button', 'send', 'Reply');
+    row.appendChild(grow);
+    row.appendChild(close);
+    row.appendChild(send);
+    pop.appendChild(row);
+
+    close.addEventListener('click', closePopover);
+    send.addEventListener('click', function () {
+      var body = ta.value.trim();
+      if (!body) return;
+      send.disabled = true;
+      api('/api/thread?site=' + encodeURIComponent(SITE) + '&id=' + encodeURIComponent(t.id), {
+        method: 'POST',
+        body: { action: 'reply', body: body, author: { name: myName || 'Anonymous' } },
+      }).then(function (json) {
+        t.messages = json.thread.messages;
+        showThread(t);
+        toast('Reply sent');
+      }).catch(function (err) {
+        send.disabled = false;
+        toast(err.message || 'Could not send reply', true);
+      });
+    });
+
+    root.appendChild(pop);
+    var at;
+    if (target) {
+      var r = target.getBoundingClientRect();
+      at = { x: r.left, y: r.bottom };
+    } else {
+      at = { x: window.innerWidth / 2 - 170, y: window.innerHeight * 0.2 };
+    }
+    placePopover(pop, at);
+  }
+
+  /* ---- drafts: never lose typed text to a network failure ------------------- */
+
+  var DRAFT_KEY = 'review:draft:' + SITE + ':' + PAGE;
+
+  function saveDraft(body, anchor) { store(DRAFT_KEY, { body: body, anchor: anchor, at: Date.now() }); }
+  function clearDraft() { try { localStorage.removeItem(DRAFT_KEY); } catch (e) {} }
+
+  function offerDraft() {
+    var d = store(DRAFT_KEY);
+    if (!d || !d.body) return;
+    var t = el('button', 'toast', 'You have an unsent comment. Tap to restore');
+    t.addEventListener('click', function () {
+      t.remove();
+      showComposer(d.anchor || null, { x: window.innerWidth / 2 - 170, y: window.innerHeight * 0.25 }, d.body);
+    });
+    root.appendChild(t);
+    setTimeout(function () { t.remove(); }, 8000);
+  }
+
+  /* ---- boot ------------------------------------------------------------------ */
+
+  api('/api/threads?site=' + encodeURIComponent(SITE) + '&status=all')
+    .then(function (json) {
+      threads = (json.threads || []).filter(function (t) { return t.path === PAGE; });
+      renderPill();
+      rebuildPins();
+      offerDraft();
+    })
+    .catch(function () {
+      renderPill();
+      offerDraft();
+      toast('Could not reach the feedback service. Comments will be saved locally', true);
+    });
+})();
