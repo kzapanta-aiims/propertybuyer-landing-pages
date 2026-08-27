@@ -181,6 +181,24 @@ h3 {
 .pill--light { height: 36px; background: var(--grad-pill-light); color: var(--text-body); filter: var(--shadow-pill-light); font-weight: var(--weight-regular); }
 .pill--light.pill--step { font-size: var(--type-body); font-weight: var(--weight-medium); }
 .pill .laurel { flex-shrink: 0; }
+/* Info pill, added 27 August 2026 for the developer confidentiality notice.
+   The other two modifiers are single-line eyebrows, so the base rule fixes a
+   40px height and sets white-space: nowrap. This one carries a sentence, so it
+   has to undo both or it runs off the side of a 390 viewport. Everything else
+   about the component is inherited. */
+.pill--info {
+  height: auto;
+  min-height: 40px;
+  max-width: 100%;
+  padding: 10px 20px;
+  background: var(--bg-info-subtle);
+  border: 1px solid var(--border-info);
+  color: var(--text-info);
+  font-weight: var(--weight-regular);
+  line-height: 1.5;
+  white-space: normal;
+  text-align: left;
+}
 
 /* ==========================================================================
    Brand furniture, promoted from landing.css on 21 August 2026

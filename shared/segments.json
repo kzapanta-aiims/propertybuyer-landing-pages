@@ -333,6 +333,54 @@
       "consequence": "Nothing above the fold now states that no vendor pays the agency. What still carries it is all below the fold: FAQ 4, \"Does the vendor pay you anything?\", which keeps the deleted card's body verbatim; truth card 3, on value rather than on who pays; the closer note, \"Buyers only, since 2001\"; and the meta description. On a page whose register is trust-first, that is a real demotion of the strongest differentiator, and it was a side effect of three separate edits rather than a stated decision.",
       "alternative": "Put the no-commission proof back as a fifth truth card, or into the truth band lede, without disturbing any of the seven supplied strings. Costs nothing the client asked for.",
       "raised": "26 Aug 2026"
+    },
+    "storyNameRedaction": {
+      "problem": "The client's 27 Aug copy edits asked for the three story client names to be blurred or taped over, and for the band to carry a confidentiality notice, because development acquisitions are not disclosed. The story photographs and the bought-year stat came out at the same time.",
+      "decision": "APPLIED. Names are wrapped in a .redacted span in New Builds/developer/index.html and taped with a solid background in landing.css. A background was chosen over a CSS blur because a blur on live text is reversible from devtools and these are real client names.",
+      "status": "OPEN, INCOMPLETE SAFEGUARD",
+      "consequence": "The name is still in the DOM and still in the accessibility tree. Transparent text plus user-select none stops a casual copy and stops a sighted reader, but view-source, a screen reader, or a search engine still reads the name. If the client means the names must not be published at all, the fix is to take them out of the markup and not to style them.",
+      "alternative": "Replace the names in the HTML with a role word, for example \"the buyers\" or \"the purchasers\", and delete the .redacted span. Costs nothing and is genuinely private.",
+      "raised": "27 Aug 2026"
+    },
+    "developerCopyEdits27Aug": {
+      "problem": "The 27 Aug client copy edits for the developer page break two DESIGN.md hard rules that tools/check.mjs enforces, and carry four wording defects that reach visible copy.",
+      "decision": "APPLIED VERBATIM. The client was asked on 27 Aug 2026 and was adamant, so the two DESIGN.md hard rules are OVERRIDDEN for this page by client instruction, not by our judgement. The sentence case breaches were the one part the client agreed to fix, and they are fixed.",
+      "status": "CLOSED FOR MERGE, CHECKER FAILS BY DESIGN",
+      "consequence": "npm run check developer reports 2 permanent failures, and they are now expected rather than outstanding: \"banned language: unlock\", from off-market move 1, and the hero subhead at 46 characters against a 42 character maximum. Anyone reading a red checker on this page should read this entry before trying to fix it. The developer page has therefore joined the buyer page as a page with a known, deliberate, documented failure, and the checker no longer returns a clean run for the paid family. Not fixed and not machine checkable: \"spurious development outcomes\" in the hero body still means false outcomes, which inverts the claim; \"a contest you optimally positioned\" and \"the opportunities maximum development potential\" are still missing words; and \"A development site is complexed\" should read complex. All four were put to the client and all four are covered by the same override.",
+      "alternative": "If the checker should go green again, the two failing strings need a client rewrite: a subhead at 42 characters or fewer, and a move 1 body without the word unlock. Nothing else needs to move.",
+      "raised": "27 Aug 2026"
+    },
+    "developerIndependenceDemotion": {
+      "problem": "The developer hero subhead was \"We never act for a vendor or an agent.\" and the 27 Aug edits replaced it with \"Due diligence and risk assessment is paramount\". The hero body's \"Nobody on the other side pays us.\" went at the same time, and truth card 1's no-commission proof was rewritten into a feasibility card.",
+      "decision": "ACCEPTED as the client's direction, not corrected. Same call and same reasoning as the commercial page on 26 Aug.",
+      "status": "OPEN, WORTH A CLIENT LOOK",
+      "consequence": "Nothing above the fold on the developer page now states that no vendor pays the agency, and this is the third page in a row to lose it. What still carries it is FAQ 5, \"Does the vendor pay you anything?\", which now also names consultants, plus the closer note and the meta description.",
+      "alternative": "Put the no-commission proof into the truth band lede, which is one short string and disturbs nothing the client supplied.",
+      "raised": "27 Aug 2026"
+    },
+    "developerSentenceCase27Aug": {
+      "problem": "The 27 Aug client strings carried mid-sentence capitals in four places: \"Successful Development\", \"Your Consultants are ours\", \"10,000+ Agents\" and \"3rd Parties\". DESIGN.md line 319 sets sentence case for every heading.",
+      "decision": "CORRECTED to sentence case with the client's agreement, unlike the rest of the 27 Aug copy. This is the one place the client did not hold the line, so it is the one place the house rule won.",
+      "status": "CLOSED",
+      "consequence": "Nothing further. The four strings now read \"Successful development\", \"Your consultants are ours\", \"10,000+ agents\" and \"3rd parties\".",
+      "alternative": "None needed.",
+      "raised": "27 Aug 2026"
+    },
+    "storyNoticeAsInfoPill": {
+      "problem": "The developer confidentiality notice was set as muted micro copy and the client wanted it bolder, as the eyebrow pill component filled with bg/info-subtle and bordered with border/info.",
+      "decision": "APPLIED as a new .pill--info modifier in base.css rather than as a one-off rule on the developer page, because it is the pill component doing a third job and the next page that needs a notice should not reinvent it.",
+      "status": "OPEN, TOUCHES A SHARED FILE",
+      "consequence": "base.css lands on every page in both families, so this is a Figma Variables class of change even though it is purely additive. The base .pill rule fixes a 40px height and white-space: nowrap for single-line eyebrows, and a sentence-length pill has to undo both, so .pill--info sets height auto, white-space normal and line-height 1.5. Verified: no page in either family gained a horizontal scroll at 390, 768, 1100 or 1440, and commercial, investor and melbourne still report all hard rules passing.",
+      "alternative": "If a notice pill is only ever a developer page thing, the modifier belongs in landing.css instead and base.css goes back untouched.",
+      "raised": "27 Aug 2026"
+    },
+    "developerStorySlot2Hidden": {
+      "problem": "Story card 2 carried two visible unfilled markers: a \"To purchase\" stat reading [N weeks], and a bracketed caveat saying the deck records the figures and not the story. The client confirmed on 27 Aug 2026 that the record is relevant and good to go, and asked for both to be hidden.",
+      "decision": "HIDDEN, NOT DELETED, which is the idiom already used for .story-card__privacy and .lead-step. The markup stays and a hidden attribute carries it, so removing one attribute brings either back.",
+      "status": "CLOSED",
+      "consequence": "Card 2 now shows one stat where the other two cards show two, which is a visible asymmetry in the row. The purchase duration for this record is still unknown; it is now unknown and invisible rather than unknown and flagged, so nothing on the page prompts anyone to go and get it. .story-stat is display: flex, so the hidden attribute needed an explicit .story-stat[hidden] rule in landing.css to take effect at all.",
+      "alternative": "Get the purchase duration from the client and unhide the stat, which restores the row and removes the asymmetry.",
+      "raised": "27 Aug 2026"
     }
   }
 }
