@@ -381,6 +381,22 @@
       "consequence": "Card 2 now shows one stat where the other two cards show two, which is a visible asymmetry in the row. The purchase duration for this record is still unknown; it is now unknown and invisible rather than unknown and flagged, so nothing on the page prompts anyone to go and get it. .story-stat is display: flex, so the hidden attribute needed an explicit .story-stat[hidden] rule in landing.css to take effect at all.",
       "alternative": "Get the purchase duration from the client and unhide the stat, which restores the row and removes the asymmetry.",
       "raised": "27 Aug 2026"
+    },
+    "investorSentenceCase27Aug": {
+      "problem": "The investor hero subhead and truth band were both rewritten by the client on 25 Aug 2026 and arrived in title case. The subhead read \"Helping Investors Succeed in Australia\". The four truth card H2s read \"The Most Comprehensive Research\", \"Only the most superior Opportunities\", \"Pay the absolute Minimum\" and \"Guidance from Sales to Settlement\", and the band lede read \"Your Preferred Area or Suggest Area from our experts.\" DESIGN.md line 319 sets sentence case for every heading, and the equivalent subhead and band on the buyer, commercial and developer pages are already sentence case.",
+      "decision": "CORRECTED to sentence case, on the precedent set by developerSentenceCase27Aug the same week. Case only. Not one word was changed, so \"suggest area\" and \"the lowest possible price\" both survive exactly as the client wrote them, and the claim question on card 3 is untouched. The subhead is 38/42 either way, because case does not move a character count.",
+      "status": "CLOSED",
+      "consequence": "The hero subhead, the four truth cards and the band lede now match the other three pages. The client has not been asked about the investor strings specifically; the 27 Aug agreement covered the developer page, and this applies the same rule one page over. Tell them at the same time as the developer change.",
+      "alternative": "Leave the client capitals standing and take DESIGN.md line 319 out instead, which would put four pages of headings up for renegotiation.",
+      "raised": "27 Aug 2026"
+    },
+    "familyWideTitleCaseHoldouts": {
+      "problem": "Three title-case strings on the investor page were left title case in the 27 Aug sentence-case pass: the service card H3s \"Full Search\", \"Appraise & Negotiate\" and \"Auction Bidding\"; the hero review link \"See Our Reviews\"; and the header tag \"25 Years Property Investment Excellence\". The last two are shared chrome, identical on all four paid pages.",
+      "decision": "LEFT ALONE, deliberately, matching what developerSentenceCase27Aug did with \"Development Sourcing\" and \"Appraise & Negotiate\". The service names read as product names rather than sentences, and the other two are template chrome: correcting either on one page only would trade one inconsistency for a worse one across the family.",
+      "status": "OPEN",
+      "consequence": "The investor page still carries five title-case strings that a strict reading of DESIGN.md line 319 fails. None of them is an H2, a subhead or body copy. Separately, the header tag breaks the harder rule at DESIGN.md line 521, \"Since 2001\", never \"25 years\": a hardcoded duration that goes stale on its own. That is on every page, including the two the client has reviewed.",
+      "alternative": "One family-wide pass over all four paid pages plus the location family, which is where a change to shared chrome belongs. Take the 25 years header tag with it.",
+      "raised": "27 Aug 2026"
     }
   }
 }
