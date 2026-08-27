@@ -10,6 +10,15 @@
  * re-run after editing the markup.
  *
  *   node tools/add-image-hints.mjs
+ *
+ * CORRECTED 28 Aug 2026. "Only the three hero portraits sit above the fold"
+ * was measured at the wrong place: at 1440x900 the hero awards strip is at
+ * 859px, inside the first viewport, and it was still unfetched at first
+ * paint. That strip is eager on the buyer page now, and the closer band's
+ * copy of the same badge set is not. This tool cannot express that
+ * difference, because it matches on file name and the two strips share
+ * theirs. It stays as the record of the 18 Aug pass and is inert against the
+ * current markup, since every tag now carries a hint.
  */
 import { readFileSync, writeFileSync } from 'node:fs';
 

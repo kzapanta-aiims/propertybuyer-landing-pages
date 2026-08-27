@@ -908,9 +908,15 @@
    touch no transition property, so hovers keep their own timing. The stagger
    arrives as animation-delay, and fill mode "both" holds the from-state
    through the delay so nothing flashes before its turn. */
+/* data-reveals="rescued" is set by the head script on a page that declares
+   its reveal classes in markup, when page.js has not arrived in three
+   seconds. It switches the from-state off document-wide, which is the only
+   version of the rescue that also covers markup still parsing. A page whose
+   classes are added at runtime never gets the attribute and never needs it,
+   so this selector reads the same as before there. */
 @media (prefers-reduced-motion: no-preference) {
-  .js .reveal,
-  .js .reveal-glass { opacity: 0; }
+  .js:not([data-reveals="rescued"]) .reveal,
+  .js:not([data-reveals="rescued"]) .reveal-glass { opacity: 0; }
   .js .reveal.revealed { animation: reveal-up 700ms ease-out both; }
   .js .reveal-glass.revealed { animation: reveal-glass 1400ms cubic-bezier(0.22, 1, 0.36, 1) both; }
 }
