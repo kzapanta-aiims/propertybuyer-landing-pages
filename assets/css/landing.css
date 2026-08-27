@@ -292,6 +292,33 @@
   color: var(--text-muted);
 }
 
+/* Confidentiality treatment for the developer page, 27 Aug 2026. Development
+   acquisitions are not disclosed, so the band carries a notice and each
+   client name is taped over. Both selectors are additive: no other page in
+   this family carries the markup, so nothing else changes.
+
+   The tape is a background rather than a blur, because a CSS blur on live
+   text is reversible by anyone who opens devtools, and these are real client
+   names. Transparent text keeps the name in the accessibility tree for a
+   screen reader, which is the same exposure as the tape being lifted, so the
+   name is also removed from selection. If the name must not reach the DOM at
+   all, it has to come out of the markup instead. See storyNameRedaction. */
+.stories-notice {
+  max-width: 720px;
+  margin: 0;
+  font-size: var(--type-micro);
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+.redacted {
+  background: var(--text-heading);
+  color: transparent;
+  border-radius: 2px;
+  padding: 0 0.15em;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
 /* ==========================================================================
    The Truth
    ========================================================================== */
