@@ -42,9 +42,38 @@
     } catch (e) { return null; }
   }
 
-  var myName = store('review:name') || '';
+  /* Nobody is asked who they are: a name field is one more thing between
+     the client and the comment, and the round is already scoped to one
+     client. Every comment reads as "Client". The per-browser id still
+     rides along, so two people reviewing the same link stay tellable
+     apart in the pulled data without either being asked to type. */
   var myId = store('review:id');
   if (!myId) { myId = 'anon_' + Math.random().toString(36).slice(2, 8); store('review:id', myId); }
+
+  /* ---- icons ------------------------------------------------------------
+     Inline SVG rather than emoji: emoji render as a different glyph on
+     every platform, sit off the text baseline, and cannot take the
+     colour of the control they are in. These inherit currentColor and
+     line up. Single stroke weight, 24-unit grid. */
+
+  var ICONS = {
+    comment: '<path d="M20 11.5a7.5 7.5 0 0 1-10.9 6.7L4 19.5l1.3-4.1A7.5 7.5 0 1 1 20 11.5z"/>',
+    target: '<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2.5"/>' +
+            '<path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>',
+    note: '<path d="M5 3.5h14v17H5z"/><path d="M8.5 9h7M8.5 13h7M8.5 17h4"/>',
+    camera: '<path d="M21 19.5H3v-12h4l1.8-3h6.4L17 7.5h4z"/><circle cx="12" cy="13.5" r="3.5"/>',
+    check: '<path d="M20 6.5L9.5 17 4 11.5"/>',
+    close: '<path d="M18 6L6 18M6 6l12 12"/>',
+  };
+
+  function icon(name, size) {
+    var span = document.createElement('span');
+    span.className = 'ico';
+    span.innerHTML = '<svg viewBox="0 0 24 24" width="' + (size || 15) + '" height="' + (size || 15) +
+      '" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" ' +
+      'stroke-linejoin="round" aria-hidden="true" focusable="false">' + ICONS[name] + '</svg>';
+    return span;
+  }
 
   /* ---- api -------------------------------------------------------------- */
 
@@ -224,6 +253,18 @@
       '-webkit-font-smoothing:antialiased}' +
     'button{cursor:pointer;border:0;background:none;font:inherit;color:inherit}' +
     'textarea,input{font:inherit}' +
+    '.ico{display:inline-flex;align-items:center;justify-content:center;flex:none}' +
+    '.ico svg{display:block}' +
+
+    /* Every scrolling region gets the same thin, dark-friendly bar, so a
+       long round reads as intentionally scrollable rather than cut off. */
+    '.scroll{overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;' +
+      'scrollbar-color:#454b57 transparent}' +
+    '.scroll::-webkit-scrollbar{width:9px}' +
+    '.scroll::-webkit-scrollbar-track{background:transparent}' +
+    '.scroll::-webkit-scrollbar-thumb{background:#454b57;border-radius:9px;' +
+      'border:2px solid transparent;background-clip:content-box}' +
+    '.scroll::-webkit-scrollbar-thumb:hover{background:#5a616f;background-clip:content-box}' +
 
     '.pill{position:fixed;left:16px;bottom:16px;display:flex;align-items:center;gap:8px;' +
       'background:#16181d;color:#f4f5f7;padding:12px 18px;border-radius:999px;font-size:14px;' +
@@ -242,10 +283,11 @@
     '.panel header h2{font-size:15px;font-weight:700}' +
     '.panel header p{font-size:12px;color:#9aa1ad;margin-top:2px}' +
     '.panel .actions{display:flex;gap:8px;padding:12px 16px}' +
-    '.panel .actions button{flex:1;background:#2a2e37;border-radius:9px;padding:10px 8px;font-size:13px;' +
-      'font-weight:600;color:#f4f5f7;border:1px solid rgba(255,255,255,.09)}' +
+    '.panel .actions button{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;' +
+      'background:#2a2e37;border-radius:9px;padding:10px 8px;font-size:12px;line-height:1.25;' +
+      'text-align:center;font-weight:600;color:#f4f5f7;border:1px solid rgba(255,255,255,.09)}' +
     '.panel .actions button.primary{background:#4f8ef7;border-color:transparent}' +
-    '.panel ul{list-style:none;overflow-y:auto;padding:4px 8px 10px}' +
+    '.panel ul{list-style:none;padding:4px 8px 10px;flex:1 1 auto;min-height:0}' +
     '.panel li button{display:flex;gap:10px;width:100%;text-align:left;padding:9px 8px;border-radius:9px;' +
       'font-size:13px;line-height:1.35;align-items:flex-start}' +
     '.panel li button:hover{background:#22252c}' +
@@ -269,38 +311,42 @@
       'box-shadow:0 2px 10px rgba(0,0,0,.35);border:2px solid #fff}' +
     '.dot.done{background:#34a26b}' +
 
-    '.pop{position:fixed;width:340px;max-width:calc(100vw - 24px);background:#16181d;color:#f4f5f7;' +
+    /* Capped and column-flexed so a thread with twenty replies stays on
+       screen: the header, composer and buttons hold their size and the
+       message list is the part that scrolls. */
+    '.pop{position:fixed;width:340px;max-width:calc(100vw - 24px);max-height:min(80vh,640px);' +
+      'display:flex;flex-direction:column;background:#16181d;color:#f4f5f7;' +
       'border-radius:14px;border:1px solid rgba(255,255,255,.12);box-shadow:0 10px 40px rgba(0,0,0,.5);' +
       'padding:14px;font-size:13px}' +
-    '@media (max-width:760px){.pop{left:8px!important;right:8px;width:auto;bottom:12px;top:auto!important}}' +
-    '.pop h3{font-size:13px;font-weight:700;margin-bottom:2px}' +
+    '@media (max-width:760px){.pop{left:8px!important;right:8px;width:auto;bottom:12px;top:auto!important;' +
+      'max-height:min(70vh,560px)}}' +
+    '.pop h3{font-size:13px;font-weight:700;margin-bottom:2px;flex:none}' +
     '.pop .ctx{color:#9aa1ad;font-size:12px;margin-bottom:10px;overflow:hidden;text-overflow:ellipsis;' +
-      'white-space:nowrap}' +
+      'white-space:nowrap;flex:none}' +
     '.pop textarea{width:100%;min-height:74px;background:#0e0f12;color:#f4f5f7;border:1px solid ' +
-      'rgba(255,255,255,.14);border-radius:9px;padding:9px;resize:vertical}' +
+      'rgba(255,255,255,.14);border-radius:9px;padding:9px;resize:vertical;flex:none}' +
     '.pop textarea:focus{outline:2px solid #4f8ef7;outline-offset:-1px}' +
-    '.pop .name{width:100%;background:#0e0f12;color:#f4f5f7;border:1px solid rgba(255,255,255,.14);' +
-      'border-radius:9px;padding:8px 9px;margin-top:8px}' +
-    '.pop .row{display:flex;gap:8px;margin-top:10px;align-items:center}' +
+    '.pop .row{display:flex;gap:8px;margin-top:10px;align-items:center;flex:none}' +
     '.pop .row .grow{flex:1}' +
     '.pop button.send{background:#4f8ef7;color:#fff;font-weight:700;border-radius:9px;padding:9px 16px}' +
     '.pop button.send[disabled]{opacity:.5;cursor:default}' +
     '.pop button.ghost{color:#9aa1ad;padding:9px 10px;font-weight:600}' +
-    '.pop button.attach{background:#2a2e37;border-radius:9px;padding:9px 12px;font-weight:600;font-size:12px}' +
-    '.pop .thumbs{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}' +
+    '.pop button.attach{display:inline-flex;align-items:center;gap:6px;background:#2a2e37;' +
+      'border-radius:9px;padding:9px 12px;font-weight:600;font-size:12px}' +
+    '.pop .thumbs{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;flex:none}' +
     '.pop .thumbs .t{position:relative;width:52px;height:52px;border-radius:7px;overflow:hidden;' +
       'border:1px solid rgba(255,255,255,.15)}' +
     '.pop .thumbs img{width:100%;height:100%;object-fit:cover;display:block}' +
     '.pop .thumbs .x{position:absolute;top:0;right:0;background:rgba(0,0,0,.65);color:#fff;width:18px;' +
       'height:18px;font-size:11px;line-height:18px;text-align:center}' +
-    '.pop .msgs{max-height:280px;overflow-y:auto;margin-bottom:10px}' +
+    '.pop .msgs{flex:1 1 auto;min-height:60px;margin-bottom:10px}' +
     '.pop .msg{padding:8px 0;border-bottom:1px solid rgba(255,255,255,.07)}' +
     '.pop .msg .by{font-size:11px;color:#9aa1ad;margin-bottom:3px;font-weight:600}' +
     '.pop .msg .by.owner{color:#7db4ff}' +
     '.pop .msg img{max-width:96px;max-height:96px;border-radius:7px;margin:6px 6px 0 0;display:inline-block;' +
       'border:1px solid rgba(255,255,255,.15);cursor:zoom-in}' +
-    '.pop .status{display:inline-block;font-size:11px;font-weight:700;border-radius:5px;padding:2px 8px;' +
-      'margin-left:6px;vertical-align:1px}' +
+    '.pop .status{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;' +
+      'border-radius:5px;padding:2px 8px;margin-left:6px;vertical-align:1px}' +
     '.pop .status.open{background:#3a3320;color:#e8c15a}' +
     '.pop .status.resolved{background:#1d3a2c;color:#5ad391}' +
     '.pop .warn{background:#3a2a20;color:#e8a15a;font-size:12px;border-radius:7px;padding:7px 9px;' +
@@ -338,9 +384,9 @@
 
   var pill = el('button', 'pill');
   pill.setAttribute('aria-label', 'Design feedback');
-  var pillText = el('span', null, '💬 Feedback');
   var pillCount = el('span', 'count', '0');
-  pill.appendChild(pillText);
+  pill.appendChild(icon('comment', 16));
+  pill.appendChild(el('span', null, 'Feedback'));
   pill.appendChild(pillCount);
   root.appendChild(pill);
 
@@ -369,8 +415,12 @@
     panel.appendChild(head);
 
     var actions = el('div', 'actions');
-    var pick = el('button', 'primary', '📍 Comment on an element');
-    var general = el('button', null, '📝 General feedback');
+    var pick = el('button', 'primary');
+    pick.appendChild(icon('target'));
+    pick.appendChild(el('span', null, 'Comment on an element'));
+    var general = el('button', null);
+    general.appendChild(icon('note'));
+    general.appendChild(el('span', null, 'General feedback'));
     actions.appendChild(pick);
     actions.appendChild(general);
     panel.appendChild(actions);
@@ -384,17 +434,19 @@
     if (!threads.length) {
       panel.appendChild(el('p', 'empty', 'Nothing yet on this page. Click an element to leave the first comment.'));
     } else {
-      var listEl = el('ul');
+      var listEl = el('ul', 'scroll');
       threads.forEach(function (t, i) {
         var li = el('li');
         var b = el('button');
-        var num = el('span', 'num' + (t.status === 'resolved' ? ' done' : ''),
-                     t.status === 'resolved' ? '✓' : String(i + 1));
+        var num = el('span', 'num' + (t.status === 'resolved' ? ' done' : ''));
+        if (t.status === 'resolved') num.appendChild(icon('check', 12));
+        else num.textContent = String(i + 1);
         var wrap = el('span');
         var first = t.messages[0] || {};
         var label = t.anchor ? (t.anchor.text || t.anchor.tag || 'Element') : 'General feedback';
         wrap.appendChild(el('span', null, (first.body || '').slice(0, 90)));
-        wrap.appendChild(el('span', 'who', (t.author && t.author.name || 'Anonymous') + ' · ' + label.slice(0, 46)));
+        wrap.appendChild(el('span', 'who', label.slice(0, 46) + ' · ' +
+                          new Date(t.createdAt).toLocaleDateString()));
         b.appendChild(num);
         b.appendChild(wrap);
         b.addEventListener('click', function () { closePanel(); showThread(t); });
@@ -420,8 +472,9 @@
     threads.forEach(function (t, i) {
       if (!t.anchor) return;
       var target = resolveAnchor(t.anchor);
-      var dot = el('button', 'dot' + (t.status === 'resolved' ? ' done' : ''),
-                   t.status === 'resolved' ? '✓' : String(i + 1));
+      var dot = el('button', 'dot' + (t.status === 'resolved' ? ' done' : ''));
+      if (t.status === 'resolved') dot.appendChild(icon('check', 13));
+      else dot.textContent = String(i + 1);
       dot.setAttribute('aria-label', 'Feedback thread');
       dot.addEventListener('click', function () { showThread(t); });
       if (target) {
@@ -532,11 +585,19 @@
     if (openPopover) { openPopover.remove(); openPopover = null; }
   }
 
+  /* Called after the popover is in the DOM so its real height is known: a
+     one-line composer and a twenty-reply thread need different room, and a
+     fixed guess pushed tall threads off the bottom of short windows. */
   function placePopover(pop, at) {
-    var x = Math.min(Math.max(at.x, 12), window.innerWidth - 352);
-    var y = Math.min(Math.max(at.y + 14, 12), window.innerHeight - 260);
-    pop.style.left = x + 'px';
-    pop.style.top = y + 'px';
+    var h = pop.getBoundingClientRect().height;
+    var w = pop.getBoundingClientRect().width;
+    var x = Math.min(Math.max(at.x, 12), Math.max(12, window.innerWidth - w - 12));
+    var below = at.y + 14;
+    var y = below + h + 12 <= window.innerHeight
+      ? below                                        /* fits under the click */
+      : Math.max(12, window.innerHeight - h - 12);   /* otherwise sit off the bottom edge */
+    pop.style.left = Math.round(x) + 'px';
+    pop.style.top = Math.round(y) + 'px';
   }
 
   /* The composer: new thread, anchored or general. */
@@ -555,13 +616,6 @@
     ta.placeholder = anchor ? 'What should change here?' : 'What should change?';
     if (draftBody) ta.value = draftBody;
     pop.appendChild(ta);
-
-    var name = document.createElement('input');
-    name.className = 'name';
-    name.placeholder = 'Your name';
-    name.maxLength = 60;
-    name.value = myName;
-    pop.appendChild(name);
 
     var thumbs = el('div', 'thumbs');
     pop.appendChild(thumbs);
@@ -582,7 +636,9 @@
           var t = el('span', 't');
           var img = document.createElement('img');
           img.src = URL.createObjectURL(f);
-          var x = el('button', 'x', '×');
+          var x = el('button', 'x');
+          x.appendChild(icon('close', 11));
+          x.setAttribute('aria-label', 'Remove photo');
           x.addEventListener('click', function () {
             files.splice(files.indexOf(f), 1);
             URL.revokeObjectURL(img.src);
@@ -604,7 +660,9 @@
     pop.addEventListener('drop', function (e) { e.preventDefault(); if (e.dataTransfer) addFiles(e.dataTransfer.files); });
 
     var row = el('div', 'row');
-    var attach = el('button', 'attach', '📷 Add photo');
+    var attach = el('button', 'attach');
+    attach.appendChild(icon('camera', 14));
+    attach.appendChild(el('span', null, 'Add photo'));
     attach.addEventListener('click', function () { fileInput.click(); });
     var grow = el('span', 'grow');
     var cancel = el('button', 'ghost', 'Cancel');
@@ -619,8 +677,6 @@
     send.addEventListener('click', function () {
       var body = ta.value.trim();
       if (!body) { toast('Write a comment first'); return; }
-      myName = name.value.trim() || 'Anonymous';
-      store('review:name', myName);
       send.disabled = true;
       send.textContent = files.length ? 'Uploading…' : 'Sending…';
 
@@ -636,7 +692,7 @@
           method: 'POST',
           body: {
             site: SITE, path: PAGE,
-            author: { name: myName, id: myId },
+            author: { name: 'Client', id: myId },
             anchor: anchor, body: body, images: urls,
           },
         });
@@ -667,7 +723,14 @@
     openPopover = pop;
 
     var title = el('h3', null, t.anchor ? 'Comment' : 'General feedback');
-    title.appendChild(el('span', 'status ' + t.status, t.status === 'resolved' ? 'Actioned ✓' : 'Open'));
+    var badge = el('span', 'status ' + t.status);
+    if (t.status === 'resolved') {
+      badge.appendChild(el('span', null, 'Actioned'));
+      badge.appendChild(icon('check', 11));
+    } else {
+      badge.textContent = 'Open';
+    }
+    title.appendChild(badge);
     pop.appendChild(title);
     pop.appendChild(el('p', 'ctx', t.anchor
       ? (t.anchor.text ? '“' + t.anchor.text.slice(0, 70) + '”' : (t.anchor.tag || '').toLowerCase())
@@ -678,13 +741,12 @@
       pop.appendChild(el('p', 'warn', 'This part of the page has changed since the comment was made.'));
     }
 
-    var msgs = el('div', 'msgs');
+    var msgs = el('div', 'msgs scroll');
     t.messages.forEach(function (m) {
       var box = el('div', 'msg');
       var isOwner = m.role === 'owner';
       box.appendChild(el('p', 'by' + (isOwner ? ' owner' : ''),
-        (isOwner ? 'Site owner' : (m.author || (t.author && t.author.name) || 'Anonymous')) +
-        ' · ' + new Date(m.at).toLocaleDateString()));
+        (isOwner ? 'Site owner' : 'Client') + ' · ' + new Date(m.at).toLocaleDateString()));
       box.appendChild(el('p', null, m.body));
       (m.images || []).forEach(function (u) {
         var img = document.createElement('img');
@@ -719,7 +781,7 @@
       send.disabled = true;
       api('/api/thread?site=' + encodeURIComponent(SITE) + '&id=' + encodeURIComponent(t.id), {
         method: 'POST',
-        body: { action: 'reply', body: body, author: { name: myName || 'Anonymous' } },
+        body: { action: 'reply', body: body, author: { name: 'Client' } },
       }).then(function (json) {
         t.messages = json.thread.messages;
         showThread(t);
