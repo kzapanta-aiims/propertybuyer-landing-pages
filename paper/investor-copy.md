@@ -35,7 +35,7 @@ Header tag now "25 Years Property Investment Excellence", 39, display line. NEW.
 | String | Count / budget |
 |---|---|
 | H1: Build your investment portfolio with an expert on your side. NEW, four lines | **59/60** |
-| Subhead: Helping Investors Succeed in Australia. NEW | **38/42 HARD** |
+| Subhead: Helping investors succeed in Australia. NEW | **38/42 HARD** |
 | Body: At Propertybuyer, we understand the unique needs and goals of property investors in Australia. Whether you're a seasoned investor or just starting, our team of dedicated professionals is here to guide you through the journey of property investment. NEW | body, no cap |
 | Award pill: Best Buyers Agency of the Year 2025. KEPT | pill |
 | Capture title: Tell us about your investment. NEW | 29 |
@@ -197,14 +197,14 @@ the deck is the thing that is inconsistent.
 | Card | String |
 |---|---|
 | Title | We buy property Australia wide. NEW |
-| Lede | Your Preferred Area or Suggest Area from our experts. NEW |
-| 1 H2 | The Most Comprehensive Research. NEW |
+| Lede | Your preferred area or suggest area from our experts. NEW |
+| 1 H2 | The most comprehensive research. NEW |
 | 1 body | None. Dropped 25 Aug 2026 at the client's direction. |
-| 2 H2 | Only the most superior Opportunities. NEW |
+| 2 H2 | Only the most superior opportunities. NEW |
 | 2 body | None. Dropped 25 Aug 2026 at the client's direction. |
-| 3 H2 | Pay the absolute Minimum. NEW |
+| 3 H2 | Pay the absolute minimum. NEW |
 | 3 body | We will negotiate the lowest possible price saving you tens of thousands of dollars. NEW |
-| 4 H2 | Guidance from Sales to Settlement. NEW |
+| 4 H2 | Guidance from sales to settlement. NEW |
 | 4 body | We have experts and trusted advisors to settlement and beyond. Best related professional to ensure your interests are protected. NEW |
 
 The whole band was rewritten by the client on 25 August 2026 and no longer
