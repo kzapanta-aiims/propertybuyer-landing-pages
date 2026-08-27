@@ -14,6 +14,11 @@
  *     client reviews is exactly the page, not the page plus our edits
  *   - all motion respects prefers-reduced-motion
  *   - classic script, so it also runs when a page is opened from disk
+ *
+ * It works on static multi-page sites and on single-page apps alike. For
+ * the latter it wraps history.pushState and replaceState to notice route
+ * changes, which is the one thing it changes about the host page beyond
+ * its own subtree; both wrappers call through to the original.
  */
 (function () {
   'use strict';
@@ -25,11 +30,51 @@
   if (!SITE || !HUB) return;
 
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var PAGE = window.location.pathname.replace(/index\.html$/, '') || '/';
+
+  /* Which page a comment belongs to. Recomputed rather than captured once:
+     in a single-page app the route changes without a document load, and a
+     comment left on /settings must not be filed under /.
+
+     The path is the identity. The query deliberately is not: these pages
+     take paid traffic, so counting it would file the same headline under
+     a different page for every gclid and utm_source that walks in. The
+     hash counts only when it looks like a route, so a hash router scopes
+     correctly while an ordinary #anchor link does not split a page in two.
+
+     An app that genuinely routes on the query (?tab=billing) opts in with
+     data-review-scope="path+query" on the script tag, and the tracking
+     parameters below are still dropped so the fragmenting problem does
+     not come back with it. */
+
+  var SCOPE = script.getAttribute('data-review-scope') || 'path';
+
+  var TRACKING = /^(review|utm_[a-z]+|gclid|dclid|fbclid|msclkid|ttclid|li_fat_id|gad_source|gbraid|wbraid|mc_[a-z]+|_hs[a-z]*|ref|referrer)$/i;
+
+  function currentPage() {
+    var p = window.location.pathname.replace(/index\.html$/, '') || '/';
+    if (SCOPE === 'path+query' && window.location.search) {
+      var kept = [];
+      new URLSearchParams(window.location.search).forEach(function (v, k) {
+        if (!TRACKING.test(k)) kept.push([k, v]);
+      });
+      if (kept.length) {
+        kept.sort(function (a, b) { return a[0] < b[0] ? -1 : 1; }); /* order must not create a new page */
+        p += '?' + kept.map(function (kv) {
+          return encodeURIComponent(kv[0]) + '=' + encodeURIComponent(kv[1]);
+        }).join('&');
+      }
+    }
+    var h = window.location.hash;
+    if (h.indexOf('#/') === 0) p += h;
+    return p;
+  }
+
+  var PAGE = currentPage();
 
   /* ---- state ------------------------------------------------------------ */
 
-  var threads = [];        /* every thread for this page, anchored or general */
+  var allThreads = [];     /* every thread for this site, every page */
+  var threads = [];        /* the current page's, in display order */
   var pins = [];           /* { thread, el } for anchored threads we resolved */
   var mode = null;         /* null | 'pick' */
   var openPopover = null;  /* the one popover allowed at a time */
@@ -206,34 +251,48 @@
      the copy is the most durable handle. Selector second. */
   function resolveAnchor(a) {
     if (!a) return null;
+
     if (a.id) {
       var byId = document.getElementById(a.id);
       if (byId && byId.tagName === a.tag) return byId;
     }
+
+    /* Cheap probe before the scan. When nothing has moved, the recorded
+       selector still points at the right element, and confirming it costs
+       one query rather than reading innerText off every element of that
+       tag. That matters here: innerText forces layout, and in a framework
+       app this runs on every burst of DOM mutations. */
+    var bySel = null;
+    if (a.selector) {
+      try { bySel = document.querySelector(a.selector); } catch (e) { /* no longer parses */ }
+    }
+    if (bySel && (!a.text || normText(bySel).indexOf(a.text) === 0)) return bySel;
+
     if (a.text) {
       var candidates = document.getElementsByTagName(a.tag || '*');
       var matches = [];
       for (var i = 0; i < candidates.length; i++) {
         var t = normText(candidates[i]);
-        if (t && (t.slice(0, 120) === a.text || t.indexOf(a.text) === 0)) matches.push(candidates[i]);
+        if (t && t.indexOf(a.text) === 0) matches.push(candidates[i]);
       }
       if (matches.length === 1) return matches[0];
-      if (matches.length > 1 && a.rect) {
-        matches.sort(function (m, n) {
-          var my = m.getBoundingClientRect().top + window.scrollY;
-          var ny = n.getBoundingClientRect().top + window.scrollY;
-          return Math.abs(my - a.rect.y) - Math.abs(ny - a.rect.y);
-        });
+      if (matches.length > 1) {
+        /* Several elements read the same. Prefer the one nearest to where
+           the comment was placed. */
+        if (a.rect) {
+          matches.sort(function (m, n) {
+            var my = m.getBoundingClientRect().top + window.scrollY;
+            var ny = n.getBoundingClientRect().top + window.scrollY;
+            return Math.abs(my - a.rect.y) - Math.abs(ny - a.rect.y);
+          });
+        }
         return matches[0];
       }
     }
-    if (a.selector) {
-      try {
-        var bySel = document.querySelector(a.selector);
-        if (bySel) return bySel;
-      } catch (e) { /* selector no longer parses: fall through */ }
-    }
-    return null;
+
+    /* The selector matched but the copy has been edited since. That is the
+       element, and anchorChanged flags the difference to the reader. */
+    return bySel;
   }
 
   function anchorChanged(a, el) {
@@ -468,29 +527,41 @@
   function rebuildPins() {
     pins = [];
     dotsWrap.textContent = '';
-    var num = 0;
     threads.forEach(function (t, i) {
       if (!t.anchor) return;
       var target = resolveAnchor(t.anchor);
+      if (!target) return; /* not on the page right now; a later pass may find it */
       var dot = el('button', 'dot' + (t.status === 'resolved' ? ' done' : ''));
       if (t.status === 'resolved') dot.appendChild(icon('check', 13));
       else dot.textContent = String(i + 1);
       dot.setAttribute('aria-label', 'Feedback thread');
       dot.addEventListener('click', function () { showThread(t); });
-      if (target) {
-        pins.push({ thread: t, el: target, dot: dot });
-        dotsWrap.appendChild(dot);
-      }
-      num++;
+      pins.push({ thread: t, el: target, dot: dot });
+      dotsWrap.appendChild(dot);
     });
     layoutDots();
+  }
+
+  /* True when the page no longer matches what the pins were built from: a
+     framework re-render swapped a pinned element out, or an element a
+     thread points at has appeared since the last pass. Either way the
+     answer is to rebuild, and the check is cheap enough to run on every
+     mutation burst. */
+  function pinsAreStale() {
+    for (var i = 0; i < pins.length; i++) {
+      if (!document.contains(pins[i].el)) return true;
+    }
+    var anchored = 0;
+    for (var j = 0; j < threads.length; j++) if (threads[j].anchor) anchored++;
+    return pins.length < anchored;
   }
 
   function layoutDots() {
     for (var i = 0; i < pins.length; i++) {
       var p = pins[i];
+      if (!document.contains(p.el)) { p.dot.style.display = 'none'; continue; }
       var r = p.el.getBoundingClientRect();
-      var visible = r.bottom > -30 && r.top < window.innerHeight + 30;
+      var visible = r.bottom > -30 && r.top < window.innerHeight + 30 && (r.width || r.height);
       p.dot.style.display = visible ? '' : 'none';
       if (!visible) continue;
       var fx = p.thread.anchor.point ? p.thread.anchor.point.fx : 0.5;
@@ -698,9 +769,8 @@
         });
       }).then(function (json) {
         clearDraft();
-        threads.push(json.thread);
-        renderPill();
-        rebuildPins();
+        allThreads.push(json.thread);
+        render();
         closePopover();
         toast('Sent, thank you');
       }).catch(function (err) {
@@ -805,13 +875,13 @@
 
   /* ---- drafts: never lose typed text to a network failure ------------------- */
 
-  var DRAFT_KEY = 'review:draft:' + SITE + ':' + PAGE;
+  function draftKey() { return 'review:draft:' + SITE + ':' + PAGE; }
 
-  function saveDraft(body, anchor) { store(DRAFT_KEY, { body: body, anchor: anchor, at: Date.now() }); }
-  function clearDraft() { try { localStorage.removeItem(DRAFT_KEY); } catch (e) {} }
+  function saveDraft(body, anchor) { store(draftKey(), { body: body, anchor: anchor, at: Date.now() }); }
+  function clearDraft() { try { localStorage.removeItem(draftKey()); } catch (e) {} }
 
   function offerDraft() {
-    var d = store(DRAFT_KEY);
+    var d = store(draftKey());
     if (!d || !d.body) return;
     var t = el('button', 'toast', 'You have an unsent comment. Tap to restore');
     t.addEventListener('click', function () {
@@ -822,17 +892,107 @@
     setTimeout(function () { t.remove(); }, 8000);
   }
 
+  /* ---- data ------------------------------------------------------------------
+     Threads for the whole site are fetched once and scoped to the current
+     page in memory, so a route change in a single-page app costs nothing
+     and works offline of the hub. */
+
+  var lastFetch = 0;
+
+  function selectPageThreads() {
+    threads = allThreads.filter(function (t) { return t.path === PAGE; });
+  }
+
+  function render() {
+    selectPageThreads();
+    renderPill();
+    rebuildPins();
+  }
+
+  function refresh(force) {
+    if (!force && Date.now() - lastFetch < 20000) return Promise.resolve();
+    return api('/api/threads?site=' + encodeURIComponent(SITE) + '&status=all')
+      .then(function (json) {
+        allThreads = json.threads || [];
+        lastFetch = Date.now();
+        render();
+      });
+  }
+
+  /* ---- single-page apps -------------------------------------------------------
+     Two things break an overlay like this in a framework app, and both are
+     handled here rather than in each site's install.
+
+     First, routes change without a document load, so the page a comment
+     belongs to changes under us. History is patched to notice; routers all
+     go through pushState or replaceState, and the browser's own back and
+     forward fire popstate.
+
+     Second, a re-render can replace the very element a pin points at, and
+     lazily rendered content can bring in an element a thread was waiting
+     for. A MutationObserver watches for both and rebuilds, debounced, and
+     never while the client is mid-interaction. */
+
+  var routeTimer = null;
+
+  function onRouteChange() {
+    /* Routers update the URL and the DOM in either order, so settle first. */
+    clearTimeout(routeTimer);
+    routeTimer = setTimeout(function () {
+      var next = currentPage();
+      if (next === PAGE) return;
+      PAGE = next;
+      if (mode === 'pick') exitPickMode();
+      closePopover();
+      closePanel();
+      render();
+      refresh();      /* pick up anything left on this route elsewhere */
+      offerDraft();   /* a draft is keyed per page, so re-offer on arrival */
+    }, 60);
+  }
+
+  try {
+    ['pushState', 'replaceState'].forEach(function (name) {
+      var original = history[name];
+      if (typeof original !== 'function') return;
+      history[name] = function () {
+        var result = original.apply(this, arguments);
+        onRouteChange();
+        return result;
+      };
+    });
+  } catch (e) { /* history locked down: popstate and hashchange still fire */ }
+
+  window.addEventListener('popstate', onRouteChange);
+  window.addEventListener('hashchange', onRouteChange);
+
+  if (window.MutationObserver) {
+    var domTimer = null;
+    var observer = new MutationObserver(function () {
+      clearTimeout(domTimer);
+      domTimer = setTimeout(function () {
+        /* Never rebuild under the client's hands: picking an element or
+           reading a thread must not have its target yanked away. */
+        if (mode === 'pick' || openPopover) return;
+        if (pinsAreStale()) rebuildPins();
+        else queueLayout();
+      }, 250);
+    });
+    /* The overlay's own UI lives in a shadow root on documentElement, so
+       observing body cannot see it and cannot feed itself. */
+    var watchBody = function () {
+      observer.observe(document.body, { childList: true, subtree: true });
+    };
+    if (document.body) watchBody();
+    else document.addEventListener('DOMContentLoaded', watchBody);
+  }
+
   /* ---- boot ------------------------------------------------------------------ */
 
-  api('/api/threads?site=' + encodeURIComponent(SITE) + '&status=all')
-    .then(function (json) {
-      threads = (json.threads || []).filter(function (t) { return t.path === PAGE; });
-      renderPill();
-      rebuildPins();
-      offerDraft();
-    })
+  refresh(true)
+    .then(offerDraft)
     .catch(function () {
-      renderPill();
+      render();
       offerDraft();
       toast('Could not reach the feedback service. Comments will be saved locally', true);
     });

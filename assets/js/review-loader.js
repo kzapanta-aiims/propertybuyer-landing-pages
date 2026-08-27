@@ -32,14 +32,16 @@
   var params = new URLSearchParams(window.location.search);
   var flag = params.get('review');
 
+  var secure = window.location.protocol === 'https:' ? '; Secure' : '';
+
   if (flag === '0') {
-    document.cookie = 'review=; path=/; max-age=0; SameSite=Lax';
+    document.cookie = 'review=; path=/; max-age=0; SameSite=Lax' + secure;
     return;
   }
   if (flag === '1') {
     /* Two weeks: long enough for a review round, short enough to expire
        on its own if the client never turns it off. */
-    document.cookie = 'review=1; path=/; max-age=1209600; SameSite=Lax';
+    document.cookie = 'review=1; path=/; max-age=1209600; SameSite=Lax' + secure;
   } else if (!/(^|;\s*)review=1(;|$)/.test(document.cookie)) {
     return; /* the normal visit: stop here, load nothing */
   }
@@ -49,7 +51,14 @@
   var s = document.createElement('script');
   s.src = script.src.replace(/review-loader\.js([?#].*)?$/, 'review.js');
   s.defer = true;
-  s.setAttribute('data-review-site', site);
-  s.setAttribute('data-review-hub', hub);
+
+  /* Forward every data-review-* attribute, not a hand-listed few: the
+     overlay reads its whole configuration off its own script tag, so a
+     new option must not need a loader change to reach it. */
+  for (var i = 0; i < script.attributes.length; i++) {
+    var attr = script.attributes[i];
+    if (attr.name.indexOf('data-review-') === 0) s.setAttribute(attr.name, attr.value);
+  }
+
   document.head.appendChild(s);
 })();
