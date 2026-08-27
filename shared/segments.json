@@ -344,10 +344,10 @@
     },
     "developerCopyEdits27Aug": {
       "problem": "The 27 Aug client copy edits for the developer page break two DESIGN.md hard rules that tools/check.mjs enforces, and carry four wording defects that reach visible copy.",
-      "decision": "APPLIED VERBATIM, NOT CORRECTED, on the developer-copy-edits branch. The precedent is the commercial page on 26 Aug: supplied client strings are applied as given and the objection is recorded here rather than silently fixed.",
-      "status": "OPEN, BLOCKS MERGE",
-      "consequence": "npm run check developer reports 2 failures. First, \"banned language: unlock\", from off-market move 1, \"We will unlock the opportunities maximum development potential\"; unlock is on the DESIGN.md banned list at line 510. Second, the hero subhead \"Due diligence and risk assessment is paramount\" is 46 characters against a 42 character hard maximum. Separately and not machine-checkable: \"spurious development outcomes\" in the hero body means false or bogus outcomes, which inverts the intended claim; \"a contest you optimally positioned\" is missing words; \"the opportunities maximum development potential\" is missing a possessive; \"A development site is complexed\" should read complex; and \"Successful Development\", \"Your Consultants are ours\" and \"10,000+ Agents\" break the sentence case rule at DESIGN.md line 319.",
-      "alternative": "Get four short rewrites from the client: a subhead at 42 characters or fewer, a move 1 body without unlock, a hero body word to replace spurious, and a repaired move 2 closing clause. Everything else can ship as written if the client wants the capitals.",
+      "decision": "APPLIED VERBATIM. The client was asked on 27 Aug 2026 and was adamant, so the two DESIGN.md hard rules are OVERRIDDEN for this page by client instruction, not by our judgement. The sentence case breaches were the one part the client agreed to fix, and they are fixed.",
+      "status": "CLOSED FOR MERGE, CHECKER FAILS BY DESIGN",
+      "consequence": "npm run check developer reports 2 permanent failures, and they are now expected rather than outstanding: \"banned language: unlock\", from off-market move 1, and the hero subhead at 46 characters against a 42 character maximum. Anyone reading a red checker on this page should read this entry before trying to fix it. The developer page has therefore joined the buyer page as a page with a known, deliberate, documented failure, and the checker no longer returns a clean run for the paid family. Not fixed and not machine checkable: \"spurious development outcomes\" in the hero body still means false outcomes, which inverts the claim; \"a contest you optimally positioned\" and \"the opportunities maximum development potential\" are still missing words; and \"A development site is complexed\" should read complex. All four were put to the client and all four are covered by the same override.",
+      "alternative": "If the checker should go green again, the two failing strings need a client rewrite: a subhead at 42 characters or fewer, and a move 1 body without the word unlock. Nothing else needs to move.",
       "raised": "27 Aug 2026"
     },
     "developerIndependenceDemotion": {
@@ -356,6 +356,30 @@
       "status": "OPEN, WORTH A CLIENT LOOK",
       "consequence": "Nothing above the fold on the developer page now states that no vendor pays the agency, and this is the third page in a row to lose it. What still carries it is FAQ 5, \"Does the vendor pay you anything?\", which now also names consultants, plus the closer note and the meta description.",
       "alternative": "Put the no-commission proof into the truth band lede, which is one short string and disturbs nothing the client supplied.",
+      "raised": "27 Aug 2026"
+    },
+    "developerSentenceCase27Aug": {
+      "problem": "The 27 Aug client strings carried mid-sentence capitals in four places: \"Successful Development\", \"Your Consultants are ours\", \"10,000+ Agents\" and \"3rd Parties\". DESIGN.md line 319 sets sentence case for every heading.",
+      "decision": "CORRECTED to sentence case with the client's agreement, unlike the rest of the 27 Aug copy. This is the one place the client did not hold the line, so it is the one place the house rule won.",
+      "status": "CLOSED",
+      "consequence": "Nothing further. The four strings now read \"Successful development\", \"Your consultants are ours\", \"10,000+ agents\" and \"3rd parties\".",
+      "alternative": "None needed.",
+      "raised": "27 Aug 2026"
+    },
+    "storyNoticeAsInfoPill": {
+      "problem": "The developer confidentiality notice was set as muted micro copy and the client wanted it bolder, as the eyebrow pill component filled with bg/info-subtle and bordered with border/info.",
+      "decision": "APPLIED as a new .pill--info modifier in base.css rather than as a one-off rule on the developer page, because it is the pill component doing a third job and the next page that needs a notice should not reinvent it.",
+      "status": "OPEN, TOUCHES A SHARED FILE",
+      "consequence": "base.css lands on every page in both families, so this is a Figma Variables class of change even though it is purely additive. The base .pill rule fixes a 40px height and white-space: nowrap for single-line eyebrows, and a sentence-length pill has to undo both, so .pill--info sets height auto, white-space normal and line-height 1.5. Verified: no page in either family gained a horizontal scroll at 390, 768, 1100 or 1440, and commercial, investor and melbourne still report all hard rules passing.",
+      "alternative": "If a notice pill is only ever a developer page thing, the modifier belongs in landing.css instead and base.css goes back untouched.",
+      "raised": "27 Aug 2026"
+    },
+    "developerStorySlot2Hidden": {
+      "problem": "Story card 2 carried two visible unfilled markers: a \"To purchase\" stat reading [N weeks], and a bracketed caveat saying the deck records the figures and not the story. The client confirmed on 27 Aug 2026 that the record is relevant and good to go, and asked for both to be hidden.",
+      "decision": "HIDDEN, NOT DELETED, which is the idiom already used for .story-card__privacy and .lead-step. The markup stays and a hidden attribute carries it, so removing one attribute brings either back.",
+      "status": "CLOSED",
+      "consequence": "Card 2 now shows one stat where the other two cards show two, which is a visible asymmetry in the row. The purchase duration for this record is still unknown; it is now unknown and invisible rather than unknown and flagged, so nothing on the page prompts anyone to go and get it. .story-stat is display: flex, so the hidden attribute needed an explicit .story-stat[hidden] rule in landing.css to take effect at all.",
+      "alternative": "Get the purchase duration from the client and unhide the stat, which restores the row and removes the asymmetry.",
       "raised": "27 Aug 2026"
     }
   }

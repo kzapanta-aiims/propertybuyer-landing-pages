@@ -304,12 +304,12 @@
    name is also removed from selection. If the name must not reach the DOM at
    all, it has to come out of the markup instead. See storyNameRedaction. */
 .stories-notice {
-  max-width: 720px;
+  max-width: 760px;
   margin: 0;
-  font-size: var(--type-micro);
-  line-height: 1.5;
-  color: var(--text-muted);
 }
+/* Same trap as .lead-step and .steps-nav: .story-stat is display: flex, which
+   outranks the UA [hidden] rule, so hiding one stat needs saying explicitly. */
+.story-stat[hidden] { display: none; }
 .redacted {
   background: var(--text-heading);
   color: transparent;
