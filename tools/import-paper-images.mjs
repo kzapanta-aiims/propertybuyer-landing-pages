@@ -76,12 +76,15 @@ const SLOTS = [
     crop: { left: 439, top: 46, width: 672, height: 802 }, node: 'BCX-0',
     asset: '01M0GTTHX9B60SM2YAW3MCRVC2.png' },
 
-  /* Rect 619x930 at x=-45.5 y=-46.297 inside 573x680. Source 1365x2048,
-     scale 2.20517 across and 2.20215 down. The crop is 1264x1497, which does
-     reach 2x, so this one ships at the full 1146x1360. */
-  { out: 'commercial-auction-3.webp', src: 'auction-3.jpg', size: [1146, 1360],
-    crop: { left: 100, top: 102, width: 1264, height: 1497 }, node: 'BCZ-0',
-    asset: '01M0GTZDHN6RQWA5GPXDE5DWF2.jpg' },
+  /* Replaced 28 Aug 2026, from COMMERCIAL v2. The v1 artwork stood the pair
+     on a residential balcony with a poinciana in flower behind them, which is
+     a house cue on a page about offices and warehouses; v2 keeps the same two
+     people and moves them to a CBD tower balcony. The rectangle fills its
+     frame at 573x680, x=0 y=0, so unlike the v1 artwork there is no crop.
+     Source 944x1120 is short of 2x (1146x1360), so it ships native and this
+     slot gives up resolution against v1. Nothing is ever enlarged. */
+  { out: 'commercial-auction-3.webp', src: 'auction-3-v2.png', size: [944, 1120],
+    node: 'LOX-1', asset: '01M131FVTNVGPQWNWRY818XSQ9.png' },
   /* --- Buyer page, auction strip. 573x680 in CSS, so 2x is 1146x1360.
      Replaced 21 Aug 2026 from BUYER v3, where the section reads "Off Market
      and auction ready". These are the unprefixed names, which belong to the
