@@ -399,10 +399,12 @@ then hidden. Nothing about the animation itself changed: same keyframes, same
 IntersectionObserver trigger.
 
 `page.js` still carries its `FADE` and `GLASS` lists and still adds the classes
-at runtime, because the commercial, investor and developer pages have not
-moved yet. Adding a class an element already has is a no-op, so one pass
-serves both. **Those three pages still flash, and this page is the template
-for fixing them.**
+at runtime, because the commercial and developer pages have not moved yet.
+Adding a class an element already has is a no-op, so one pass serves both.
+**Those two pages still flash, and this page is the template for fixing
+them.** The investor page was moved on 28 August 2026 and needed no change to
+`landing.css` or `page.js`, only the head script and `reveal` on the 35
+elements those two lists already matched there.
 
 Declaring the state in markup means the body cannot appear if `page.js` never
 arrives, which was not possible before. Three guards, all tested:
