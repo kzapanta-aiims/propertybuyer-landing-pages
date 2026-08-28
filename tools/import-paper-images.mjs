@@ -109,6 +109,45 @@ const SLOTS = [
     crop: { left: 1142, top: 290, width: 906, height: 1075 }, node: 'D2U-0',
     asset: '01M0H7ZWSVSQF7JDWWRKMY51VJ.jpg' },
 
+  /* --- Investor page, from INVESTOR 1440 -- v2, added 28 Aug 2026. -------
+     The page was derived from the buyer template and then pointed at the
+     commercial photography for these six slots, which put offices and CBD
+     towers on a page about residential investment. The client replaced all
+     six in Paper and marked them with comment threads on the artboard.
+
+     Every one of the six is a fresh rectangle that fills its frame exactly,
+     so none of them carries a crop and a centred cover is faithful. Unlike
+     the eleven commercial slots above, these assets are already exported at
+     the size the page needs, so the numbers below are measured rather than
+     derived: five land exactly on 2x and the sixth is short of it and ships
+     native, the same way the buyer page's third auction photo does.
+
+     The prefix is not optional. These names have to differ from the
+     commercial ones or importing here would redecorate the commercial page,
+     which is the mistake recorded at the top of this file. ------------- */
+
+  /* Truth cards 1 and 3. 361x359 in CSS, so 2x is 722x718, which both
+     sources hit exactly. Cards 2 and 4 still take buyer artwork. */
+  { out: 'investor-truth-1.webp', src: 'investor-truth-1.jpg', size: [722, 718], node: 'LOO-1',
+    asset: '71CJ1WDF8GNWS3J75VKVAMG9WA.jpg' },
+  { out: 'investor-truth-3.webp', src: 'investor-truth-3.jpg', size: [722, 718], node: 'LOP-1',
+    asset: '0H9AKP039P2CP5JCMFN3TZWYRM.jpg' },
+
+  /* Step 2 of four, the only step photo the client changed. 227x212 in CSS,
+     so 2x is 454x424, which the source hits exactly. */
+  { out: 'investor-step-research.webp', src: 'investor-step-research.webp', size: [454, 424], node: 'LOR-1',
+    asset: '1H9HSPCQD8NYSAKH1BBTTW0HVA.webp' },
+
+  /* Auction strip, all three. 573x680 in CSS, so 2x is 1146x1360. The first
+     two hit it exactly. The third source is 906x1075, short of 2x, so it
+     ships native and is the lowest resolution of the three. */
+  { out: 'investor-auction-1.webp', src: 'investor-auction-1.webp', size: [1146, 1360], node: 'LOS-1',
+    asset: '3W44V5PE0X09BK8Y8EEF83BPNF.webp' },
+  { out: 'investor-auction-2.webp', src: 'investor-auction-2.webp', size: [1146, 1360], node: 'LOU-1',
+    asset: '0K5TMJ9BRAEN06QHG1BGKW5V9R.webp' },
+  { out: 'investor-auction-3.webp', src: 'investor-auction-3.webp', size: [906, 1075], node: 'LOT-1',
+    asset: '4JDY02TVPBXHMTMSYR4P347S31.webp' },
+
 ];
 
 if (!existsSync(OUT)) mkdirSync(OUT, { recursive: true });

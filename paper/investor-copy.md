@@ -199,7 +199,7 @@ the deck is the thing that is inconsistent.
 | Title | We buy property Australia wide. NEW |
 | Lede | Your preferred area or suggest area from our experts. NEW |
 | 1 H2 | The most comprehensive research. KEPT |
-| 1 body | Only the most superior opportunities. Pay the absolute minimum. We will negotiate you the lowest best possible price. CHANGED 28 Aug 2026 |
+| 1 body | Only the most superior opportunities. Pay the absolute minimum. We will negotiate the lowest possible price. CHANGED 28 Aug 2026 |
 | 2 H2 | Protecting your interests. CHANGED 28 Aug 2026 |
 | 2 body | We have all the trusted advisors including the best pest and building inspectors, the best solicitors, and the best related professionals to ensure your interests are protected. CHANGED 28 Aug 2026 |
 | 3 H2 | Off-market and pre-market. CHANGED 28 Aug 2026 |
@@ -221,14 +221,14 @@ changing meaning: a missing space after "opportunities." in card 1 body, and
 client's own 25 Aug copy had written as "professional". Card 4 body gained its
 terminal full stop.
 
-**Two wordings were applied exactly as supplied and both want a client pass.**
-Card 1 body reads "We will negotiate you the lowest best possible price": a
-double superlative, and "negotiate you" rather than "negotiate for you". It
-was left alone because unlike the corrections above it is a wording choice
-rather than an unambiguous error, and rewording client copy silently is not
-this file's habit. The banned list holds "lowest price" as a contiguous
-string, which this does not contain, so it passes the checker, but it sits
-close to a claim the register would otherwise gate.
+Card 1 body arrived as "We will negotiate you the lowest best possible
+price", a double superlative with "negotiate you" for "negotiate for you". It
+shipped that way for a few hours on 28 Aug 2026 and was then corrected to "We
+will negotiate the lowest possible price", which is the client's own 25 August
+wording for the same sentence rather than anything written here. The banned
+list holds "lowest price" as a contiguous string, which this does not contain,
+so it passes the checker, but it sits close to a claim the register would
+otherwise gate.
 
 Card 3 body is now word for word identical to a paragraph already in the
 off-market band lower down the same page, so that sentence renders twice.
@@ -308,7 +308,7 @@ register. No off-market percentage appears anywhere; that claim is gated.
 | Q | A |
 |---|---|
 | What does a buyer's agent do for an investor? | Two paragraphs. First, NEW: We provide industry leading research and analysis - to give you a high level of confidence. We assess and enlighten you of areas that will outperform the market for your budget and have experts within them. Second, KEPT: We find the property, inspect it, tell you what it is worth, and negotiate or bid for you. You keep the decision. We do the work and carry the risk of getting it wrong. |
-| Do you work for me exclusively? | Some clients can purchase within 48 hours, others want to feel the market out first before making any decisions and we are here to support and guide you into finding the right property and giving you the confidence in a major financial decision. NEW |
+| Do you work for me exclusively? | **[Exclusivity answer needed from the client.]** The timing copy that stood here until 28 Aug 2026 answered a different question and moved to the timing entry below. Ships visibly unfilled under rule 2 rather than as plausible copy. See investorFaqExclusivityGap28Aug |
 | Can you buy in a state I do not live in? | Yes. We have offices in Sydney, Melbourne, Brisbane and Adelaide, and we inspect in person so you do not have to fly. NEW |
 | How long does it usually take? | Every buyer moves at a different pace. / Some are ready to purchase within 48 hours, most land somewhere in the 30 to 60 day range, and a rare brief takes as long as it takes to find the right property. Our job is to guide you through it and give you confidence in a major financial decision. CHANGED 28 Aug 2026, the line break is authored and ships as a br |
 | What do you charge? | A full search is 1.5 to 2 percent of the purchase price. Appraise and negotiate, where you have already found the property, is 1 percent. NEW |
@@ -316,14 +316,14 @@ register. No off-market percentage appears anywhere; that claim is gated.
 The second question was replaced on 25 August 2026. As supplied, the question
 asks about exclusivity and the answer describes how long a purchase takes, so
 the pair does not currently meet. It is recorded here as given; both halves are
-the client's. **This got worse on 28 August 2026**, not better: the client
-rewrote that same timing copy as the answer to "How long does it usually
-take?", where it belongs, and the Paper artboard shows it there. The
-exclusivity entry was left collapsed in the design, so it carries no
-instruction and its misplaced timing answer still stands. The page therefore
-now answers the timing question twice and the exclusivity question not at all.
-Fixing it needs a real exclusivity answer from the client rather than one
-invented here. Note also that dropping the old entry removed the page's only
+the client's. It was **resolved as far as it can be on 28 August 2026**. The
+client rewrote that same timing copy as the answer to "How long does it
+usually take?", where it belongs, which briefly left the page answering timing
+twice. The duplicate has been removed and the exclusivity slot now ships as a
+visible bracket. It cannot be filled here: answering it from the independence
+claim the page already makes, "we act for buyers only, never for sellers",
+would answer whether the agency ever acts for a seller, not whether it runs
+two buyers against each other on one property, which is what was asked. Note also that dropping the old entry removed the page's only
 statement that no commission is taken from developers, which was the segment's
 independence claim. The fee answer uses the schedule cleared in the
 `DESIGN.md` claims register, unchanged.
