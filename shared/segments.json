@@ -413,6 +413,13 @@
       "reason": "height: auto is what makes the attributes safe. Without it the height attribute lands as a presentational hint on any image the design layer sizes by width alone, and truth-docs stretched from 689px to 1220px. That regression was caught by comparing every box on the page against the pre-change build at 390, 768, 1100 and 1440; with the rule added, document height matches at all four and the only remaining differences are 1px horizontal offsets inside the decorative marquee.",
       "consequence": "77KB of badge artwork now loads eagerly on mobile, where the strip is at 1576px and below the fold. base.css is shared by both families, so height: auto lands on the location pages too, where it is equally correct: melbourne already carries width and height on two of its three images. The two badge-reb.svg references and the footer logo are still unsized, because reading a viewBox was out of scope for this pass.",
       "raised": "28 Aug 2026"
+    },
+    "prestigeThreshold5m": {
+      "problem": "The prestige band on the buyer page qualified itself as \"For homes valued from $2m and above\". The client asked on 28 Aug 2026 for that figure to read $5m.",
+      "decision": "CHANGED to \"For homes valued from $5m and above\" on the buyer page. Copy only, one figure, no token, structure or capture change. The band was removed from commercial, investor and developer on 21 Aug 2026, so the buyer page is the only place it exists and nothing else moved.",
+      "status": "APPLIED 28 Aug 2026, buyer only",
+      "consequence": "Both budget selects on the page still top out at \"$3m and above\", and DESIGN.md section Segments derives the prestige flag from the top budget band rather than from a chip. A buyer reading $5m and above therefore selects a band that does not say it, and every prestige lead keeps arriving labelled 3m-plus. The option values are live, so they were left alone under rule 3. Matching the derived flag to the copy means a new 5m-plus band and a HubSpot property that accepts it, which is a client decision.",
+      "raised": "28 Aug 2026"
     }
   }
 }
