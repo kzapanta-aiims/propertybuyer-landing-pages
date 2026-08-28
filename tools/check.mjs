@@ -179,9 +179,18 @@ for (const { key, file, family } of pages) {
      widths, which is why this is a budget exception rather than a render bug.
      Recorded as openDecisions.commercialClientCopyEdits.
 
-     A client overrule on one page is not a new house rule, so the other three
+     The investor page is over it on purpose too. On 28 Aug 2026 the client
+     supplied a 55 character subhead naming who the agency helps, and was
+     adamant on the wording. It wraps to two lines, and the clipping, scroll
+     and tap target checks below pass at all four widths, so this is the same
+     class of exception as the commercial one rather than a render bug. The
+     copy was set in sentence case rather than the title case supplied,
+     because DESIGN.md bans title case outright; the words are unchanged.
+     Recorded as openDecisions.investorClientCopyEdits28Aug.
+
+     A client overrule on one page is not a new house rule, so the other two
      pages still answer to 42. */
-  const subheadBudget = key === 'commercial' ? 78 : 42;
+  const subheadBudget = key === 'commercial' ? 78 : key === 'investor' ? 55 : 42;
 
   subhead.length <= subheadBudget
     ? pass(`hero subhead ${subhead.length}/${subheadBudget}`)
@@ -194,7 +203,16 @@ for (const { key, file, family } of pages) {
       : fail(`${what} over ${max}: ${bad.map((t) => `${t.length} "${t}"`).join(' | ')}`);
   };
 
-  over(['h1', 'h2'].flatMap(between), 60, 'H1 and H2');
+  /* H1 and H2 were one 60 character gate until 28 Aug 2026. They are split
+     so the investor H1 can carry its own exception without also relaxing
+     that page's H2s, which all still answer to 60. On 28 Aug 2026 the client
+     was adamant on a 68 character H1 for the investor page. It is authored
+     with four explicit line breaks and its widest line, "investment
+     portfolio", is unchanged from the 59 character version, so it costs no
+     extra width at any of the four widths and the render checks below pass.
+     Recorded as openDecisions.investorClientCopyEdits28Aug. */
+  over(between('h1'), key === 'investor' ? 68 : 60, 'H1');
+  over(between('h2'), 60, 'H2');
   over(between('h3'), 32, 'card headings');
   over(buttons, 34, 'button labels');
   over(between('label class="micro"').concat(between('legend class="micro"')), 20, 'field labels');

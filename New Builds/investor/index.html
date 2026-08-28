@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Buy an investment with no developer commission | Propertybuyer</title>
+<title>Buy an investment with an expert on your side | Propertybuyer</title>
 <meta name="description" content="Independent buyers agency, established 2001. We act for buyers only and take no commission from developers, vendors or agents.">
 <!-- Both faces are declared inside tokens.css, so without these the browser
      cannot discover them until the stylesheet has downloaded and parsed.
@@ -18,6 +18,31 @@
 <link rel="stylesheet" href="../../assets/css/tokens.css">
 <link rel="stylesheet" href="../../assets/css/base.css">
 <link rel="stylesheet" href="../../assets/css/landing.css">
+<!-- The reveal from-states are declared in this page's markup and gated on
+     html.js, so the flag has to be set here, before the first paint. Set
+     from the top of page.js, which is where it used to live and where it
+     still lives for the pages that have not moved yet, the browser paints
+     the cards visible and the script blanks them a moment later, and the
+     entry animation reads as a flash rather than an entry. page.js sets the
+     same flag on arrival; setting it twice is harmless.
+
+     The timer is the safety net. On this page html.js plus a markup reveal
+     class is what holds a card at opacity 0, so a page.js that never
+     arrives would leave the body invisible. The attribute switches the
+     from-state off in landing.css for the whole document rather than
+     element by element, so it covers markup that has not parsed yet, and
+     page.js reads it on arrival so it cannot re-hide a rescued page.
+
+     Rolled forward from the buyer page 28 Aug 2026. See
+     revealStateBeforeFirstPaint in shared/segments.json. -->
+<script>
+(function (el) {
+  el.classList.add('js');
+  setTimeout(function () {
+    if (!el.hasAttribute('data-reveals')) el.setAttribute('data-reveals', 'rescued');
+  }, 3000);
+})(document.documentElement);
+</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -83,7 +108,7 @@
             <svg class="laurel" viewBox="0 0 14 26" width="14" height="26" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="lg-b" gradientUnits="objectBoundingBox" x1="0.5" y1="0" x2="0.5" y2="1"><stop offset="0" stop-color="#b9795d"/><stop offset="0.15" stop-color="#53362a"/><stop offset="0.51" stop-color="#f8d5c6"/><stop offset="0.86" stop-color="#53362a"/><stop offset="1" stop-color="#b9795d"/></linearGradient></defs><path d="M7.603 22.386C7.879 22.028 8.138 21.645 8.378 21.239C8.695 20.704 8.975 20.135 9.216 19.539C9.878 19.396 12.646 18.566 14.000 14.519C13.803 14.572 11.190 15.490 9.734 18.015C9.983 17.114 10.152 16.170 10.232 15.203C10.241 15.095 10.249 14.986 10.256 14.878C10.773 14.578 13.223 12.926 13.200 8.573C13.030 8.687 10.827 10.413 10.278 13.301C10.235 12.138 10.062 11.004 9.763 9.937C10.205 9.477 12.071 7.234 10.890 3.089C10.750 3.251 8.953 5.693 9.388 8.805C9.070 7.980 8.648 7.186 8.135 6.433C8.355 5.889 9.231 3.218 6.763 0.000C6.699 0.188 6.015 2.842 7.305 5.348C6.772 4.723 6.171 4.136 5.507 3.594C5.312 3.356 5.096 3.145 4.855 2.951C3.494 1.854 1.751 1.241 0.002 1.243C-0.040 1.791 0.684 2.297 1.064 2.583C1.933 3.237 2.847 3.684 3.910 3.969C4.485 4.124 5.122 4.252 5.729 4.280C6.591 5.047 7.330 5.897 7.929 6.807C7.690 6.560 7.424 6.330 7.132 6.118C6.297 5.514 5.337 5.097 4.346 4.811C4.348 5.016 4.377 5.220 4.430 5.418C4.496 5.663 4.601 5.896 4.717 6.122C5.613 7.877 7.408 9.542 9.386 10.004C9.839 11.611 9.988 13.362 9.852 15.087C9.443 11.548 7.081 9.705 6.891 9.575C6.985 13.778 9.135 15.588 9.749 16.020C9.499 17.798 8.942 19.513 8.094 20.971C8.838 17.234 6.666 14.386 6.504 14.199C5.337 18.454 7.131 20.906 7.721 21.569C6.904 22.793 5.903 23.764 4.750 24.460C6.546 21.405 5.373 18.131 5.279 17.922C3.087 21.358 3.989 23.941 4.341 24.692C3.479 25.151 2.539 25.465 1.532 25.624C1.428 25.640 1.358 25.737 1.374 25.840C1.388 25.933 1.469 26.000 1.561 26.000C1.571 26.000 1.581 25.999 1.591 25.998C3.392 25.714 4.988 24.957 6.316 23.774C6.981 23.890 9.860 24.164 12.648 20.922C12.452 20.898 9.857 20.774 7.602 22.386C7.602 22.386 7.603 22.386 7.603 22.386Z" fill="url(#lg-b)"/></svg>
           </p>
           <div class="hero-title-block">
-            <h1>Build your<br>investment portfolio<br>with an expert<br>on your side</h1>
+            <h1>Build your property<br>investment portfolio<br>with an expert<br>on your side</h1>
             <div class="hero-vs" aria-hidden="true">
               <div class="hero-vs-pair">
                 <div class="avatar-card avatar-card--l">
@@ -103,7 +128,7 @@
           </div>
         </div>
         <div class="hero-sub">
-          <p class="hero__subhead">Helping investors succeed in Australia</p>
+          <p class="hero__subhead">Helping property investors achieve success in Australia</p>
           <p class="hero-body">At Propertybuyer, we understand the unique needs and goals of property investors in Australia. Whether you're a seasoned investor or just starting, our team of dedicated professionals is here to guide you through the journey of property investment.</p>
         </div>
       </div>
@@ -241,11 +266,11 @@
 <section class="section testimonials">
   <div class="wrap">
     <div class="testimonials-head">
-      <div class="testimonials-head__intro">
+      <div class="reveal testimonials-head__intro">
         <h2>published client stories</h2>
         <p class="muted">Genuine words from our valued clients.</p>
       </div>
-      <div class="rating-rows">
+      <div class="reveal rating-rows">
         <div class="rating-row">
           <div class="rating-row__place">
             <svg width="39" height="18" viewBox="-0.055 -0.484 38.876 18.012" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M26.415 14.054C21.399 15.643 20.022 10.848 16.522 12.244L13.797 14.803C18.079 14.054 18.874 21.437 26.415 14.047V14.054Z" fill="#B9795D"/><path d="M20.393 8.936C22.657 8.969 23.943 11.275 26.206 11.523 27.671 11.688 29.547 10.985 32.355 8.234 27.9 9.644 26.317 6.018 23.563 6.169 23.307 6.183 23.077 6.224 22.857 6.279L19.973 8.99C20.111 8.949 20.256 8.922 20.393 8.928V8.936Z" fill="#B9795D"/><path d="M7.166 9.175C10.528 7.979 11.808 11.591 14.803 11.542 15.073 11.542 15.329 11.502 15.571 11.453L18.649 8.556C13.938 8.673 12.928 2.722 7.159 9.175H7.166Z" fill="#00404B"/><path d="M38.272 2.42C34.003 3.768 32.37 0.5 29.819 0.356 29.575 0.342 29.348 0.356 29.133 0.39L26.234 3.122C30.026 3.088 31.085 9.458 38.272 2.42Z" fill="#B9795D"/><path d="M17.65 0.356C15.381 0.478 14.62 2.557 13.223 2.708 8.09 3.272 7.212-3.311 1.248 3.362 4.61 2.164 5.89 5.777 8.885 5.729 11.625 5.681 12.946 3.1 14.489 3.122 16.75 3.156 18.038 5.46 20.299 5.707 20.839 5.769 21.337 5.715 21.801 5.598L24.845 2.728C21.559 2.941 20.051 0.224 17.65 0.356Z" fill="#00404B"/></svg>
@@ -298,7 +323,7 @@
     </div>
 
     <div class="story-cards">
-      <article class="story-card">
+      <article class="reveal story-card">
         <div class="story-card__media">
           <img src="../../assets/img/investor-story-1.webp" alt="An inner west property secured in Sydney" loading="lazy" decoding="async">
           <p class="story-card__privacy">
@@ -319,7 +344,7 @@
           </div>
         </div>
       </article>
-      <article class="story-card">
+      <article class="reveal story-card">
         <div class="story-card__media">
           <img src="../../assets/img/investor-story-2.webp" alt="A single level home secured in Melbourne" loading="lazy" decoding="async">
           <p class="story-card__privacy">
@@ -340,7 +365,7 @@
           </div>
         </div>
       </article>
-      <article class="story-card">
+      <article class="reveal story-card">
         <div class="story-card__media">
           <img src="../../assets/img/investor-story-3.webp" alt="A house with a city outlook secured in Brisbane" loading="lazy" decoding="async">
           <p class="story-card__privacy">
@@ -372,7 +397,7 @@
 <section class="section truth">
   <div class="wrap">
     <div class="truth-head">
-      <div class="truth-head__copy">
+      <div class="reveal truth-head__copy">
         <div class="truth-head__group">
           <p class="pill pill--dark">The Truth</p>
           <h2 class="truth-title"><span>We buy property</span> <span class="line-2">Australia wide.</span></h2>
@@ -383,7 +408,7 @@
           <p class="btn-note">No obligation. No upfront fees. Just a conversation.</p>
         </div>
       </div>
-      <div class="truth-visual" aria-hidden="true">
+      <div class="reveal truth-visual" aria-hidden="true">
         <img class="truth-visual__docs" src="../../assets/img/truth-docs.webp" alt="" loading="lazy" decoding="async">
         <img class="truth-visual__medal" src="../../assets/img/medal.webp" alt="" loading="lazy" decoding="async">
       </div>
@@ -398,6 +423,7 @@
           <svg class="swoosh" viewBox="0 8.931 41.979 19.01" width="42" height="19" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M41.56 16.31C26.823 21.043 21.185 9.573 12.372 9.065 11.537 9.016 10.748 9.065 10.008 9.186 10.008 9.186 0 18.772 0 18.772 13.089 18.653 16.743 41.014 41.56 16.31Z" fill="#B9795D"/></svg>
           <div class="group">
             <h2>The most comprehensive research</h2>
+            <p>Only the most superior opportunities. Pay the absolute minimum. We will negotiate you the lowest best possible price.</p>
           </div>
         </div>
       </article>
@@ -408,7 +434,8 @@
         <div class="truth-card__copy">
           <svg class="swoosh" viewBox="0 8.931 41.979 19.01" width="42" height="19" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M41.56 16.31C26.823 21.043 21.185 9.573 12.372 9.065 11.537 9.016 10.748 9.065 10.008 9.186 10.008 9.186 0 18.772 0 18.772 13.089 18.653 16.743 41.014 41.56 16.31Z" fill="#B9795D"/></svg>
           <div class="group">
-            <h2>Only the most superior opportunities</h2>
+            <h2>Protecting your interests</h2>
+            <p>We have all the trusted advisors including the best pest and building inspectors, the best solicitors, and the best related professionals to ensure your interests are protected.</p>
           </div>
         </div>
       </article>
@@ -419,8 +446,8 @@
         <div class="truth-card__copy">
           <svg class="swoosh" viewBox="0 8.931 41.979 19.01" width="42" height="19" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M41.56 16.31C26.823 21.043 21.185 9.573 12.372 9.065 11.537 9.016 10.748 9.065 10.008 9.186 10.008 9.186 0 18.772 0 18.772 13.089 18.653 16.743 41.014 41.56 16.31Z" fill="#B9795D"/></svg>
           <div class="group">
-            <h2>Pay the absolute minimum</h2>
-            <p>We will negotiate the lowest possible price saving you tens of thousands of dollars</p>
+            <h2>Off-market and pre-market</h2>
+            <p>We see off-market, pre-market and are privy to information on on-market properties not available to anyone else.</p>
           </div>
         </div>
       </article>
@@ -431,8 +458,8 @@
         <div class="truth-card__copy">
           <svg class="swoosh" viewBox="0 8.931 41.979 19.01" width="42" height="19" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M41.56 16.31C26.823 21.043 21.185 9.573 12.372 9.065 11.537 9.016 10.748 9.065 10.008 9.186 10.008 9.186 0 18.772 0 18.772 13.089 18.653 16.743 41.014 41.56 16.31Z" fill="#B9795D"/></svg>
           <div class="group">
-            <h2>Guidance from sales to settlement</h2>
-            <p>We have experts and trusted advisors to settlement and beyond. Best related professional to ensure your interests are protected.</p>
+            <h2>We provide industry leading research and analysis</h2>
+            <p>To give you a high level of confidence. We assess and enlighten you of areas that will outperform the market for your budget and have experts within them.</p>
           </div>
         </div>
       </article>
@@ -447,7 +474,7 @@
      ========================================================================== -->
 <section class="section stats on-dark">
   <div class="wrap">
-    <div class="stats-visual" aria-hidden="true">
+    <div class="reveal stats-visual" aria-hidden="true">
       <img class="stats-visual__photo" src="../../assets/img/stats-team.webp" alt="" loading="lazy" decoding="async">
       <img class="stats-visual__medal" src="../../assets/img/medal.webp" alt="" loading="lazy" decoding="async">
       <div class="stat stat--properties">
@@ -473,10 +500,10 @@
       </div>
     </div>
 
-    <div class="stats-copy">
+    <div class="reveal stats-copy">
       <div class="stats-copy__head">
         <h2>Reviewed by buyers only,<br>since 2001.</h2>
-        <div class="rating-rows rating-rows--on-brand">
+        <div class="reveal rating-rows rating-rows--on-brand">
           <div class="rating-row">
             <div class="rating-row__place">
               <svg width="39" height="18" viewBox="-0.055 -0.484 38.876 18.012" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M26.415 14.054C21.399 15.643 20.022 10.848 16.522 12.244L13.797 14.803C18.079 14.054 18.874 21.437 26.415 14.047V14.054Z" fill="#B9795D"/><path d="M20.393 8.936C22.657 8.969 23.943 11.275 26.206 11.523 27.671 11.688 29.547 10.985 32.355 8.234 27.9 9.644 26.317 6.018 23.563 6.169 23.307 6.183 23.077 6.224 22.857 6.279L19.973 8.99C20.111 8.949 20.256 8.922 20.393 8.928V8.936Z" fill="#B9795D"/><path d="M7.166 9.175C10.528 7.979 11.808 11.591 14.803 11.542 15.073 11.542 15.329 11.502 15.571 11.453L18.649 8.556C13.938 8.673 12.928 2.722 7.159 9.175H7.166Z" fill="#00404B"/><path d="M38.272 2.42C34.003 3.768 32.37 0.5 29.819 0.356 29.575 0.342 29.348 0.356 29.133 0.39L26.234 3.122C30.026 3.088 31.085 9.458 38.272 2.42Z" fill="#B9795D"/><path d="M17.65 0.356C15.381 0.478 14.62 2.557 13.223 2.708 8.09 3.272 7.212-3.311 1.248 3.362 4.61 2.164 5.89 5.777 8.885 5.729 11.625 5.681 12.946 3.1 14.489 3.122 16.75 3.156 18.038 5.46 20.299 5.707 20.839 5.769 21.337 5.715 21.801 5.598L24.845 2.728C21.559 2.941 20.051 0.224 17.65 0.356Z" fill="#00404B"/></svg>
@@ -544,7 +571,7 @@
      ========================================================================== -->
 <section class="section steps">
   <div class="wrap">
-    <div class="steps-head">
+    <div class="reveal steps-head">
       <h2>What happens after you call us</h2>
       <p class="muted">Most clients go from engagement to purchase in 30 to 60 days.</p>
       <p class="order">Here is the order it happens in:</p>
@@ -556,7 +583,7 @@
          they come back. Drag the rail or use the arrows; without script it is
          still a native horizontal scroller, so nothing is unreachable. -->
     <div class="steps-row" data-steps-row>
-      <article class="step-card step-card--1 on-dark">
+      <article class="reveal step-card step-card--1 on-dark">
         <p class="pill pill--light pill--step">Step 1</p>
         <div class="step-card__text">
           <h3>Define the numbers</h3>
@@ -565,7 +592,7 @@
         <div class="step-card__img"><img src="../../assets/img/step-strategy.webp" alt="Notes taken during a strategy call" loading="lazy" decoding="async"></div>
         <svg class="step-card__swoosh" viewBox="0 8.931 41.979 19.01" width="42" height="19" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M41.56 16.31C26.823 21.043 21.185 9.573 12.372 9.065 11.537 9.016 10.748 9.065 10.008 9.186 10.008 9.186 0 18.772 0 18.772 13.089 18.653 16.743 41.014 41.56 16.31Z" fill="#B9795D"/></svg>
       </article>
-      <article class="step-card step-card--2 on-dark">
+      <article class="reveal step-card step-card--2 on-dark">
         <p class="pill pill--light pill--step">Step 2</p>
         <div class="step-card__text">
           <h3>Search<br>&amp; due diligence</h3>
@@ -574,7 +601,7 @@
         <div class="step-card__img"><img src="../../assets/img/commercial-step-research.webp" alt="An agent inspecting shortlisted premises" loading="lazy" decoding="async"></div>
         <svg class="step-card__swoosh" viewBox="0 8.931 41.979 19.01" width="42" height="19" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M41.56 16.31C26.823 21.043 21.185 9.573 12.372 9.065 11.537 9.016 10.748 9.065 10.008 9.186 10.008 9.186 0 18.772 0 18.772 13.089 18.653 16.743 41.014 41.56 16.31Z" fill="#B9795D"/></svg>
       </article>
-      <article class="step-card step-card--3 on-dark">
+      <article class="reveal step-card step-card--3 on-dark">
         <p class="pill pill--light pill--step">Step 3</p>
         <div class="step-card__text">
           <h3>Negotiate &amp; secure</h3>
@@ -583,7 +610,7 @@
         <div class="step-card__img"><img src="../../assets/img/step-negotiate.webp" alt="An agent securing a property by phone" loading="lazy" decoding="async"></div>
         <svg class="step-card__swoosh" viewBox="0 8.931 41.979 19.01" width="42" height="19" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M41.56 16.31C26.823 21.043 21.185 9.573 12.372 9.065 11.537 9.016 10.748 9.065 10.008 9.186 10.008 9.186 0 18.772 0 18.772 13.089 18.653 16.743 41.014 41.56 16.31Z" fill="#FFFFFF"/></svg>
       </article>
-      <article class="step-card step-card--4 on-dark">
+      <article class="reveal step-card step-card--4 on-dark">
         <p class="pill pill--light pill--step">Step 4</p>
         <div class="step-card__text">
           <h3>Settlement &amp; ongoing support</h3>
@@ -611,7 +638,7 @@
      ========================================================================== -->
 <section class="section services on-dark">
   <div class="wrap">
-    <div class="services-head">
+    <div class="reveal services-head">
       <div class="services-head__intro">
         <p class="pill pill--dark">Services</p>
         <h2>Our services</h2>
@@ -622,21 +649,21 @@
       </div>
     </div>
     <div class="service-cards">
-      <article class="service-card">
+      <article class="reveal service-card">
         <div class="service-card__img"><img src="../../assets/img/service-full-search.webp" alt="The Propertybuyer buyers agents" loading="lazy" decoding="async"></div>
         <div class="service-card__text">
           <h3>Full Search</h3>
           <p>The complete engagement. We search, shortlist, inspect, appraise and negotiate, from the first brief to settlement.</p>
         </div>
       </article>
-      <article class="service-card">
+      <article class="reveal service-card">
         <div class="service-card__img"><img src="../../assets/img/service-appraise.webp" alt="A home being appraised before an offer" loading="lazy" decoding="async"></div>
         <div class="service-card__text">
           <h3>Appraise &amp; Negotiate</h3>
           <p>Found the property yourself? We inspect it, tell you what it is worth, and negotiate so you do not overpay.</p>
         </div>
       </article>
-      <article class="service-card">
+      <article class="reveal service-card">
         <div class="service-card__img"><img src="../../assets/img/service-auction.webp" alt="A buyer shaking hands with the agent after winning at auction" loading="lazy" decoding="async"></div>
         <div class="service-card__text">
           <h3>Auction Bidding</h3>
@@ -653,7 +680,7 @@
      point.
      ========================================================================== -->
 <section class="auction">
-  <div class="auction-head">
+  <div class="reveal auction-head">
     <p class="pill pill--dark">Real Access</p>
     <h2>Off-market &amp; auction ready</h2>
     <div class="sub">
@@ -664,22 +691,22 @@
 
   <div class="auction-strip" aria-hidden="true">
     <div class="auction-strip__row">
-      <div class="auction-photo"><img src="../../assets/img/commercial-auction-1.webp" alt="" loading="lazy" decoding="async"></div>
-      <div class="auction-photo"><img src="../../assets/img/commercial-auction-2.webp" alt="" loading="lazy" decoding="async"></div>
-      <div class="auction-photo"><img src="../../assets/img/commercial-auction-3.webp" alt="" loading="lazy" decoding="async"></div>
+      <div class="reveal-glass auction-photo"><img src="../../assets/img/commercial-auction-1.webp" alt="" loading="lazy" decoding="async"></div>
+      <div class="reveal-glass auction-photo"><img src="../../assets/img/commercial-auction-2.webp" alt="" loading="lazy" decoding="async"></div>
+      <div class="reveal-glass auction-photo"><img src="../../assets/img/commercial-auction-3.webp" alt="" loading="lazy" decoding="async"></div>
     </div>
   </div>
 
   <div class="auction-moves">
     <div class="moves-row">
-      <div class="move">
+      <div class="reveal move">
         <svg viewBox="0 0 40 40" width="40" height="40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path transform="translate(3.333 3.333)" d="M27.055 32.945C27.055 32.945 25.111 31.000 25.111 31.000C25.111 31.000 28.014 28.055 28.014 28.055C28.014 28.055 16.667 28.055 16.667 28.055C16.667 28.055 16.667 25.278 16.667 25.278C16.667 25.278 28.014 25.278 28.014 25.278C28.014 25.278 25.111 22.333 25.111 22.333C25.111 22.333 27.055 20.389 27.055 20.389C27.055 20.389 33.333 26.667 33.333 26.667C33.333 26.667 27.055 32.945 27.055 32.945ZM0.000 18.333C0.000 18.333 0.000 13.889 0.000 13.889C0.000 13.889 4.445 13.889 4.445 13.889C4.445 13.889 4.445 18.333 4.445 18.333C4.445 18.333 0.000 18.333 0.000 18.333ZM8.375 16.625C7.236 15.486 6.667 14.111 6.667 12.500C6.667 12.500 6.667 5.833 6.667 5.833C6.667 4.222 7.236 2.847 8.375 1.708C9.514 0.569 10.889 0.000 12.500 0.000C14.111 0.000 15.486 0.569 16.625 1.708C17.764 2.847 18.333 4.222 18.333 5.833C18.333 5.833 18.333 12.500 18.333 12.500C18.333 14.111 17.764 15.486 16.625 16.625C15.486 17.764 14.111 18.333 12.500 18.333C10.889 18.333 9.514 17.764 8.375 16.625ZM23.375 16.625C22.236 15.486 21.667 14.111 21.667 12.500C21.667 12.500 21.667 5.833 21.667 5.833C21.667 4.222 22.236 2.847 23.375 1.708C24.514 0.569 25.889 0.000 27.500 0.000C29.111 0.000 30.486 0.569 31.625 1.708C32.764 2.847 33.333 4.222 33.333 5.833C33.333 5.833 33.333 12.500 33.333 12.500C33.333 14.111 32.764 15.486 31.625 16.625C30.486 17.764 29.111 18.333 27.500 18.333C25.889 18.333 24.514 17.764 23.375 16.625ZM14.660 14.664C15.257 14.070 15.555 13.349 15.555 12.500C15.555 12.500 15.555 5.833 15.555 5.833C15.555 4.984 15.259 4.263 14.666 3.669C14.073 3.075 13.354 2.778 12.507 2.778C11.660 2.778 10.938 3.075 10.340 3.669C9.743 4.263 9.445 4.984 9.445 5.833C9.445 5.833 9.445 12.500 9.445 12.500C9.445 13.349 9.741 14.070 10.334 14.664C10.927 15.258 11.646 15.555 12.493 15.555C13.340 15.555 14.062 15.258 14.660 14.664ZM29.660 14.664C30.257 14.070 30.555 13.349 30.555 12.500C30.555 12.500 30.555 5.833 30.555 5.833C30.555 4.984 30.259 4.263 29.666 3.669C29.073 3.075 28.354 2.778 27.507 2.778C26.660 2.778 25.938 3.075 25.340 3.669C24.743 4.263 24.445 4.984 24.445 5.833C24.445 5.833 24.445 12.500 24.445 12.500C24.445 13.349 24.741 14.070 25.334 14.664C25.927 15.258 26.646 15.555 27.493 15.555C28.340 15.555 29.062 15.258 29.660 14.664Z" fill="var(--text-heading)"/></svg>
         <div class="move__text">
           <h3>We ask before it is listed</h3>
           <p>Your brief goes out to a database of 10,000+ agents. We hear about a property while the owner is still deciding whether to sell.</p>
         </div>
       </div>
-      <div class="move">
+      <div class="reveal move">
         <svg viewBox="0 0 40 40" width="40" height="40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path transform="translate(1.667 13.347)" d="M9.250 13.320C7.556 13.320 6.264 13.090 5.375 12.632C4.486 12.174 3.667 11.320 2.917 10.070C2.500 9.375 2.146 8.549 1.854 7.590C1.563 6.632 1.292 5.764 1.042 4.986C0.736 4.986 0.486 4.889 0.292 4.695C0.097 4.500 0.000 4.250 0.000 3.945C0.000 3.945 0.000 1.903 0.000 1.903C0.000 1.653 0.083 1.438 0.250 1.257C0.417 1.077 0.625 0.958 0.875 0.903C2.431 0.597 3.840 0.375 5.104 0.236C6.368 0.097 7.583 0.028 8.750 0.028C10.444 0.028 11.979 0.167 13.354 0.445C14.729 0.722 15.806 1.125 16.583 1.653C16.583 1.653 20.125 1.653 20.125 1.653C20.792 1.153 21.847 0.752 23.292 0.452C24.736 0.151 26.292 0.000 27.958 0.000C29.106 0.000 30.310 0.074 31.570 0.222C32.829 0.371 34.236 0.597 35.792 0.903C36.042 0.958 36.250 1.077 36.417 1.257C36.583 1.438 36.667 1.653 36.667 1.903C36.667 1.903 36.667 3.945 36.667 3.945C36.667 4.250 36.569 4.500 36.375 4.695C36.181 4.889 35.931 4.986 35.625 4.986C35.375 5.764 35.104 6.632 34.813 7.590C34.521 8.549 34.167 9.375 33.750 10.070C33.028 11.292 32.215 12.139 31.313 12.611C30.410 13.083 29.111 13.320 27.417 13.320C25.667 13.320 24.204 12.935 23.028 12.167C21.852 11.398 20.981 10.199 20.417 8.570C20.259 8.125 20.137 7.681 20.049 7.236C19.961 6.792 19.847 6.347 19.708 5.903C19.597 5.570 19.431 5.327 19.208 5.174C18.986 5.021 18.694 4.945 18.333 4.945C18.000 4.945 17.722 5.028 17.500 5.195C17.278 5.361 17.097 5.597 16.958 5.903C16.819 6.347 16.701 6.792 16.604 7.236C16.507 7.681 16.389 8.125 16.250 8.570C15.778 10.236 14.931 11.445 13.708 12.195C12.486 12.945 11.000 13.320 9.250 13.320ZM9.250 11.403C11.389 11.403 12.857 10.732 13.653 9.389C14.449 8.046 14.847 6.449 14.847 4.597C14.847 3.903 14.593 3.410 14.083 3.118C13.574 2.827 12.889 2.570 12.028 2.347C11.195 2.134 10.255 2.007 9.208 1.965C8.162 1.924 7.171 1.972 6.236 2.111C5.384 2.241 4.743 2.482 4.313 2.833C3.882 3.185 3.667 3.653 3.667 4.236C3.667 5.023 3.734 5.778 3.868 6.500C4.002 7.222 4.204 7.894 4.472 8.514C4.972 9.616 5.553 10.373 6.215 10.785C6.877 11.197 7.889 11.403 9.250 11.403ZM27.417 11.403C28.778 11.403 29.799 11.192 30.479 10.771C31.160 10.350 31.727 9.598 32.180 8.514C32.449 7.894 32.653 7.218 32.792 6.486C32.931 5.755 33.000 4.991 33.000 4.195C33.000 3.593 32.785 3.113 32.354 2.757C31.924 2.401 31.268 2.172 30.389 2.070C29.454 1.949 28.470 1.912 27.438 1.958C26.405 2.005 25.472 2.134 24.639 2.347C23.778 2.570 23.093 2.824 22.583 3.111C22.074 3.398 21.820 3.889 21.820 4.583C21.820 6.435 22.218 8.035 23.014 9.382C23.810 10.729 25.278 11.403 27.417 11.403Z" fill="var(--text-heading)"/></svg>
         <div class="move__text">
           <h3>Fewer buyers in the room</h3>
@@ -688,14 +715,14 @@
       </div>
     </div>
     <div class="moves-row">
-      <div class="move">
+      <div class="reveal move">
         <svg viewBox="0 0 40 40" width="40" height="40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path transform="translate(6.667 3.333)" d="M0.000 31.667C0.000 31.667 0.000 28.889 0.000 28.889C0.000 28.889 20.000 28.889 20.000 28.889C20.000 28.889 20.000 31.667 20.000 31.667C20.000 31.667 0.000 31.667 0.000 31.667ZM9.305 23.083C9.305 23.083 0.000 13.778 0.000 13.778C0.000 13.778 3.111 10.583 3.111 10.583C3.111 10.583 12.500 19.889 12.500 19.889C12.500 19.889 9.305 23.083 9.305 23.083ZM19.889 12.500C19.889 12.500 10.583 3.111 10.583 3.111C10.583 3.111 13.778 0.000 13.778 0.000C13.778 0.000 23.083 9.305 23.083 9.305C23.083 9.305 19.889 12.500 19.889 12.500ZM28.055 30.000C28.055 30.000 5.917 7.861 5.917 7.861C5.917 7.861 7.861 5.917 7.861 5.917C7.861 5.917 30.000 28.055 30.000 28.055C30.000 28.055 28.055 30.000 28.055 30.000Z" fill="var(--text-heading)"/></svg>
         <div class="move__text">
           <h3>Your position stays yours</h3>
           <p>Going direct tells the selling agent what you can pay and how much you want it. We sit between you and the person who is paid to act against you.</p>
         </div>
       </div>
-      <div class="move">
+      <div class="reveal move">
         <svg viewBox="0 0 40 40" width="40" height="40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path transform="translate(2.333 1.667)" d="M18.861 36.667C16.380 36.667 14.079 36.053 11.958 34.826C9.838 33.600 8.120 31.935 6.805 29.833C6.805 29.833 0.000 19.028 0.000 19.028C0.000 19.028 0.820 18.208 0.820 18.208C1.301 17.718 1.882 17.444 2.563 17.389C3.243 17.333 3.861 17.505 4.417 17.903C4.417 17.903 9.333 21.458 9.333 21.458C9.333 21.458 9.333 4.722 9.333 4.722C9.333 4.343 9.465 4.016 9.729 3.743C9.993 3.470 10.324 3.333 10.722 3.333C11.102 3.333 11.428 3.470 11.701 3.743C11.975 4.016 12.111 4.343 12.111 4.722C12.111 4.722 12.111 26.847 12.111 26.847C12.111 26.847 5.083 21.750 5.083 21.750C5.083 21.750 9.125 28.222 9.125 28.222C10.153 29.972 11.528 31.354 13.250 32.368C14.972 33.382 16.843 33.889 18.861 33.889C21.907 33.889 24.507 32.831 26.660 30.715C28.812 28.600 29.889 26.028 29.889 23.000C29.889 23.000 29.889 6.389 29.889 6.389C29.889 6.009 30.021 5.683 30.285 5.410C30.548 5.137 30.880 5.000 31.278 5.000C31.657 5.000 31.984 5.137 32.257 5.410C32.530 5.683 32.667 6.009 32.667 6.389C32.667 6.389 32.667 23.000 32.667 23.000C32.667 26.806 31.322 30.035 28.632 32.688C25.942 35.340 22.685 36.667 18.861 36.667ZM16.195 18.055C16.195 18.055 16.195 1.389 16.195 1.389C16.195 1.009 16.331 0.683 16.604 0.410C16.877 0.137 17.204 0.000 17.583 0.000C17.981 0.000 18.312 0.137 18.576 0.410C18.840 0.683 18.972 1.009 18.972 1.389C18.972 1.389 18.972 18.055 18.972 18.055C18.972 18.055 16.195 18.055 16.195 18.055ZM23.055 18.055C23.055 18.055 23.055 3.055 23.055 3.055C23.055 2.676 23.187 2.350 23.451 2.076C23.715 1.803 24.046 1.667 24.445 1.667C24.824 1.667 25.150 1.803 25.424 2.076C25.697 2.350 25.833 2.676 25.833 3.055C25.833 3.055 25.833 18.055 25.833 18.055C25.833 18.055 23.055 18.055 23.055 18.055Z" fill="var(--text-heading)"/></svg>
         <div class="move__text">
           <h3>Auction ready when it counts</h3>
@@ -706,7 +733,7 @@
 
     <!-- Capture point 2 of 2. Routes into the hero form; the button is a
          real submit so the lead intent is countable. -->
-    <form class="auction-cta auction-cta--strip" data-segment="investor" method="get" action="#lead-form">
+    <form class="reveal auction-cta auction-cta--strip" data-segment="investor" method="get" action="#lead-form">
       <div class="auction-cta__lines">
         <p>Most investors only ever see the advertised market.</p>
         <p>Tell us what you are looking for and we will put it to our agent network.</p>
@@ -725,9 +752,9 @@
      ========================================================================== -->
 <section class="section faq">
   <div class="wrap">
-    <h2>Questions <br>we get from investors</h2>
+    <h2 class="reveal">Questions <br>we get from investors</h2>
     <div class="faq-list">
-      <details class="faq-item" open>
+      <details class="reveal faq-item" open>
         <summary>
           What does a buyer's agent do for an investor?
           <svg width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M7 1V13M1 7H13" fill="none" stroke="var(--text-heading)" stroke-width="1.5"/></svg>
@@ -735,28 +762,28 @@
         <p class="faq-item__a">We provide industry leading research and analysis - to give you a high level of confidence. We assess and enlighten you of areas that will outperform the market for your budget and have experts within them.</p>
         <p class="faq-item__a">We find the property, inspect it, tell you what it is worth, and negotiate or bid for you. You keep the decision. We do the work and carry the risk of getting it wrong.</p>
       </details>
-      <details class="faq-item">
+      <details class="reveal faq-item">
         <summary>
           Do you work for me exclusively?
           <svg width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M7 1V13M1 7H13" fill="none" stroke="var(--text-heading)" stroke-width="1.5"/></svg>
         </summary>
         <p class="faq-item__a">Some clients can purchase within 48 hours, others want to feel the market out first before making any decisions and we are here to support and guide you into finding the right property and giving you the confidence in a major financial decision.</p>
       </details>
-      <details class="faq-item">
+      <details class="reveal faq-item">
         <summary>
           Can you buy in a state I do not live in?
           <svg width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M7 1V13M1 7H13" fill="none" stroke="var(--text-heading)" stroke-width="1.5"/></svg>
         </summary>
         <p class="faq-item__a">Yes. We have offices in Sydney, Melbourne, Brisbane and Adelaide, and we inspect in person so you do not have to fly.</p>
       </details>
-      <details class="faq-item">
+      <details class="reveal faq-item">
         <summary>
           How long does it usually take?
           <svg width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M7 1V13M1 7H13" fill="none" stroke="var(--text-heading)" stroke-width="1.5"/></svg>
         </summary>
-        <p class="faq-item__a">Most clients go from engagement to purchase in 30 to 60 days. A tight brief in a liquid market can be faster; a rare one takes as long as it takes to find the right property.</p>
+        <p class="faq-item__a">Every buyer moves at a different pace.<br>Some are ready to purchase within 48 hours, most land somewhere in the 30 to 60 day range, and a rare brief takes as long as it takes to find the right property. Our job is to guide you through it and give you confidence in a major financial decision.</p>
       </details>
-      <details class="faq-item">
+      <details class="reveal faq-item">
         <summary>
           What do you charge?
           <svg width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M7 1V13M1 7H13" fill="none" stroke="var(--text-heading)" stroke-width="1.5"/></svg>
@@ -774,7 +801,7 @@
      Claims are reused from earlier in the page, nothing new is asserted.
      ========================================================================== -->
 <section class="section closer on-dark" id="closer">
-  <div class="wrap closer__wrap">
+  <div class="reveal wrap closer__wrap">
     <h2>Your side of the table is waiting</h2>
     <p class="closer__body">One conversation tells you what your budget really buys, and how we would run the search. No pressure, and nothing to sign.</p>
     <a class="btn btn--primary closer__btn" href="#lead-form">Talk to our investment team</a>
