@@ -58,7 +58,7 @@ Pages sit two levels down, so every asset reference is `../../` relative.
 | `home` | built, client-reviewed | nothing |
 | `commercial` | built, client-reviewed, merged | budget bands unconfirmed |
 | `investor` | **built, not yet reviewed** | budget bands unconfirmed |
-| `developer` | **built, not yet reviewed** | the three story records are home purchases, not development sites. Framing needs the client |
+| `developer` | built, two client copy rounds applied | one check fails on "unlock", see `developerBannedWordUnlock`. Truth cards 4 and 5 repeat auction moves 1 and 2 word for word |
 | `prestige`, `expat` | no page, deliberately | chip only, see segments.json |
 
 **Next step: a purchase date for three sites the client already publishes.**
@@ -183,9 +183,15 @@ They are the client-demo availability switch and must be deleted before
 launch. A page that fails only these is otherwise passing.
 
 Stripped from `commercial`, `investor` and `developer` on 21 Aug 2026, so all
-three now report "All hard rules pass". The CSS rule and the `page.js` handler
-stay, because both are gated on `data-poc` and the buyer page still demos with
-them; they are inert wherever the attribute is gone.
+three cleared the POC items. The CSS rule and the `page.js` handler stay,
+because both are gated on `data-poc` and the buyer page still demos with them;
+they are inert wherever the attribute is gone.
+
+`developer` no longer reports "All hard rules pass": client copy applied on
+27 and 28 Aug 2026 put the banned word "unlock" on the page twice, and it is
+left as supplied rather than reworded or quietly delisted. A developer page
+that fails only that one line is otherwise passing. See
+`developerBannedWordUnlock`.
 
 **The template is the page that keeps the scaffolding**, so any page derived
 from `New Builds/buyer/index.html` inherits all three items again. Strip them

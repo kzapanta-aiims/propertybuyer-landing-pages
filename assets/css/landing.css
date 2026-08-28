@@ -263,6 +263,46 @@
 .story-card__text { display: flex; flex-direction: column; gap: var(--gap-xs); }
 .story-card__text h3 { line-height: 1.25; }
 
+/* Developer page only, 28 Aug 2026. The three development sites are real and
+   confidential, so the photograph ships whole and the blur is applied here
+   rather than baked into the file: the same source becomes a clear crop by
+   dropping one class, once a client agrees a site can be named.
+
+   The scale is what keeps the blur honest. A blurred image samples outside
+   its own edges and feathers them, so without it the card would carry a
+   pale border on all four sides. */
+.story-card__media--private img { filter: blur(8px); scale: 1.08; }
+.story-card__confidential {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--space-gutter);
+  opacity: 0.9;
+  padding: var(--gap-sm) var(--gap) var(--gap-sm) var(--space-gutter);
+  border: 1px solid var(--border-info);
+  border-radius: var(--radius-card);
+  background: var(--bg-brand);
+  font-size: var(--type-small);
+  font-weight: var(--weight-regular);
+  line-height: 16px;
+  color: var(--text-on-brand);
+}
+.story-card__confidential svg { flex-shrink: 0; }
+
+/* The summary and the purchase record share one box that takes the leftover
+   height, so the figures sit on the same line across all three cards however
+   long the summary runs. Without it a short summary floats its stats up and
+   the row reads as three unrelated cards. */
+.story-card__text:has(.story-card__flow) { flex: 1; }
+.story-card__flow {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-gutter);
+}
+
 /* The purchase record under the summary, two or three figures per card.
    The numbers stay at type/body and semibold rather than type/stat: the
    card already spends its weight on the photograph and the heading, and a
@@ -378,6 +418,9 @@
 .truth-card:nth-child(2) { top: 112px; }
 .truth-card:nth-child(3) { top: 128px; }
 .truth-card:nth-child(4) { top: 144px; }
+/* The developer page runs five cards where the other three run four. The
+   rule is inert on a page with four. */
+.truth-card:nth-child(5) { top: 160px; }
 
 .truth-card__media { position: relative; width: 361px; height: 359px; flex-shrink: 0; overflow: clip; }
 .truth-card__media > img:first-child { width: 100%; height: 100%; object-fit: cover; }
@@ -875,6 +918,7 @@
   .truth-card:nth-child(2) { top: 84px; }
   .truth-card:nth-child(3) { top: 96px; }
   .truth-card:nth-child(4) { top: 108px; }
+  .truth-card:nth-child(5) { top: 120px; }
   .rating-rows { width: 100%; }
   .services-head { flex-direction: column; align-items: flex-start; }
   .service-cards { flex-direction: column; }
@@ -1111,6 +1155,7 @@
   .truth-card:nth-child(2) { top: 36px; }
   .truth-card:nth-child(3) { top: 48px; }
   .truth-card:nth-child(4) { top: 60px; }
+  .truth-card:nth-child(5) { top: 72px; }
 
   /* Stats band copy and action centre. */
   .stats-copy { align-items: center; text-align: center; }

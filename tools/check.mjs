@@ -171,26 +171,26 @@ for (const { key, file, family } of pages) {
      line at --type-h3-card with no max width, and 42 is what fits on one line
      at 390.
 
-     The commercial page is over it on purpose. On 26 Aug 2026 the client
-     supplied a 78 character subhead naming who the agency acts for, and
-     overruled the budget rather than the copy. It wraps to two lines on
-     desktop and three at 390, so it costs vertical space in the hero; the
-     clipping, scroll and tap target checks below still pass at all four
-     widths, which is why this is a budget exception rather than a render bug.
-     Recorded as openDecisions.commercialClientCopyEdits.
+     The commercial, investor and developer pages are all over it on
+     purpose, each because the client supplied the subhead and overruled the
+     budget rather than the copy. Commercial took 78 on 26 Aug 2026, naming
+     who the agency acts for. Investor took 55 on 28 Aug 2026, naming who
+     the agency helps, set in sentence case rather than the title case
+     supplied because DESIGN.md bans title case outright; the words are
+     unchanged. Developer took 62 on 28 Aug 2026, rewritten in Paper to
+     "Due diligence does not just involve costings and realisations."
 
-     The investor page is over it on purpose too. On 28 Aug 2026 the client
-     supplied a 55 character subhead naming who the agency helps, and was
-     adamant on the wording. It wraps to two lines, and the clipping, scroll
-     and tap target checks below pass at all four widths, so this is the same
-     class of exception as the commercial one rather than a render bug. The
-     copy was set in sentence case rather than the title case supplied,
-     because DESIGN.md bans title case outright; the words are unchanged.
-     Recorded as openDecisions.investorClientCopyEdits28Aug.
+     All three wrap to more than one line and cost vertical space in the
+     hero. The clipping, scroll, tap target and rhythm checks below still
+     pass at all four widths on each, which is what makes these budget
+     exceptions rather than render bugs. Recorded as
+     openDecisions.commercialClientCopyEdits,
+     openDecisions.investorClientCopyEdits28Aug and
+     openDecisions.developerPaperEdits28Aug.
 
-     A client overrule on one page is not a new house rule, so the other two
-     pages still answer to 42. */
-  const subheadBudget = key === 'commercial' ? 78 : key === 'investor' ? 55 : 42;
+     A client overrule on one page is not a new house rule, so any page not
+     named here still answers to 42. */
+  const subheadBudget = { commercial: 78, investor: 55, developer: 62 }[key] ?? 42;
 
   subhead.length <= subheadBudget
     ? pass(`hero subhead ${subhead.length}/${subheadBudget}`)

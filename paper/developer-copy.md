@@ -636,3 +636,55 @@ Draft 1 listed five. Two are resolved, one shrank, and two are new.
    and the twenty named purchases are the two that reach a live page.
 6. **Photography.** Every slot currently inherits the buyer page's residential
    artwork.
+
+## Round 3, 28 August 2026, from the Paper artboard
+
+The client edited DEVELOPER v2 in Paper and left fifteen comment threads
+marking where. This section records the strings as applied. The tables above
+are the v2 deck and are **two rounds behind**: they do not carry the 27 Aug
+client round either, so read them as the v2 record rather than as the page.
+
+Recorded in `shared/segments.json` as `developerPaperEdits28Aug`.
+
+| Slot | String | Count / budget |
+|---|---|---|
+| Hero subhead | Due diligence does not just involve costings and realisations. | 62/42, OVERRULED |
+| Hero body | Propertybuyer provides the full suite of due diligence and analysis to provide you with superior development acquisitions | body, no cap |
+| Stories sub | Genuine cases from our valued clients. | muted, was "Genuine words" |
+| Truth lede | It is not something left to chance. Do not risk a successful site acquisition | lede |
+
+### The truth band goes from four cards to five
+
+Card 1 is untouched. The rest are replaced.
+
+| Heading | Count | Body |
+|---|---|---|
+| Feasibility tailored to your circumstances. KEPT | 42/60 | KEPT: Every client works under different margins with different consultants and different goals, we will mould around your brief and ensure we are hitting your metrics |
+| Our 25 years industry experience. NEW | 32/60 | MOVED from card 4: Our extensive history and experience with development sites will allow introductions where you need specialists to assist you with your development goals. |
+| Your consultants or ours. NEW | 24/60 | NEW: Real access to quality land, medium-high density, and commercial subdivision |
+| We look for highest and best use. NEW here | 32/60 | NEW here: We will unlock the opportunities for maximum development potential |
+| We access what others don't. NEW here | 27/60 | NEW here: An off-market sale has no campaign and no competing parties. It is a negotiation between two parties rather than a contest you are optimally positioned. |
+
+Two strings dropped out of the band: "We run the feasibility first" and
+"We tell you what it is worth", both v2 cards.
+
+**Cards 4 and 5 repeat auction moves 1 and 2 word for word.** That is what
+the artboard shows, so it is what shipped, but it puts the same two claims
+twice on one page. Put it back to the client before sign-off.
+
+**"unlock" on card 4 is on the banned list.** The string is the client's and
+was left as supplied, so `npm run check developer` fails on it. See
+`developerBannedWordUnlock`.
+
+### Photography, nine slots filled
+
+The page no longer inherits residential or commercial artwork in these slots.
+All nine ship under a `developer-` prefix, imported by
+`npm run import-images` with the crop geometry recorded in
+`tools/import-paper-images.mjs`.
+
+- Story cards 1 to 3, blurred in CSS with a Confidential pill over each. The
+  blur is the point: it pairs with the confidentiality notice above the row
+  and the name redaction inside each card.
+- Truth cards 2, 3 and 5. Cards 1 and 4 keep the images they had.
+- Auction strip, all three.
