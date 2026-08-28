@@ -23,7 +23,7 @@ the first truth card is the independence claim rather than the inspection one.
 
 | String | Count / budget |
 |---|---|
-| Title: Buy an investment with no developer commission / Propertybuyer. NEW | title tag |
+| Title: Buy an investment with an expert on your side / Propertybuyer. CHANGED 28 Aug 2026, the old title read "no developer commission" and was mistaken for the developer segment. The fee claim stays in the meta description. | title tag |
 | Meta description: Independent buyers agency, established 2001. We act for buyers only and take no commission from developers, vendors or agents. NEW | meta |
 
 ## site-header
@@ -34,9 +34,9 @@ Header tag now "25 Years Property Investment Excellence", 39, display line. NEW.
 
 | String | Count / budget |
 |---|---|
-| H1: Build your investment portfolio with an expert on your side. NEW, four lines | **59/60** |
-| Subhead: Helping investors succeed in Australia. NEW | **38/42 HARD** |
-| Body: At Propertybuyer, we understand the unique needs and goals of property investors in Australia. Whether you're a seasoned investor or just starting, our team of dedicated professionals is here to guide you through the journey of property investment. NEW | body, no cap |
+| H1: Build your property investment portfolio with an expert on your side. CHANGED 28 Aug 2026, client supplied and adamant. Four lines, breaking after "property". Widest line is still "investment portfolio", so it costs no extra width. | **68/60 OVER, excepted per page in check.mjs** |
+| Subhead: Helping property investors achieve success in Australia. CHANGED 28 Aug 2026, client supplied. Set in sentence case, supplied in title case, no word changed. Wraps to two lines. | **55/42 OVER, excepted per page in check.mjs** |
+| Body (UNCHANGED, re-confirmed 28 Aug 2026 as byte for byte identical to the client string): At Propertybuyer, we understand the unique needs and goals of property investors in Australia. Whether you're a seasoned investor or just starting, our team of dedicated professionals is here to guide you through the journey of property investment. NEW | body, no cap |
 | Award pill: Best Buyers Agency of the Year 2025. KEPT | pill |
 | Capture title: Tell us about your investment. NEW | 29 |
 | Legend: What are you buying. KEPT micro | 19/20 |
@@ -198,24 +198,40 @@ the deck is the thing that is inconsistent.
 |---|---|
 | Title | We buy property Australia wide. NEW |
 | Lede | Your preferred area or suggest area from our experts. NEW |
-| 1 H2 | The most comprehensive research. NEW |
-| 1 body | None. Dropped 25 Aug 2026 at the client's direction. |
-| 2 H2 | Only the most superior opportunities. NEW |
-| 2 body | None. Dropped 25 Aug 2026 at the client's direction. |
-| 3 H2 | Pay the absolute minimum. NEW |
-| 3 body | We will negotiate the lowest possible price saving you tens of thousands of dollars. NEW |
-| 4 H2 | Guidance from sales to settlement. NEW |
-| 4 body | We have experts and trusted advisors to settlement and beyond. Best related professional to ensure your interests are protected. NEW |
+| 1 H2 | The most comprehensive research. KEPT |
+| 1 body | Only the most superior opportunities. Pay the absolute minimum. We will negotiate you the lowest best possible price. CHANGED 28 Aug 2026 |
+| 2 H2 | Protecting your interests. CHANGED 28 Aug 2026 |
+| 2 body | We have all the trusted advisors including the best pest and building inspectors, the best solicitors, and the best related professionals to ensure your interests are protected. CHANGED 28 Aug 2026 |
+| 3 H2 | Off-market and pre-market. CHANGED 28 Aug 2026 |
+| 3 body | We see off-market, pre-market and are privy to information on on-market properties not available to anyone else. CHANGED 28 Aug 2026 |
+| 4 H2 | We provide industry leading research and analysis. CHANGED 28 Aug 2026 |
+| 4 body | To give you a high level of confidence. We assess and enlighten you of areas that will outperform the market for your budget and have experts within them. CHANGED 28 Aug 2026 |
 
-The whole band was rewritten by the client on 25 August 2026 and no longer
-tracks the template. Cards 1 and 2 carry a heading and no body: the four cards
-still render at a matched height because the media block sets it, so the two
-short cards do not collapse.
+The whole band was rewritten by the client on 25 August 2026, then rewritten
+again on 28 August 2026 in the Paper file, and no longer tracks the template.
+All four cards now carry a heading and a body, so the two headings that stood
+alone since 25 Aug are filled and the matched-height question is moot. Only
+card 1's heading survived the second pass. Read off the Paper artboard
+"INVESTOR · 1440 -- v2", where five comment threads on the truth frame mark
+the changes; three were copy and two were the card images.
 
-Card 3 says "the lowest possible price". The banned list holds "lowest price"
-as a contiguous string, which this does not contain, so it passes the checker.
-It is the client's wording and it sits close to a claim the register would
-otherwise gate. Worth raising before the page carries paid traffic.
+Three typographic corrections were made under DESIGN.md mechanics, none
+changing meaning: a missing space after "opportunities." in card 1 body, and
+"the best related progressions" to "professionals" in card 2 body, which the
+client's own 25 Aug copy had written as "professional". Card 4 body gained its
+terminal full stop.
+
+**Two wordings were applied exactly as supplied and both want a client pass.**
+Card 1 body reads "We will negotiate you the lowest best possible price": a
+double superlative, and "negotiate you" rather than "negotiate for you". It
+was left alone because unlike the corrections above it is a wording choice
+rather than an unambiguous error, and rewording client copy silently is not
+this file's habit. The banned list holds "lowest price" as a contiguous
+string, which this does not contain, so it passes the checker, but it sits
+close to a claim the register would otherwise gate.
+
+Card 3 body is now word for word identical to a paragraph already in the
+off-market band lower down the same page, so that sentence renders twice.
 
 ## stats band
 
@@ -294,13 +310,20 @@ register. No off-market percentage appears anywhere; that claim is gated.
 | What does a buyer's agent do for an investor? | Two paragraphs. First, NEW: We provide industry leading research and analysis - to give you a high level of confidence. We assess and enlighten you of areas that will outperform the market for your budget and have experts within them. Second, KEPT: We find the property, inspect it, tell you what it is worth, and negotiate or bid for you. You keep the decision. We do the work and carry the risk of getting it wrong. |
 | Do you work for me exclusively? | Some clients can purchase within 48 hours, others want to feel the market out first before making any decisions and we are here to support and guide you into finding the right property and giving you the confidence in a major financial decision. NEW |
 | Can you buy in a state I do not live in? | Yes. We have offices in Sydney, Melbourne, Brisbane and Adelaide, and we inspect in person so you do not have to fly. NEW |
-| How long does it usually take? | Most clients go from engagement to purchase in 30 to 60 days. A tight brief in a liquid market can be faster; a rare one takes as long as it takes to find the right property. KEPT |
+| How long does it usually take? | Every buyer moves at a different pace. / Some are ready to purchase within 48 hours, most land somewhere in the 30 to 60 day range, and a rare brief takes as long as it takes to find the right property. Our job is to guide you through it and give you confidence in a major financial decision. CHANGED 28 Aug 2026, the line break is authored and ships as a br |
 | What do you charge? | A full search is 1.5 to 2 percent of the purchase price. Appraise and negotiate, where you have already found the property, is 1 percent. NEW |
 
 The second question was replaced on 25 August 2026. As supplied, the question
 asks about exclusivity and the answer describes how long a purchase takes, so
 the pair does not currently meet. It is recorded here as given; both halves are
-the client's. Note also that dropping the old entry removed the page's only
+the client's. **This got worse on 28 August 2026**, not better: the client
+rewrote that same timing copy as the answer to "How long does it usually
+take?", where it belongs, and the Paper artboard shows it there. The
+exclusivity entry was left collapsed in the design, so it carries no
+instruction and its misplaced timing answer still stands. The page therefore
+now answers the timing question twice and the exclusivity question not at all.
+Fixing it needs a real exclusivity answer from the client rather than one
+invented here. Note also that dropping the old entry removed the page's only
 statement that no commission is taken from developers, which was the segment's
 independence claim. The fee answer uses the schedule cleared in the
 `DESIGN.md` claims register, unchanged.

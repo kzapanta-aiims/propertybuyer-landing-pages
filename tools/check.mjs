@@ -171,24 +171,26 @@ for (const { key, file, family } of pages) {
      line at --type-h3-card with no max width, and 42 is what fits on one line
      at 390.
 
-     The commercial page is over it on purpose. On 26 Aug 2026 the client
-     supplied a 78 character subhead naming who the agency acts for, and
-     overruled the budget rather than the copy. It wraps to two lines on
-     desktop and three at 390, so it costs vertical space in the hero; the
-     clipping, scroll and tap target checks below still pass at all four
-     widths, which is why this is a budget exception rather than a render bug.
-     Recorded as openDecisions.commercialClientCopyEdits.
+     The commercial, investor and developer pages are all over it on
+     purpose, each because the client supplied the subhead and overruled the
+     budget rather than the copy. Commercial took 78 on 26 Aug 2026, naming
+     who the agency acts for. Investor took 55 on 28 Aug 2026, naming who
+     the agency helps, set in sentence case rather than the title case
+     supplied because DESIGN.md bans title case outright; the words are
+     unchanged. Developer took 62 on 28 Aug 2026, rewritten in Paper to
+     "Due diligence does not just involve costings and realisations."
 
-     The developer page is over it on purpose too, for the same reason. On
-     28 Aug 2026 the client rewrote the subhead in Paper to a 62 character
-     line, "Due diligence does not just involve costings and realisations."
-     It wraps to two lines on desktop and three at 390, and the four render
-     checks still pass at all four widths. Recorded as
+     All three wrap to more than one line and cost vertical space in the
+     hero. The clipping, scroll, tap target and rhythm checks below still
+     pass at all four widths on each, which is what makes these budget
+     exceptions rather than render bugs. Recorded as
+     openDecisions.commercialClientCopyEdits,
+     openDecisions.investorClientCopyEdits28Aug and
      openDecisions.developerPaperEdits28Aug.
 
      A client overrule on one page is not a new house rule, so any page not
      named here still answers to 42. */
-  const subheadBudget = { commercial: 78, developer: 62 }[key] ?? 42;
+  const subheadBudget = { commercial: 78, investor: 55, developer: 62 }[key] ?? 42;
 
   subhead.length <= subheadBudget
     ? pass(`hero subhead ${subhead.length}/${subheadBudget}`)
@@ -201,7 +203,16 @@ for (const { key, file, family } of pages) {
       : fail(`${what} over ${max}: ${bad.map((t) => `${t.length} "${t}"`).join(' | ')}`);
   };
 
-  over(['h1', 'h2'].flatMap(between), 60, 'H1 and H2');
+  /* H1 and H2 were one 60 character gate until 28 Aug 2026. They are split
+     so the investor H1 can carry its own exception without also relaxing
+     that page's H2s, which all still answer to 60. On 28 Aug 2026 the client
+     was adamant on a 68 character H1 for the investor page. It is authored
+     with four explicit line breaks and its widest line, "investment
+     portfolio", is unchanged from the 59 character version, so it costs no
+     extra width at any of the four widths and the render checks below pass.
+     Recorded as openDecisions.investorClientCopyEdits28Aug. */
+  over(between('h1'), key === 'investor' ? 68 : 60, 'H1');
+  over(between('h2'), 60, 'H2');
   over(between('h3'), 32, 'card headings');
   over(buttons, 34, 'button labels');
   over(between('label class="micro"').concat(between('legend class="micro"')), 20, 'field labels');
