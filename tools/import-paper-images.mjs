@@ -109,6 +109,74 @@ const SLOTS = [
     crop: { left: 1142, top: 290, width: 906, height: 1075 }, node: 'D2U-0',
     asset: '01M0H7ZWSVSQF7JDWWRKMY51VJ.jpg' },
 
+  /* --- Developer page, from DEVELOPER v2, 28 Aug 2026. ------------------
+     Nine slots, all prefixed `developer-`, so the developer page holds its
+     own photographs beside the buyer and commercial sets in the same folder.
+     Truth cards 1 and 4 are not here: the design leaves them unchanged, so
+     they keep pointing at commercial-truth-1.webp and truth-card-4.webp.
+
+     The three story photographs ship unblurred. The blur and the dark wash
+     are a CSS treatment on the page, not baked into the file, so the same
+     source can be swapped to a clear crop by dropping one class. */
+
+  /* Story cards. 373x342 in CSS, so 2x is 746x684. */
+
+  /* Rect 395x395 at x=-11 y=-31.297 inside 373x342. Source 1024x1024, scale
+     2.5924. The crop is 967x887, past 2x, so it ships at the full 746x684. */
+  { out: 'developer-story-1.webp', src: 'dev-story-1.png', size: [746, 684],
+    crop: { left: 29, top: 81, width: 967, height: 887 }, node: 'LPZ-1',
+    asset: '01M132C8A6XKB5EE6GPVJRHGCN.png' },
+
+  /* Rect 396x397 centred in 373x342, so x=-11.5 y=-27.297. Source 1024x1024,
+     scale 2.5859. The crop is 964x884, past 2x. */
+  { out: 'developer-story-2.webp', src: 'dev-story-2.png', size: [746, 684],
+    crop: { left: 30, top: 71, width: 964, height: 884 }, node: 'LQ1-1',
+    asset: '01M132EQ90FV7RQ4EQSW8E8FKS.png' },
+
+  /* Rect 400x401 at x=-13.836 y=-29.297 inside 373x342. Source 1024x1024,
+     scale 2.56. The crop is 955x875, past 2x. */
+  { out: 'developer-story-3.webp', src: 'dev-story-3.png', size: [746, 684],
+    crop: { left: 35, top: 75, width: 955, height: 875 }, node: 'LQ4-1',
+    asset: '01M132T2T5BKVZMZ7GFVAR10K3.png' },
+
+  /* Truth cards 2, 3 and 5. 361x359 in CSS, so 2x is 722x718. */
+
+  /* Rect 364x365 at 0,0 inside 361x359, a three pixel overflow. Source
+     1024x1024, scale 2.8132. The crop is 1015x1009, past 2x. */
+  { out: 'developer-truth-2.webp', src: 'dev-truth-2.png', size: [722, 718],
+    crop: { left: 0, top: 0, width: 1015, height: 1009 }, node: 'LR0-1',
+    asset: '01M137TQ2PPENQ8JT2VCW6MRMJ.png' },
+
+  /* Rect 370x370 at 0,0 inside 361x359. Source 1024x1024, scale 2.7676.
+     The crop is 999x993, past 2x. */
+  { out: 'developer-truth-3.webp', src: 'dev-truth-3.png', size: [722, 718],
+    crop: { left: 0, top: 0, width: 999, height: 993 }, node: 'LQV-1',
+    asset: '01M137KZ7H4AZ2BYH2QM811S5V.png' },
+
+  /* Rect 628x420 at x=-66 y=-11.297 inside 361x359. Source 6045x4030, scale
+     9.6258 across and 9.5952 down. The crop is 3475x3445, far past 2x, so
+     this is the highest resolution source of the nine. */
+  { out: 'developer-truth-5.webp', src: 'dev-truth-5.jpg', size: [722, 718],
+    crop: { left: 635, top: 108, width: 3475, height: 3445 }, node: 'LQL-1',
+    asset: '01M137HJXDP6JGYYWEV0XZR5CC.jpg' },
+
+  /* Auction strip. 573x680 in CSS, so 2x is 1146x1360. All three sources are
+     short of 2x, so all three ship at their native crop size. */
+
+  /* Rect 679x680 at x=-53 y=0 inside 573x680, overflowing evenly either
+     side. Source 1024x1024, scale 1.5081 across and 1.5059 down. */
+  { out: 'developer-auction-1.webp', src: 'dev-auction-1.png', size: [864, 1024],
+    crop: { left: 80, top: 0, width: 864, height: 1024 }, node: 'LQY-1',
+    asset: '01M137S8Q3M6G73791MYT8BRZ5.png' },
+
+  /* Rect fills the frame exactly. Source 944x1120. */
+  { out: 'developer-auction-2.webp', src: 'dev-auction-2.png', size: [944, 1120],
+    node: 'LQX-1', asset: '01M137S1P4P6EYP779S1VBWA6C.png' },
+
+  /* Rect fills the frame exactly. Source 944x1120. */
+  { out: 'developer-auction-3.webp', src: 'dev-auction-3.png', size: [944, 1120],
+    node: 'LR1-1', asset: '01M137Q0VKFX5ADQTAAQXJPMQE.png' },
+
 ];
 
 if (!existsSync(OUT)) mkdirSync(OUT, { recursive: true });

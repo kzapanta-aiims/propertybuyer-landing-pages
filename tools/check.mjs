@@ -179,9 +179,16 @@ for (const { key, file, family } of pages) {
      widths, which is why this is a budget exception rather than a render bug.
      Recorded as openDecisions.commercialClientCopyEdits.
 
-     A client overrule on one page is not a new house rule, so the other three
-     pages still answer to 42. */
-  const subheadBudget = key === 'commercial' ? 78 : 42;
+     The developer page is over it on purpose too, for the same reason. On
+     28 Aug 2026 the client rewrote the subhead in Paper to a 62 character
+     line, "Due diligence does not just involve costings and realisations."
+     It wraps to two lines on desktop and three at 390, and the four render
+     checks still pass at all four widths. Recorded as
+     openDecisions.developerPaperEdits28Aug.
+
+     A client overrule on one page is not a new house rule, so any page not
+     named here still answers to 42. */
+  const subheadBudget = { commercial: 78, developer: 62 }[key] ?? 42;
 
   subhead.length <= subheadBudget
     ? pass(`hero subhead ${subhead.length}/${subheadBudget}`)
