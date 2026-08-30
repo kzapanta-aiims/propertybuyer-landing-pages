@@ -477,6 +477,14 @@
       "status": "OPEN, NEEDS THE CLIENT",
       "consequence": "npm run check developer reports one failure, \"banned language: unlock\". The page is otherwise clean. Either the client agrees a rewording, or \"unlock\" comes off the banned list the way \"journey\" did. Until one of those happens the developer page does not report all hard rules passing, and CLAUDE.md's claim that it does is behind.",
       "raised": "28 Aug 2026"
+    },
+    "developerAuctionPhoto31Aug": {
+      "problem": "Auction strip photo 3 on the developer page stood a couple in front of a site hoarding reading \"Premier Developments, building better communities\", an invented company name. The strip is not blurred, so it was legible at full size and read as a real developer's branding on a page selling development site acquisition. Raised on 28 Aug 2026 when the nine developer photographs went in.",
+      "decision": "APPLIED 31 Aug 2026. The client regenerated the artwork on the DEVELOPER v2 artboard without the hoarding, same couple and same site. Reimported through tools/import-paper-images.mjs rather than by hand, so the geometry stays recorded. Node LR1-1, asset 01M1AC13F2HDMAZVKFQHNDD79E.png.",
+      "status": "DONE, CLIENT SUPPLIED",
+      "consequence": "Nothing else moved. The rectangle still fills its 573x680 frame exactly at 944x1120, so this slot still carries no crop and still ships native at about 1.65x rather than 2x. The other 28 slots re-encode identical and are absent from the diff.",
+      "note": "One invented brand is still on the page. Auction photo 1 has \"Summit Construction\" on the hi-vis, which the client has not replaced. The three story-card photographs carry similar marks but are blurred in CSS, so nothing there is legible.",
+      "raised": "31 Aug 2026"
     }
   }
 }
