@@ -214,9 +214,13 @@ const SLOTS = [
   { out: 'developer-auction-2.webp', src: 'dev-auction-2.png', size: [944, 1120],
     node: 'LQX-1', asset: '01M137S1P4P6EYP779S1VBWA6C.png' },
 
-  /* Rect fills the frame exactly. Source 944x1120. */
-  { out: 'developer-auction-3.webp', src: 'dev-auction-3.png', size: [944, 1120],
-    node: 'LR1-1', asset: '01M137Q0VKFX5ADQTAAQXJPMQE.png' },
+  /* Rect fills the frame exactly. Source 944x1120.
+     Replaced 31 Aug 2026. The first artwork stood the couple in front of a
+     hoarding reading "Premier Developments", an invented company name that
+     read as real at full size on an unblurred strip. The client regenerated
+     it without the hoarding. Same rectangle, same source size, no crop. */
+  { out: 'developer-auction-3.webp', src: 'dev-auction-3-v2.png', size: [944, 1120],
+    node: 'LR1-1', asset: '01M1AC13F2HDMAZVKFQHNDD79E.png' },
 
 ];
 
