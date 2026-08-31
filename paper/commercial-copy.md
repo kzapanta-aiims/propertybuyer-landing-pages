@@ -130,6 +130,13 @@ deck rather than derived. Abbreviated figures are exact, never rounded:
 where a price does not abbreviate exactly it is written in full in the body
 and kept out of the stat row.
 
+**No copy changed on 31 Aug 2026, only the boxes it sits in.** The client
+raised that the three headings did not line up, BugHerd task 1, so each card's
+summary and stat list moved into the `.story-card__flow` wrapper the developer
+page already used. Heading tops and stat baselines now agree across the row.
+Nothing was rewritten and no count below moved. See
+`storyCardHeadingAlignment`.
+
 | String | Count / budget |
 |---|---|
 | H2: published client stories. KEPT | 24/60 |

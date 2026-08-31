@@ -271,10 +271,13 @@ silently discards a lead is worse than no form. Tracked in `HANDOVER.md`.
   brackets on the page itself and under `developerProofSlots` in
   `shared/segments.json`.
 
-  The developer story panels ship with **no photograph**, deliberately. A
-  different property's picture on a Tier 1 card is a false claim, so the panel
-  renders as a flat brand block, which is the same call recorded for the
-  investor page before its photographs arrived.
+  The developer story panels are now **photograph only**. They used to ship
+  with no photograph at all, on the grounds that a different property's
+  picture on a Tier 1 card is a false claim. Both halves of that have since
+  moved: the client supplied three real site photographs on 28 August 2026,
+  blurred in CSS under a Confidential badge, and on 31 August 2026 asked for
+  every card body to be removed, so the three panels now carry a picture and
+  no words. See `developerStoryCardsImageOnly`.
 
   The investor three came from "Legacy All Investor.pdf" on 21 August 2026 and
   give three states, which the commercial three could not. Their photographs

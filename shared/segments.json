@@ -457,11 +457,13 @@
     },
     "investorFaqExclusivityGap28Aug": {
       "problem": "The investor FAQ has asked \"Do you work for me exclusively?\" since 25 Aug 2026 and has never had an answer to it. The copy that sat there described how long a purchase takes. On 28 Aug 2026 the client rewrote that timing copy as the answer to \"How long does it usually take?\", where it belongs, which left the exclusivity question holding a duplicate of the timing answer and the page answering timing twice.",
-      "decision": "The wrong answer was REMOVED 28 Aug 2026 and the slot now ships as \"[Exclusivity answer needed from the client.]\", visibly unfilled under rule 2 rather than as plausible copy.",
-      "status": "OPEN, NEEDS THE CLIENT",
-      "consequence": "A visible bracket renders on a live page, which is ugly. It is the better of the two: what stood there answered a different question than the one asked, which misleads rather than merely looking unfinished. The checker retired its bracket rule on 18 Aug 2026 so this does not fail a run, and the brackets are tracked in README.md and HANDOVER.md alongside the three footer legal links.",
-      "alternative": "Answer it from the independence claim the page already makes, \"we act for buyers only, never for sellers\". REJECTED: that answers whether the agency ever acts for a seller, not whether it runs two buyers against each other on one property, which is what the question asks. Inventing the answer would be a Tier 1 claim written here rather than supplied, which rule 1 forbids.",
-      "raised": "28 Aug 2026"
+      "decision": "The wrong answer was REMOVED 28 Aug 2026 and the slot shipped as \"[Exclusivity answer needed from the client.]\", visibly unfilled under rule 2 rather than as plausible copy. CLOSED 31 Aug 2026: the client supplied the answer verbatim in BugHerd task 8, and it is on the page word for word. \"Yes. We act for buyers only, and have since 2001. We take no commission from sellers, developers or agents. You are the only person paying us, so you are the only person we answer to.\"",
+      "status": "DONE, CLIENT SUPPLIED",
+      "consequence": "The last bracket outside the footer is gone from the investor page. Three footer legal links remain bracketed across the family, tracked in README.md and HANDOVER.md.",
+      "alternative": "Answer it from the independence claim the page already makes, \"we act for buyers only, never for sellers\". REJECTED on 28 Aug: that answers whether the agency ever acts for a seller, not whether it runs two buyers against each other on one property, which is what the question asks. Inventing the answer would be a Tier 1 claim written here rather than supplied, which rule 1 forbids.",
+      "note": "The supplied answer takes the first reading, not the second: it settles who pays and who the agency answers to, and does not say whether two of the agency's own buyers can compete for one property. That is now the client's own wording on their own question, so it stands as supplied and is not reworded here. Worth one sentence back to them if a visitor is ever expected to read it the second way. Nothing about Australian buyers agent licensing was added: it is state by state, no source for it is in the register or in DESIGN.md, and rule 1 forbids writing one here.",
+      "raised": "28 Aug 2026",
+      "closed": "31 Aug 2026"
     },
     "developerPaperEdits28Aug": {
       "problem": "The client edited the DEVELOPER v2 artboard in Paper on 28 Aug 2026 and left fifteen comment threads on it marking where. The comments name the location, not the wording, so every change was read off the artboard itself and diffed against the built page. Two of the fifteen were already on the page from the 27 Aug round and needed nothing.",
@@ -484,6 +486,29 @@
       "status": "DONE, CLIENT SUPPLIED",
       "consequence": "Nothing else moved. The rectangle still fills its 573x680 frame exactly at 944x1120, so this slot still carries no crop and still ships native at about 1.65x rather than 2x. The other 28 slots re-encode identical and are absent from the diff.",
       "note": "One invented brand is still on the page. Auction photo 1 has \"Summit Construction\" on the hi-vis, which the client has not replaced. The three story-card photographs carry similar marks but are blurred in CSS, so nothing there is legible.",
+      "raised": "31 Aug 2026"
+    },
+    "storyCardHeadingAlignment": {
+      "problem": "On the commercial page the three story card headings did not line up. Card 1 sat about 26px below cards 2 and 3 at 1440, and the three stat rows did not share a baseline either. Raised by the client 31 Aug 2026, BugHerd task 1, with a screenshot.",
+      "decision": "APPLIED 31 Aug 2026, in markup only. The summary and the stat list on each commercial card are now wrapped in the .story-card__flow box the developer page has carried since 27 Aug. Nothing in landing.css changed except its comment.",
+      "status": "DONE",
+      "consequence": "The cause was .story-card__body being justify-content: space-between with the text block as its last child, so the whole block bottom-aligned and the card with the shortest text dropped its heading. Giving the text block the leftover height pins the heading under the pill and lets the flow box push the stats to the bottom, which fixes the headings and the stat baseline in one move.",
+      "note": "The buyer and investor pages still carry the plain arrangement and were not touched, because the client did not raise them and both happen to align on their current copy. That alignment is a coincidence of line counts, not a property of the layout: any copy edit that changes a summary by one line will pull a heading out of true again. Rolling the same wrap to those two pages is a markup-only change of the same shape.",
+      "raised": "31 Aug 2026"
+    },
+    "developerStoryCardsImageOnly": {
+      "problem": "The client asked for the whole .story-card__body to come off the three developer story cards, keeping only the image container and the confidentiality treatment. BugHerd task 3, 31 Aug 2026, screenshot pinned to the card body.",
+      "decision": "APPLIED 31 Aug 2026 as asked. The pill, the heading, the redacted summary and the stat list are gone from all three cards. The blurred photograph, the Confidential badge on it, and the .stories-notice pill above the row all stay.",
+      "status": "DONE, CLIENT DIRECTED",
+      "consequence": "Three Tier 1 proof points come off the developer page: the Sydney family home at $6.2M in 6 weeks, the Melbourne purchase at $4.2M, and the Sydney downsizer at $15M. The page keeps its photographs and its confidentiality claim and loses the figures. Every record is still in paper/proof-register.md and in paper/developer-copy.md, so restoring a card is a markup job and not a research one.",
+      "note": ".redacted and .story-stat[hidden] in landing.css now match nothing on any page, and .story-card__flow is left to the commercial page alone. All three are kept rather than deleted, the same call as .story-card__privacy, because these cards are a client decision that has already changed twice. See storyNameRedaction and developerStorySlot2Hidden, both of which this supersedes on the live page: the tape and the hidden second stat they describe are no longer rendered anywhere.",
+      "raised": "31 Aug 2026"
+    },
+    "bugherdAsAReviewChannel": {
+      "problem": "The 31 Aug round arrived on BugHerd, project 538511, not through the ?review=1 overlay this repository ships and not only through Paper comments. Nine tasks, from two people: three from AIIMS and six from the client directly.",
+      "decision": "Read and acted on tasks 1, 2 and 3, which is the scope that was asked for. Tasks 4 to 9 are NOT APPLIED and are recorded here so they are not lost. All six are on the developer page and all six are from the client directly. Task 4: add a full stop to \"...ensure we are hitting your metrics\" on a truth card. Task 5: add a full stop to \"Real access to quality land, medium-high density, and commercial subdivision\". Task 6: add a full stop to \"We will unlock the opportunities for maximum development potential\", which is also the banned-word line in developerBannedWordUnlock. Task 7: change the closer button from \"Request an off-market brief\" to \"Talk to our acquisitions team\", 27 characters against the 34 budget. Task 9: replace the service-appraise.webp image on the services band with a subdivision photograph the client attached to the task and also linked from Google Drive.",
+      "status": "OPEN, NEEDS A DECISION",
+      "consequence": "Three review channels are now live at once, the feedback hub, Paper comments and BugHerd, and only the first is described in CLAUDE.md. A round can be applied from one and left open in another, which is what happened here: the exclusivity answer sat OPEN in this log while the client had already supplied it in BugHerd task 8. Pick one channel of record, or write the merge rule down.",
       "raised": "31 Aug 2026"
     }
   }

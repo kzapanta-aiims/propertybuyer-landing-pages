@@ -293,7 +293,14 @@
 /* The summary and the purchase record share one box that takes the leftover
    height, so the figures sit on the same line across all three cards however
    long the summary runs. Without it a short summary floats its stats up and
-   the row reads as three unrelated cards. */
+   the row reads as three unrelated cards.
+
+   It fixes the headings too, which is why the commercial page adopted it on
+   31 Aug 2026. .story-card__body is space-between, so with no flow box the
+   whole text block bottom-aligns and the card with the shortest text hangs
+   its heading below the other two. Giving the text block the leftover height
+   pins the heading under the pill instead. Commercial only as at 31 Aug: the
+   buyer and investor pages still carry the plain arrangement. */
 .story-card__text:has(.story-card__flow) { flex: 1; }
 .story-card__flow {
   flex: 1;
@@ -342,7 +349,13 @@
    names. Transparent text keeps the name in the accessibility tree for a
    screen reader, which is the same exposure as the tape being lifted, so the
    name is also removed from selection. If the name must not reach the DOM at
-   all, it has to come out of the markup instead. See storyNameRedaction. */
+   all, it has to come out of the markup instead. See storyNameRedaction.
+
+   NOTE, 31 Aug 2026: .redacted and .story-stat[hidden] now match nothing on
+   any page. The client removed the developer card bodies, which were the only
+   markup using them. Both are kept rather than deleted, the same call as
+   .story-card__privacy above, because the cards are a client decision that
+   has already changed twice. .stories-notice is still live. */
 .stories-notice {
   max-width: 760px;
   margin: 0;
