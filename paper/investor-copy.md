@@ -308,7 +308,7 @@ register. No off-market percentage appears anywhere; that claim is gated.
 | Q | A |
 |---|---|
 | What does a buyer's agent do for an investor? | Two paragraphs. First, NEW: We provide industry leading research and analysis - to give you a high level of confidence. We assess and enlighten you of areas that will outperform the market for your budget and have experts within them. Second, KEPT: We find the property, inspect it, tell you what it is worth, and negotiate or bid for you. You keep the decision. We do the work and carry the risk of getting it wrong. |
-| Do you work for me exclusively? | **[Exclusivity answer needed from the client.]** The timing copy that stood here until 28 Aug 2026 answered a different question and moved to the timing entry below. Ships visibly unfilled under rule 2 rather than as plausible copy. See investorFaqExclusivityGap28Aug |
+| Do you work for me exclusively? | Yes. We act for buyers only, and have since 2001. We take no commission from sellers, developers or agents. You are the only person paying us, so you are the only person we answer to. SUPPLIED VERBATIM by the client 31 Aug 2026, BugHerd task 8, filling the bracket that stood here from 28 Aug. See investorFaqExclusivityGap28Aug |
 | Can you buy in a state I do not live in? | Yes. We have offices in Sydney, Melbourne, Brisbane and Adelaide, and we inspect in person so you do not have to fly. NEW |
 | How long does it usually take? | Every buyer moves at a different pace. / Some are ready to purchase within 48 hours, most land somewhere in the 30 to 60 day range, and a rare brief takes as long as it takes to find the right property. Our job is to guide you through it and give you confidence in a major financial decision. CHANGED 28 Aug 2026, the line break is authored and ships as a br |
 | What do you charge? | A full search is 1.5 to 2 percent of the purchase price. Appraise and negotiate, where you have already found the property, is 1 percent. NEW |
@@ -319,12 +319,20 @@ the pair does not currently meet. It is recorded here as given; both halves are
 the client's. It was **resolved as far as it can be on 28 August 2026**. The
 client rewrote that same timing copy as the answer to "How long does it
 usually take?", where it belongs, which briefly left the page answering timing
-twice. The duplicate has been removed and the exclusivity slot now ships as a
-visible bracket. It cannot be filled here: answering it from the independence
-claim the page already makes, "we act for buyers only, never for sellers",
-would answer whether the agency ever acts for a seller, not whether it runs
-two buyers against each other on one property, which is what was asked. Note also that dropping the old entry removed the page's only
-statement that no commission is taken from developers, which was the segment's
+twice. The duplicate was removed and the exclusivity slot shipped as a visible
+bracket for three days.
+
+**Filled 31 August 2026, by the client, verbatim.** BugHerd task 8 supplied
+the answer word for word and it is on the page unedited. It reads on the first
+of the two possible questions, who pays and who the agency answers to, and not
+on the second, whether two of the agency's own buyers can be run against each
+other on one property. That is the client answering their own question, so it
+stands as supplied. Nothing about buyers agent licensing was added around it:
+licensing is state by state, no source for it sits in the claims register, and
+rule 1 forbids writing one here.
+
+It also returns the statement that no commission is taken from developers,
+which dropping the old entry had removed and which is this segment's
 independence claim. The fee answer uses the schedule cleared in the
 `DESIGN.md` claims register, unchanged.
 

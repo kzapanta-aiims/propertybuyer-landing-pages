@@ -51,15 +51,27 @@ investor page under `investor-`. Any future page does the same.
 
 Pages sit two levels down, so every asset reference is `../../` relative.
 
-## Current state, 21 August 2026
+## Current state, 31 August 2026
 
 | Segment | Status | Blocked on |
 |---|---|---|
 | `home` | built, client-reviewed | nothing |
 | `commercial` | built, client-reviewed, merged | budget bands unconfirmed |
-| `investor` | **built, not yet reviewed** | budget bands unconfirmed |
-| `developer` | built, two client copy rounds applied | one check fails on "unlock", see `developerBannedWordUnlock`. Truth cards 4 and 5 repeat auction moves 1 and 2 word for word |
+| `investor` | built, client-reviewed | budget bands unconfirmed |
+| `developer` | built, three client copy rounds applied | one check fails on "unlock", see `developerBannedWordUnlock`. Truth cards 4 and 5 repeat auction moves 1 and 2 word for word. **Five BugHerd items open**, see below |
 | `prestige`, `expat` | no page, deliberately | chip only, see segments.json |
+
+**A third review channel is live, and a round arrived on it.** BugHerd
+project 538511 carried nine items on 31 Aug 2026, alongside the feedback hub
+and Paper comments. Three were applied that day: commercial story card
+heading alignment, the investor FAQ exclusivity answer, and the removal of
+every developer story card body. **Tasks 4 to 9 are on the developer page and
+are not applied**: three missing full stops, one closer button label, and one
+image swap. Each is written out in `bugherdAsAReviewChannel`. Read that entry
+before touching the developer page, and settle which channel is the record
+before the next round. One consequence already bit: the exclusivity answer
+sat OPEN in `segments.json` while the client had already supplied it on
+BugHerd.
 
 **Next step: a purchase date for three sites the client already publishes.**
 All four segment pages are now built. The developer page is the only one whose

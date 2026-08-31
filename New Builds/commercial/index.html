@@ -331,11 +331,18 @@
           <p class="pill pill--light">Owner occupier</p>
           <div class="story-card__text">
             <h3>Office <br>in Melbourne</h3>
-            <p>Geoff wanted premises of his own rather than another lease. We appraised a 952 sqm office at $4,172,548 and bought it for $3,908,748.</p>
-            <dl class="story-stats">
-              <div class="story-stat"><dt>Under appraisal</dt><dd>$263,800</dd></div>
-              <div class="story-stat"><dt>Floor area</dt><dd>952 sqm</dd></div>
-            </dl>
+            <!-- The summary and the purchase record share one .story-card__flow
+                 box, 31 Aug 2026. Without it .story-card__body space-between
+                 bottom-aligns the whole text block, so the card with the
+                 shortest summary drops its heading below the other two. See
+                 storyCardHeadingAlignment. -->
+            <div class="story-card__flow">
+              <p>Geoff wanted premises of his own rather than another lease. We appraised a 952 sqm office at $4,172,548 and bought it for $3,908,748.</p>
+              <dl class="story-stats">
+                <div class="story-stat"><dt>Under appraisal</dt><dd>$263,800</dd></div>
+                <div class="story-stat"><dt>Floor area</dt><dd>952 sqm</dd></div>
+              </dl>
+            </div>
           </div>
         </div>
       </article>
@@ -351,11 +358,13 @@
           <p class="pill pill--light">Investment</p>
           <div class="story-card__text">
             <h3>Warehouse <br>in Brisbane</h3>
-            <p>Jamie and Tamara wanted an industrial asset with a tenant already in place. We bought a 650 sqm warehouse returning $335,310 a year on a three year lease.</p>
-            <dl class="story-stats">
-              <div class="story-stat"><dt>Price</dt><dd>$5.55M</dd></div>
-              <div class="story-stat"><dt>Yield</dt><dd>6.0%</dd></div>
-            </dl>
+            <div class="story-card__flow">
+              <p>Jamie and Tamara wanted an industrial asset with a tenant already in place. We bought a 650 sqm warehouse returning $335,310 a year on a three year lease.</p>
+              <dl class="story-stats">
+                <div class="story-stat"><dt>Price</dt><dd>$5.55M</dd></div>
+                <div class="story-stat"><dt>Yield</dt><dd>6.0%</dd></div>
+              </dl>
+            </div>
           </div>
         </div>
       </article>
@@ -371,11 +380,13 @@
           <p class="pill pill--light">Investment</p>
           <div class="story-card__text">
             <h3>Office <br>in Sydney</h3>
-            <p>Stella was buying from overseas and never saw the building. We inspected it for her and secured a 431 sqm office let on a five plus five year lease.</p>
-            <dl class="story-stats">
-              <div class="story-stat"><dt>Price</dt><dd>$4.475M</dd></div>
-              <div class="story-stat"><dt>Yield</dt><dd>4.9%</dd></div>
-            </dl>
+            <div class="story-card__flow">
+              <p>Stella was buying from overseas and never saw the building. We inspected it for her and secured a 431 sqm office let on a five plus five year lease.</p>
+              <dl class="story-stats">
+                <div class="story-stat"><dt>Price</dt><dd>$4.475M</dd></div>
+                <div class="story-stat"><dt>Yield</dt><dd>4.9%</dd></div>
+              </dl>
+            </div>
           </div>
         </div>
       </article>

@@ -188,7 +188,20 @@ recorded as behind. Do not silently overwrite the DESIGN.md figure.
 **Changing these values after launch breaks HubSpot routing the same way the
 segment strings do.**
 
-## testimonials, FILLED 21 Aug 2026 from the home buyer deck
+## testimonials, FILLED 21 Aug 2026, THEN REMOVED FROM THE PAGE 31 Aug 2026
+
+> **None of the card copy below renders any more.** On 31 Aug 2026 the client
+> asked for the whole card body to come off all three developer story cards,
+> keeping only the image container, the Confidential badge on it and the
+> `.stories-notice` pill above the row. BugHerd task 3. The section is kept in
+> this deck rather than cut, because the records are sound and the decision is
+> the client's to reverse: putting a card back is a markup job, not a research
+> one. See `developerStoryCardsImageOnly`.
+>
+> One consequence to carry: the developer page now renders no Tier 1 figure at
+> all. `developerProofSlots` was already waiting on a purchase date for three
+> named sites; this removes the stand-in records that were holding those slots
+> in the meantime, so the band is photographs and a confidentiality claim.
 
 **At the client direction, for client review, after the concern below was
 raised and the instruction confirmed.** The three slots no longer ship
@@ -684,7 +697,9 @@ All nine ship under a `developer-` prefix, imported by
 `tools/import-paper-images.mjs`.
 
 - Story cards 1 to 3, blurred in CSS with a Confidential pill over each. The
-  blur is the point: it pairs with the confidentiality notice above the row
-  and the name redaction inside each card.
+  blur is the point: it pairs with the confidentiality notice above the row.
+  From 31 Aug 2026 these three photographs are the whole card, since the
+  client removed every card body. The name redaction they used to pair with
+  is gone with it.
 - Truth cards 2, 3 and 5. Cards 1 and 4 keep the images they had.
 - Auction strip, all three.
