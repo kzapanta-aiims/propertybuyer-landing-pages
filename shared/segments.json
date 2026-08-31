@@ -506,9 +506,33 @@
     },
     "bugherdAsAReviewChannel": {
       "problem": "The 31 Aug round arrived on BugHerd, project 538511, not through the ?review=1 overlay this repository ships and not only through Paper comments. Nine tasks, from two people: three from AIIMS and six from the client directly.",
-      "decision": "Read and acted on tasks 1, 2 and 3, which is the scope that was asked for. Tasks 4 to 9 are NOT APPLIED and are recorded here so they are not lost. All six are on the developer page and all six are from the client directly. Task 4: add a full stop to \"...ensure we are hitting your metrics\" on a truth card. Task 5: add a full stop to \"Real access to quality land, medium-high density, and commercial subdivision\". Task 6: add a full stop to \"We will unlock the opportunities for maximum development potential\", which is also the banned-word line in developerBannedWordUnlock. Task 7: change the closer button from \"Request an off-market brief\" to \"Talk to our acquisitions team\", 27 characters against the 34 budget. Task 9: replace the service-appraise.webp image on the services band with a subdivision photograph the client attached to the task and also linked from Google Drive.",
-      "status": "OPEN, NEEDS A DECISION",
+      "decision": "CLOSED 31 Aug 2026. Tasks 1, 2 and 3 went in first, then the user asked for the rest and tasks 4, 5, 6, 7 and 9 followed in a second commit the same day. Every item on the board is now applied. The original scope note is kept below because it records what each task asked for.",
+      "supersededNote": "Read and acted on tasks 1, 2 and 3, which is the scope that was asked for. Tasks 4 to 9 are NOT APPLIED and are recorded here so they are not lost. All six are on the developer page and all six are from the client directly. Task 4: add a full stop to \"...ensure we are hitting your metrics\" on a truth card. Task 5: add a full stop to \"Real access to quality land, medium-high density, and commercial subdivision\". Task 6: add a full stop to \"We will unlock the opportunities for maximum development potential\", which is also the banned-word line in developerBannedWordUnlock. Task 7: change the closer button from \"Request an off-market brief\" to \"Talk to our acquisitions team\", 27 characters against the 34 budget. Task 9: replace the service-appraise.webp image on the services band with a subdivision photograph the client attached to the task and also linked from Google Drive.",
+      "status": "DONE for this round, THE CHANNEL QUESTION IS STILL OPEN",
       "consequence": "Three review channels are now live at once, the feedback hub, Paper comments and BugHerd, and only the first is described in CLAUDE.md. A round can be applied from one and left open in another, which is what happened here: the exclusivity answer sat OPEN in this log while the client had already supplied it in BugHerd task 8. Pick one channel of record, or write the merge rule down.",
+      "raised": "31 Aug 2026"
+    },
+    "developerServiceImage31Aug": {
+      "problem": "BugHerd task 9 asked for the middle services card photograph on the developer page to be replaced with a subdivision aerial the client attached. The card is headed \"Subdivisions\" and was showing service-appraise.webp, a residential appraisal photograph inherited from the buyer template.",
+      "decision": "APPLIED 31 Aug 2026 as developer-service-appraise.webp, a NEW prefixed file. The page now points at the new name and service-appraise.webp is untouched.",
+      "status": "DONE, CLIENT SUPPLIED",
+      "consequence": "The prefix is the whole point and this one nearly went wrong. service-appraise.webp is referenced by the buyer AND investor pages as well as developer, so writing the client's photograph over that name would have put a subdivision aerial on two live client-reviewed pages as a silent side effect. This is exactly the shared-assets trap CLAUDE.md warns about, and it is the first time the shared name was in use by three pages rather than two.",
+      "note": "Not a Paper import, so it is absent from tools/import-paper-images.mjs and the crop is recorded here instead. Source is the BugHerd attachment at 5472x3648, cropped to 3402x3648 at x=1900 and resized to 746x800, quality 82. The crop is off centre on purpose: a plain centre crop cuts the cul-de-sac, which is the element that reads as a subdivision rather than as any road. The slot renders at most 373x400, so 746 is 2x, and a cap was added to tools/compress-images.mjs so a later run cannot resize it. The file is 116KB against about 50KB for its two neighbours, which is the aerial detail rather than the settings. The other two developer service cards still carry unprefixed buyer artwork, service-full-search.webp and service-auction.webp, and are shared the same way.",
+      "raised": "31 Aug 2026"
+    },
+    "developerFullStops31Aug": {
+      "problem": "The client asked for a full stop on three developer truth card lines that had none, BugHerd tasks 4, 5 and 6.",
+      "decision": "APPLIED 31 Aug 2026. One character on each of the three lines, nothing else reworded.",
+      "status": "DONE, CLIENT DIRECTED",
+      "consequence": "Task 6 is the \"unlock\" line. The full stop went on and the banned word was left exactly as supplied, so npm run check developer still fails on \"unlock\" and developerBannedWordUnlock is unchanged. Adding punctuation is not a licence to reword.",
+      "note": "The same claim appears twice on the page and the two copies still differ. The truth card now reads \"We will unlock the opportunities for maximum development potential.\" and auction move 1 reads \"We will unlock the opportunities maximum development potential.\", missing the word \"for\". Both are as supplied. The client marked only the truth card, so the auction line was left alone, but one of the two is ungrammatical and it is worth putting back to them.",
+      "raised": "31 Aug 2026"
+    },
+    "developerCloserLabel31Aug": {
+      "problem": "BugHerd task 7 asked for the closer button to read \"Talk to our acquisitions team\" instead of \"Request an off-market brief\".",
+      "decision": "APPLIED 31 Aug 2026. 28 characters against the 34 full-width budget, and it clears the banned CTA label list, both confirmed by npm run check.",
+      "status": "DONE, CLIENT DIRECTED",
+      "consequence": "The developer page is now the only one of the four whose closer button names a team rather than an action on a property. Nothing routes differently: the href is still #lead-form.",
       "raised": "31 Aug 2026"
     }
   }

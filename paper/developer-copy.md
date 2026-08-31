@@ -536,7 +536,7 @@ defensible; these are the four a developer recognises first.
 |---|---|
 | H2: Your side of the table is waiting. KEPT | 33/60 |
 | Body. KEPT verbatim | |
-| Button: Request an off-market brief. NEW, on the DESIGN.md cleared CTA list | 27/34 full width |
+| Button: Talk to our acquisitions team. CHANGED 31 Aug 2026, BugHerd task 7, from "Request an off-market brief" | 28/34 full width |
 | Note: Buyers only, since 2001. Your details stay private. KEPT | |
 
 ## Joint ventures, NOT IN THIS DECK, needs a decision
@@ -672,10 +672,10 @@ Card 1 is untouched. The rest are replaced.
 
 | Heading | Count | Body |
 |---|---|---|
-| Feasibility tailored to your circumstances. KEPT | 42/60 | KEPT: Every client works under different margins with different consultants and different goals, we will mould around your brief and ensure we are hitting your metrics |
+| Feasibility tailored to your circumstances. KEPT | 42/60 | KEPT: Every client works under different margins with different consultants and different goals, we will mould around your brief and ensure we are hitting your metrics. Full stop added 31 Aug 2026, BugHerd task 4 |
 | Our 25 years industry experience. NEW | 32/60 | MOVED from card 4: Our extensive history and experience with development sites will allow introductions where you need specialists to assist you with your development goals. |
-| Your consultants or ours. NEW | 24/60 | NEW: Real access to quality land, medium-high density, and commercial subdivision |
-| We look for highest and best use. NEW here | 32/60 | NEW here: We will unlock the opportunities for maximum development potential |
+| Your consultants or ours. NEW | 24/60 | NEW: Real access to quality land, medium-high density, and commercial subdivision. Full stop added 31 Aug 2026, BugHerd task 5 |
+| We look for highest and best use. NEW here | 32/60 | NEW here: We will unlock the opportunities for maximum development potential. Full stop added 31 Aug 2026, BugHerd task 6. The banned word is untouched, see developerBannedWordUnlock |
 | We access what others don't. NEW here | 27/60 | NEW here: An off-market sale has no campaign and no competing parties. It is a negotiation between two parties rather than a contest you are optimally positioned. |
 
 Two strings dropped out of the band: "We run the feasibility first" and

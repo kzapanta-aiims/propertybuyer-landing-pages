@@ -24,6 +24,14 @@ const CAPS = [
   [/^commercial-truth/, 722],
   [/^commercial-step/, 454],
   [/^commercial-service/, 746],
+  /* Same reasoning, developer page. This one did not come through Paper: the
+     client attached it to BugHerd task 9 on 31 Aug 2026 and it was cropped by
+     hand from 5472x3648 to the slot's 2x. The cap is here so a later run
+     cannot quietly resize it. The other developer- files match no pattern in
+     this list and fall to the 1440 default, which is larger than any of them,
+     so nothing resizes today. Worth capping properly if they are ever
+     re-exported bigger. */
+  [/^developer-service/, 746],
   [/^commercial-auction/, 1146],
   [/^auction-\d/, 1146],
   [/^truth-card/, 722],
