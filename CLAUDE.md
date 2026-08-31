@@ -58,20 +58,26 @@ Pages sit two levels down, so every asset reference is `../../` relative.
 | `home` | built, client-reviewed | nothing |
 | `commercial` | built, client-reviewed, merged | budget bands unconfirmed |
 | `investor` | built, client-reviewed | budget bands unconfirmed |
-| `developer` | built, three client copy rounds applied | one check fails on "unlock", see `developerBannedWordUnlock`. Truth cards 4 and 5 repeat auction moves 1 and 2 word for word. **Five BugHerd items open**, see below |
+| `developer` | built, four client copy rounds applied | one check fails on "unlock", see `developerBannedWordUnlock`. Truth cards 4 and 5 repeat auction moves 1 and 2, and the two copies of the "unlock" line now differ by one word |
 | `prestige`, `expat` | no page, deliberately | chip only, see segments.json |
 
-**A third review channel is live, and a round arrived on it.** BugHerd
+**A third review channel is live, and a whole round came through it.** BugHerd
 project 538511 carried nine items on 31 Aug 2026, alongside the feedback hub
-and Paper comments. Three were applied that day: commercial story card
-heading alignment, the investor FAQ exclusivity answer, and the removal of
-every developer story card body. **Tasks 4 to 9 are on the developer page and
-are not applied**: three missing full stops, one closer button label, and one
-image swap. Each is written out in `bugherdAsAReviewChannel`. Read that entry
-before touching the developer page, and settle which channel is the record
-before the next round. One consequence already bit: the exclusivity answer
-sat OPEN in `segments.json` while the client had already supplied it on
-BugHerd.
+and Paper comments. **All nine are applied**, in two commits that day. Settle
+which channel is the record before the next round: one consequence already
+bit, in that the investor exclusivity answer sat OPEN in `segments.json` for
+three days while the client had already supplied the wording on BugHerd. See
+`bugherdAsAReviewChannel`.
+
+**The unprefixed shared images are now in use by three pages, not two.**
+`service-appraise.webp` is referenced by `buyer`, `investor` AND `developer`.
+Replacing the developer page's copy on 31 Aug 2026 meant writing a new
+`developer-service-appraise.webp` rather than overwriting that name, which
+would have redecorated two live client-reviewed pages silently. Two more
+unprefixed files are still shared the same way on the developer services band,
+`service-full-search.webp` and `service-auction.webp`. Check `grep -rn` for a
+filename across all four pages before replacing any artwork. See
+`developerServiceImage31Aug`.
 
 **Next step: a purchase date for three sites the client already publishes.**
 All four segment pages are now built. The developer page is the only one whose
