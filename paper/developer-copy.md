@@ -664,7 +664,7 @@ Recorded in `shared/segments.json` as `developerPaperEdits28Aug`.
 | Hero subhead | Due diligence does not just involve costings and realisations. | 62/42, OVERRULED |
 | Hero body | Propertybuyer provides the full suite of due diligence and analysis to provide you with superior development acquisitions | body, no cap |
 | Stories sub | Genuine cases from our valued clients. | muted, was "Genuine words" |
-| Truth lede | It is not something left to chance. Do not risk a successful site acquisition | lede |
+| Truth lede | It is not something left to chance. Do not risk a successful site acquisition. | lede, full stop added 1 Sep 2026 |
 
 ### The truth band goes from four cards to five
 
@@ -675,19 +675,28 @@ Card 1 is untouched. The rest are replaced.
 | Feasibility tailored to your circumstances. KEPT | 42/60 | KEPT: Every client works under different margins with different consultants and different goals, we will mould around your brief and ensure we are hitting your metrics. Full stop added 31 Aug 2026, BugHerd task 4 |
 | Our 25 years industry experience. NEW | 32/60 | MOVED from card 4: Our extensive history and experience with development sites will allow introductions where you need specialists to assist you with your development goals. |
 | Your consultants or ours. NEW | 24/60 | NEW: Real access to quality land, medium-high density, and commercial subdivision. Full stop added 31 Aug 2026, BugHerd task 5 |
-| We look for highest and best use. NEW here | 32/60 | NEW here: We will unlock the opportunities for maximum development potential. Full stop added 31 Aug 2026, BugHerd task 6. The banned word is untouched, see developerBannedWordUnlock |
+| We look for highest and best use. NEW here | 32/60 | NEW here: We will unlock the opportunities for maximum development potential. Full stop added 31 Aug 2026, BugHerd task 6. Confirmed unchanged by the client 1 Sep 2026, and "unlock" came off the banned list the same day, see developerBannedWordUnlock |
 | We access what others don't. NEW here | 27/60 | NEW here: An off-market sale has no campaign and no competing parties. It is a negotiation between two parties rather than a contest you are optimally positioned. |
 
 Two strings dropped out of the band: "We run the feasibility first" and
 "We tell you what it is worth", both v2 cards.
 
-**Cards 4 and 5 repeat auction moves 1 and 2 word for word.** That is what
-the artboard shows, so it is what shipped, but it puts the same two claims
-twice on one page. Put it back to the client before sign-off.
+**Card 4 no longer repeats auction move 1.** It did, word for word, because
+that is what the artboard showed. The client differentiated the two on
+1 Sep 2026: the card keeps "We look for highest and best use" and the move
+becomes "We target highest and best use" over "We work out the maximum
+development potential of every site." See `developerHighestBestUse1Sep`.
 
-**"unlock" on card 4 is on the banned list.** The string is the client's and
-was left as supplied, so `npm run check developer` fails on it. See
-`developerBannedWordUnlock`.
+**Card 5 still repeats auction move 2**, and the two copies still differ by a
+word: the card ends "a contest you are optimally positioned" and the move ends
+"a contest you optimally positioned". Both are ungrammatical either way. The
+client fixed the first duplicate pair and did not mark this one. Put it back
+to them before sign-off.
+
+**"unlock" on card 4 is no longer banned.** The client directed on
+1 Sep 2026 that the word be kept and taken off the list, so it came out of the
+`tools/check.mjs` array and out of `DESIGN.md`. `npm run check developer`
+passes. See `developerBannedWordUnlock`.
 
 ### Photography, nine slots filled
 
@@ -703,3 +712,25 @@ All nine ship under a `developer-` prefix, imported by
   is gone with it.
 - Truth cards 2, 3 and 5. Cards 1 and 4 keep the images they had.
 - Auction strip, all three.
+
+## Version 6, the 1 September 2026 round
+
+Client supplied. Three items, and only the first is copy.
+
+| String | Count / budget | Change |
+|---|---|---|
+| Move 1 H3: We target highest and best use | 30/32 | Was "We look for highest and best use", which duplicated truth card 4 |
+| Move 1 body: We work out the maximum development potential of every site. | 57 | Was "We will unlock the opportunities maximum development potential.", which was missing the word "for" |
+| Truth lede: ...Do not risk a successful site acquisition. | lede | Full stop added |
+
+The duplicate pair is now differentiated rather than deleted, so both claims
+stay on the page and neither is the other's typo. "unlock" survives on truth
+card 4 only, and it is no longer a banned word.
+
+**The off-market band icons changed on all four paid pages, not just this
+one.** The gavel had been sitting on move 3 and the auction card had a raised
+hand. The gavel moved to move 4, the shield took move 3, and moves 1 and 2
+took new artwork: the ruler and the key here, the speech bubble and the people
+icon on buyer, commercial and investor. Move 1 had been rendering a glyph
+reading ".00", which was never an icon. See `auctionMoveIcons1Sep` for the
+colour decision and for what the new stroked artwork does to the band.

@@ -507,7 +507,9 @@ adjectives, Australian English, no em dashes.
 - "lowest price" anywhere. Substitute "right price".
 - "advocate" in headings and CTAs (fine in body).
 - discretion / anonymity / NDA outside prestige components.
-- unlock, elevate, seamless, journey, empower.
+- elevate, seamless, empower. "journey" came off this list on 25 Aug 2026 and
+  "unlock" on 1 Sep 2026, both at the client's direction. `tools/check.mjs`
+  holds the enforced list and is the record.
 - "in today's market", "now more than ever", any opener that delays the verb.
 - "we are passionate about", "we pride ourselves on", anything unfalsifiable.
 - "solutions" as a noun standing in for a service.

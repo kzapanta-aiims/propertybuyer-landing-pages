@@ -112,9 +112,10 @@ for (const { key, file, family } of pages) {
   }
 
   /* 'journey' came off this list on 25 Aug 2026 at the client's direction,
-     for the investor hero body. The rest stand. */
+     for the investor hero body. 'unlock' came off it on 1 Sep 2026 the same
+     way, for the developer truth card. The rest stand. */
   const banned = [
-    'lowest price', 'unlock', 'elevate', 'seamless', 'empower',
+    'lowest price', 'elevate', 'seamless', 'empower',
     "in today's market", 'now more than ever', 'passionate about',
     'pride ourselves', 'solutions', 'click here', 'find out more',
   ];
