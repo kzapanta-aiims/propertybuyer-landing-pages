@@ -675,7 +675,7 @@ Card 1 is untouched. The rest are replaced.
 | Feasibility tailored to your circumstances. KEPT | 42/60 | KEPT: Every client works under different margins with different consultants and different goals, we will mould around your brief and ensure we are hitting your metrics. Full stop added 31 Aug 2026, BugHerd task 4 |
 | Our 25 years industry experience. NEW | 32/60 | MOVED from card 4: Our extensive history and experience with development sites will allow introductions where you need specialists to assist you with your development goals. |
 | Your consultants or ours. NEW | 24/60 | NEW: Real access to quality land, medium-high density, and commercial subdivision. Full stop added 31 Aug 2026, BugHerd task 5 |
-| We look for highest and best use. NEW here | 32/60 | NEW here: We will unlock the opportunities for maximum development potential. Full stop added 31 Aug 2026, BugHerd task 6. Confirmed unchanged by the client 1 Sep 2026, and "unlock" came off the banned list the same day, see developerBannedWordUnlock |
+| We look for highest and best use. KEPT | 32/60 | REWRITTEN 1 Sep 2026: We work out what the planning controls actually permit, and what that yield is worth, before you commit. Was "We will unlock the opportunities for maximum development potential." This removed the last "unlock" on the page, see developerCardBodyRewrite1Sep |
 | We access what others don't. NEW here | 27/60 | NEW here: An off-market sale has no campaign and no competing parties. It is a negotiation between two parties rather than a contest you are optimally positioned. |
 
 Two strings dropped out of the band: "We run the feasibility first" and
@@ -693,10 +693,13 @@ word: the card ends "a contest you are optimally positioned" and the move ends
 client fixed the first duplicate pair and did not mark this one. Put it back
 to them before sign-off.
 
-**"unlock" on card 4 is no longer banned.** The client directed on
-1 Sep 2026 that the word be kept and taken off the list, so it came out of the
-`tools/check.mjs` array and out of `DESIGN.md`. `npm run check developer`
-passes. See `developerBannedWordUnlock`.
+**"unlock" is off the banned list, and is also off the page.** The client
+directed on 1 Sep 2026 that the word be kept and taken off the list, so it came
+out of the `tools/check.mjs` array and out of `DESIGN.md`. Later the same day
+they rewrote card 4's body for a different reason, and the rewrite happens not
+to use the word. The list is left loosened, because taking a word off was a
+client decision and putting it back is a separate one nobody has made. See
+`developerBannedWordUnlock` and `developerCardBodyRewrite1Sep`.
 
 ### Photography, nine slots filled
 

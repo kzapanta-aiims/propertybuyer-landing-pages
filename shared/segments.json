@@ -551,6 +551,14 @@
       "consequence": "The gavel path is the client's existing one taken off the live page, and the script asserted it still matched byte for byte before writing, so nothing about that icon changed. The five new icons are 24-unit stroked artwork against the old 40-unit filled artwork, so the band now mixes a stroke face with one fill. They render in a 40px box like the icons they replace, so no row geometry moved and the rendered checks still pass at 390, 768, 1100 and 1440.",
       "note": "The client supplied them on currentColor and said fill or currentColor were both fine. They are set to var(--text-heading) instead, because .move inherits body colour rather than heading colour, so currentColor would have shifted all six off the teal the old icons used. If the whole band is ever restyled, that is the one line to revisit.",
       "raised": "1 Sep 2026"
+    },
+    "developerCardBodyRewrite1Sep": {
+      "problem": "Truth card 4's body read \"We will unlock the opportunities for maximum development potential.\", which asserts an outcome without saying what the agency actually does to reach it. It also sat one band above auction move 1, which had just been rewritten to \"We work out the maximum development potential of every site.\", so the two were still circling the same sentence.",
+      "decision": "APPLIED 1 Sep 2026, client supplied, later the same day as developerHighestBestUse1Sep. The body becomes \"We work out what the planning controls actually permit, and what that yield is worth, before you commit.\" The heading is untouched and still reads \"We look for highest and best use\".",
+      "status": "DONE, CLIENT SUPPLIED",
+      "consequence": "The card now names the two things the agency checks rather than the outcome it promises, which moves it off an unfalsifiable claim. It runs to two lines in the 540px card against the previous one, and the card frame is fixed at 174px with room for it, so nothing reflowed: the developer artboard is still 11334.296875 tall in Paper and the rendered checks still pass at 390, 768, 1100 and 1440.",
+      "note": "This removed the last \"unlock\" on the page, hours after the word came off the banned list at the client's direction specifically so this card could keep it. The list is deliberately left loosened. Taking a word off was a client decision and putting it back is a separate decision nobody has made, and re-banning it silently would be the same quiet-delisting move that developerBannedWordUnlock exists to prevent. If the client wants it re-banned, that is one line in tools/check.mjs and one in DESIGN.md. Also worth watching: card 4 and auction move 1 now both open \"We work out\", which is a weaker duplication than the one just fixed but is still a repetition inside one page.",
+      "raised": "1 Sep 2026"
     }
   }
 }
