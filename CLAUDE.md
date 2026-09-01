@@ -58,7 +58,7 @@ Pages sit two levels down, so every asset reference is `../../` relative.
 | `home` | built, client-reviewed | nothing |
 | `commercial` | built, client-reviewed, merged | budget bands unconfirmed |
 | `investor` | built, client-reviewed | budget bands unconfirmed |
-| `developer` | built, four client copy rounds applied | one check fails on "unlock", see `developerBannedWordUnlock`. Truth cards 4 and 5 repeat auction moves 1 and 2, and the two copies of the "unlock" line now differ by one word |
+| `developer` | built, five client copy rounds applied, checks clean | truth card 5 still repeats auction move 2, and the two copies differ by one word. See `developerHighestBestUse1Sep` |
 | `prestige`, `expat` | no page, deliberately | chip only, see segments.json |
 
 **A third review channel is live, and a whole round came through it.** BugHerd
@@ -205,11 +205,14 @@ three cleared the POC items. The CSS rule and the `page.js` handler stay,
 because both are gated on `data-poc` and the buyer page still demos with them;
 they are inert wherever the attribute is gone.
 
-`developer` no longer reports "All hard rules pass": client copy applied on
-27 and 28 Aug 2026 put the banned word "unlock" on the page twice, and it is
-left as supplied rather than reworded or quietly delisted. A developer page
-that fails only that one line is otherwise passing. See
-`developerBannedWordUnlock`.
+`developer` reports "All hard rules pass" again as of 1 Sep 2026. It had
+failed on the banned word "unlock" since 27 Aug, and the client resolved it on
+1 Sep by directing that the word be kept and taken off the list, the same way
+"journey" left it on 25 Aug. **The enforced banned list is the array in
+`tools/check.mjs`, not the prose list in `DESIGN.md`.** DESIGN.md carried
+"journey" for fifteen days after it came off because that removal only touched
+the checker; both words are corrected now and DESIGN.md points at check.mjs.
+Take a word off in both places. See `developerBannedWordUnlock`.
 
 **The template is the page that keeps the scaffolding**, so any page derived
 from `New Builds/buyer/index.html` inherits all three items again. Strip them

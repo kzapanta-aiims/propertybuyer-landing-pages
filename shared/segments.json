@@ -475,9 +475,10 @@
     },
     "developerBannedWordUnlock": {
       "problem": "\"We will unlock the opportunities for maximum development potential\" uses \"unlock\", which is on the DESIGN.md banned list and in the tools/check.mjs banned array. It reached the page in the 27 Aug round on auction move 1, and the 28 Aug Paper round repeats it on truth card 4, so the page now fails that check on two occurrences rather than one.",
-      "decision": "NOT APPLIED. The copy is the client's and is left exactly as supplied. The banned list is not loosened either: \"journey\" came off that list on 25 Aug 2026 at the client's direction, which is the precedent for how a word leaves it, and no such direction exists for \"unlock\".",
-      "status": "OPEN, NEEDS THE CLIENT",
-      "consequence": "npm run check developer reports one failure, \"banned language: unlock\". The page is otherwise clean. Either the client agrees a rewording, or \"unlock\" comes off the banned list the way \"journey\" did. Until one of those happens the developer page does not report all hard rules passing, and CLAUDE.md's claim that it does is behind.",
+      "decision": "RESOLVED 1 Sep 2026, the second of the two ways this entry named. The client directed that \"unlock\" be kept and taken off the banned list, so it came off exactly the way \"journey\" did on 25 Aug 2026: removed from the tools/check.mjs banned array and from the DESIGN.md list, with a dated comment at both. The truth card keeps the word. The auction move copy was rewritten in the same round for a separate reason and no longer uses it, so \"unlock\" is now on the page once rather than twice.",
+      "status": "DONE, CLIENT DIRECTED",
+      "consequence": "npm run check developer reports all hard rules passing for the first time since 27 Aug 2026. The paid family returns a clean run again apart from the buyer page's three deliberate POC demo items. The banned list is now two words shorter than DESIGN.md described it, and DESIGN.md was corrected here rather than left behind, which the \"journey\" removal did not do.",
+      "note": "DESIGN.md still listed \"journey\" as banned fifteen days after it came off, because that removal only touched tools/check.mjs. Both are corrected now and DESIGN.md points at check.mjs as the enforced record, so the next removal has one obvious place to land.",
       "raised": "28 Aug 2026"
     },
     "developerAuctionPhoto31Aug": {
@@ -534,6 +535,22 @@
       "status": "DONE, CLIENT DIRECTED",
       "consequence": "The developer page is now the only one of the four whose closer button names a team rather than an action on a property. Nothing routes differently: the href is still #lead-form.",
       "raised": "31 Aug 2026"
+    },
+    "developerHighestBestUse1Sep": {
+      "problem": "The \"highest and best use\" claim ran twice on the developer page, on truth card 4 and on auction move 1, and the two copies differed: the move was missing the word \"for\". Raised as a note under developerPaperRound28Aug and again under developerFullStops31Aug, both times as something to put back to the client.",
+      "decision": "APPLIED 1 Sep 2026, client supplied, and it settles the duplication by differentiating the two rather than deleting either. Truth card 4 is unchanged and keeps \"We look for highest and best use\" over \"We will unlock the opportunities for maximum development potential.\" Auction move 1 becomes \"We target highest and best use\" over \"We work out the maximum development potential of every site.\" Same round: a full stop added after \"Do not risk a successful site acquisition\" on the developer truth lede, and the full stop removed from \"We buy property Australia wide\" on the investor truth title.",
+      "status": "DONE, CLIENT SUPPLIED",
+      "consequence": "The move heading is 30 characters and the body 57, both inside budget. The missing-word defect is gone, and so is the last use of \"unlock\" outside the truth card. The word survives on the page once, deliberately, which is why developerBannedWordUnlock resolved by loosening the list rather than by rewording.",
+      "note": "Truth card 5 and auction move 2 are still the same claim twice, \"We access what others don't\", and they still differ by a word: the card reads \"a contest you are optimally positioned\" and the move reads \"a contest you optimally positioned\". Both endings are ungrammatical either way. The client fixed the first of the two duplicate pairs in this round and did not mark the second, so it is still worth putting back to them.",
+      "raised": "1 Sep 2026"
+    },
+    "auctionMoveIcons1Sep": {
+      "problem": "The gavel sat on auction move 3, \"Your position stays yours\" on three pages and \"Don't be caught out\" on developer, and move 4 \"Auction ready when it counts\" showed a raised hand. The auction card was the one card on the band with no gavel. Move 1 rendered a glyph reading \".00\" with a small arrow, which is not an icon, and move 2 rendered a pair of glasses. Wrong on all four paid pages.",
+      "decision": "APPLIED 1 Sep 2026 from a client icon supply naming the card for each icon. The gavel moves to move 4 and the shield takes the slot it leaves, on all four pages. Move 1 takes the speech bubble on buyer, commercial and investor, and the ruler on developer. Move 2 takes the people icon on the first three and the key on developer. Sixteen icons in total, swapped by a script keyed on the card heading so no card could pick up the wrong one.",
+      "status": "DONE, CLIENT SUPPLIED",
+      "consequence": "The gavel path is the client's existing one taken off the live page, and the script asserted it still matched byte for byte before writing, so nothing about that icon changed. The five new icons are 24-unit stroked artwork against the old 40-unit filled artwork, so the band now mixes a stroke face with one fill. They render in a 40px box like the icons they replace, so no row geometry moved and the rendered checks still pass at 390, 768, 1100 and 1440.",
+      "note": "The client supplied them on currentColor and said fill or currentColor were both fine. They are set to var(--text-heading) instead, because .move inherits body colour rather than heading colour, so currentColor would have shifted all six off the teal the old icons used. If the whole band is ever restyled, that is the one line to revisit.",
+      "raised": "1 Sep 2026"
     }
   }
 }
