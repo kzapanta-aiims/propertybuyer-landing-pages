@@ -10,7 +10,11 @@
    loaded before this file. Declares no tokens and holds no raw colour
    values. npm run check fails a raw hex anywhere in here.
 
-   FIRST BUILT 21 August 2026, with locations/melbourne/index.html. The
+   FIRST BUILT 21 August 2026, with the Melbourne page now archived at
+   locations/_archive/melbourne-2026-08-21/. This layer was NOT archived with
+   it: the composition it describes is the part under review, but the tokens,
+   the class vocabulary and the shared furniture all carry into the rebuild.
+   Read locations/PLAN.md section 3 before extending it. The
    family takes its own layout, decided by the design lead: what carries
    over from the paid pages is the design language, the tokens, the two
    faces and the shared furniture in base.css, not the page composition.
@@ -22,7 +26,7 @@
    where the search copy lives. Brand teal appears exactly three times, on
    the hero, the team band and the closing capture, so the three conversion
    moments are also the three loudest. The rationale and the research are in
-   locations/STRATEGY.md.
+   locations/_archive/STRATEGY.md.
 
    Class vocabulary is loc- prefixed throughout, so this layer can never be
    confused with landing.css, which is never loaded with it. Pixel values
@@ -352,7 +356,8 @@
    is needed, and the brief for each slot is written inside the slot. Every
    ratio below is fixed, so filling a slot cannot reflow the page.
 
-   The dimensions each slot wants are listed in locations/melbourne/COPY.md
+   The dimensions each slot wants are listed in
+   locations/_archive/melbourne-2026-08-21/COPY.md
    under "Photography". Ask for them in one request rather than six. */
 
 .loc-figure {

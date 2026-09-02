@@ -35,8 +35,8 @@ paper/commercial-copy.md copy deck, commercial
 paper/investor-copy.md   copy deck, investor
 paper/developer-copy.md  copy deck, developer
 tools/check.mjs          the acceptance checklist, both families
-locations/melbourne/index.html the first location page, built 21 Aug 2026
-locations/STRATEGY.md    the location family's structure argument
+locations/PLAN.md        the rules layer, the location family. Read it first
+locations/_archive/      the 21 Aug 2026 location work, and why it was replaced
 shared/locations.json    the location registry and its decision log
 tools/import-paper-images.mjs  Paper artwork in, with the crop geometry
 tools/extract-deck-images.mjs  story photographs out of the client decks
@@ -140,11 +140,29 @@ or declares a `:root` block outside `tokens.css`.
 **The location pages are a second family, and they take their own layout.**
 `locations/`, organic search, shipped in HubSpot rather than on Vercel. They
 share the design language and the context, not the page structure, so
-`landing.css` is not their starting point. Melbourne is built and is that
-family's template. Its capture contract inverts the paid pages, and the
-checker enforces it: forms carry `data-location`, never `data-segment`, no
-chip is pre-selected and the segment group is required. See
-`locations/BRIEF.md` and `shared/locations.json`.
+`landing.css` is not their starting point. Their capture contract inverts the
+paid pages, and the checker enforces it: forms carry `data-location`, never
+`data-segment`, no chip is pre-selected and the segment group is required.
+
+**That family was reset on 2 Sep 2026, and `locations/PLAN.md` is now its
+rules layer.** Read it before touching anything under `locations/`. It
+supersedes `STRATEGY.md`, `REFERENCE.md` and `BRIEF.md`, which are in
+`locations/_archive/` alongside the Melbourne page built 21 Aug 2026. The
+reset is not a rework of bad work: the page passed every hard rule. It was
+composed from the live Brisbane page on the assumption that Brisbane's
+structure is why Brisbane ranks, and `/location/melbourne` and
+`/location/adelaide` turn out to run that same template with different
+outcomes, so the assumption does not hold. Three things carry forward: the
+capture contract above, the two audited Melbourne proof records, and the
+checker rules. See `templateNotFormula` in `shared/locations.json`.
+
+**Two of the three location URLs already exist, so those two are
+replacements of ranking pages rather than new pages.** Melbourne and
+Adelaide are live; Perth is the only new URL. Before writing copy for a page
+that exists, carry every content signal off the live page or record why it
+was dropped. That rule is `replacementInventory` in `shared/locations.json`
+and the inventory itself is `PLAN.md` section 2. Dropping a signal quietly is
+the one way this work goes backwards.
 
 **The header, the footer and the lead capture component live in base.css**
 since 21 Aug 2026, promoted from landing.css when the location family needed

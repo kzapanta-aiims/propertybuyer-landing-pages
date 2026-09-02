@@ -23,3 +23,10 @@ CRO/
 # (/client-review pull). Working material for acting on a round; the threads
 # themselves live in the feedback hub, so nothing here needs keeping.
 .feedback/
+
+# Analytics exports and saved live HTML for the location pages, read by
+# tools/extract-live-inventory.mjs and by locations/PLAN.md phase 0. Inputs
+# rather than source: the GSC, Semrush and Ahrefs exports carry client
+# performance figures, and the saved pages are copies of the client's own
+# live site. The generated inventory JSON is derived from them.
+locations/data/

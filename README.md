@@ -15,7 +15,7 @@ the bottom of this section is a requirement and not a preference: the developer
 receiving them works in HubSpot templates, in plain HTML, CSS and JavaScript.
 
 They are separate directories with separate design layers and separate
-registries. They are not separate repositories: see `locations/BRIEF.md` for
+registries. They are not separate repositories: see `locations/PLAN.md` for
 why, and `shared/segments.json` under `openDecisions.cssLayerSplit` for what
 that costs and what it buys.
 
@@ -64,7 +64,7 @@ New Builds/commercial/index.html   built 20 Aug 2026 from that template
 New Builds/investor/index.html     built 21 Aug 2026 from that template
 New Builds/developer/index.html    built 21 Aug 2026 from that template
 
-locations/BRIEF.md                 the location pages, nothing built yet
+locations/PLAN.md                  the location pages, the rules layer
 locations/README.md                the shape they take when they are
 
 shared/segments.json     the segment list, single source of truth
