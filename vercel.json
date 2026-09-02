@@ -8,12 +8,15 @@
     { "source": "/buyer", "destination": "/New Builds/buyer/index.html" },
     { "source": "/commercial", "destination": "/New Builds/commercial/index.html" },
     { "source": "/investor", "destination": "/New Builds/investor/index.html" },
-    { "source": "/developer", "destination": "/New Builds/developer/index.html" },
-    { "source": "/melbourne", "destination": "/locations/melbourne/index.html" }
+    { "source": "/developer", "destination": "/New Builds/developer/index.html" }
   ],
   "headers": [
     {
       "source": "/((?!locations).*)",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    },
+    {
+      "source": "/locations/_archive/(.*)",
       "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
     },
     {
