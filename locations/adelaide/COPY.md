@@ -276,10 +276,16 @@ Barossa Valley", matching its own region card. "The Hills" to "the Adelaide
 Hills" in FAQ 6. "Mixed use" to "mixed-use property" in the commercial block.
 A redundant "in Adelaide" in the expat block.
 
-**Left alone, and why.** Three strings on this page are inherited furniture
-from the client-approved Melbourne artboard and carry the same faults there.
-Changing them here alone would desync the family, so they are listed for
-Melbourne in the flags below rather than fixed.
+**Extended to Melbourne the same day.** The inherited furniture was corrected
+across all three artboards rather than left to desync: the award band subhead,
+which read "Australia's most awarded buyer agents" with no apostrophe at all,
+the five agent card titles, which now read "Buyers' Advocate" as the client's
+own site writes them, and the FAQ intro, which said "questions" three times in
+two sentences. Melbourne also took the six plural-possessive and two
+hyphenation corrections listed above, a comma splice in its FAQ 10 answer, and
+its Geelong region card moved from "Draft only (confirm if this is serviced)"
+to square brackets, which is the repository's convention for an unfilled
+value. All three location artboards now read the same way.
 
 ## Flags
 
@@ -289,13 +295,8 @@ Melbourne in the flags below rather than fixed.
 - `[Tracked SA number]`, `[Monday to Friday, hours]`, market figures, four
   testimonials, inner south suburbs, Hills towns: client supply items.
 - Whether the national agent cards stay or the section becomes single agent.
-- **Three inherited strings need the same correction on the client-approved
-  Melbourne artboard, and were left alone here to keep the family in sync.**
-  The award band subhead reads "Australia's most awarded buyer agents" with no
-  apostrophe at all, and it is furniture shared with the paid segment pages.
-  The six agent card titles read "Principal Buyer's Advocate" where the client
-  site writes "Buyers' Advocate", including Jonathon Moore's own title. The
-  FAQ intro repeats "questions" three times in two sentences. Melbourne also
-  carries the plural possessive and hyphenation faults corrected above, in the
-  same six and two places. Fixing Melbourne is a text-only pass with no layout
-  risk, and it should happen before the client sees Adelaide beside it.
+- **The award band subhead is furniture shared with the four paid segment
+  pages, and only the three location artboards were corrected.** It now reads
+  "Australia's most awarded buyers' agents" here, on Melbourne and on Perth,
+  and still reads "buyer agents" wherever else it appears. Worth a sweep of
+  `New Builds/` before the next paid round.

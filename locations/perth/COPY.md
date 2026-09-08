@@ -190,9 +190,27 @@ changed here:
   the Adelaide proof cards, so the sentence leads and the input follows.
 - **The testimonials H2** was the only Zone B heading not in query form.
 
+## The team section came back once, and was removed again
+
+On 8 September 2026, during the language pass, the deleted team section
+reappeared on this artboard as a verbatim copy of the Adelaide one, new node
+IDs and all. It carried the heading "Your Adelaide buyers' agents" and named
+Jonathon Moore covering "Adelaide and regional SA", on the Perth page. Its
+card titles still held the pre-pass singular possessive, which dates the copy
+to a few minutes earlier in that same session.
+
+How it got there is not established. It was not a Paper call made from this
+session, so it was either a stray paste in the editor or a client resync.
+
+It was deleted again and the artboard verified clean: the only remaining
+mentions of Adelaide on this page are the sibling location list and the
+sitewide footer, both correct. **Check this section is still absent before
+sending Perth to the client.** A page with no local presence that shows seven
+agents, five of them in other states under an Adelaide heading, is the exact
+failure `perthHasNoLocalPresence` exists to prevent.
+
 ## Flags
 
 Everything in `BLOCKED.md`, plus: the six regions are a proposal, and the two
 remaining "[nearest office]" brackets should be filled once the client names
-the office. The inherited-furniture items listed at the end of
-`../adelaide/COPY.md` apply to this page too.
+the office.

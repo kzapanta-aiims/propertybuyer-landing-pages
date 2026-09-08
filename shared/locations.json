@@ -46,6 +46,7 @@
       "office": "yes, named in the client supplied office list",
       "proof": "Two of three filled and audited clean. Geoff, Melbourne office, May 2025, $3,908,748 against a $4,172,548 appraisal, commercial deck p.7, and absent from the investor deck. Wendy, 2024, $1,175,000 on a 5.0 percent initial yield, $1,400,000 in 2026, $225,000 equity created, investor deck p37, figures verified against that deck directly. THE THIRD SLOT IS BLOCKED ON THE CLIENT: both Melbourne home buyer candidates are re-narrated in the investor deck as investments, one with identical figures. See openDecisions.melbourneThirdProofContested.",
       "note": "The template for the family, and the honest test of it. Its bracketed slots and their owners are numbered in locations/PLAN.md section 8.",
+      "paper": "Artboard 'MELBOURNE · 1440' in the Paper file 'Location Pages - Adelaide, Perth, Melbourne'. Client-approved, and edited once since approval: the 8 Sep 2026 language pass changed seventeen strings, all grammar, punctuation or bracket convention, no claim, figure, name or layout. See openDecisions.melbourneLanguagePass. There is no Melbourne COPY.md yet, so when phase 2 writes one it must be written from the corrected artboard.",
       "archived": "locations/_archive/melbourne-2026-08-21/, archived 2 Sep 2026. Built 21 Aug 2026 and passing every hard rule, but composed from the live Brisbane page on the assumption that Brisbane structure is why Brisbane ranks. PLAN.md section 0 retired that assumption. See openDecisions.templateNotFormula, and the README in that folder for the three things that carry forward."
     },
     {
@@ -227,11 +228,19 @@
       "consequence": "A Paper set_text_content call can echo the value it was given without the node taking it. Verify a heading rewrite by reading it back, not by the tool response. This is the second design-side check that has to be a read-back rather than a trust.",
       "raised": "8 Sep 2026"
     },
-    "melbourneNeedsTheSameLanguagePass": {
-      "problem": "The client-approved Melbourne artboard carries the same plural-possessive and hyphenation faults that were corrected on Adelaide and Perth, plus three of its own: the award band subhead 'Australia's most awarded buyer agents' with no apostrophe, six agent card titles reading 'Buyer's Advocate' where the client site writes 'Buyers' Advocate', and an FAQ intro that says 'questions' three times in two sentences.",
-      "decision": "Not fixed on Melbourne in this pass. It is client-approved work and it was not in scope, and fixing two of three pages was the choice that leaves the pages that ship next correct rather than consistently wrong.",
-      "status": "OPEN, RECOMMEND FIXING BEFORE THE CLIENT SEES THE THREE SIDE BY SIDE. Owner Kenn",
-      "consequence": "Until it is done the three location artboards disagree on the possessive, which is visible if they are reviewed together. It is a text-only pass with no layout risk: six plural-possessive strings and two hyphenation strings, matching the Adelaide list. The award band subhead is furniture shared with the four paid segment pages, so that one is a family-wide change rather than a Melbourne one.",
+    "melbourneLanguagePass": {
+      "problem": "The client-approved Melbourne artboard carried the same plural-possessive and hyphenation faults corrected on Adelaide and Perth, plus four of its own: the award band subhead 'Australia's most awarded buyer agents' with no apostrophe, five agent card titles reading 'Principal Buyer's Advocate' where the client site writes 'Buyers' Advocate', an FAQ intro saying 'questions' three times in two sentences, and a comma splice in the FAQ 10 answer.",
+      "decision": "Fixed on Melbourne 8 Sep 2026 at the client lead's direction, so all three location artboards read the same way. Seventeen strings changed, text only, no layout change. The Geelong region card also moved from 'Draft only (confirm if this is serviced)' to square brackets, matching the repository convention that an unfilled value is visibly bracketed.",
+      "status": "RESOLVED 8 Sep 2026",
+      "consequence": "Melbourne is client-approved work and was edited after approval. Every change is a correction of grammar, punctuation or an established repository convention, and none alters a claim, a figure, a name or a layout. The Melbourne copy deck is still a phase 2 job that has not been written, so there is no deck to keep in step; when it is written it must be written from the corrected artboard.",
+      "outOfScope": "The award band subhead is furniture shared with the four paid segment pages. Only the three location artboards were corrected, so 'buyer agents' still stands wherever else it appears. Sweep New Builds/ before the next paid round.",
+      "raised": "8 Sep 2026"
+    },
+    "perthTeamSectionReappeared": {
+      "problem": "During the 8 Sep 2026 language pass the Perth team section, deleted earlier the same day, was found back on the artboard with new node IDs. It was a verbatim copy of the Adelaide team section: the heading read 'Your Adelaide buyers' agents' and Jonathon Moore was shown covering 'Adelaide and regional SA', on the Perth page. Its card titles still carried the pre-pass singular possessive, dating the copy to minutes earlier in the same session.",
+      "decision": "Deleted again, and the artboard verified clean.",
+      "status": "RESOLVED 8 Sep 2026, CAUSE NOT ESTABLISHED",
+      "consequence": "No Paper call from this session created it, so it was either a stray paste in the editor or a client resync. Verify the section is absent before Perth goes to the client. Seven agents, five of them in other states under an Adelaide heading, on a page whose whole argument is that there is no local presence, is the exact failure perthHasNoLocalPresence exists to prevent. More generally: a deletion in this file is worth re-checking at the end of a session, the same way a heading rewrite is worth reading back per languagePass8Sep.",
       "raised": "8 Sep 2026"
     },
     "adelaideRatingUnverified": {

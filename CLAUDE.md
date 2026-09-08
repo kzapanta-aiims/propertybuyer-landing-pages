@@ -179,6 +179,17 @@ not as an oddity. Run the cross deck check before selecting any record, from
 any deck. See `adelaideProofFramingContested` in `shared/locations.json` and
 `paper/decks/README.md`.
 
+**All three location artboards took a language pass on 8 Sep 2026, Melbourne
+included.** The rules are written down in `locations/adelaide/COPY.md` under
+"Language pass" and they are the standard for this family: full stops on every
+sentence of body copy and none on fragments, "a buyer's agent" singular
+against "buyers' agents" plural, and "off-market" hyphenated only before a
+noun. Melbourne was client-approved and was still corrected, because two of
+three pages reading correctly and one not is worse than editing approved work
+for grammar. **The award band subhead is furniture shared with the four paid
+segment pages and still reads "most awarded buyer agents" there**, so sweep
+`New Builds/` before the next paid round. See `melbourneLanguagePass`.
+
 **The header, the footer and the lead capture component live in base.css**
 since 21 Aug 2026, promoted from landing.css when the location family needed
 them. They land on every page in both families; treat a change to them like
