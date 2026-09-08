@@ -6,11 +6,24 @@ least one Perth purchase. Neither is recorded, so the HTML page is not built.
 
 ## What was checked
 
-- **All five client decks, page by page**, now committed in `paper/decks/`:
-  Legacy Homebuyer (80 pages), Legacy Investor (80), July 2026 Homebuyers
-  (88), July 2026 Investors (89), Commercial (14). Cities covered: Sydney,
-  Melbourne, Brisbane, Adelaide, Gold Coast, regional NSW, VIC, QLD and SA,
-  and one Hobart record. **Zero Perth or Western Australian records.**
+- **All five client decks**, now committed in `paper/decks/`: Legacy
+  Homebuyer (80 pages), Legacy Investor (80), July 2026 Homebuyers (88), July
+  2026 Investors (89), Commercial (14). Cities covered: Sydney, Melbourne,
+  Brisbane, Adelaide, Gold Coast, regional NSW, VIC, QLD and SA, and one
+  Hobart record. **Zero Perth or Western Australian records.**
+
+  Checked twice, 8 Sep 2026: once by reading every page header, then again by
+  text search across all five files for three patterns. `P E R T H` catches
+  the letter-spaced city header, `, W A` catches the state code and so would
+  find a record headed "Regional, WA" as well, and `Perth` catches any
+  mention in the backstory prose. Fifteen searches, zero matches.
+
+  Two controls prove a zero is a real zero rather than a failed search:
+  `A D E L A I D E` returns two hits in the Legacy homebuyer deck and
+  `H O B A R T` returns one in the July investor deck. The Adelaide control
+  also explains why it is two and not five: three of the five South
+  Australian records are headed "Regional, SA", so Karl and Peter are the
+  only two in Adelaide proper.
 - **The client's team page**, `propertybuyer.com.au/about/our-team`. Every
   person is placed in NSW, VIC, QLD or SA, or "Australia-wide". Nobody is
   placed in Perth or WA. **This reading was wrong, corrected 8 Sep 2026 by

@@ -20,9 +20,12 @@ names are copied as printed.
 
 ## Three things to know before selecting a record
 
-**No deck holds a Perth record.** Zero across all five, checked page by page
-on 8 September 2026. This is the finding that keeps
-`locations/perth/BLOCKED.md` in place.
+**No deck holds a Perth record.** Zero across all five, checked twice on
+8 September 2026: every page header read, then fifteen text searches across
+the five files for `P E R T H`, `, W A` and `Perth`, with `A D E L A I D E`
+and `H O B A R T` as controls to prove the search finds what is there. This is
+the finding that keeps `locations/perth/BLOCKED.md` in place, and it is the
+one Perth blocker no repository work can clear.
 
 **The July 2026 decks hold no Adelaide records either.** Only the two Legacy
 decks do, five each, and they are the same five purchases. So the Adelaide
