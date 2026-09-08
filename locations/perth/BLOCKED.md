@@ -13,7 +13,12 @@ least one Perth purchase. Neither is recorded, so the HTML page is not built.
   and one Hobart record. **Zero Perth or Western Australian records.**
 - **The client's team page**, `propertybuyer.com.au/about/our-team`. Every
   person is placed in NSW, VIC, QLD or SA, or "Australia-wide". Nobody is
-  placed in Perth or WA.
+  placed in Perth or WA. **This reading was wrong, corrected 8 Sep 2026 by
+  the client lead: Propertybuyer has agents for each location, Perth
+  included. They are simply not on the public page, or not placed there.
+  The Perth page keeps its team section. See `perthHasATeamSection` in
+  `shared/locations.json`.** What is still needed is their names, which is
+  item 1 below.
 - **The client's office list**, recorded in `paper/commercial-copy.md` and
   `paper/investor-copy.md` and repeated in the site footer: Sydney, Bondi
   Junction, Forestville, Erina, Newcastle, Prahran, Brisbane, Surfers
@@ -23,17 +28,22 @@ least one Perth purchase. Neither is recorded, so the HTML page is not built.
 
 ## What unblocks it
 
-1. **A named agent who has bought in Perth**, with their profile URL on the
-   client site. Fills the third "How we buy in Perth" card, the FAQ answer
-   and the `[named agent]` bracket.
+1. **The Perth agents, by name.** Titles, the areas each covers, the one
+   credential line per card, and photographs. The team section is on the
+   artboard but still carries the Adelaide names it was copied from. This
+   also fills the third "How we buy in Perth" card, the FAQ answer and the
+   `[named agent]` bracket.
 2. **One Perth purchase** with a month, year, price and client first name,
-   in the same shape as the decks. Fills the card's stats.
-3. **Which office runs Perth briefs.** Fills `[nearest office]`, which
-   appears five times on the design.
+   in the same shape as the decks. Fills the card's stats. Still zero across
+   all five decks, so this is the hardest of the three.
+3. **Which office runs Perth briefs**, if any brief is run from elsewhere.
+   Fills the two remaining `[nearest office]` brackets, and may fall away
+   once the Perth agents are named.
 
-With all three, phase 6 builds the variant from the Melbourne template as
-described in `COPY.md`. Without them, PLAN section 5's standing advice holds:
-two good pages beat three where one cannot support its own structure.
+With all three, phase 6 builds the page from the Melbourne template as
+described in `COPY.md`. Item 1 is the one that moves most: naming the agents
+turns Perth from a page with no local presence into a page with a team and no
+published purchase, which is a much smaller gap.
 
 ## What exists anyway
 

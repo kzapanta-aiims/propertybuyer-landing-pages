@@ -2,10 +2,12 @@
 
 **Applied to the Paper artboard "PERTH· 1440" on 8 September 2026**, in the
 file "Location Pages - Adelaide, Perth, Melbourne". This is the variant
-`../PLAN.md` section 5 describes, not the template: no proof section, no
-local team, no office block, and an FAQ that answers "Do you have an office
-in Perth?" honestly. It is a design for the client to react to. **The HTML
-page is not built and stays blocked**; see `BLOCKED.md` for what unblocks it.
+`../PLAN.md` section 5 describes, not the template: no purchase proof, no
+office block, and an FAQ that answers "Do you have an office in Perth?"
+honestly. It keeps the team section, which is where it departs from PLAN.md,
+per `perthHasATeamSection`. It is a design for the client to react to. **The
+HTML page is not built and stays blocked**; see `BLOCKED.md` for what
+unblocks it.
 
 Counts are `used/budget`. Brackets are inputs, and each names what fills it.
 
@@ -24,7 +26,7 @@ Counts are `used/budget`. Brackets are inputs, and each names what fills it.
 | Melbourne section | Perth |
 |---|---|
 | 3. Melbourne purchases, three proof cards, Google rating row | **How we buy in Perth**, three cards carrying cleared Tier 2 facts and one bracketed slot for the named agent. Rating row removed, no Perth listing exists |
-| 4. Your Melbourne buyers' agents, seven cards | **Removed.** No WA based person on the client's team page |
+| 4. Your Melbourne buyers' agents, seven cards | **Kept.** Propertybuyer has agents for each location. Needs the Perth names, see below |
 | 7. Regions, eight cards | Six cards, the six PLAN 5 proposes |
 | 11. Testimonials, five cards | One bracketed card. No Perth client exists in any deck |
 | 12. FAQ | "Do you have an office in Perth?" replaces the auction question in the row that shows its answer; the auction question moves to row 6 |
@@ -190,24 +192,31 @@ changed here:
   the Adelaide proof cards, so the sentence leads and the input follows.
 - **The testimonials H2** was the only Zone B heading not in query form.
 
-## The team section came back once, and was removed again
+## The team section stays, and it needs Perth names
 
-On 8 September 2026, during the language pass, the deleted team section
-reappeared on this artboard as a verbatim copy of the Adelaide one, new node
-IDs and all. It carried the heading "Your Adelaide buyers' agents" and named
-Jonathon Moore covering "Adelaide and regional SA", on the Perth page. Its
-card titles still held the pre-pass singular possessive, which dates the copy
-to a few minutes earlier in that same session.
+**Corrected 8 September 2026.** Propertybuyer has agents for each location,
+Perth included, so this page carries a team section like the other two.
+`PLAN.md` section 5 said to remove it, which was written from the client's
+public team page listing nobody in WA. That reading was wrong and the
+paragraph is annotated as overridden. Do not remove this section.
 
-How it got there is not established. It was not a Paper call made from this
-session, so it was either a stray paste in the editor or a client resync.
+It was removed once during the language pass and re-added by the client lead.
+It should not have been touched: it was ambiguous, the ambiguity was noticed,
+and it was deleted on an inference instead of a question. On this family a
+whole section appearing or disappearing is a question for the client lead.
 
-It was deleted again and the artboard verified clean: the only remaining
-mentions of Adelaide on this page are the sibling location list and the
-sitewide footer, both correct. **Check this section is still absent before
-sending Perth to the client.** A page with no local presence that shows seven
-agents, five of them in other states under an Adelaide heading, is the exact
-failure `perthHasNoLocalPresence` exists to prevent.
+**What the section still needs.** It went on as a copy of the Adelaide one, so
+it currently reads "Your Adelaide buyers' agents" and shows Jonathon Moore
+covering "Adelaide and regional SA". For review it needs:
+
+- The heading changed to "Your Perth buyers' agents".
+- The Perth agents by name, with their titles, the areas they cover, the one
+  credential line each card carries, and their photographs.
+- A decision on whether the national cards stay behind the local ones, the
+  same open question flagged on Adelaide.
+
+Naming a Perth agent also answers item 1 of the three blockers in
+`BLOCKED.md`, which moves this page materially closer to being buildable.
 
 ## Flags
 

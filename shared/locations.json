@@ -72,7 +72,8 @@
       "readiness": "STILL BLOCKED 8 Sep 2026, AND NOW CHECKED EXHAUSTIVELY. locations/perth/BLOCKED.md lists what was checked (all five decks page by page, the team page, the office list, the URL) and the three things that unblock it: a named agent who has bought in Perth, one Perth purchase with month, year and price, and which office runs Perth briefs. The Paper artboard 'PERTH· 1440' was updated to the PLAN.md section 5 variant the same day so the client can see the honest page and its gaps; locations/perth/COPY.md records it. No HTML is built.",
       "office": "NO. The office list supplied by the client and recorded independently in paper/commercial-copy.md and paper/investor-copy.md is Sydney, Melbourne, Brisbane and Adelaide. Perth is not in it, and the site footer confirms it.",
       "proof": "None, and none available. Zero Perth or WA records across all five client decks, checked page by page 8 Sep 2026 and recorded in paper/decks/README.md.",
-      "note": "See openDecisions.perthHasNoLocalPresence and openDecisions.perthVariantInPaper. Three slots in the template assume a local presence that does not exist in Perth. PLAN.md section 5 takes option two, a variant with those sections removed rather than emptied, and makes it conditional: if the client cannot name a person who has bought in Perth, phase 6 stops and writes locations/perth/BLOCKED.md instead of a page. That file now exists. Perth is also the only new URL of the three, so it has no rankings to protect.",
+      "note": "See openDecisions.perthHasATeamSection first: the page KEEPS its team section, because Propertybuyer has agents for each location. Do not remove it. Then openDecisions.perthHasNoLocalPresence and openDecisions.perthVariantInPaper, both partly superseded by it. Two slots rather than three still cannot be filled honestly, the office block and the purchase proof, and PLAN.md section 5 removes those rather than emptying them. Perth is also the only new URL of the three, so it has no rankings to protect.",
+      "team": "The section is on the artboard and still carries the Adelaide names it was copied from. It needs the Perth agents, their titles, the areas they cover and their photographs. That is item 1 in locations/perth/BLOCKED.md and it is the change that moves this page most.",
       "paper": "Artboard 'PERTH· 1440' in the Paper file 'Location Pages - Adelaide, Perth, Melbourne', updated to the variant 8 Sep 2026"
     }
   ],
@@ -117,7 +118,8 @@
         "Build Perth on a variant with those three sections removed rather than emptied, and say so on the page: served from the nearest office, inspected in person. That is the claim the copy decks already make and it is true.",
         "Drop Perth and build Adelaide and Melbourne. Two honest pages beat three where one cannot support its own structure."
       ],
-      "doNot": "Do not fill the three slots with records from other cities, and do not name agents who are not in Perth. Do not soften this because the brief asks for three pages."
+      "doNot": "Do not fill the three slots with records from other cities, and do not name agents who are not in Perth. Do not soften this because the brief asks for three pages.",
+      "partlySuperseded": "8 Sep 2026, by openDecisions.perthHasATeamSection. The client lead states Propertybuyer has agents for each location, Perth included, so the 'no local team' half of this entry is wrong and the Perth page keeps its team section. What still holds is the office (there is none in Perth) and the purchase proof (zero Perth records across all five decks). The doNot above also still holds in the form that matters: name the Perth agents, not agents from other states."
     },
     "referencePageIsNotACopyModel": {
       "decision": "The live Brisbane page is the structural and SEO reference for this family. It is not the design or copy model. Its anatomy, its 23 sections, its SEO gaps and its three conflicts with DESIGN.md are recorded in locations/_archive/REFERENCE.md.",
@@ -236,11 +238,12 @@
       "outOfScope": "The award band subhead is furniture shared with the four paid segment pages. Only the three location artboards were corrected, so 'buyer agents' still stands wherever else it appears. Sweep New Builds/ before the next paid round.",
       "raised": "8 Sep 2026"
     },
-    "perthTeamSectionReappeared": {
-      "problem": "During the 8 Sep 2026 language pass the Perth team section, deleted earlier the same day, was found back on the artboard with new node IDs. It was a verbatim copy of the Adelaide team section: the heading read 'Your Adelaide buyers' agents' and Jonathon Moore was shown covering 'Adelaide and regional SA', on the Perth page. Its card titles still carried the pre-pass singular possessive, dating the copy to minutes earlier in the same session.",
-      "decision": "Deleted again, and the artboard verified clean.",
-      "status": "RESOLVED 8 Sep 2026, CAUSE NOT ESTABLISHED",
-      "consequence": "No Paper call from this session created it, so it was either a stray paste in the editor or a client resync. Verify the section is absent before Perth goes to the client. Seven agents, five of them in other states under an Adelaide heading, on a page whose whole argument is that there is no local presence, is the exact failure perthHasNoLocalPresence exists to prevent. More generally: a deletion in this file is worth re-checking at the end of a session, the same way a heading rewrite is worth reading back per languagePass8Sep.",
+    "perthHasATeamSection": {
+      "decision": "The Perth page carries a team section. Propertybuyer has agents for each location, Perth included, and the client lead added the section to the artboard on 8 Sep 2026 and directed that it stay.",
+      "status": "RESOLVED 8 Sep 2026, FROM THE CLIENT LEAD. Supersedes PLAN.md section 5 and part of perthHasNoLocalPresence",
+      "consequence": "PLAN.md section 5's instruction 'Section 4 (local team) is removed' is annotated as overridden rather than deleted, so the reasoning stays visible. Do not remove this section again. The Perth variant is now the Melbourne template minus the office block and the purchase proof, not minus three sections.",
+      "howThisWentWrong": "The section was added by the client lead, found by this session, read as a stray paste and deleted, then re-added. It was deleted because it was a verbatim copy of the Adelaide section, headed 'Your Adelaide buyers' agents' with Jonathon Moore covering 'Adelaide and regional SA', which reads as an accident on a Perth page. The ambiguity was noticed and named, and the delete happened anyway instead of an ask. On this family, a whole section appearing or disappearing is a question for the client lead, never an inference.",
+      "stillToDo": "The re-added cards carry Adelaide names and an Adelaide heading. They need the Perth agents, their titles, the areas they cover and their photographs before the page can be reviewed. Naming a Perth agent also answers item 1 of the three blockers in locations/perth/BLOCKED.md.",
       "raised": "8 Sep 2026"
     },
     "adelaideRatingUnverified": {
