@@ -55,9 +55,11 @@
       "url": "/location/adelaide",
       "page": "locations/adelaide/index.html",
       "copy": "locations/adelaide/COPY.md",
-      "readiness": "BLOCKED ON EXTRACTION AND ON MELBOURNE, NOT ON THE CLIENT. /location/adelaide is live and ranking, so openDecisions.replacementInventory applies here too. PLAN.md section 5 carries the Adelaide deltas: one SA based agent, no region cards on the live page, and two Tier 3 claims in the live FAQ that must not carry over.",
-      "office": "yes, named in the client supplied office list",
-      "proof": "None extracted. The investor deck holds 75 records across Sydney, Melbourne, Brisbane and Adelaide, per paper/proof-register.md, so Adelaide records exist in material the client has already supplied. They have not been pulled into the register. This is an extraction job here, not a request to the client."
+      "readiness": "DESIGNED IN PAPER 8 Sep 2026, awaiting client review. The artboard 'ADELAIDE· 1440' carries the full Adelaide copy, imagery and three proof cards; locations/adelaide/COPY.md is the record of it and ends with the preserved-from-live table the replacementInventory rule asks for. The HTML page is not built; PLAN.md builds Melbourne first. Client supply items on the design: the segment framing for all three proof records (openDecisions.adelaideProofFramingContested), a tracked SA number, office hours, sourced market figures, four Adelaide testimonials, inner south suburbs and Hills towns.",
+      "office": "yes, 224 Hutt Street, Adelaide SA 5000, on the live page and in the site footer. No local phone number is published; the live page carries 1300 only",
+      "team": "Jonathon Moore, Senior Buyers' Advocate, is the only SA based person on the client's team page, read 8 Sep 2026. He is card 1 on the design; the six national cards carry over from the client-approved Melbourne artboard, flagged in COPY.md for the client to keep or drop",
+      "proof": "Three records on the design, figures only: Karl (Adelaide, 2008, $400,000, $1,050,000 in 2026), Peter (Adelaide, 2009, $365,000, $1,050,000), Li (regional SA, 2025, $617,000, $750,000). All five SA records in the client's material appear in BOTH Legacy decks with identical figures and opposite framings, so the segment pill on each card is bracketed. See paper/proof-register.md, 'Adelaide location page'.",
+      "paper": "Artboard 'ADELAIDE· 1440' in the Paper file 'Location Pages - Adelaide, Perth, Melbourne', updated 8 Sep 2026"
     },
     {
       "slug": "perth",
@@ -66,10 +68,11 @@
       "url": "/location/perth",
       "page": "locations/perth/index.html",
       "copy": "locations/perth/COPY.md",
-      "readiness": "BLOCKED, AND NOT BY ANYTHING THIS REPOSITORY CAN FIX",
-      "office": "NO. The office list supplied by the client and recorded independently in paper/commercial-copy.md and paper/investor-copy.md is Sydney, Melbourne, Brisbane and Adelaide. Perth is not in it.",
-      "proof": "None, and none available. Zero Perth records across the register, and paper/commercial-copy.md records explicitly that no proof record is in Perth, Adelaide or Canberra.",
-      "note": "See openDecisions.perthHasNoLocalPresence. Three slots in the template assume a local presence that does not exist in Perth. PLAN.md section 5 takes option two, a variant with those sections removed rather than emptied, and makes it conditional: if the client cannot name a person who has bought in Perth, phase 6 stops and writes locations/perth/BLOCKED.md instead of a page. Perth is also the only new URL of the three, so it has no rankings to protect."
+      "readiness": "STILL BLOCKED 8 Sep 2026, AND NOW CHECKED EXHAUSTIVELY. locations/perth/BLOCKED.md lists what was checked (all five decks page by page, the team page, the office list, the URL) and the three things that unblock it: a named agent who has bought in Perth, one Perth purchase with month, year and price, and which office runs Perth briefs. The Paper artboard 'PERTH· 1440' was updated to the PLAN.md section 5 variant the same day so the client can see the honest page and its gaps; locations/perth/COPY.md records it. No HTML is built.",
+      "office": "NO. The office list supplied by the client and recorded independently in paper/commercial-copy.md and paper/investor-copy.md is Sydney, Melbourne, Brisbane and Adelaide. Perth is not in it, and the site footer confirms it.",
+      "proof": "None, and none available. Zero Perth or WA records across all five client decks, checked page by page 8 Sep 2026 and recorded in paper/decks/README.md.",
+      "note": "See openDecisions.perthHasNoLocalPresence and openDecisions.perthVariantInPaper. Three slots in the template assume a local presence that does not exist in Perth. PLAN.md section 5 takes option two, a variant with those sections removed rather than emptied, and makes it conditional: if the client cannot name a person who has bought in Perth, phase 6 stops and writes locations/perth/BLOCKED.md instead of a page. That file now exists. Perth is also the only new URL of the three, so it has no rankings to protect.",
+      "paper": "Artboard 'PERTH· 1440' in the Paper file 'Location Pages - Adelaide, Perth, Melbourne', updated to the variant 8 Sep 2026"
     }
   ],
   "openDecisions": {
@@ -187,6 +190,41 @@
       "consequence": "This is the strongest single AEO move available on the page, because \"how much does a buyers agent cost in Melbourne\" is a head question no competitor answers directly, and an answer engine quotes the most specific sourced sentence it can find. It is also a commercial call that this repository does not get to make. Blocks section 8 and FAQ 1 and 2. If the answer is no, those slots ship bracketed rather than vague: a fee section that talks around the number is worse than one that says the number is on request.",
       "tier": "Tier 1 when published, because it is the client's own pricing schedule. Do not publish a fee figure that is not in that schedule, and do not average or round one.",
       "raised": "2 Sep 2026"
+    },
+    "decksCommitted": {
+      "decision": "The five client success-story decks are committed in paper/decks/ from 8 Sep 2026, at the client lead's direction, so the source of every Tier 1 figure travels with the repository. Until then they were gitignored working files in .deck-src/.",
+      "status": "RESOLVED 8 Sep 2026",
+      "consequence": "tools/extract-deck-images.mjs reads paper/decks/ first and .deck-src/ as a fallback. paper/decks/README.md maps each deck's pages to cities. About 30MB of PDF is now in the repository; the byte-identical '(1)' downloads were not committed. Anyone auditing a register figure can open the page it cites without asking for the file."
+    },
+    "adelaideProofFramingContested": {
+      "problem": "Every South Australian record the client has supplied, five in all, appears in both Legacy decks with identical figures: as a home purchase in the homebuyer deck and as an investment in the investor deck. The proof register's 21 Aug rule says a record in more than one deck is Tier 3 until the client says which framing is true.",
+      "decision": "Render the figures, bracket the framing. The three Adelaide cards carry year, price, 2026 value and equity, which both decks agree on, plus one fact per record that both decks share. The segment pill reads [Home or investment], and nothing on a card says home, investment, yield, rent, saving or time to purchase, since each of those is in only one deck. Karl's quote, identical in both decks and segment neutral, is the one Adelaide testimonial.",
+      "status": "APPLIED TO THE DESIGN 8 Sep 2026, FRAMING NEEDS THE CLIENT",
+      "consequence": "This differs from the Melbourne third slot, which stays fully bracketed because that card needed to be a home buyer record. Adelaide's cards make no segment claim, so the uncontested figures can stand. One answer per record from Rich (home or investment for Karl, Peter and Li) clears all three pills. The July 2026 decks show the same re-narration across seven Sydney records, so the question is now about how the client writes decks, not about individual records.",
+      "raised": "8 Sep 2026"
+    },
+    "julyDecksCarryNoSaOrWa": {
+      "finding": "The three decks supplied 8 Sep 2026 (July 2026 Homebuyers, July 2026 Investors, Latest Commercial) cover Sydney, Melbourne, Brisbane, Gold Coast, regional NSW, VIC and QLD, and one Hobart record. No Adelaide, no Perth. The Adelaide proof therefore comes from the two Legacy decks, and Perth stays at zero.",
+      "status": "RECORDED 8 Sep 2026",
+      "consequence": "The July decks are still useful: they carry month and year on every record, which the Legacy decks do not, and 25 new Melbourne home buyer records that the Melbourne third proof slot could be filled from once the cross deck check is run against the July investor deck. That is a Melbourne job, not started here."
+    },
+    "perthVariantInPaper": {
+      "decision": "The Perth artboard was updated to the PLAN.md section 5 variant on 8 Sep 2026 even though phase 6 is blocked: proof section rewritten as 'How we buy in Perth' with three cards of cleared Tier 2 facts and one bracketed named-agent slot, the local team section deleted, the office block deleted, two region cards and four testimonial cards deleted, and 'Do you have an office in Perth?' answered honestly in the FAQ.",
+      "status": "RESOLVED 8 Sep 2026 for the design; the HTML build stays blocked per locations/perth/BLOCKED.md",
+      "consequence": "The client reviews the honest page and sees the three gaps as brackets, which is a better prompt for supplying a name and a purchase than a note. The card photographs are Perth streetscapes and are named '(not a purchase)' in the layer tree so nobody mistakes them for proof. Everything deleted is recoverable from Paper's version history and the Melbourne artboard.",
+      "raised": "8 Sep 2026"
+    },
+    "adelaideAgentCards": {
+      "problem": "PLAN.md 4.2 and section 5 say do not pad the local team with the executive or national team, and that a single SA agent makes the section 'Your Adelaide buyers' agent'. The client-approved Melbourne artboard shows seven cards, five of them Sydney and Brisbane people.",
+      "decision": "Follow the approved artboard. Jonathon Moore replaces Amanda Jones and moves to card 1; the other six carry over. COPY.md flags the single-agent alternative for the client.",
+      "status": "APPLIED 8 Sep 2026, CLIENT TO CONFIRM",
+      "consequence": "Matching the approved template is the reversible choice; the client has already accepted national cards on Melbourne. If they prefer the honest single card, deleting six cards is a smaller change than rebuilding a section."
+    },
+    "adelaideRatingUnverified": {
+      "problem": "The approved Melbourne purchases header carries a Google rating row, 'Melbourne 5.0' with five stars. No Adelaide listing rating has been verified.",
+      "decision": "The Adelaide row reads 'Adelaide [5.0]'. The Perth row was deleted, since no Perth listing exists.",
+      "status": "BRACKETED 8 Sep 2026",
+      "consequence": "A rating is a Tier 3 claim until verified. The bracket is visible in review, which is the point."
     }
   }
 }
