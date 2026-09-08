@@ -220,6 +220,20 @@
       "status": "APPLIED 8 Sep 2026, CLIENT TO CONFIRM",
       "consequence": "Matching the approved template is the reversible choice; the client has already accepted national cards on Melbourne. If they prefer the honest single card, deleting six cards is a smaller change than rebuilding a section."
     },
+    "languagePass8Sep": {
+      "decision": "Both new artboards were read end to end for Australian English, punctuation and terminal full stops on 8 Sep 2026, and the rules are written down in locations/adelaide/COPY.md under 'Language pass'. Full stops on every sentence of body copy including inside brackets, none on fragments (suburb lists, stat labels, field labels, captions, fee values, the reviewed byline). 'A buyer's agent' singular, 'buyers' agents' plural. 'Off-market' hyphenated before a noun, open elsewhere.",
+      "status": "APPLIED TO ADELAIDE AND PERTH 8 Sep 2026",
+      "found": "One material error: the Perth section heading still read 'Perth purchases' above three cards that state there are no Perth purchases, because the earlier rewrite to 'How we buy in Perth' had not taken. Set again and verified by screenshot. Also corrected across the two pages: eleven plural-possessive errors, four hyphenation errors, a comma splice in the Adelaide proof intro, 'the Barossa' against its own 'Barossa Valley' card, 'the Hills' in an Adelaide FAQ, 'mixed use' as a bare noun, a tense mix in a Perth card, 'yet' in the Perth intro implying an office is coming, a Perth testimonials H2 that was not in query form, an Australian city listed among expat bases, and '[nearest office] office' saying office twice in five places.",
+      "consequence": "A Paper set_text_content call can echo the value it was given without the node taking it. Verify a heading rewrite by reading it back, not by the tool response. This is the second design-side check that has to be a read-back rather than a trust.",
+      "raised": "8 Sep 2026"
+    },
+    "melbourneNeedsTheSameLanguagePass": {
+      "problem": "The client-approved Melbourne artboard carries the same plural-possessive and hyphenation faults that were corrected on Adelaide and Perth, plus three of its own: the award band subhead 'Australia's most awarded buyer agents' with no apostrophe, six agent card titles reading 'Buyer's Advocate' where the client site writes 'Buyers' Advocate', and an FAQ intro that says 'questions' three times in two sentences.",
+      "decision": "Not fixed on Melbourne in this pass. It is client-approved work and it was not in scope, and fixing two of three pages was the choice that leaves the pages that ship next correct rather than consistently wrong.",
+      "status": "OPEN, RECOMMEND FIXING BEFORE THE CLIENT SEES THE THREE SIDE BY SIDE. Owner Kenn",
+      "consequence": "Until it is done the three location artboards disagree on the possessive, which is visible if they are reviewed together. It is a text-only pass with no layout risk: six plural-possessive strings and two hyphenation strings, matching the Adelaide list. The award band subhead is furniture shared with the four paid segment pages, so that one is a family-wide change rather than a Melbourne one.",
+      "raised": "8 Sep 2026"
+    },
     "adelaideRatingUnverified": {
       "problem": "The approved Melbourne purchases header carries a Google rating row, 'Melbourne 5.0' with five stars. No Adelaide listing rating has been verified.",
       "decision": "The Adelaide row reads 'Adelaide [5.0]'. The Perth row was deleted, since no Perth listing exists.",

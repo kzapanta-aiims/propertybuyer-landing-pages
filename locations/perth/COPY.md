@@ -16,7 +16,7 @@ Counts are `used/budget`. Brackets are inputs, and each names what fills it.
 | URL | `/location/perth` | new URL, nothing to preserve. The live nav link is empty and the URL returns 404 |
 | Title | Buyers' Agents in Perth \| Propertybuyer | 41. WA says agent, so no advocate variant needed |
 | Meta description | Independent buyers' agents for Perth since 2001. We act for buyers only, never for sellers. Every shortlisted property inspected in person. Fixed fees, 30 to 60 days to purchase. | 173 |
-| H1 | Buyer's agents in Perth | 23/60 |
+| H1 | Buyers' agents in Perth | 23/60. Plural possessive, corrected 8 Sep 2026 |
 | Schema | `Service` with `areaServed` Perth, never `LocalBusiness` | PLAN 5 |
 
 ## What changed from the Melbourne template, structurally
@@ -24,7 +24,7 @@ Counts are `used/budget`. Brackets are inputs, and each names what fills it.
 | Melbourne section | Perth |
 |---|---|
 | 3. Melbourne purchases, three proof cards, Google rating row | **How we buy in Perth**, three cards carrying cleared Tier 2 facts and one bracketed slot for the named agent. Rating row removed, no Perth listing exists |
-| 4. Your Melbourne buyer's agents, seven cards | **Removed.** No WA based person on the client's team page |
+| 4. Your Melbourne buyers' agents, seven cards | **Removed.** No WA based person on the client's team page |
 | 7. Regions, eight cards | Six cards, the six PLAN 5 proposes |
 | 11. Testimonials, five cards | One bracketed card. No Perth client exists in any deck |
 | 12. FAQ | "Do you have an office in Perth?" replaces the auction question in the row that shows its answer; the auction question moves to row 6 |
@@ -36,7 +36,7 @@ Counts are `used/budget`. Brackets are inputs, and each names what fills it.
 
 | Element | Copy | Count |
 |---|---|---|
-| H1 | Buyer's agents in Perth | 23/60 |
+| H1 | Buyers' agents in Perth | 23/60 |
 | Subhead | We work for you. Never for the seller. | 38/42 |
 | Primary action | Talk to a Perth buyer's agent | 29/34 |
 | Hero photographs | Palmyra house · Fremantle street · Perth CBD skyline | Unsplash |
@@ -45,15 +45,18 @@ Counts are `used/budget`. Brackets are inputs, and each names what fills it.
 
 ### How we buy in Perth (19/60)
 
-Intro: "No Perth office yet, and we say so. Here is how a Perth purchase is
-run." Side note: "Propertybuyer has no Perth office. Perth briefs are run from
-our [nearest office] office, and every shortlisted property is inspected in
+Intro: "We have no Perth office, and we say so. Here is how a Perth purchase
+is run." Side note: "Propertybuyer has no Perth office. Perth briefs are run
+from our nearest office, and every shortlisted property is inspected in
 person."
+
+The word "yet" was cut from the intro on 8 September 2026. It implied a Perth
+office is coming, which is a claim the client has not made.
 
 | Card | Pill | Heading | Count | Body | Stats |
 |---|---|---|---|---|---|
-| 1 | Where it is run from | Run from our [nearest office] office | 36/32 with the bracket, 28 once "Adelaide" or "Melbourne" is substituted | [Confirm with the client which office runs Perth briefs.] One named agent takes the brief, the appraisal and the negotiation, and stays with you to settlement. | Since 2001 Buyers only · 5,000+ Properties bought · 50+ Industry awards |
-| 2 | How we inspect | Inspected in person, every time | 31/32 | We walk every shortlisted property ourselves, then send you what we saw: the video, the contract, the building report and our appraisal, before you commit to anything. | In person Every inspection · 10,000+ Selling agents briefed · 30 to 60 Days to purchase |
+| 1 | Where it is run from | Run from our nearest office | 27/32 | One named agent takes the brief, the appraisal and the negotiation, and stays with you to settlement. [Confirm which office runs Perth briefs.] | Since 2001 Buyers only · 5,000+ Properties bought · 50+ Industry awards |
+| 2 | How we inspect | Inspected in person, every time | 31/32 | We walk every shortlisted property ourselves, then send you the video, the contract, the building report and our appraisal, before you commit to anything. | In person Every inspection · 10,000+ Selling agents briefed · 30 to 60 Days to purchase |
 | 3 | Who buys for you | [Named agent] buys in Perth | 27/32 | [Blocked on the client. Name the agent who has bought in Perth, and one Perth purchase with a month, year and price. Without both, locations/PLAN.md holds this page.] | [Name] Your agent · [Month Year] Last Perth purchase · [$ price] Bought |
 
 Every unbracketed number is in the DESIGN.md claims register: since 2001,
@@ -80,18 +83,22 @@ Bracketed as Melbourne. Table: median house price · median unit price ·
 rental vacancy rate. Photo: Perth from Kings Park.
 
 **Which Perth suburbs do you cover?** (33/60)
-Answer: Propertybuyer buys across metropolitan Perth from our [nearest
-office] office, with every shortlisted property inspected in person. [The
-regions below are a draft for the client to confirm.]
+Answer: Propertybuyer buys across metropolitan Perth from our nearest office,
+with every shortlisted property inspected in person. [The regions below are a
+draft for the client to confirm.]
 
 | Region | Suburbs |
 |---|---|
 | Western suburbs | Cottesloe, Claremont, Nedlands |
 | Inner north | Mount Lawley, Leederville |
 | Inner south | South Perth, Applecross |
-| Fremantle and the coast | Fremantle and the coastal suburbs. [Suburbs to confirm] |
+| Fremantle and the coast | [Suburbs to confirm] |
 | Northern corridor | Joondalup |
 | Perth Hills | [Suburbs to confirm] |
+
+The Fremantle card read "Fremantle and the coastal suburbs. [Suburbs to
+confirm]" until 8 September 2026, which restated its own heading and was the
+only card in the grid carrying a full stop. It now matches Perth Hills.
 
 All six are PLAN section 5's proposal, verbatim, with nothing added. Photo:
 Cottesloe beach.
@@ -109,25 +116,26 @@ Perth suburban street.
 Answer: Propertybuyer buys for six kinds of buyer in Perth, and the brief, the
 search and the fee are set for each one rather than shared. (24) Six blocks,
 none referencing a record. Prestige names Cottesloe, Nedlands, Claremont
-(from the regions list). Expats: "The process is the same from Singapore,
-London or Sydney."
+(from the regions list). Expats ends: "The process is the same wherever you
+are." That line read "from Singapore, London or Sydney" until 8 September
+2026, which put an Australian city in a list of expat bases.
 
-**What Perth clients say** (22/60)
+**What do Perth clients say?** (26/60)
 Intro: [No Perth client record exists in any deck the client has supplied.
 Supply one or remove this section.] One bracketed card.
 
 **Questions about buying in Perth** (31/60)
 
 1. How much does a buyer's agent cost in Perth?
-2. Do buyer's agents in Perth charge a percentage or a fixed fee?
+2. Do buyers' agents in Perth charge a percentage or a fixed fee?
 3. How long does it take to buy with a buyer's agent in Perth?
 4. **Do you have an office in Perth?** Answer visible: No. Perth purchases
-   are run from our [nearest office] office by [named agent], who inspects
-   every shortlisted property in person and negotiates on your behalf.
-   [Confirm with the client before this page is built.]
+   are run from our nearest office by [named agent], who inspects every
+   shortlisted property in person and negotiates on your behalf. [Confirm the
+   office and the agent before this page is built.]
 5. What areas of Perth do you cover?
 6. Do you bid at auction on my behalf?
-7. How do you find off market properties in Perth?
+7. How do you find off-market properties in Perth?
 8. Can you help me buy in Perth if I live interstate or overseas?
 9. How do you stop me overpaying for a Perth property?
 10. What is the difference between a buyer's agent and a buyer's advocate?
@@ -137,9 +145,9 @@ Supply one or remove this section.] One bracketed card.
 
 **Talk to a Perth buyer's agent** (29/60)
 Body: One conversation tells you what your budget really buys in Perth, and
-how we would run the search from [nearest office]. Nothing to sign. No office
-block. We also buy in: Sydney · Melbourne · Brisbane · Adelaide · Gold Coast ·
-Sunshine Coast · Newcastle · Central Coast · Canberra · Hobart.
+how we would run the search. Nothing to sign. No office block. We also buy in:
+Sydney · Melbourne · Brisbane · Adelaide · Gold Coast · Sunshine Coast ·
+Newcastle · Central Coast · Canberra · Hobart.
 
 ## Photography
 
@@ -158,8 +166,33 @@ All Unsplash, hotlinked for review; download and self host for the build.
 | Regions banner | Cottesloe beach clubhouse | Dylan Alcock | C1zrEm4KabM |
 | Off market | Perth suburban street | Steve Doig | 3pfLewydrcs |
 
+## Language pass, 8 September 2026
+
+Read end to end alongside Adelaide. The rules are recorded in full in
+`../adelaide/COPY.md` under "Language pass" and apply to both pages. What
+changed here:
+
+- **The section heading read "Perth purchases".** The 8 September rewrite to
+  "How we buy in Perth" had not taken, so the page carried a heading claiming
+  Perth purchases above three cards that say there are none. This was the one
+  material error in the pass and it is fixed.
+- **Plural possessive** corrected in five places: the H1, the investor and
+  developer segment blocks, the off market answer, and FAQ 2.
+- **Hyphenation**: "off-market stock" and "off-market properties" before a
+  noun; "mostly off market" left open.
+- **"[nearest office] office"** said office twice. Every instance now reads
+  "our nearest office", which is true without a bracket, and the two brackets
+  that ask the client to name it sit where they are read: card 1's body and
+  the FAQ 4 answer. The bracket count drops from five to two.
+- **Tense** in card 2: "send you what we saw" mixed present and past, and is
+  now a plain list of what is sent.
+- **Card 1's bracket moved to the end of the body**, matching the pattern on
+  the Adelaide proof cards, so the sentence leads and the input follows.
+- **The testimonials H2** was the only Zone B heading not in query form.
+
 ## Flags
 
-Everything in `BLOCKED.md`, plus: the six regions are a proposal, and the
-"[nearest office]" bracket appears five times and should be filled once the
-client names the office.
+Everything in `BLOCKED.md`, plus: the six regions are a proposal, and the two
+remaining "[nearest office]" brackets should be filled once the client names
+the office. The inherited-furniture items listed at the end of
+`../adelaide/COPY.md` apply to this page too.

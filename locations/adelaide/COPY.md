@@ -19,7 +19,7 @@ names what unblocks it.
 | URL | `/location/adelaide` | unchanged, self referencing canonical, no redirect |
 | Title | Buyers' Agents in Adelaide \| Buyers' Advocates \| Propertybuyer | 63. Carries both terms the live title carries. `advocateInRankingLayer` is still OPEN |
 | Meta description | Independent buyers' agents and advocates in Adelaide since 2001. We act for buyers only, never for sellers. Fixed fees, off market access, 30 to 60 days to purchase. Hutt Street office. | 178, trim to 155 if Manu prefers |
-| H1 | Buyer's agents in Adelaide | 26/60. The approved Melbourne artboard uses the singular possessive; matched |
+| H1 | Buyers' agents in Adelaide | 26/60. Plural possessive, corrected 8 Sep 2026. See "Language pass" |
 
 ## Zone A
 
@@ -27,7 +27,7 @@ names what unblocks it.
 
 | Element | Copy | Count |
 |---|---|---|
-| H1 | Buyer's agents in Adelaide | 26/60 |
+| H1 | Buyers' agents in Adelaide | 26/60 |
 | Subhead | We work for you. Never for the seller. | 38/42, unchanged |
 | Primary action | Talk to an Adelaide buyer's agent | 33/34 |
 | Hero photographs | Seacliff beach house · Adelaide Oval and the Torrens · Adelaide from the Hills | Unsplash, credits below |
@@ -41,7 +41,7 @@ Header: **Adelaide purchases** (18/60). Intro: "Every figure below is from a
 client file, not a case study." Rating row: **Adelaide · [5.0]**. The 5.0 is
 bracketed because it was carried from Melbourne and no Adelaide Google
 listing rating has been verified. Side note: "Every purchase here is a South
-Australian property. Two are in Adelaide, one is regional."
+Australian property. Two are in Adelaide and one is regional."
 
 | Slot | Pill | Heading | Count | Body | Stats | Photo |
 |---|---|---|---|---|---|---|
@@ -70,7 +70,7 @@ $10,000 equity).
 Band: "Most Adelaide buyers only ever see what is advertised." Unchanged
 otherwise.
 
-### Your Adelaide buyer's agents (28/60)
+### Your Adelaide buyers' agents (28/60)
 
 Intro unchanged. Seven cards, as the approved Melbourne artboard has. Card 1
 is now **Jonathon Moore, Senior Buyer's Advocate, Adelaide and regional SA,
@@ -112,7 +112,7 @@ clearance; Adelaide's local angle is vacancy, per PLAN section 5). Reviewed
 
 **Which Adelaide suburbs do you cover?** (36/60)
 Answer: Propertybuyer buys across metropolitan Adelaide, the Adelaide Hills,
-the Barossa and McLaren Vale, with Jonathon Moore based in Adelaide. (19)
+the Barossa Valley and McLaren Vale, with Jonathon Moore based in Adelaide. (20)
 
 | Region | Suburbs | Source |
 |---|---|---|
@@ -121,9 +121,12 @@ the Barossa and McLaren Vale, with Jonathon Moore based in Adelaide. (19)
 | Western beaches | Glenelg, Henley Beach | Glenelg live page, Henley PLAN 5 |
 | Inner south | [Suburbs to confirm with the Adelaide office] | PLAN 5 names the region only |
 | Northern corridor | Prospect, Gawler | live page |
-| Adelaide Hills | Lifestyle and relocation purchases. [Towns to confirm] | live FAQ |
-| Barossa Valley | Lifestyle, relocation and investment purchases | live FAQ, confirmed serviced |
-| McLaren Vale | Lifestyle, relocation and investment purchases | live FAQ, confirmed serviced |
+| Adelaide Hills | Lifestyle and relocation purchases. [Towns to confirm.] | live FAQ |
+| Barossa Valley | Lifestyle, relocation and investment purchases. | live FAQ, confirmed serviced |
+| McLaren Vale | Lifestyle, relocation and investment purchases. | live FAQ, confirmed serviced |
+
+The four suburb-list cards carry no full stop and the three statement cards
+do. That split is the rule recorded under "Language pass" below.
 
 Photo: Adelaide Hills.
 
@@ -148,11 +151,13 @@ brief, the search and the fee are set for each one rather than shared. (24)
   low vacancy rates ... comparatively lower buy-in prices". Tier 2.)
 - **Commercial buyers in Adelaide.** ... South Australia charges no stamp
   duty on commercial property, which changes the numbers on every acquisition
-  here. (Jonathon Moore's profile on the client site says so, and it has been
-  the case since 1 July 2018. Tier 2.)
-- **Expats buying in Adelaide.** ... Peter bought in Adelaide from interstate
-  without flying down once, and the process is the same from overseas. (His
-  quote in both decks. Framing neutral.)
+  here. We buy offices, retail, industrial and mixed-use property for owner
+  occupiers and for investors. (Jonathon Moore's profile on the client site
+  states the stamp duty position, and it has been the case since 1 July 2018.
+  Tier 2.)
+- **Expats buying in Adelaide.** ... Peter bought from interstate without
+  flying down once, and the process is the same from overseas. (His quote in
+  both decks. Framing neutral.)
 - **Developers in Adelaide.** Unchanged apart from the city.
 - **Prestige homes in Adelaide.** ... North Adelaide, Unley, Burnside, and
   the addresses that never list. (Live page suburbs.)
@@ -178,8 +183,8 @@ decks too but contains a banned word, so it is not used.
 3. How long does it take to buy with a buyer's agent in Adelaide? (live Q10, without "4 to 6 weeks" or "50 to 60 local experts")
 4. Do you bid at auction on my behalf? Answer visible, unchanged.
 5. What areas of Adelaide do you cover? (live Q2)
-6. Do you buy in regional South Australia, the Hills or the Barossa? (live Q3)
-7. How do you find off market properties in Adelaide? (live Q7)
+6. Do you buy in regional South Australia, the Adelaide Hills or the Barossa Valley? (live Q3)
+7. How do you find off-market properties in Adelaide? (live Q7)
 8. Can you help me buy in Adelaide if I live interstate or overseas?
 9. How do you stop me overpaying for an Adelaide property? (live Q8)
 10. What is the difference between a buyer's agent and a buyer's advocate?
@@ -245,6 +250,37 @@ credit where practical.
 | Off market | North Adelaide bluestone | Binod Ghimire | 08uBz2NWnjc |
 | Agent card 1 | Jonathon Moore | propertybuyer.com.au/hubfs/Jonathon Moore.webp | client site |
 
+## Language pass, 8 September 2026
+
+Both artboards were read end to end for Australian English, punctuation and
+terminal full stops. The rules applied, and now the standard for this family:
+
+**Full stops.** Every sentence of body copy ends in one, including the
+bracketed inputs, which carry their stop inside the bracket. Fragments do not:
+suburb lists, stat labels, field labels, agent card captions, fee table values
+and the reviewed byline. On the region grid that splits the cards, four
+suburb-list cards with no stop and three statement cards with one.
+
+**Plural possessive.** "A buyer's agent" is singular and correct. Two or more
+acting for buyers generally are "buyers' agents", which is what the client's
+own site, `DESIGN.md`, `PLAN.md` and `shared/locations.json` all write.
+Corrected in six places on this page: the H1, the team H2, the investor and
+developer segment blocks, the off market answer, and the FAQ.
+
+**Hyphenation.** "Off-market" is hyphenated before a noun (an off-market
+property, off-market stock, off-market properties) and open elsewhere (sold
+off market, mostly off market). Two corrections here.
+
+**Also fixed.** A comma splice in the proof intro. "The Barossa" to "the
+Barossa Valley", matching its own region card. "The Hills" to "the Adelaide
+Hills" in FAQ 6. "Mixed use" to "mixed-use property" in the commercial block.
+A redundant "in Adelaide" in the expat block.
+
+**Left alone, and why.** Three strings on this page are inherited furniture
+from the client-approved Melbourne artboard and carry the same faults there.
+Changing them here alone would desync the family, so they are listed for
+Melbourne in the flags below rather than fixed.
+
 ## Flags
 
 - Three proof cards with a bracketed segment pill. One client answer per
@@ -253,3 +289,13 @@ credit where practical.
 - `[Tracked SA number]`, `[Monday to Friday, hours]`, market figures, four
   testimonials, inner south suburbs, Hills towns: client supply items.
 - Whether the national agent cards stay or the section becomes single agent.
+- **Three inherited strings need the same correction on the client-approved
+  Melbourne artboard, and were left alone here to keep the family in sync.**
+  The award band subhead reads "Australia's most awarded buyer agents" with no
+  apostrophe at all, and it is furniture shared with the paid segment pages.
+  The six agent card titles read "Principal Buyer's Advocate" where the client
+  site writes "Buyers' Advocate", including Jonathon Moore's own title. The
+  FAQ intro repeats "questions" three times in two sentences. Melbourne also
+  carries the plural possessive and hyphenation faults corrected above, in the
+  same six and two places. Fixing Melbourne is a text-only pass with no layout
+  risk, and it should happen before the client sees Adelaide beside it.
